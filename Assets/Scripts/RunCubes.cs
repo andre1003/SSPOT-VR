@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class RunCubes : MonoBehaviour {
     public static List<string> cubes = new List<string>();          // Cubes list
     public GameObject terminal;                                     // Programming slots
     public GameObject projector;                                    // Stars projector (appears at the end of level)
+    public GameObject projectorParticleSystem;                      // Projector particle system
     public GameObject elevatorButton;                               // Elevator button
     public GoingUpAndDownController scriptGoingUpAndDown;           // Elevator controller script
 
@@ -32,8 +34,9 @@ public class RunCubes : MonoBehaviour {
     // Player
     public GameObject playerHand;                                   // Player hand
 
+
     // Private variables
-    private AudioSource audioSource;                                     // Audio source
+    private AudioSource audioSource;                                // Audio source
     private Material[] mats;                                        // Material vector
     private Animator robotAnimator;                                 // Robot animator
     private AudioSource robotSource;                                // Robot audio source
@@ -60,11 +63,11 @@ public class RunCubes : MonoBehaviour {
             if (// If robot walk ended
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
-                    robotAnimator.GetBool("Walk")
+                    robotAnimator.GetBool("Forward")
                 ) {
 
                 // Stop robot
-                robotAnimator.SetBool("Walk", false);
+                robotAnimator.SetBool("Forward", false);
                 waitingForIdle = false;
 
                 // Go to next command
@@ -75,11 +78,11 @@ public class RunCubes : MonoBehaviour {
             if (// If robot is turning left
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("TurnLeft") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
-                    robotAnimator.GetBool("TurnLeft")
+                    robotAnimator.GetBool("Left")
                 ) {
 
                 // Stop robot
-                robotAnimator.SetBool("TurnLeft", false);
+                robotAnimator.SetBool("Left", false);
                 waitingForIdle = false;
 
                 // Go to next command
@@ -90,11 +93,11 @@ public class RunCubes : MonoBehaviour {
             if (// If robot is turning right
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("TurnRight") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
-                    robotAnimator.GetBool("TurnRight")
+                    robotAnimator.GetBool("Right")
                 ) {
 
                 // Stop robot
-                robotAnimator.SetBool("TurnRight", false);
+                robotAnimator.SetBool("Right", false);
                 waitingForIdle = false;
 
                 // Go to next command
@@ -247,5 +250,13 @@ public class RunCubes : MonoBehaviour {
         instructionsNextScene.SetActive(true);
         projector.SetActive(true);
         errorScreen.SetActive(false);
+
+        StartCoroutine(ParticleSystemWait(5.0f));
+    }
+
+    private IEnumerator ParticleSystemWait(float seconds) {
+        yield return new WaitForSeconds(seconds);
+
+        Destroy(projectorParticleSystem);
     }
 }

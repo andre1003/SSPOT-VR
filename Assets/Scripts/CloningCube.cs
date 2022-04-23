@@ -33,9 +33,8 @@ public class CloningCube : MonoBehaviour {
         selectedCube.transform.SetParent(playerHands.transform);
 
         // Set cube transform at player's hand
-        selectedCube.transform.localPosition = new Vector3(0f, -0.35f, 1.45f);  // Editor only
-        //selectedCube.transform.localPosition = new Vector3(0f, -0.5f, 0.75f); // Smartphone only (test needed)
-        selectedCube.transform.rotation = Quaternion.Euler(72f, 0f, 0f);
-        selectedCube.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        selectedCube.transform.localPosition = new Vector3(0f, -0.5f, 0.75f);   // Position
+        selectedCube.transform.rotation = Quaternion.Euler(72f, 0f, 0f);        // Rotation
+        selectedCube.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);      // Scale
     }
 }

@@ -14,7 +14,7 @@ public class VRCObject : MonoBehaviour {
 
 
     /// <summary>
-    /// Start is called before everthing.
+    /// Awake is called before everthing.
     /// </summary>
     private void Awake() {
         newScale = reticle.rectTransform.localScale; // Set initial target scale to current image local scale

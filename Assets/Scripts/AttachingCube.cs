@@ -27,12 +27,20 @@ public class AttachingCube : MonoBehaviour {
     }
 
     /// <summary>
+    /// When player click on this object, it attaches a cube in the coding cell
+    /// </summary>
+    public void OnPointerClick() {
+        // Attach a cube to a coding cell.
+        Attaching();
+    }
+
+    /// <summary>
     /// Attach a cube to a coding cell.
     /// 
     /// <para>If there is a cube in player hand and the coding cell cube holder is free, then attach it to the clicked cube holder.</para>
     /// <para>If there is a cube in the coding cell but not in the player hand, remove the cube from coding cell.</para>
     /// </summary>
-    public void Atacching() {
+    private void Attaching() {
         // Check if player hand has a child and cube holder has no child
         if (playerHands.transform.childCount == 1 && cubeHolder.transform.childCount == 0) {
             // Set selected cube
@@ -43,7 +51,6 @@ public class AttachingCube : MonoBehaviour {
 
             // Disable BoxCollider and EvenTrigger from selected cube
             selectedCube.GetComponent<BoxCollider>().enabled = false;
-            selectedCube.GetComponent<EventTrigger>().enabled = false; // THIS MIGHT BE REMOVED AFTER UPGRADE
 
             // Set selected cube transform
             selectedCube.transform.localPosition = new Vector3(0f, 0f, 0f);     // Position

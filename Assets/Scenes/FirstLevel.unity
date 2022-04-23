@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 31706991}
   - component: {fileID: 31706990}
   - component: {fileID: 31706989}
-  - component: {fileID: 31706993}
   - component: {fileID: 31706994}
   - component: {fileID: 31706995}
   m_Layer: 0
@@ -311,35 +310,6 @@ Transform:
   m_Father: {fileID: 740695876}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &31706993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31706988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 31706994}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Run
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &31706994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +338,7 @@ MonoBehaviour:
   - {fileID: 1270671417}
   terminal: {fileID: 2140996822}
   projector: {fileID: 1313105665}
+  projectorParticleSystem: {fileID: 1931098619}
   elevatorButton: {fileID: 1418575952}
   scriptGoingUpAndDown: {fileID: 1418575958}
   successTerminalMaterial: {fileID: 2100000, guid: c91ea5393f73a814888ae7c250232e43, type: 2}
@@ -645,7 +616,6 @@ GameObject:
   - component: {fileID: 98761417}
   - component: {fileID: 98761416}
   - component: {fileID: 98761415}
-  - component: {fileID: 98761414}
   - component: {fileID: 98761413}
   - component: {fileID: 98761418}
   m_Layer: 0
@@ -695,47 +665,6 @@ MonoBehaviour:
   originalTerminalMaterial: {fileID: 2100000, guid: 2bb3db0cc41185948ac9418fdeaa3032, type: 2}
   robot: {fileID: 641116654}
   playerHand: {fileID: 1751640418}
---- !u!114 &98761414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98761411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 98761413}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Reset
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 354538126}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!65 &98761415
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1407,7 +1336,6 @@ GameObject:
   - component: {fileID: 297680686}
   - component: {fileID: 297680685}
   - component: {fileID: 297680684}
-  - component: {fileID: 297680688}
   - component: {fileID: 297680689}
   - component: {fileID: 297680690}
   m_Layer: 0
@@ -1497,35 +1425,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &297680688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297680683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 297680689}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &297680689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,7 +1437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: {fileID: 1504077161}
+  playerHands: {fileID: 1751640418}
   cubeHolder: {fileID: 1063282959}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -2039,7 +1938,6 @@ GameObject:
   - component: {fileID: 340751224}
   - component: {fileID: 340751223}
   - component: {fileID: 340751229}
-  - component: {fileID: 340751227}
   - component: {fileID: 340751228}
   m_Layer: 0
   m_Name: BeginDispenser
@@ -2127,47 +2025,6 @@ Transform:
   m_Father: {fileID: 1315685917}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
---- !u!114 &340751227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340751222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 340751228}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Cloning
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 340751229}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &340751228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4068,6 +3925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7192900133106063903, guid: 07543ddc30ead5e488692b1bd695b6e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7192900133275044984, guid: 07543ddc30ead5e488692b1bd695b6e9, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4156,11 +4017,6 @@ MonoBehaviour:
   codingCell8: {fileID: 0}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
---- !u!4 &782906966 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7192900133275044984, guid: 07543ddc30ead5e488692b1bd695b6e9, type: 3}
-  m_PrefabInstance: {fileID: 782906963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &782906967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4292,6 +4148,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1123882848775949268, guid: 049cb1eebcfb6c04d9a3db3c624d96a4, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2126958078}
     - target: {fileID: 1123882849698619442, guid: 049cb1eebcfb6c04d9a3db3c624d96a4, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4467,7 +4327,6 @@ GameObject:
   - component: {fileID: 798027283}
   - component: {fileID: 798027282}
   - component: {fileID: 798027281}
-  - component: {fileID: 798027287}
   - component: {fileID: 798027286}
   m_Layer: 0
   m_Name: BackDispenser
@@ -4665,47 +4524,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands: {fileID: 1751640418}
   audioSource: {fileID: 798027281}
---- !u!114 &798027287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798027280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 798027286}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Cloning
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 798027281}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &811475836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5714,7 +5532,6 @@ GameObject:
   - component: {fileID: 958899061}
   - component: {fileID: 958899060}
   - component: {fileID: 958899059}
-  - component: {fileID: 958899063}
   - component: {fileID: 958899064}
   - component: {fileID: 958899065}
   m_Layer: 0
@@ -5804,35 +5621,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &958899063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958899058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 958899064}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &958899064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5845,7 +5633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: {fileID: 1504077161}
+  playerHands: {fileID: 1751640418}
   cubeHolder: {fileID: 61745897}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -6607,6 +6395,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19818464, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19818464, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19992378, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
 --- !u!1 &1184875451 stripped
@@ -6614,95 +6414,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: cb9bbea6a07fb17409dbf8ea7c840af2, type: 3}
   m_PrefabInstance: {fileID: 952053635}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1184875452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184875451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1846614450}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1184875456}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1418575958}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1184875453}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Teleport
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1874386547}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Autorization
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1184875454}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!114 &1184875453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7136,7 +6847,6 @@ GameObject:
   - component: {fileID: 1275469258}
   - component: {fileID: 1275469257}
   - component: {fileID: 1275469262}
-  - component: {fileID: 1275469261}
   - component: {fileID: 1275469263}
   m_Layer: 0
   m_Name: CodingCell2
@@ -7225,35 +6935,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1275469261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275469256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1275469262}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1275469262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7266,7 +6947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: {fileID: 1504077161}
+  playerHands: {fileID: 1751640418}
   cubeHolder: {fileID: 2125969834}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -7962,7 +7643,6 @@ GameObject:
   - component: {fileID: 1418575956}
   - component: {fileID: 1418575955}
   - component: {fileID: 1418575954}
-  - component: {fileID: 1418575953}
   - component: {fileID: 1418575958}
   - component: {fileID: 1418575959}
   - component: {fileID: 1418575960}
@@ -7974,47 +7654,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1418575953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418575952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1418575958}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: GoingUpAndDown
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1418575961}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!65 &1418575954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8105,7 +7744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146fa3ab926c940498f3d36a0170396b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 830986956}
+  player: {fileID: 782906964}
   playerCodingPlatform: {fileID: 811475837}
   instructionsCodingPlatform: {fileID: 566334977}
   location1Initial: {fileID: 1846614450}
@@ -8380,7 +8019,6 @@ GameObject:
   - component: {fileID: 1447979092}
   - component: {fileID: 1447979091}
   - component: {fileID: 1447979090}
-  - component: {fileID: 1447979094}
   - component: {fileID: 1447979095}
   - component: {fileID: 1447979096}
   m_Layer: 0
@@ -8470,35 +8108,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1447979094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447979089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1447979095}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1447979095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8511,7 +8120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: {fileID: 1504077161}
+  playerHands: {fileID: 1751640418}
   cubeHolder: {fileID: 1270671417}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -8654,7 +8263,6 @@ GameObject:
   - component: {fileID: 1510664671}
   - component: {fileID: 1510664670}
   - component: {fileID: 1510664669}
-  - component: {fileID: 1510664673}
   - component: {fileID: 1510664674}
   - component: {fileID: 1510664675}
   m_Layer: 0
@@ -8744,35 +8352,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1510664673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1510664668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1510664674}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1510664674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8785,7 +8364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: {fileID: 1504077161}
+  playerHands: {fileID: 1751640418}
   cubeHolder: {fileID: 1441171122}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -8898,7 +8477,6 @@ GameObject:
   - component: {fileID: 1540696181}
   - component: {fileID: 1540696180}
   - component: {fileID: 1540696184}
-  - component: {fileID: 1540696186}
   - component: {fileID: 1540696185}
   m_Layer: 0
   m_Name: EndDispenser
@@ -9096,47 +8674,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands: {fileID: 1751640418}
   audioSource: {fileID: 1540696184}
---- !u!114 &1540696186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540696179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1540696185}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Cloning
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1540696184}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1575066462
 GameObject:
   m_ObjectHideFlags: 0
@@ -9317,7 +8854,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 9
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1577576610
 Canvas:
   m_ObjectHideFlags: 0
@@ -9486,12 +9023,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751640418}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.095, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.09500003, z: 1.72}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 782906966}
+  m_Father: {fileID: 2126958080}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1755712488
@@ -10198,95 +9735,6 @@ MonoBehaviour:
   teleportLocationMesh: {fileID: 27969751}
   upAndDownController: {fileID: 1418575958}
   audioSource: {fileID: 1846614453}
---- !u!114 &1846614452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846614450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1846614451}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Teleport
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1846614450}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1184875456}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1418575958}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1846614453}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1874386541}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!82 &1846614453
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10647,7 +10095,6 @@ GameObject:
   - component: {fileID: 1893894501}
   - component: {fileID: 1893894500}
   - component: {fileID: 1893894499}
-  - component: {fileID: 1893894505}
   - component: {fileID: 1893894504}
   m_Layer: 0
   m_Name: ForwardDispenser
@@ -10845,47 +10292,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands: {fileID: 1751640418}
   audioSource: {fileID: 1893894499}
---- !u!114 &1893894505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!1 &1931098619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 114796, guid: 496fa247adc61d44ebaeaf9d72671287, type: 3}
+  m_PrefabInstance: {fileID: 1168348705}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893894498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1893894504}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Cloning
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1893894499}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1960109352
 GameObject:
   m_ObjectHideFlags: 0
@@ -11124,7 +10535,6 @@ GameObject:
   - component: {fileID: 1972161897}
   - component: {fileID: 1972161896}
   - component: {fileID: 1972161895}
-  - component: {fileID: 1972161901}
   - component: {fileID: 1972161900}
   m_Layer: 0
   m_Name: LeftDispenser
@@ -11322,47 +10732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands: {fileID: 1751640418}
   audioSource: {fileID: 1972161895}
---- !u!114 &1972161901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972161894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1972161900}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Cloning
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1972161895}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2006081132
 GameObject:
   m_ObjectHideFlags: 0
@@ -11375,7 +10744,6 @@ GameObject:
   - component: {fileID: 2006081135}
   - component: {fileID: 2006081134}
   - component: {fileID: 2006081133}
-  - component: {fileID: 2006081137}
   - component: {fileID: 2006081138}
   - component: {fileID: 2006081139}
   m_Layer: 0
@@ -11465,35 +10833,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2006081137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006081132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2006081138}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &2006081138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11692,7 +11031,6 @@ GameObject:
   - component: {fileID: 2023542844}
   - component: {fileID: 2023542843}
   - component: {fileID: 2023542842}
-  - component: {fileID: 2023542846}
   - component: {fileID: 2023542847}
   - component: {fileID: 2023542848}
   m_Layer: 0
@@ -11782,35 +11120,6 @@ Transform:
   m_Father: {fileID: 861440281}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2023542846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023542841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2023542847}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Atacching
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &2023542847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11823,7 +11132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: {fileID: 1504077161}
+  playerHands: {fileID: 1751640418}
   cubeHolder: {fileID: 254457485}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -12163,7 +11472,6 @@ GameObject:
   - component: {fileID: 2120462251}
   - component: {fileID: 2120462250}
   - component: {fileID: 2120462249}
-  - component: {fileID: 2120462255}
   - component: {fileID: 2120462254}
   m_Layer: 0
   m_Name: RightDispenser
@@ -12361,47 +11669,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands: {fileID: 1751640418}
   audioSource: {fileID: 2120462249}
---- !u!114 &2120462255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120462248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2120462254}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Cloning
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2120462249}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2125969834
 GameObject:
   m_ObjectHideFlags: 0
@@ -12441,6 +11708,11 @@ Camera:
 --- !u!20 &2126958079 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7192900133106063900, guid: 07543ddc30ead5e488692b1bd695b6e9, type: 3}
+  m_PrefabInstance: {fileID: 782906963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2126958080 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7192900133106063903, guid: 07543ddc30ead5e488692b1bd695b6e9, type: 3}
   m_PrefabInstance: {fileID: 782906963}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2140996820
