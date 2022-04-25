@@ -22,40 +22,41 @@ using UnityEngine;
 /// <summary>
 /// Sends messages to gazed GameObject.
 /// </summary>
-public class CameraPointer : MonoBehaviour
-{
+public class CameraPointer : MonoBehaviour {
+    public CrosshairController crosshairController; // Reference to CrosshairController script
+
+
     private const float _maxDistance = 100;
     private GameObject _gazedAtObject = null;
 
     /// <summary>
     /// Update is called once per frame.
     /// </summary>
-    public void Update()
-    {
+    public void Update() {
         // Casts ray towards camera's forward direction, to detect if a GameObject is being gazed
         // at.
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, _maxDistance))
-        {
+        if (Physics.Raycast(transform.position, transform.forward, out hit, _maxDistance)) {
             // GameObject detected in front of the camera.
-            if (_gazedAtObject != hit.transform.gameObject)
-            {
+            if (_gazedAtObject != hit.transform.gameObject) {
                 // New GameObject.
                 _gazedAtObject?.SendMessage("OnPointerExit");
                 _gazedAtObject = hit.transform.gameObject;
                 _gazedAtObject.SendMessage("OnPointerEnter");
+
+                if(_gazedAtObject.CompareTag("Clickable"))
+                    crosshairController.SetCrosshairScale(new Vector3(2.5f, 2.75f, 2.5f));
             }
         }
-        else
-        {
+        else {
             // No GameObject detected in front of the camera.
             _gazedAtObject?.SendMessage("OnPointerExit");
             _gazedAtObject = null;
+            crosshairController.SetCrosshairScale(new Vector3(0.5f, 0.55f, 0.5f));
         }
 
         // Checks for screen touches.
-        if (Google.XR.Cardboard.Api.IsTriggerPressed || Input.GetTouch(0).phase == TouchPhase.Began)
-        {
+        if (Google.XR.Cardboard.Api.IsTriggerPressed || Input.GetTouch(0).phase == TouchPhase.Began) {
             _gazedAtObject?.SendMessage("OnPointerClick");
         }
     }
