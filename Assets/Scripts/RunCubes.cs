@@ -14,6 +14,9 @@ public class RunCubes : MonoBehaviour {
     public int animationIndex;                                      // Index of animation
     public bool waitingForIdle;                                     // Boolean varible for wait for idle
 
+    // Correct code
+    public List<string> code;
+
     // Enviroment
     public List<GameObject> codingCell = new List<GameObject>();    // Programming slots that cube can be attached
     public static List<string> cubes = new List<string>();          // Cubes list
@@ -35,12 +38,14 @@ public class RunCubes : MonoBehaviour {
     public GameObject playerHand;                                   // Player hand
 
 
-    // Private variables
+    // Robot variables
     private AudioSource audioSource;                                // Audio source
     private Material[] mats;                                        // Material vector
     private Animator robotAnimator;                                 // Robot animator
     private AudioSource robotSource;                                // Robot audio source
 
+    // Counters
+    private int errors = 0;
 
     // Start is called before the first frame update
     void Start() {
@@ -60,18 +65,18 @@ public class RunCubes : MonoBehaviour {
     void LateUpdate() {
         // If is waiting for robot's idle
         if (waitingForIdle) {
+            
             if (// If robot walk ended
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
                     robotAnimator.GetBool("Forward")
                 ) {
-
                 // Stop robot
                 robotAnimator.SetBool("Forward", false);
                 waitingForIdle = false;
 
-                // Go to next command
-                NextCommand();
+                // Go to next command after 0.5 seconds (enought time to refresh robot animation)
+                StartCoroutine(WaitToNextCommand(0.5f));
             }
 
 
@@ -85,8 +90,8 @@ public class RunCubes : MonoBehaviour {
                 robotAnimator.SetBool("Left", false);
                 waitingForIdle = false;
 
-                // Go to next command
-                NextCommand();
+                // Go to next command after 0.5 seconds (enought time to refresh robot animation)
+                StartCoroutine(WaitToNextCommand(0.5f));
             }
 
 
@@ -100,16 +105,28 @@ public class RunCubes : MonoBehaviour {
                 robotAnimator.SetBool("Right", false);
                 waitingForIdle = false;
 
-                // Go to next command
-                NextCommand();
+                // Go to next command after 0.5 seconds (enought time to refresh robot animation)
+                StartCoroutine(WaitToNextCommand(0.5f));
             }
         }
+    }
+
+    /// <summary>
+    /// Wait a given seconds to call NextCommand().
+    /// </summary>
+    /// <param name="seconds">Seconds to wait.</param>
+    private IEnumerator WaitToNextCommand(float seconds) {
+        yield return new WaitForSeconds(seconds);
+
+        // Call NextCommand method
+        NextCommand();
     }
 
     /// <summary>
     /// When player clicks on this object, it tries to run the algorithm.
     /// </summary>
     public void OnPointerClick() {
+        // Try to run code
         Run();
 
         // If there is a cube in player's hand
@@ -125,13 +142,25 @@ public class RunCubes : MonoBehaviour {
     public void NextCommand() {
         // If have any coammand left
         if (animationIndex < (cubes.Count - 1)) {
+            Debug.Log(cubes[animationIndex]);
             robotAnimator.SetBool(cubes[animationIndex], true); // Set animation according to command
             waitingForIdle = true;                              // Wait for robot idle
             animationIndex++;                                   // Increase animationIndex
         }
         // If doesn't have any command left
         else {
-            animationIndex = 1;                                 // Set animationIndex to 1
+            // Set animationIndex to 1
+            animationIndex = 1;
+
+            // Clear cubes
+            cubes.Clear();
+
+            // Set final GameObjects
+            instructionsNextScene.SetActive(true);
+            projector.SetActive(true);
+
+            // Destroy particle system after 5 seconds
+            StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
         }
     }
 
@@ -162,36 +191,43 @@ public class RunCubes : MonoBehaviour {
             // If coding cell doesn't have a child
             else {
                 // Call Error method
-                Error("Deu ERRO ! Você deve preencher todas as placas de programação !");
+                Error("Deu ERRO! Você deve preencher todas as placas de programação!");
 
                 // Stop for loop
                 break;
             }
-            
-            // Check if the first cube is not "Begin"
-            if (i == 0 && cubes[i] != "Begin") {
-                // Call Error method
-                Error("Deu ERRO ! Verifique se o algoritmo foi iniciado corretamente !");
+            // If code cell is not correct
+            if(cubes[i] != code[i]) {
+                // Check if the first cube is not "Begin"
+                if(i == 0 && cubes[i] != "Begin") {
+                    // Call Error method
+                    Error("Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!");
 
-                // Stop for loop
-                break;
-            }
+                    // Stop for loop
+                    break;
+                }
 
-            // Check if the last cube is not "End"
-            if (i == (codingCell.Count - 1) && cubes[i] != "End") {
-                // Call Error method
-                Error("Deu ERRO ! Verifique se o algoritmo foi finalizado corretamente !");
+                // Check if the last cube is not "End"
+                if(i == (codingCell.Count - 1) && cubes[i] != "End") {
+                    // Call Error method
+                    Error("Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!");
 
-                // Stop for loop
-                break;
-            }
+                    // Stop for loop
+                    break;
+                }
 
-            // Check if "Begin" and "End" cubes are in the middle of the algorithm
-            if ((i != 0) && (i != codingCell.Count - 1) && (cubes[i] == "Begin" || cubes[i] == "End")) {
-                // Call Error method
-                Error("Deu ERRO ! Início e Fim devem ser usados no lugar certo !");
 
-                // Stop for loop
+                Debug.Log("Code: " + code[i] + ", Cubes: " + cubes[i] + ", Index: " + i);
+                // Check if "Begin" and "End" cubes are in the middle of the algorithm
+                if((i != 0) && (i != codingCell.Count - 1) && (cubes[i] == "Begin" || cubes[i] == "End")) {
+                    // Call Error method
+                    Error("Deu ERRO! Início e Fim devem ser usados no lugar certo!");
+
+                    // Stop for loop
+                    break;
+                }
+
+                Error("Deu ERRO!\nCódigo incorreto! Tente novamente!");
                 break;
             }
             #endregion Errors
@@ -213,6 +249,9 @@ public class RunCubes : MonoBehaviour {
     /// </summary>
     /// <param name="errorMessage">The error message that will be displayed.</param>
     private void Error(string errorMessage) {
+        // Clear cubes list
+        cubes.Clear();
+
         // Play error song
         audioSource.clip = error;
         audioSource.Play();
@@ -225,6 +264,9 @@ public class RunCubes : MonoBehaviour {
         // Display error message to player
         errorScreen.transform.GetComponentInChildren<Text>().text = errorMessage;
         errorScreen.SetActive(true);
+
+        // Hide error screen after 5 seconds
+        StartCoroutine(WaitToDeactivate(5.0f, errorScreen));
     }
 
     /// <summary>
@@ -245,18 +287,30 @@ public class RunCubes : MonoBehaviour {
         // Play robot audio source and next command
         robotSource.Play();
         NextCommand();
-
-        // Set final GameObjects
-        instructionsNextScene.SetActive(true);
-        projector.SetActive(true);
+        
+        // Close error screen
         errorScreen.SetActive(false);
-
-        StartCoroutine(ParticleSystemWait(5.0f));
     }
 
-    private IEnumerator ParticleSystemWait(float seconds) {
+    /// <summary>
+    /// Wait a given seconds to destroy a given GameObject.
+    /// </summary>
+    /// <param name="seconds">Seconds to wait.</param>
+    /// <param name="objectToDestroy">GameObject to destroy.</param>
+    private IEnumerator WaitToDestroy(float seconds, GameObject objectToDestroy) {
         yield return new WaitForSeconds(seconds);
 
-        Destroy(projectorParticleSystem);
+        Destroy(objectToDestroy);
+    }
+
+    /// <summary>
+    /// Wait a given seconds to deactivate a given GameObject.
+    /// </summary>
+    /// <param name="seconds">Seconds to wait.</param>
+    /// <param name="objectToDestroy">GameObject to deactivate.</param>
+    private IEnumerator WaitToDeactivate(float seconds, GameObject objectToDeactivate) {
+        yield return new WaitForSeconds(seconds);
+
+        objectToDeactivate.SetActive(false);
     }
 }
