@@ -9,6 +9,21 @@ public class ChangeScene : MonoBehaviour {
     public GameObject loadSceneCanvas;  // Loading scene canvas GameObject
     public Slider progressBar;          // Progress bar slider
 
+
+    /// <summary>
+    /// This method is called by the Main Camera when it starts gazing at this GameObject.
+    /// </summary>
+    public void OnPointerEnter() {
+
+    }
+
+    /// <summary>
+    /// This method is called by the Main Camera when it stops gazing at this GameObject.
+    /// </summary>
+    public void OnPointerExit() {
+
+    }
+
     /// <summary>
     /// When player clicks on this object, the next level is loaded
     /// </summary>

@@ -11,15 +11,18 @@ public class GameObjectController : MonoBehaviour {
     /// This method is called by the Main Camera when it starts gazing at this GameObject.
     /// </summary>
     public void OnPointerEnter() {
-        description.SetActive(true);
-        audioSource.Play();
+        if(description && audioSource) {
+            description.SetActive(true);
+            audioSource.Play();
+        }
     }
 
     /// <summary>
     /// This method is called by the Main Camera when it stops gazing at this GameObject.
     /// </summary>
     public void OnPointerExit() {
-        description.SetActive(false);
+        if(description)
+            description.SetActive(false);
     }
 
     public void OnPointerClick() {
