@@ -45,7 +45,7 @@ public class RunCubes : MonoBehaviour {
     private AudioSource robotSource;                                // Robot audio source
 
     // Counters
-    private int errors = 0;
+    //private int errors = 0;
 
     // Start is called before the first frame update
     void Start() {
