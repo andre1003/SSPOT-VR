@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: First Scene_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e1817dd86e2dd964689e891a667ab9e6, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 28317253632
+    m_Localized: 'Oh no! Mark bugged again!
+
+      It must have been reset!
+
+
+      It
+      doesn''t remember how to walk!
+
+
+      What now? Go to the platform at your
+      right to help him!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 748848349184
+    m_Localized: 'To Mark move again, you''ll need to program it again with a secret
+      algorithm!
+
+
+      The computer is too big, you must go up!
+
+
+      Use the
+      red button at your left to go up or down.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403386265600
+    m_Localized: 'The secret code is:
+
+      forward, forward, left, forward, right.
+
+
+      Do
+      not forget the
+
+      algorithm Begin and End.
+
+
+      Get the Cubes and put
+      it on Computer! After that is just hit Play!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2433045954560
+    m_Localized: 'It worked! Thank you!
+
+
+      Now I can guide you through training!
+
+
+      Prepare
+      yourself for the next challenge!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2980234854400
+    m_Localized: 'TO GO BACK
+
+      TO THE TUTORIAL
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

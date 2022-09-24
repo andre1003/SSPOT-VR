@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Global Localization Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Global Localization
+  m_TableCollectionNameGuidString: c41a65fbb7947ae4fa1c2c42eae88b37
+  m_Entries:
+  - m_Id: 7668695040
+    m_Key: BeginCube
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50576424960
+    m_Key: EndCube
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87582769152
+    m_Key: RepeatCube
+    m_Metadata:
+      m_Items: []
+  - m_Id: 139407589376
+    m_Key: VRController
+    m_Metadata:
+      m_Items: []
+  - m_Id: 214590488576
+    m_Key: BackToTutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3309349306368
+    m_Key: NextLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11396240048128
+    m_Key: Loading
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6410816352908214310
+  references:
+    version: 2
+    RefIds:
+    - rid: 6410816352908214310
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1664033132863

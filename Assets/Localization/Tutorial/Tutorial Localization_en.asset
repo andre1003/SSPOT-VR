@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorial Localization_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 59d5971e2b3420d4e966d8f3e023c0e3, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 15117778944
+    m_Localized: 'TO BEGIN
+
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 939412357120
+    m_Localized: 'Welcome to the Space Station for Programming Training!
+
+
+      Gaze
+      the objects to see tips of how to use them!
+
+
+      Here in your right is Mark!
+      Your tutor!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157576650752
+    m_Localized: 'PROGRAMMING CUBES
+
+
+      USE the CUBES to PROGRAM!
+
+      Put
+      the CUBES in the COMPUTER.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2784725762048
+    m_Localized: 'Algorithm PLAY and RESET
+
+      BUTTON
+
+
+      PLAY EXECUTES.
+
+      RESET
+      CLEANS the algorithm.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3514593378304
+    m_Localized: 'PROGRAMMING PLATFORM BUTTON
+
+
+      Select the PLATFORM BUTTON
+      to go up and down.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3844492165120
+    m_Localized: 'Hello! I''m Mark!
+
+
+
+      The space station tutor!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4327080394752
+    m_Localized: 'TELETRANSPORT ARROW
+
+
+      Select the ARROW to MOVE !'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20636665053184
+    m_Localized: 'TO CHANGE THE
+
+      LANGUAGE
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -45,14 +45,14 @@ public class CameraPointer : MonoBehaviour {
                 _gazedAtObject.SendMessage("OnPointerEnter", SendMessageOptions.DontRequireReceiver);
 
                 if(_gazedAtObject.CompareTag("Clickable"))
-                    crosshairController.SetCrosshairScale(new Vector3(1f, 1.1f, 1f));
+                    crosshairController.SetCrosshairScale(new Vector3(1.5f, 1.5f, 1.5f));
             }
         }
         else {
             // No GameObject detected in front of the camera.
             _gazedAtObject?.SendMessage("OnPointerExit", SendMessageOptions.DontRequireReceiver);
             _gazedAtObject = null;
-            crosshairController.SetCrosshairScale(new Vector3(0.5f, 0.55f, 0.5f));
+            crosshairController.SetCrosshairScale(new Vector3(1f, 1f, 1f));
         }
 
         // Checks for screen touches.

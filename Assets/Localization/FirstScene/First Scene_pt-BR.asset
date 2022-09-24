@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: First Scene_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: e1817dd86e2dd964689e891a667ab9e6, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 28317253632
+    m_Localized: "Oh, n\xE3o! O Mark travou de novo!\nTeve que ser resetado!\n\nEle
+      n\xE3o lembra nem como andar!\n\nE agora? V\xE1 at\xE9 a plataforma \xE0 sua
+      direita para ajudar ele!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 748848349184
+    m_Localized: "Para o Mark se mexer de novo, voc\xEA vai programar ele com um
+      algoritmo secreto!\n\nO computador dele \xE9 muito grande,\nvoc\xEA precisa
+      subir!\n\nUse o bot\xE3o vermelho \xE0 sua esquerda\npara subir e descer.\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403386265600
+    m_Localized: "O c\xF3digo secreto \xE9:\nfrente, frente, esquerda, frente e direita.\r\n\r\nN\xE3o
+      esque\xE7a do\nIn\xEDcio e do Fim do algoritmo.\r\n\r\nPegue os Cubos e coloque
+      no Computador! Depois \xE9 s\xF3 dar Play!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2433045954560
+    m_Localized: "Funcionou! Obrigado!\n\nAgora consigo guiar voc\xEA no treinamento!\n\nPrepare-se
+      para o pr\xF3ximo desafio!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2980234854400
+    m_Localized: 'PARA VOLTAR
+
+      PARA O TUTORIAL
+
+
+      CLIQUE AQUI'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

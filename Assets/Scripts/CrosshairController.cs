@@ -19,7 +19,7 @@ public class CrosshairController : MonoBehaviour {
     void Update() {
         // If reticle current scale is different from newScale, smoothly change the crosshair the scale
         if (reticle.transform.localScale != newScale) {
-            reticle.transform.localScale = Vector3.Lerp(reticle.transform.localScale, newScale, 5f * Time.deltaTime);
+            reticle.transform.localScale = Vector3.Lerp(reticle.transform.localScale, newScale, 20f * Time.deltaTime);
         }
     }
 

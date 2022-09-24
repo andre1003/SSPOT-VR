@@ -11,5 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstLevel.unity
     guid: f4c5d18b38a307541ab699b1500ab5b6
+  - enabled: 1
+    path: Assets/Scenes/ThirdLevel.unity
+    guid: 9e62d7fcc24f22641bc05d50b7978aba
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 3f6cbb6fc35162a408f24494a7a340c7, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 4a75643bdc4c83e42a8c6b494b11e435, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 386dfaef28007f7479255fe00ef1927c, type: 2}

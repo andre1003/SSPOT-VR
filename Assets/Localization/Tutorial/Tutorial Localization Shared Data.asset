@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Tutorial Localization Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Tutorial Localization
+  m_TableCollectionNameGuidString: 59d5971e2b3420d4e966d8f3e023c0e3
+  m_Entries:
+  - m_Id: 15117778944
+    m_Key: ChangeScene
+    m_Metadata:
+      m_Items: []
+  - m_Id: 939412357120
+    m_Key: Instructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2157576650752
+    m_Key: CubeDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2784725762048
+    m_Key: RunAndResetButtons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3514593378304
+    m_Key: ElevatorButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3844492165120
+    m_Key: MarkDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4327080394752
+    m_Key: TeletransportButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20636665053184
+    m_Key: ChangeLanguage
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6410816352908214296
+  references:
+    version: 2
+    RefIds:
+    - rid: 6410816352908214296
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1664030754433

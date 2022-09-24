@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Global Localization_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: c41a65fbb7947ae4fa1c2c42eae88b37, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7668695040
+    m_Localized: "In\xEDcio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50576424960
+    m_Localized: Fim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87582769152
+    m_Localized: Repita
+    m_Metadata:
+      m_Items: []
+  - m_Id: 214590488576
+    m_Localized: 'PARA VOLTAR
+
+      PARA O TUTORIAL
+
+
+      CLIQUE AQUI'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 139407589376
+    m_Localized: "\u2190 Imersivo \u2190\n\n\n\n\n\u2192 N\xE3o Imersivo \u2192"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3309349306368
+    m_Localized: '
+
+
+
+      CLIQUE AQUI'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11396240048128
+    m_Localized: "Carregando pr\xF3xima fase"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
