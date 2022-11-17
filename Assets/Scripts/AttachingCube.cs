@@ -2,6 +2,9 @@
 using UnityEngine.EventSystems;
 
 public class AttachingCube : MonoBehaviour {
+    public int cubeIndex;
+    public bool isLeftCell;
+
     // Player
     public GameObject playerHands;      // Player hand
 
@@ -45,6 +48,19 @@ public class AttachingCube : MonoBehaviour {
         if (playerHands.transform.childCount == 1 && cubeHolder.transform.childCount == 0) {
             // Set selected cube
             selectedCube = playerHands.transform.GetChild(0).gameObject;
+
+
+            // If is a loop cube (this gives an index out of bounds error!)
+            if(playerHands.transform.GetChild(0).gameObject.name.StartsWith("Repeat") && !isLeftCell)
+            {
+                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
+                ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(true);
+                return;
+            }
+            else if(playerHands.transform.GetChild(0).gameObject.name.StartsWith("Repeat"))
+            {
+                ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(true);
+            }
 
             // Attach the selected cube to cubeHolder
             selectedCube.transform.SetParent(cubeHolder.transform);

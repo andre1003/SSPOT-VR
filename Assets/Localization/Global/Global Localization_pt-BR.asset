@@ -51,6 +51,12 @@ MonoBehaviour:
     m_Localized: "Carregando pr\xF3xima fase"
     m_Metadata:
       m_Items: []
+  - m_Id: 19603096054726656
+    m_Localized: 'Fim
+
+      Repita'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

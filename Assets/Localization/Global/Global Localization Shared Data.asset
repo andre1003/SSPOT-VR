@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Loading
     m_Metadata:
       m_Items: []
+  - m_Id: 19603096054726656
+    m_Key: EndRepeatCube
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

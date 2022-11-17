@@ -57,6 +57,12 @@ MonoBehaviour:
     m_Localized: Loading next level
     m_Metadata:
       m_Items: []
+  - m_Id: 19603096054726656
+    m_Localized: 'End
+
+      Repeat'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

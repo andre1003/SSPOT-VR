@@ -11,9 +11,6 @@ public class TeleportToObject : MonoBehaviour {
     // Elevator
     public GoingUpAndDownController upAndDownController;    // Elevator controller
 
-    // Audio source
-    public AudioSource audioSource;                         // Audio source
-
 
     /// <summary>
     /// When player clicks on this object, it teleports the player to current GameObject position.
@@ -27,6 +24,7 @@ public class TeleportToObject : MonoBehaviour {
 
         // Activate initial location for teleport
         initialLocation.SetActive(true);
+        initialLocation.GetComponent<MeshRenderer>().enabled = true;
 
         // Enable elevator button
         upAndDownController.enabled = true;
