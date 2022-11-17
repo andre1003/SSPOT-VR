@@ -64,6 +64,11 @@ MonoBehaviour:
       CLIQUE AQUI'
     m_Metadata:
       m_Items: []
+  - m_Id: 19278344073183232
+    m_Localized: "COMPUTADOR do MARK\n\nOs CUBOS v\xE3o nas\nPLACAS de PROGRAMA\xC7\xC3O.\n\nComo
+      o CUBO IN\xCDCIO!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

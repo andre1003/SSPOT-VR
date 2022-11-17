@@ -13,6 +13,9 @@ public class MouseController : MonoBehaviour {
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        playerBody.Rotate(Vector3.zero);
     }
 
     // Update is called once per frame
