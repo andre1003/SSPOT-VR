@@ -365,16 +365,16 @@ MonoBehaviour:
   instructions:
   - Begin
   - Left
-  - Right
   - Forward
+  - Right
   - Forward
   - End
   loop:
   - None
   - Repeat
-  - None
   - EndRepeat
-  - None
+  - Repeat
+  - EndRepeat
   - None
   codingCell:
   - {fileID: 89653333}
@@ -2600,8 +2600,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Tenho uma formulinha nova pra te\najudar! Vale a pena tentar:\n\nRepita
-    esqueda e direita 2 vezes.\nDepois frente e frente.\n\nN\xE3o esque\xE7a de marcar
-    o fim da repeti\xE7\xE3o!!"
+    esqueda 4 vezes e depois frente.\nA\xED repita direita 5 vezes e depois frente.\n\nN\xE3o
+    esque\xE7a de marcar o fim da repeti\xE7\xE3o!!"
 --- !u!222 &263444607
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13015,10 +13015,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeIndex: 4
+  cubeIndex: 5
   isLeftCell: 1
   playerHands: {fileID: 532217703}
-  cubeHolder: {fileID: 1588365860}
+  cubeHolder: {fileID: 1435309657}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
 --- !u!65 &1399044191
@@ -17999,7 +17999,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 96544f486f43da84ba2802539753cb0b, type: 2}
+      objectReference: {fileID: 9100000, guid: 1a6cfda6fa8cd1b40b261b1f7c211541, type: 2}
     - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_UpdateMode
       value: 1
@@ -19323,7 +19323,7 @@ MonoBehaviour:
   cubeIndex: 4
   isLeftCell: 1
   playerHands: {fileID: 532217703}
-  cubeHolder: {fileID: 1588365860}
+  cubeHolder: {fileID: 512191383}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
 --- !u!65 &1895907878
