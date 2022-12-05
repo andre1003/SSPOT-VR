@@ -11,26 +11,26 @@ public class ControllerListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
+        foreach(KeyCode kcode in Enum.GetValues(typeof(KeyCode)))
         {
-            if (Input.GetKeyDown(kcode))
+            if(Input.GetKeyDown(kcode))
             {
                 Debug.Log("Key Code down: " + kcode);
                 canvasMsg.text = "Key Code down: " + kcode.ToString();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            
+
         }
-                          
+
     }
 
 

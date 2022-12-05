@@ -20,13 +20,13 @@ public class ComputerCellsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public GameObject GetMainCellAtIndex(int index)
@@ -34,13 +34,13 @@ public class ComputerCellsController : MonoBehaviour
         return mainCells[index];
     }
 
-    public GameObject GetLeftCellAtIndex(int index) 
-    { 
+    public GameObject GetLeftCellAtIndex(int index)
+    {
         return leftCells[index];
     }
 
-    public GameObject GetRightCellAtIndex(int index) 
-    { 
+    public GameObject GetRightCellAtIndex(int index)
+    {
         return rightCells[index];
     }
 
@@ -50,13 +50,13 @@ public class ComputerCellsController : MonoBehaviour
         List<string> commands = new List<string>();
 
         // Loop all left cells
-        foreach(GameObject cell in leftCells) 
+        foreach(GameObject cell in leftCells)
         {
             GameObject cube;
 
             try
             {
-                cube = cell.transform.GetChild(0).gameObject;
+                cube = cell.transform.GetChild(0).transform.GetChild(0).gameObject;
                 // If there is a repeat cube, add its name to local list
                 if(cube.name.Contains("Repeat"))
                 {
@@ -73,7 +73,7 @@ public class ComputerCellsController : MonoBehaviour
                 commands.Add("None");
             }
 
-            
+
         }
 
         // Return commands

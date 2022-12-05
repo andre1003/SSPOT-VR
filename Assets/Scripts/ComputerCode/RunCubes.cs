@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RunCubes : MonoBehaviour {
+public class RunCubes : MonoBehaviour
+{
     #region Attributes
     #region Screens
     // Error screen GameObject
@@ -113,7 +114,8 @@ public class RunCubes : MonoBehaviour {
 
     #region Methods
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         // Setup robot audio-visual attributes
         robotAnimator = robot.GetComponent<Animator>();
         robotAnimation = robot.GetComponent<Animation>();
@@ -132,15 +134,18 @@ public class RunCubes : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate() {
+    void LateUpdate()
+    {
         // If is waiting for robot's idle
-        if(waitingForIdle) {
+        if(waitingForIdle)
+        {
 
             if(// If robot walk ended
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
                     robotAnimator.GetBool("Forward")
-                ) {
+                )
+            {
                 // Stop robot
                 robotAnimator.SetBool("Forward", false);
                 waitingForIdle = false;
@@ -154,7 +159,8 @@ public class RunCubes : MonoBehaviour {
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("TurnLeft") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
                     robotAnimator.GetBool("Left")
-                ) {
+                )
+            {
 
                 // Stop robot
                 robotAnimator.SetBool("Left", false);
@@ -169,7 +175,8 @@ public class RunCubes : MonoBehaviour {
                     robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("TurnRight") &&
                     robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
                     robotAnimator.GetBool("Right")
-                ) {
+                )
+            {
 
                 // Stop robot
                 robotAnimator.SetBool("Right", false);
@@ -185,7 +192,8 @@ public class RunCubes : MonoBehaviour {
     /// Wait a given seconds to call NextCommand().
     /// </summary>
     /// <param name="seconds">Seconds to wait.</param>
-    private IEnumerator WaitToNextCommand(float seconds) {
+    private IEnumerator WaitToNextCommand(float seconds)
+    {
         yield return new WaitForSeconds(seconds);
 
         // Call NextCommand method
@@ -195,7 +203,8 @@ public class RunCubes : MonoBehaviour {
     /// <summary>
     /// When player clicks on this object, it tries to run the algorithm.
     /// </summary>
-    public void OnPointerClick() {
+    public void OnPointerClick()
+    {
         // Try to run code
         CheckIsRunnable();
 
@@ -210,15 +219,18 @@ public class RunCubes : MonoBehaviour {
     /// <summary>
     /// Run next command from the algorithm.
     /// </summary>
-    public void NextCommand() {
+    public void NextCommand()
+    {
         // If have any coammand left
-        if(animationIndex < (mainInstructions.Count - 1)) {
+        if(animationIndex < (mainInstructions.Count - 1))
+        {
             robotAnimator.SetBool(mainInstructions[animationIndex], true); // Set animation according to command
             waitingForIdle = true;                              // Wait for robot idle
             animationIndex++;                                   // Increase animationIndex
         }
         // If doesn't have any command left
-        else {
+        else
+        {
             // Set animationIndex to 1
             animationIndex = 1;
 
@@ -240,7 +252,8 @@ public class RunCubes : MonoBehaviour {
     /// <para>This method plays error song, set material to error material and display error message.</para>
     /// </summary>
     /// <param name="errorMessage">The error message that will be displayed.</param>
-    private void Error(string errorMessage) {
+    private void Error(string errorMessage)
+    {
         // Clear cubes list
         mainInstructions.Clear();
 
@@ -266,7 +279,8 @@ public class RunCubes : MonoBehaviour {
     /// 
     /// <para>This method plays success song, set material to success material and display the final GameObjects.</para>
     /// </summary>
-    private void Success() {
+    private void Success()
+    {
         // Play success song
         audioSource.clip = success;
         audioSource.Play();
@@ -289,7 +303,8 @@ public class RunCubes : MonoBehaviour {
     /// </summary>
     /// <param name="seconds">Seconds to wait.</param>
     /// <param name="objectToDestroy">GameObject to destroy.</param>
-    private IEnumerator WaitToDestroy(float seconds, GameObject objectToDestroy) {
+    private IEnumerator WaitToDestroy(float seconds, GameObject objectToDestroy)
+    {
         yield return new WaitForSeconds(seconds);
 
         Destroy(objectToDestroy);
@@ -300,7 +315,8 @@ public class RunCubes : MonoBehaviour {
     /// </summary>
     /// <param name="seconds">Seconds to wait.</param>
     /// <param name="objectToDestroy">GameObject to deactivate.</param>
-    private IEnumerator WaitToDeactivate(float seconds, GameObject objectToDeactivate) {
+    private IEnumerator WaitToDeactivate(float seconds, GameObject objectToDeactivate)
+    {
         yield return new WaitForSeconds(seconds);
 
         objectToDeactivate.SetActive(false);
@@ -329,6 +345,7 @@ public class RunCubes : MonoBehaviour {
             if(loopCommands[i] != loop[i])
             {
                 Error("A repetição na linha " + i + " está incorreta!");
+                Debug.Log("LoopCommands: " + loopCommands[i] + "\nEsperado: " + loop[i]);
                 return false;
             }
         }
@@ -348,10 +365,12 @@ public class RunCubes : MonoBehaviour {
         int length = 0; // Name length
 
         // Compiler
-        for(int i = 0; i < codingCell.Count; i++) {
+        for(int i = 0; i < codingCell.Count; i++)
+        {
             #region Valid Coding Cell
             // Verify if all the slots are sequentially filled. There can be no empty slots
-            if(codingCell[i].transform.childCount > 0) {
+            if(codingCell[i].transform.childCount > 0)
+            {
                 // Get child GameObject's name length
                 length = codingCell[i].transform.GetChild(0).gameObject.name.Length;
 
@@ -366,7 +385,8 @@ public class RunCubes : MonoBehaviour {
 
             #region Errors
             // If coding cell doesn't have a child
-            else {
+            else
+            {
                 // Call Error method
                 Error("Deu ERRO! Você deve preencher todas as placas de programação!");
 
@@ -374,9 +394,11 @@ public class RunCubes : MonoBehaviour {
                 return false;
             }
             // If code cell is not correct
-            if(mainInstructions[i] != instructions[i]) {
+            if(mainInstructions[i] != instructions[i])
+            {
                 // Check if the first cube is not "Begin"
-                if(i == 0 && mainInstructions[i] != "Begin") {
+                if(i == 0 && mainInstructions[i] != "Begin")
+                {
                     // Call Error method
                     Error("Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!");
 
@@ -385,7 +407,8 @@ public class RunCubes : MonoBehaviour {
                 }
 
                 // Check if the last cube is not "End"
-                if(i == (codingCell.Count - 1) && mainInstructions[i] != "End") {
+                if(i == (codingCell.Count - 1) && mainInstructions[i] != "End")
+                {
                     // Call Error method
                     Error("Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!");
 
@@ -397,7 +420,8 @@ public class RunCubes : MonoBehaviour {
                 Debug.Log("Code: " + instructions[i] + ", Cubes: " + mainInstructions[i] + ", Index: " + i);
 
                 // Check if "Begin" and "End" cubes are in the middle of the algorithm
-                if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i] == "Begin" || mainInstructions[i] == "End")) {
+                if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i] == "Begin" || mainInstructions[i] == "End"))
+                {
                     // Call Error method
                     Error("Deu ERRO! Início e Fim devem ser usados no lugar certo!");
 
@@ -438,12 +462,14 @@ public class RunCubes : MonoBehaviour {
             // If finds the end loop command, return its index
             if(loopCommands[i] == "EndRepeat")
             {
-                return i;
+                return i + 1;
             }
+            else if(i != startIndex && loopCommands[i] == "Repeat")
+                break;
         }
 
-        // Return -1 if there is no end loop command
-        return -1;
+        // Return startIndex if there is no end loop command
+        return startIndex + 1;
     }
 
     public void RunNextCommand()
@@ -467,17 +493,20 @@ public class RunCubes : MonoBehaviour {
                 iteration = 0;
                 iterationStart = -1;
                 iterationEnd = -1;
+                RunNextCommand();
+                return;
             }
         }
 
         // Else, if the animation index is on loop commands range
-        else if(animationIndex < (loopCommands.Count - 1))
+        else if(animationIndex < (loopCommands.Count))
         {
             // If the loop comand is repeat begin
             if(loopCommands[animationIndex] == "Repeat")
             {
                 // Setup iterations variables
                 iteration = ComputerCellsController.instance.GetRightCellAtIndex(animationIndex).GetComponent<LoopController>().iterations;
+                Debug.Log(iteration);
                 iterationStart = animationIndex;
                 iterationEnd = FindRepeatEnd(iterationStart);
             }

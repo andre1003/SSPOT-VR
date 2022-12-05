@@ -29,7 +29,7 @@ public class RunCubesBackup : MonoBehaviour
     public Material successTerminalMaterial;
     public Material errorTerminalMaterial;
 
-    Material[] mats;    
+    Material[] mats;
 
     private AudioSource source;
     public AudioClip success;
@@ -45,7 +45,7 @@ public class RunCubesBackup : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
     }
 
     public void Run()
@@ -55,22 +55,23 @@ public class RunCubesBackup : MonoBehaviour
 
         List<string> cubes = new List<string>();
         string cube;
-        int length=0;
+        int length = 0;
 
         //compilador
-        for (int i = 0; i < codingCell.Count; i++)
+        for(int i = 0; i < codingCell.Count; i++)
         {
             Debug.Log("%%%%%%%%%%%%%%%%%%%" + codingCell[i]);
-           
+
             //verificar se todos estao preenchidos sequencialmente, nao pode ter nenhum buraco
-            if (codingCell[i].transform.childCount > 0)
+            if(codingCell[i].transform.childCount > 0)
             {
-                
+
                 length = codingCell[i].transform.GetChild(0).gameObject.name.Length;
-                cube = codingCell[i].transform.GetChild(0).gameObject.name.Remove(length-16);
+                cube = codingCell[i].transform.GetChild(0).gameObject.name.Remove(length - 16);
                 cubes.Add(cube);
 
-            } else
+            }
+            else
             {
                 //tem celula sem child, sem cubo, placa nao preenchida
                 //mudar a cor de fundo do terminal e toca som de erro 
@@ -79,16 +80,16 @@ public class RunCubesBackup : MonoBehaviour
                 mats = terminal.GetComponent<MeshRenderer>().materials;
                 mats[1] = errorTerminalMaterial;
                 terminal.GetComponent<MeshRenderer>().materials = mats;
-                
-                errorScreen.transform.GetComponentInChildren<Text>().text= "Deu ERRO ! Você deve preencher todas as placas de programação !";
+
+                errorScreen.transform.GetComponentInChildren<Text>().text = "Deu ERRO ! Você deve preencher todas as placas de programação !";
                 errorScreen.SetActive(true);
-                
+
                 break;
             }
 
 
             //primeiro = inicio
-            if (i == 0 && cubes[i] != "Begin")
+            if(i == 0 && cubes[i] != "Begin")
             {
                 source.clip = error;
                 source.Play();
@@ -103,21 +104,21 @@ public class RunCubesBackup : MonoBehaviour
             }
 
             //ultimo = fim
-            if (i == (codingCell.Count - 1) && cubes[i] != "End")
+            if(i == (codingCell.Count - 1) && cubes[i] != "End")
             {
                 source.clip = error;
                 source.Play();
                 mats = terminal.GetComponent<MeshRenderer>().materials;
                 mats[1] = errorTerminalMaterial;
                 terminal.GetComponent<MeshRenderer>().materials = mats;
-                
+
                 errorScreen.transform.GetComponentInChildren<Text>().text = "Deu ERRO ! Verifique se o algoritmo foi finalizado corretamente !";
                 errorScreen.SetActive(true);
-                
+
                 break;
             }
 
-            if ( (i!= 0) && (i != codingCell.Count - 1) && (cubes[i] == "Begin" || cubes[i] == "End"))
+            if((i != 0) && (i != codingCell.Count - 1) && (cubes[i] == "Begin" || cubes[i] == "End"))
             {
                 source.clip = error;
                 source.Play();
@@ -126,16 +127,16 @@ public class RunCubesBackup : MonoBehaviour
                 terminal.GetComponent<MeshRenderer>().materials = mats;
 
                 errorScreen.transform.GetComponentInChildren<Text>().text = "Deu ERRO ! Início e Fim devem ser usados no lugar certo !";
-                errorScreen.SetActive(true); 
+                errorScreen.SetActive(true);
 
                 break;
             }
 
-            if (i == (codingCell.Count-1))
+            if(i == (codingCell.Count - 1))
             {
                 source.clip = success;
                 source.Play();
-                
+
                 mats = terminal.GetComponent<MeshRenderer>().materials;
                 mats[1] = successTerminalMaterial;
                 terminal.GetComponent<MeshRenderer>().materials = mats;
@@ -145,19 +146,19 @@ public class RunCubesBackup : MonoBehaviour
                 instructionsNextScene.SetActive(true);
                 projector.SetActive(true);
                 errorScreen.SetActive(false);
-                
+
                 //scriptGoingUpAndDown.GoingUpAndDown();
-                
+
             }
 
             Debug.Log("&&&&&& CUBO " + i + ": " + cubes[i]);
 
         } //for compilador
 
-       
+
 
     }
 
-    
+
 
 }

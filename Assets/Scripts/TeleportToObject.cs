@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class TeleportToObject : MonoBehaviour {
+public class TeleportToObject : MonoBehaviour
+{
     // Player
     public GameObject player;                               // Player GameObject
 
@@ -15,7 +16,8 @@ public class TeleportToObject : MonoBehaviour {
     /// <summary>
     /// When player clicks on this object, it teleports the player to current GameObject position.
     /// </summary>
-    public void OnPointerClick() {
+    public void OnPointerClick()
+    {
         // Disable elevator teleport button mesh
         teleportLocationMesh.enabled = false;
 

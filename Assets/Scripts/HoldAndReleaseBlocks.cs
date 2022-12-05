@@ -27,9 +27,9 @@ public class HoldAndReleaseBlocks : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1"))
         {
-            if (inHands) //solta o cubo para a posicao original
+            if(inHands) //solta o cubo para a posicao original
             {
                 this.GetComponent<HoldAndReleaseBlocks>().enabled = false;
                 cube.transform.SetParent(null);
@@ -37,14 +37,14 @@ public class HoldAndReleaseBlocks : MonoBehaviour
                 inHands = false;
             }
             else //pega o cubo da posição dele para as mãos
-            {                
+            {
                 cube.transform.SetParent(hands.transform);
                 cube.transform.localPosition = new Vector3(0f, -.55f, 1.2f);
                 inHands = true;
             }
-            
+
         }
 
-        
+
     }
 }

@@ -30,7 +30,7 @@ public class LoopController : MonoBehaviour
     public void DecreaseIterations()
     {
         iterations--;
-        
+
         if(iterations < 1)
         {
             iterations = 1;

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Second Scene_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: 4cd60ccf85cd22d4bb21fdd871671b7c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 12496338944
+    m_Localized: "O Mark est\xE1 se sentindo melhor,\nmas ainda n\xE3o est\xE1 100%...\n\nAcho
+      que ele precisa dar\numas voltas por ai...\n\nVamos ajudar ele!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1025328480256
+    m_Localized: "Vamos fazer o Mark praticar alguns\ngiros, para ver se ele ainda
+      tem\nas manhas.\n\nVoc\xEA j\xE1 sabe, n\xE9?!  Vamos ter que subir\nde novo
+      a plataforma.\n\nDica: Use o bot\xE3o vermelho para subir ."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2036591951872
+    m_Localized: "Tenho uma formulinha nova pra te\r\najudar! Vale a pena tentar:\r\n\r\nRepita
+      esqueda 4 vezes e depois frente.\r\nA\xED repita direita 5 vezes e depois frente.\r\n\r\nN\xE3o
+      esque\xE7a de marcar o in\xEDcio e fim do c\xF3digo!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3843611361280
+    m_Localized: "Deu certo! Parab\xE9ns!\n\nAgora o Mark consegue dar umas voltas
+      por a\xED.\n\nMas ainda n\xE3o acabou!\n\nVamos continuar!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

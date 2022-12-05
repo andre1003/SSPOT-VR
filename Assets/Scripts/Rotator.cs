@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class Rotator : MonoBehaviour {
+public class Rotator : MonoBehaviour
+{
     // Rotation
     public Vector3 rotation; // Rotation vector
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         transform.Rotate(rotation * Time.deltaTime); // Constantly rotate this object in rotation vector
     }
 }

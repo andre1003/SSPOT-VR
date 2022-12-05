@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class CloningCube : MonoBehaviour {
+public class CloningCube : MonoBehaviour
+{
     // Player
     public GameObject playerHands;      // Player hands GameObject
 
@@ -13,9 +14,11 @@ public class CloningCube : MonoBehaviour {
     /// <summary>
     /// When player clicks on this object, it clones the selected cube to player's hand
     /// </summary>
-    public void OnPointerClick() {
+    public void OnPointerClick()
+    {
         // If the hand is not empty
-        if (playerHands.transform.childCount != 0) {
+        if(playerHands.transform.childCount != 0)
+        {
             // Clear the hand
             Destroy(playerHands.transform.GetChild(0).gameObject);
             audioSource.Play();
@@ -25,7 +28,8 @@ public class CloningCube : MonoBehaviour {
         AttachCubeToHand();
     }
 
-    private void AttachCubeToHand() {
+    private void AttachCubeToHand()
+    {
         // Instanciate the selected object
         selectedCube = Instantiate(gameObject);
 

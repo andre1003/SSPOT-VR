@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Address: Assets/Localization/Global/Global Localization Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 4cd60ccf85cd22d4bb21fdd871671b7c
+    m_Address: Assets/Localization/SecondScene/Second Scene Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 8189444b1fe375340ad3a0bd116e19ae, type: 2}
   m_SchemaSet:

@@ -49,64 +49,65 @@ public class InstantiateAttachAndDestroyBlocks : MonoBehaviour
     void Update()
     {
         //fica verificando se o fire1 é disparado
-       
-        if (Input.GetButtonDown("Fire1"))
+
+        if(Input.GetButtonDown("Fire1"))
         {
             Debug.Log("%%% Fire1 pressionado");
 
-            if (inHands) // anexa o cubo a uma placa de programação ou destrói o cubo
+            if(inHands) // anexa o cubo a uma placa de programação ou destrói o cubo
             {
 
                 //verifica para onde o usuário está olhando quando clica e então retorna o nome do gameobject clicado
                 //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 //if (Physics.Raycast(ray, out hit))
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+                if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
                 {
                     Debug.Log("#### Raio hit e inHands: " + hit.transform.name + " --- " + inHands);
 
-                    if (selectedCube && hit.transform.name.Contains("CodingCell"))
+                    if(selectedCube && hit.transform.name.Contains("CodingCell"))
                     {
 
                         Debug.Log("@@ CoddingCell selecionada: " + hit.transform.name);
 
-                        switch (hit.transform.name) {
+                        switch(hit.transform.name)
+                        {
                             case "CodingCell1":
-                                if (codingCell1.transform.childCount == 0)
+                                if(codingCell1.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell1.transform);
                                 break;
 
                             case "CodingCell2":
-                                if (codingCell2.transform.childCount == 0)
+                                if(codingCell2.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell2.transform);
                                 break;
 
                             case "CodingCell3":
-                                if (codingCell3.transform.childCount == 0)
+                                if(codingCell3.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell3.transform);
                                 break;
 
                             case "CodingCell4":
-                                if (codingCell4.transform.childCount == 0)
+                                if(codingCell4.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell4.transform);
                                 break;
 
                             case "CodingCell5":
-                                if (codingCell5.transform.childCount == 0)
+                                if(codingCell5.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell5.transform);
                                 break;
 
                             case "CodingCell6":
-                                if (codingCell6.transform.childCount == 0)
+                                if(codingCell6.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell6.transform);
                                 break;
 
                             case "CodingCell7":
-                                if (codingCell7.transform.childCount == 0)
+                                if(codingCell7.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell7.transform);
                                 break;
 
                             case "CodingCell8":
-                                if (codingCell8.transform.childCount == 0)
+                                if(codingCell8.transform.childCount == 0)
                                     selectedCube.transform.SetParent(codingCell8.transform);
                                 break;
                         }
@@ -121,12 +122,12 @@ public class InstantiateAttachAndDestroyBlocks : MonoBehaviour
                         source.Play();
 
 
-                        inHands = false;                                                        
+                        inHands = false;
                     }
                 }
                 else
-                {                    
-                    if (selectedCube)
+                {
+                    if(selectedCube)
                     {
                         Debug.Log("DESTROYYYYYYYYY");
                         source.clip = releasingCube;
@@ -135,22 +136,22 @@ public class InstantiateAttachAndDestroyBlocks : MonoBehaviour
                         selectedCube = null;
                         inHands = false;
                         //Debug.Log("#### Raio hit e inHands: " + hit.transform.name + " --- " + inHands);
-                        
+
                     }
                 }
-         
+
             }
             else //instancia uma cópia do cubo selecionado colocando-o nas mãos do player ou apaga o cubo que está anexado na placa de programação
             {
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))                
-                {                    
-                    if (hit.transform.name.Contains("CodingCell"))
+                if(Physics.Raycast(ray, out hit))
+                {
+                    if(hit.transform.name.Contains("CodingCell"))
                     {
                         source.clip = releasingCube;
                         source.Play();
-                        switch (hit.transform.name)
-                        {                            
+                        switch(hit.transform.name)
+                        {
                             case "CodingCell1":
                                 Destroy(codingCell1.transform.GetChild(0).gameObject);
                                 break;
@@ -177,11 +178,11 @@ public class InstantiateAttachAndDestroyBlocks : MonoBehaviour
                                 break;
                         }
                     }
-                    else if (hit.transform.name.Contains("Dispenser"))
+                    else if(hit.transform.name.Contains("Dispenser"))
                     {
                         source.clip = selectingCube;
                         source.Play();
-                        switch (hit.transform.name)
+                        switch(hit.transform.name)
                         {
                             case "ForwardDispenser":
                                 selectedCube = Object.Instantiate(forwardDispenser);
@@ -205,7 +206,7 @@ public class InstantiateAttachAndDestroyBlocks : MonoBehaviour
 
                         Debug.Log("## O cubo selecionado foi o: " + selectedCube);
 
-                        if (selectedCube)
+                        if(selectedCube)
                         {
                             selectedCube.transform.SetParent(playerHands.transform);
                             selectedCube.transform.localPosition = new Vector3(0f, -0.35f, 1.45f);

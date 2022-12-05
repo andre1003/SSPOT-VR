@@ -4,13 +4,15 @@ using UnityEngine.XR;
 /// <summary>
 /// Attach this controller to the main camera, or an appropriate ancestor thereof, such as the "player" game object.
 /// </summary>
-public class GyroController : MonoBehaviour {
+public class GyroController : MonoBehaviour
+{
     // Rotation
     private const float DRAG_RATE = .2f;    // Drag left/right to rotate the world.
     private float dragYawDegrees;
 
     // Start is called before the first frame update
-    private void Start() {
+    private void Start()
+    {
         // Make sure orientation sensor is enabled.
         Input.gyro.enabled = true;
 
@@ -18,8 +20,10 @@ public class GyroController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    private void Update() {
-        if (XRSettings.enabled) {
+    private void Update()
+    {
+        if(XRSettings.enabled)
+        {
             // Unity takes care of updating camera transform in VR.
             return;
         }
@@ -64,9 +68,11 @@ public class GyroController : MonoBehaviour {
     /// <summary>
     /// Check if player is dragging a finger on screen.
     /// </summary>
-    private void CheckDrag() {
+    private void CheckDrag()
+    {
         // If player is not touching the screen
-        if (Input.touchCount != 1) {
+        if(Input.touchCount != 1)
+        {
             // Exit method
             return;
         }
@@ -75,7 +81,8 @@ public class GyroController : MonoBehaviour {
         Touch touch = Input.GetTouch(0);
 
         // Check if player is not moving the finger across the screen
-        if (touch.phase != TouchPhase.Moved) {
+        if(touch.phase != TouchPhase.Moved)
+        {
             // Exit method
             return;
         }

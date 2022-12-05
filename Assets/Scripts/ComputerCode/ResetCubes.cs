@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetCubes : MonoBehaviour {
+public class ResetCubes : MonoBehaviour
+{
     // Terminal stuff
     public List<GameObject> codingCell = new List<GameObject>();    // List of all coding cells
     public GameObject terminal;                                     // Terminal GameObject
@@ -25,7 +26,8 @@ public class ResetCubes : MonoBehaviour {
 
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         // Set audio source
         audioSource = GetComponent<AudioSource>();
 
@@ -36,12 +38,14 @@ public class ResetCubes : MonoBehaviour {
     /// <summary>
     /// When player clicks on this object, it reset all coding cells.
     /// </summary>
-    public void OnPointerClick() {
+    public void OnPointerClick()
+    {
         // Call ResetBlocks method
         ResetBlocks();
 
         // If there is a cube in player's hand
-        if (playerHand.transform.childCount != 0) {
+        if(playerHand.transform.childCount != 0)
+        {
             // Clear the hand
             Destroy(playerHand.transform.GetChild(0).gameObject);
         }
@@ -50,11 +54,14 @@ public class ResetCubes : MonoBehaviour {
     /// <summary>
     /// Reset all coding cells of terminal.
     /// </summary>
-    private void ResetBlocks() {
+    private void ResetBlocks()
+    {
         // Check every coding cell
-        for (int i = 0; i < codingCell.Count; i++) {
+        for(int i = 0; i < codingCell.Count; i++)
+        {
             // If the coding cell has a child
-            if (codingCell[i].transform.childCount > 0) {
+            if(codingCell[i].transform.childCount > 0)
+            {
                 // Clear this cell
                 Destroy(codingCell[i].transform.GetChild(0).gameObject);
             }

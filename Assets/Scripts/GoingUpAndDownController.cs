@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class GoingUpAndDownController : MonoBehaviour {
+public class GoingUpAndDownController : MonoBehaviour
+{
     // GameObjects
     public GameObject player;                       // Player GameObject
     public GameObject playerCodingPlatform;         // Elevator platform GameObject
@@ -21,13 +22,16 @@ public class GoingUpAndDownController : MonoBehaviour {
     /// <summary>
     /// Elevator controller. If the platform is on the floor, the goes up. If not, goes down.
     /// </summary>
-    public void OnPointerClick() {
+    public void OnPointerClick()
+    {
         // If player is on the floor and player is on the platform, go up
-        if (isDown && location1Initial.activeInHierarchy) {
+        if(isDown && location1Initial.activeInHierarchy)
+        {
             GoUp();
         }
         // Else, if player is up, go down
-        else if (isUp) {
+        else if(isUp)
+        {
             GoDown();
         }
 
@@ -38,7 +42,8 @@ public class GoingUpAndDownController : MonoBehaviour {
     /// <summary>
     /// Go up the elevator.
     /// </summary>
-    private void GoUp() {
+    private void GoUp()
+    {
         // Enable GoingUp
         player.GetComponent<GoingUp>().enabled = true;
         playerCodingPlatform.GetComponent<GoingUp>().enabled = true;
@@ -49,7 +54,7 @@ public class GoingUpAndDownController : MonoBehaviour {
         location1Initial.SetActive(false);
         instructionsInitial.SetActive(false);
         instructionsProgramming.SetActive(true);
-        
+
         // Rotate this object
         transform.Rotate(transform.rotation.x + 180, transform.rotation.y, transform.rotation.z, Space.Self);
 
@@ -61,7 +66,8 @@ public class GoingUpAndDownController : MonoBehaviour {
     /// <summary>
     /// Go down the elevator.
     /// </summary>
-    private void GoDown() {
+    private void GoDown()
+    {
         // Enable GoingDown
         player.GetComponent<GoingDown>().enabled = true;
         playerCodingPlatform.GetComponent<GoingDown>().enabled = true;

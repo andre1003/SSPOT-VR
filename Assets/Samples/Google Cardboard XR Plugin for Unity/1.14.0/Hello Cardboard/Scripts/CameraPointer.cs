@@ -25,6 +25,8 @@ using UnityEngine;
 public class CameraPointer : MonoBehaviour {
     public CrosshairController crosshairController; // Reference to CrosshairController script
 
+    // Player
+    public GameObject playerHands; // Player hand
 
     private const float _maxDistance = 100;
     private GameObject _gazedAtObject = null;
@@ -57,7 +59,18 @@ public class CameraPointer : MonoBehaviour {
 
         // Checks for screen touches.
         if (Google.XR.Cardboard.Api.IsTriggerPressed || /*Input.GetTouch(0).phase == TouchPhase.Began ||*/ Input.GetButtonDown("Fire1")) {
-            _gazedAtObject?.SendMessage("OnPointerClick", SendMessageOptions.DontRequireReceiver);
+            // If is a non clickable area and there is any cube in player hands, remove it
+            if((!_gazedAtObject ||
+                (!_gazedAtObject.CompareTag("Clickable") && !_gazedAtObject.CompareTag("NoPointerAction")))
+                && playerHands.transform.childCount == 1)
+            {
+                Destroy(playerHands.transform.GetChild(0).gameObject);
+            }
+            // If not, call OnPointerClick method
+            else
+            {
+                _gazedAtObject?.SendMessage("OnPointerClick", SendMessageOptions.DontRequireReceiver);
+            }
         }
     }
 }

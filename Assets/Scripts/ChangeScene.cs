@@ -4,40 +4,52 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class ChangeScene : MonoBehaviour {
+public class ChangeScene : MonoBehaviour
+{
     // UI Objects
     public GameObject loadSceneCanvas;  // Loading scene canvas GameObject
     public Slider progressBar;          // Progress bar slider
 
+    // Controller
+    public bool goForward = false;      // Go to next or previous level controller
 
-    /// <summary>
-    /// This method is called by the Main Camera when it starts gazing at this GameObject.
-    /// </summary>
-    public void OnPointerEnter() {
-
-    }
-
-    /// <summary>
-    /// This method is called by the Main Camera when it stops gazing at this GameObject.
-    /// </summary>
-    public void OnPointerExit() {
-
-    }
 
     /// <summary>
     /// When player clicks on this object, the next level is loaded
     /// </summary>
-    public void OnPointerClick() {
-        LoadLevel(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
+    public void OnPointerClick()
+    {
+        // Load next level
+        if(goForward)
+        {
+            LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        // Load previous level
+        else
+        {
+            LoadLevel(SceneManager.GetActiveScene().buildIndex - 1);
+        }
     }
 
     /// <summary>
     /// Starts coroutine for load a level async.
     /// </summary>
     /// <param name="level">Level index to be loaded</param>
-    private void LoadLevel(int level) {
-        loadSceneCanvas.SetActive(true);            // Activate loading scene canvas
-        StartCoroutine(LoadAsynchronously(level));  // Start loading next level
+    private void LoadLevel(int level)
+    {
+        // If level to load is out of bounds, exit
+        if(level >= SceneManager.sceneCountInBuildSettings || level < 0)
+        {
+            Debug.LogError("Cena inválida!");
+            return;
+        }
+
+        // Activate loading scene canvas
+        loadSceneCanvas.SetActive(true);
+
+        // Start loading next level
+        StartCoroutine(LoadAsynchronously(level));
     }
 
     /// <summary>
@@ -45,13 +57,19 @@ public class ChangeScene : MonoBehaviour {
     /// </summary>
     /// <param name="level">Level index to be loaded</param>
     /// <returns></returns>
-    private IEnumerator LoadAsynchronously(int level) {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(level);  // Get the async operation from LoadSceneAsync
+    private IEnumerator LoadAsynchronously(int level)
+    {
+        // Get the async operation from LoadSceneAsync
+        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
 
         // While the loading is not done
-        while (!operation.isDone) {
-            float progress = Mathf.Clamp01(operation.progress / .9f);   // Calculate the loading progress percent
-            progressBar.value = progress;                               // Set slider value acording to progress
+        while(!operation.isDone)
+        {
+            // Calculate the loading progress percent
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            // Set slider value acording to progress
+            progressBar.value = progress;
 
             yield return null;
         }

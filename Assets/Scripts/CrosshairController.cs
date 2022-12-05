@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CrosshairController : MonoBehaviour {
+public class CrosshairController : MonoBehaviour
+{
     // UI
     public Image reticle;       // Crosshair reticle
 
@@ -11,14 +12,17 @@ public class CrosshairController : MonoBehaviour {
 
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         newScale = reticle.transform.localScale;    // Set the target scale to reticle scale when the scene starts
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         // If reticle current scale is different from newScale, smoothly change the crosshair the scale
-        if (reticle.transform.localScale != newScale) {
+        if(reticle.transform.localScale != newScale)
+        {
             reticle.transform.localScale = Vector3.Lerp(reticle.transform.localScale, newScale, 20f * Time.deltaTime);
         }
     }
@@ -27,7 +31,8 @@ public class CrosshairController : MonoBehaviour {
     /// Set crosshair target scale.
     /// </summary>
     /// <param name="scale">Target scale.</param>
-    public void SetCrosshairScale(Vector3 scale) {
+    public void SetCrosshairScale(Vector3 scale)
+    {
         newScale = scale;
     }
 }
