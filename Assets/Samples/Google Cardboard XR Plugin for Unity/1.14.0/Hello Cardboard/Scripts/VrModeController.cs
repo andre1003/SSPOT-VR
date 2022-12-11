@@ -28,7 +28,7 @@ public class VrModeController : MonoBehaviour {
     // Field of view value to be used when the scene is not in VR mode. In case
     // XR isn't initialized on startup, this value could be taken from the main
     // camera and stored.
-    private const float _defaultFieldOfView = 60.0f;
+    private const float _defaultFieldOfView = 120.0f;
 
     // Main camera from the scene.
     public Camera _mainCamera;
@@ -68,7 +68,8 @@ public class VrModeController : MonoBehaviour {
         // This is only required if the XR plugin is initialized on startup,
         // otherwise these API calls can be removed and just be used when the XR
         // plugin is started.
-        if (!Api.HasDeviceParams()) {
+        if(!Api.HasDeviceParams())
+        {
             Api.ScanDeviceParams();
         }
     }
@@ -128,7 +129,8 @@ public class VrModeController : MonoBehaviour {
         Debug.Log("XR deinitialized.");
 
         _mainCamera.ResetAspect();
-        _mainCamera.fieldOfView = _defaultFieldOfView;
+        Screen.SetResolution(Screen.width, Screen.height, true);
+        _mainCamera.fieldOfView = 40;
     }
 
     /// <summary>
@@ -139,6 +141,7 @@ public class VrModeController : MonoBehaviour {
             ExitVR();
             Api.UpdateScreenParams();
             uiCamera.ResetAspect();
+            Screen.SetResolution(Screen.width, Screen.height, true);
             uiCamera.fieldOfView = _defaultFieldOfView;
         }
         else {
