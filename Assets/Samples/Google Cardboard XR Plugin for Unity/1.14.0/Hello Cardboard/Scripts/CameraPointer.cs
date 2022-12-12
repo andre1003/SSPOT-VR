@@ -25,6 +25,8 @@ using UnityEngine;
 public class CameraPointer : MonoBehaviour {
     public CrosshairController crosshairController; // Reference to CrosshairController script
 
+    public Camera uiCamera;
+
     // Player
     public GameObject playerHands; // Player hand
 

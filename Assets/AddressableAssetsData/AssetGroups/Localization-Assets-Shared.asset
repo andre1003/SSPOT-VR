@@ -33,6 +33,14 @@ MonoBehaviour:
     m_Address: Assets/Localization/SecondScene/Second Scene Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 90aafecfaec7ad541a70b15f6db69f19
+    m_Address: Assets/Localization/MainMenu/MainMenu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 2e6412289232a3b4eaed6260ededfe90
+    m_Address: Assets/Localization/Lobby/Lobby Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 8189444b1fe375340ad3a0bd116e19ae, type: 2}
   m_SchemaSet:

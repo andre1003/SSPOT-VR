@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,13 @@ public class MouseController : MonoBehaviour
 
 
     private float xRotation = 0f;
+    private PhotonView photonView;
 
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponentInParent<PhotonView>();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -23,6 +27,11 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!photonView.IsMine)
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
