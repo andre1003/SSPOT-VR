@@ -11,6 +11,14 @@ public class CrosshairController : MonoBehaviour
     private Vector3 newScale;   // Target scale
 
 
+    private void Awake()
+    {
+        if(reticle == null)
+        {
+            reticle = GameObject.Find("PointerImage").GetComponent<Image>();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 7192900133106063901}
   - component: {fileID: 7192900133106063897}
   - component: {fileID: 7192900133106063896}
+  - component: {fileID: 2543849838348204125}
   - component: {fileID: 7192900133106063902}
   - component: {fileID: 7192900133106063899}
   - component: {fileID: 2126958081}
@@ -250,6 +251,19 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
+--- !u!114 &2543849838348204125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7192900133106063890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be97b49a1a6d7a49a5c64015b55cb07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reticle: {fileID: 0}
 --- !u!114 &7192900133106063902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfb4b86b2e54606894da54f755db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshairController: {fileID: 0}
+  crosshairController: {fileID: 2543849838348204125}
   uiCamera: {fileID: 7192900133199524578}
   playerHands: {fileID: 1751640418}
 --- !u!114 &7192900133106063899
@@ -382,7 +396,7 @@ GameObject:
   - component: {fileID: 782906971}
   - component: {fileID: 1342912186638044370}
   - component: {fileID: 6573537839188949696}
-  - component: {fileID: 4814874242293596298}
+  - component: {fileID: 2813635778784725259}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -606,11 +620,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 4814874242293596298}
+  - {fileID: 2813635778784725259}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4814874242293596298
+--- !u!114 &2813635778784725259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public PhotonView photonView;
 
     public Canvas hudCanvas;
     public Text pingText;
@@ -41,7 +40,7 @@ public class Spawner : MonoBehaviour
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, Quaternion.identity);
 
         // Setup player crosshair
-        player.GetComponentInChildren<CameraPointer>().crosshairController = GameObject.Find("CrosshairController").GetComponent<CrosshairController>();
+        //player.GetComponentInChildren<CameraPointer>().crosshairController = GameObject.Find("CrosshairController").GetComponent<CrosshairController>();
         hudCanvas.worldCamera = player.GetComponentInChildren<CameraPointer>().uiCamera;
     }
 }
