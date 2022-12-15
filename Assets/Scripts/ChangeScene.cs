@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 
 public class ChangeScene : MonoBehaviour
@@ -19,9 +20,19 @@ public class ChangeScene : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
+        // Set the automatic scene sync to true
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        // If is not master client, exit
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            return;
+        }
+
         // Load next level
         if(goForward)
         {
+            
             LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
@@ -49,7 +60,9 @@ public class ChangeScene : MonoBehaviour
         loadSceneCanvas.SetActive(true);
 
         // Start loading next level
-        StartCoroutine(LoadAsynchronously(level));
+        PhotonNetwork.LoadLevel(level);
+        
+        //StartCoroutine(LoadAsynchronously(level));
     }
 
     /// <summary>
