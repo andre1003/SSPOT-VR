@@ -28,7 +28,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: sa
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -39,6 +39,16 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - AttachCubeToHand
+  - Attaching
+  - OnPointerClick
+  - AddPlayerHand
+  - SetCubeParent
+  - SetupSelectedCube
+  - AddPlayerHandRPC
+  - AmbientSetup
+  - AddId
+  - DestroyCubeOnHand
   DisableAutoOpenWizard: 1
   ShowSettings: 0
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1

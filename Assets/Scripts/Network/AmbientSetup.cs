@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,9 +20,14 @@ public class AmbientSetup : MonoBehaviour
     public List<AttachingCube> attachingCubesList;
 
 
-    public void ConfigureAmbient(GameObject player)
+    /// <summary>
+    /// Configure ambient with local player settings.
+    /// </summary>
+    /// <param name="playerId">Local player Photon View ID.</param>
+    public void ConfigureAmbient(int playerId)
     {
         // Get player hand
+        GameObject player = PhotonView.Find(playerId).gameObject;
         GameObject playerHand = player.GetComponent<PlayerSetup>().playerHand;
 
         // Setup computer
@@ -41,19 +47,31 @@ public class AmbientSetup : MonoBehaviour
         {
             ConfigureElevator(player);
         }
+    }
+
+    /// <summary>
+    /// Add local player hand to hands lists from every needed script.
+    /// </summary>
+    /// <param name="playerId">Local player Photon View ID.</param>
+    public void AddHands(int playerId)
+    {
+        // Get player hand
+        GameObject player = PhotonView.Find(playerId).gameObject;
+        GameObject playerHand = player.GetComponent<PlayerSetup>().playerHand;
 
         // Setup clone cubes
         if(cloningCubesList.Count > 0)
         {
-            ConfigureCloningCubes(playerHand);
+            ConfigureCloningCubes(playerId);
         }
 
-        // Setup attaching cubes
+        // Setup attaching cubes (NOT WORKING YET!)
         if(attachingCubesList.Count > 0)
         {
             ConfigureAttachingCubes(playerHand);
         }
     }
+
 
     /// <summary>
     /// Configure scene computer.
@@ -86,11 +104,16 @@ public class AmbientSetup : MonoBehaviour
         elevator.player = player;
     }
 
-    private void ConfigureCloningCubes(GameObject playerHand)
+    /// <summary>
+    /// Configure all cloning cubes scripts.
+    /// </summary>
+    /// <param name="playerViewId">Local player Photon View ID.</param>
+    private void ConfigureCloningCubes(int playerViewId)
     {
+        // Loop cloning cubes scripts list, adding the player Photon View ID
         foreach(CloningCube cloningCube in cloningCubesList)
         {
-            cloningCube.playerHands = playerHand;
+            cloningCube.AddPlayerHand(playerViewId);
         }
     }
 

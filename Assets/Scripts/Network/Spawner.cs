@@ -1,10 +1,11 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviourPun
 {
     // Ambient setup reference
     public AmbientSetup ambientSetup;
@@ -22,6 +23,10 @@ public class Spawner : MonoBehaviour
     public float maxX;
     public float minZ;
     public float maxZ;
+
+    // Player reference
+    GameObject player;
+    int viewId;
 
 
     // Start is called before the first frame update
@@ -53,15 +58,28 @@ public class Spawner : MonoBehaviour
         }
 
         // Spawn player on network
-        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, Quaternion.identity);
-        
+        player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, Quaternion.identity);
+
+        viewId = player.GetComponent<PhotonView>().ViewID;
+
         // Setup player crosshair
         hudCanvas.worldCamera = player.GetComponentInChildren<CameraPointer>().uiCamera;
 
-        // Configure ambient
-        if(ambientSetup != null )
+        // Ambient setup
+        if(ambientSetup != null)
         {
-            ambientSetup.ConfigureAmbient(player);
+            ambientSetup.ConfigureAmbient(viewId);
+            photonView.RPC("AmbientSetup", RpcTarget.AllBuffered, viewId);
         }
+    }
+
+    /// <summary>
+    /// Perform RPC ambient setup.
+    /// </summary>
+    /// <param name="id">Player Photon View ID.</param>
+    [PunRPC]
+    private void AmbientSetup(int id)
+    {
+        ambientSetup.AddHands(id);
     }
 }

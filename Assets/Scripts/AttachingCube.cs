@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
-public class AttachingCube : MonoBehaviour
+public class AttachingCube : MonoBehaviourPun
 {
     public int cubeIndex;
     public bool isLeftCell;
@@ -37,6 +38,7 @@ public class AttachingCube : MonoBehaviour
     public void OnPointerClick()
     {
         // Attach a cube to a coding cell.
+        //this.photonView.RPC("Attaching", RpcTarget.AllBuffered);
         Attaching();
     }
 
@@ -46,6 +48,7 @@ public class AttachingCube : MonoBehaviour
     /// <para>If there is a cube in player hand and the coding cell cube holder is free, then attach it to the clicked cube holder.</para>
     /// <para>If there is a cube in the coding cell but not in the player hand, remove the cube from coding cell.</para>
     /// </summary>
+    //[PunRPC]
     private void Attaching()
     {
         // Check if player hand has a child
