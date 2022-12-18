@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class RunCubes : MonoBehaviour
+public class RunCubes : MonoBehaviourPun
 {
     #region Attributes
     #region Screens
@@ -206,19 +207,20 @@ public class RunCubes : MonoBehaviour
     public void OnPointerClick()
     {
         // Try to run code
-        CheckIsRunnable();
+        photonView.RPC("CheckIsRunnable", RpcTarget.AllBuffered);
 
         // If there is a cube in player's hand
-        if(playerHand.transform.childCount != 0)
-        {
-            // Clear the hand
-            Destroy(playerHand.transform.GetChild(0).gameObject);
-        }
+        //if(playerHand.transform.childCount != 0)
+        //{
+        //    // Clear the hand
+        //    Destroy(playerHand.transform.GetChild(0).gameObject);
+        //}
     }
 
     /// <summary>
     /// Run next command from the algorithm.
     /// </summary>
+    [PunRPC]
     public void NextCommand()
     {
         // If have any coammand left
@@ -252,6 +254,7 @@ public class RunCubes : MonoBehaviour
     /// <para>This method plays error song, set material to error material and display error message.</para>
     /// </summary>
     /// <param name="errorMessage">The error message that will be displayed.</param>
+    [PunRPC]
     private void Error(string errorMessage)
     {
         // Clear cubes list
@@ -279,6 +282,7 @@ public class RunCubes : MonoBehaviour
     /// 
     /// <para>This method plays success song, set material to success material and display the final GameObjects.</para>
     /// </summary>
+    [PunRPC]
     private void Success()
     {
         // Play success song
@@ -326,6 +330,7 @@ public class RunCubes : MonoBehaviour
     /// Check if all loop commands are correct.
     /// </summary>
     /// <returns>TRUE if all loop commands are correct. FALSE if not.</returns>
+    [PunRPC]
     private bool CheckLoop()
     {
         // Get all loop commands
@@ -358,6 +363,7 @@ public class RunCubes : MonoBehaviour
     /// Check if all instructions are correct.
     /// </summary>
     /// <returns>TRUE if all instructions are correct. FALSE if not.</returns>
+    [PunRPC]
     private bool CheckInstructions()
     {
         // Local variables
@@ -440,6 +446,10 @@ public class RunCubes : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Check if code is runnable via RPC.
+    /// </summary>
+    [PunRPC]
     private void CheckIsRunnable()
     {
         // Check loops and instructions
@@ -453,7 +463,12 @@ public class RunCubes : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Find the end of repeat loop.
+    /// </summary>
+    /// <param name="startIndex">Repeat instruction start index.</param>
+    /// <returns>If there is a end repeat, return it's index. Else, return startIndex + 1.</returns>
+    [PunRPC]
     int FindRepeatEnd(int startIndex)
     {
         // Loop loop commands, starting at startIndex
@@ -472,6 +487,7 @@ public class RunCubes : MonoBehaviour
         return startIndex + 1;
     }
 
+    [PunRPC]
     public void RunNextCommand()
     {
         // If there is an iterarion start index and the animation index is equal to iteration end

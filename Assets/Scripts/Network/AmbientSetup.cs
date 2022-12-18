@@ -65,10 +65,10 @@ public class AmbientSetup : MonoBehaviour
             ConfigureCloningCubes(playerId);
         }
 
-        // Setup attaching cubes (NOT WORKING YET!)
+        // Setup attaching cubes
         if(attachingCubesList.Count > 0)
         {
-            ConfigureAttachingCubes(playerHand);
+            ConfigureAttachingCubes(playerId);
         }
     }
 
@@ -117,11 +117,11 @@ public class AmbientSetup : MonoBehaviour
         }
     }
 
-    private void ConfigureAttachingCubes(GameObject playerHand)
+    private void ConfigureAttachingCubes(int playerViewId)
     {
         foreach(AttachingCube attachingCube in attachingCubesList)
         {
-            attachingCube.playerHands = playerHand;
+            attachingCube.AddPlayerHand(playerViewId);
         }
     }
 }

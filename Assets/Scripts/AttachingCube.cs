@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
+using System.Collections.Generic;
 
 public class AttachingCube : MonoBehaviourPun
 {
@@ -8,7 +9,7 @@ public class AttachingCube : MonoBehaviourPun
     public bool isLeftCell;
 
     // Player
-    public GameObject playerHands;      // Player hand
+    public List<GameObject> playerHands;      // Player hands GameObject
 
     // Coding cell
     public GameObject cubeHolder;       // Coding cell cube holder
@@ -20,25 +21,21 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
+    private int playerId;
 
     // Audio source
     [SerializeField] private AudioSource audioSource;    // Audio source
 
-    /// <summary>
-    /// Called before Start.
-    /// </summary>
-    private void Awake()
-    {
-        //audioSource = GetComponent<AudioSource>();
-    }
 
     /// <summary>
     /// When player click on this object, it attaches a cube in the coding cell
     /// </summary>
     public void OnPointerClick()
     {
+        // Get local player Photon View ID
+        playerId = GetPlayerID();
+
         // Attach a cube to a coding cell.
-        //this.photonView.RPC("Attaching", RpcTarget.AllBuffered);
         Attaching();
     }
 
@@ -48,14 +45,23 @@ public class AttachingCube : MonoBehaviourPun
     /// <para>If there is a cube in player hand and the coding cell cube holder is free, then attach it to the clicked cube holder.</para>
     /// <para>If there is a cube in the coding cell but not in the player hand, remove the cube from coding cell.</para>
     /// </summary>
-    //[PunRPC]
     private void Attaching()
     {
+        // Attach cube via RPC
+        photonView.RPC("AttachingRpc", RpcTarget.AllBuffered, playerId);
+    }
+
+    [PunRPC]
+    private void AttachingRpc(int id)
+    {
+        // Get hand
+        GameObject hand = PhotonView.Find(id).gameObject.GetComponent<PlayerSetup>().playerHand;
+
         // Check if player hand has a child
-        if(playerHands.transform.childCount == 1)
+        if(hand.transform.childCount == 1)
         {
             // Set selected cube
-            selectedCube = playerHands.transform.GetChild(0).gameObject;
+            selectedCube = hand.transform.GetChild(0).gameObject;
 
 
             // If is a loop cube (this gives an index out of bounds error!)
@@ -97,7 +103,7 @@ public class AttachingCube : MonoBehaviourPun
         }
 
         // If cube holder has a child and player hand has no child 
-        else if(cubeHolder.transform.childCount == 1 && playerHands.transform.childCount == 0)
+        else if(cubeHolder.transform.childCount == 1 && hand.transform.childCount == 0)
         {
             // Destroy cube from cube holder
             Destroy(cubeHolder.transform.GetChild(0).gameObject);
@@ -113,5 +119,53 @@ public class AttachingCube : MonoBehaviourPun
                 ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(false);
             }
         }
+    }
+
+
+    /// <summary>
+    /// Call RPC add player hand.
+    /// </summary>
+    /// <param name="playerViewId"></param>
+    public void AddPlayerHand(int playerViewId)
+    {
+        // If this player is master, than add the hand to the list
+        if(PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("AddPlayerHandRPC", RpcTarget.AllBuffered, playerViewId);
+        }
+    }
+
+    /// <summary>
+    /// Add player hand or playerHands list via RPC.
+    /// </summary>
+    /// <param name="playerViewId">Player ID.</param>
+    [PunRPC]
+    private void AddPlayerHandRPC(int playerViewId)
+    {
+        GameObject hand = PhotonView.Find(playerViewId).gameObject.GetComponent<PlayerSetup>().playerHand;
+        playerHands.Add(hand);
+    }
+
+    /// <summary>
+    /// Get local player ID.
+    /// </summary>
+    /// <returns>PhotonView local player ID.</returns>
+    private int GetPlayerID()
+    {
+        // Loop player hands list
+        foreach(GameObject hand in playerHands)
+        {
+            // Get PhotonView component of player
+            PhotonView playerHandView = hand.GetComponentInParent<PhotonView>();
+
+            // If is local player, return ViewID
+            if(playerHandView.IsMine)
+            {
+                return playerHandView.ViewID;
+            }
+        }
+
+        // If something went wrong, return -1
+        return -1;
     }
 }

@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 31706989}
   - component: {fileID: 31706994}
   - component: {fileID: 31706995}
+  - component: {fileID: 31706996}
   m_Layer: 0
   m_Name: RunButton
   m_TagString: Clickable
@@ -455,6 +456,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &31706996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31706988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 14
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &61745897
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +654,7 @@ GameObject:
   - component: {fileID: 98761415}
   - component: {fileID: 98761413}
   - component: {fileID: 98761418}
+  - component: {fileID: 98761419}
   m_Layer: 0
   m_Name: ResetButton
   m_TagString: Clickable
@@ -837,6 +861,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &98761419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98761411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 15
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &140272602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 1063282959}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -4359,7 +4405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 61745897}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -5951,7 +5997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 2125969834}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -6870,7 +6916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 1270671417}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -7210,7 +7256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 1441171122}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -9380,7 +9426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 89653333}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
@@ -9693,7 +9739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeIndex: 0
   isLeftCell: 0
-  playerHands: {fileID: 0}
+  playerHands: []
   cubeHolder: {fileID: 254457485}
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}

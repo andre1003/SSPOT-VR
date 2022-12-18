@@ -55,10 +55,10 @@ public class CloningCube : MonoBehaviourPun
     {
         // Instanciate the selected object
         GameObject _selectedCube = PhotonNetwork.Instantiate(gameObject.name, Vector3.zero, Quaternion.identity);
-        string cubeName = _selectedCube.name;
+        int cubeId = _selectedCube.GetComponent<PhotonView>().ViewID;
 
         // Setup selected cube via RPC
-        photonView.RPC("SetupSelectedCube", RpcTarget.AllBuffered, cubeName, playerId);
+        photonView.RPC("SetupSelectedCube", RpcTarget.AllBuffered, cubeId, playerId);
     }
 
     /// <summary>
@@ -67,10 +67,10 @@ public class CloningCube : MonoBehaviourPun
     /// <param name="name">Cube name.</param>
     /// <param name="id">Player ID.</param>
     [PunRPC]
-    private void SetupSelectedCube(string name, int id)
+    private void SetupSelectedCube(int cubeId, int id)
     {
         // Find selected cube
-        selectedCube = GameObject.Find(name);
+        selectedCube = PhotonView.Find(cubeId).gameObject;
 
         // If there is no selected cube, exit
         if(!selectedCube)
