@@ -487,6 +487,9 @@ public class RunCubes : MonoBehaviourPun
         return startIndex + 1;
     }
 
+    /// <summary>
+    /// Run the next instruction displayed on terminal.
+    /// </summary>
     [PunRPC]
     public void RunNextCommand()
     {
