@@ -278,7 +278,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairController: {fileID: 2543849838348204125}
   uiCamera: {fileID: 7192900133199524578}
-  playerHands: {fileID: 1751640418}
 --- !u!114 &7192900133106063899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHand: {fileID: 1751640418}
   playerCamera: {fileID: 7192900133106063890}
-  uiCamera: {fileID: 0}
+  uiCamera: {fileID: 7192900133199524577}
 --- !u!114 &6573537839188949696
 MonoBehaviour:
   m_ObjectHideFlags: 0

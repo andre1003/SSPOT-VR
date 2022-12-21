@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class AmbientSetup : MonoBehaviour
 {
+    #region Singleton
+    public static AmbientSetup instance;
+
+    void Awake()
+    {
+        if(!instance)
+        {
+            instance = this;
+        }
+    }
+    #endregion
+
+
     // Run and reset cubes
     public RunCubes runCubes;
     public ResetCubes resetCubes;
@@ -19,6 +32,9 @@ public class AmbientSetup : MonoBehaviour
     public List<CloningCube> cloningCubesList;
     public List<AttachingCube> attachingCubesList;
 
+    // Players list
+    private List<GameObject> players = new List<GameObject>();
+
 
     /// <summary>
     /// Configure ambient with local player settings.
@@ -29,6 +45,9 @@ public class AmbientSetup : MonoBehaviour
         // Get player hand
         GameObject player = PhotonView.Find(playerId).gameObject;
         GameObject playerHand = player.GetComponent<PlayerSetup>().playerHand;
+
+        // Add player game object
+        players.Add(player);
 
         // Setup computer
         if(runCubes && resetCubes)
@@ -55,10 +74,6 @@ public class AmbientSetup : MonoBehaviour
     /// <param name="playerId">Local player Photon View ID.</param>
     public void AddHands(int playerId)
     {
-        // Get player hand
-        GameObject player = PhotonView.Find(playerId).gameObject;
-        GameObject playerHand = player.GetComponent<PlayerSetup>().playerHand;
-
         // Setup clone cubes
         if(cloningCubesList.Count > 0)
         {
@@ -70,6 +85,15 @@ public class AmbientSetup : MonoBehaviour
         {
             ConfigureAttachingCubes(playerId);
         }
+    }
+
+    /// <summary>
+    /// Get all players GameObjects.
+    /// </summary>
+    /// <returns>Players GameObject.</returns>
+    public List<GameObject> GetPlayers()
+    {
+        return players;
     }
 
 
@@ -117,8 +141,13 @@ public class AmbientSetup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Configure all attaching cubes scripts.
+    /// </summary>
+    /// <param name="playerViewId">Local player Photon View ID.</param>
     private void ConfigureAttachingCubes(int playerViewId)
     {
+        // Loop attaching cubes scripts list, adding the player Photon View ID
         foreach(AttachingCube attachingCube in attachingCubesList)
         {
             attachingCube.AddPlayerHand(playerViewId);

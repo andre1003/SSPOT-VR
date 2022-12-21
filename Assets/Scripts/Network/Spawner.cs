@@ -51,6 +51,7 @@ public class Spawner : MonoBehaviourPun
         {
             spawnPosition = new Vector3(Random.Range(minX, maxX), 1f, Random.Range(minZ, maxZ));
         }
+
         // If there is a valid spawn point, get it
         else
         {

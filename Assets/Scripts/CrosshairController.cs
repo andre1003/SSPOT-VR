@@ -11,7 +11,7 @@ public class CrosshairController : MonoBehaviour
     private Vector3 newScale;   // Target scale
 
 
-    private void Awake()
+    void Awake()
     {
         if(reticle == null)
         {
@@ -42,5 +42,6 @@ public class CrosshairController : MonoBehaviour
     public void SetCrosshairScale(Vector3 scale)
     {
         newScale = scale;
+        Debug.Log(scale);
     }
 }

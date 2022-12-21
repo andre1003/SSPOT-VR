@@ -23,32 +23,11 @@ public class CloningCube : MonoBehaviourPun
         // Get local player index
         playerId = GetPlayerID();
 
-        #region Clear Cube Not Working Example
-        // If the hand is not empty
-        //if(playerHands[_playerIndex].transform.childCount != 0)
-        //{
-        //    // Clear the hand
-        //    Destroy(playerHands[_playerIndex].transform.GetChild(0).gameObject);
-        //    audioSource.Play();
-        //}
-
-        // If the hand is not empty
-        //if(PhotonView.Find(playerId).GetComponent<PlayerSetup>().playerHand.transform.childCount != 0)
-        //{
-        //    // Clear the hand
-        //    photonView.RPC("DestroyCubeOnHand", RpcTarget.AllBuffered);
-        //    audioSource.Play();
-        //}
-        #endregion
+        // Destroy cube on hand, if there is any
+        //PlayerSetup.instance.DestroyCubeOnHand();
 
         // Attach the selected cube to the player's hand
         AttachCubeToHand();
-    }
-
-    [PunRPC]
-    private void DestroyCubeOnHand()
-    {
-        Destroy(PhotonView.Find(playerId).GetComponent<PlayerSetup>().playerHand);
     }
 
     private void AttachCubeToHand()
@@ -78,8 +57,6 @@ public class CloningCube : MonoBehaviourPun
             Debug.LogError("No selected cubes!");
             return;
         }
-
-        Debug.Log("Setting parent!");
 
         // Attach to player's hand
         selectedCube.transform.SetParent(PhotonView.Find(id).GetComponent<PlayerSetup>().playerHand.transform);
