@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
-public class GoingUpAndDownController : MonoBehaviour
+public class GoingUpAndDownController : MonoBehaviourPun
 {
     // GameObjects
     public GameObject player;                       // Player GameObject
@@ -44,6 +45,12 @@ public class GoingUpAndDownController : MonoBehaviour
     /// </summary>
     private void GoUp()
     {
+        photonView.RPC("GoUpRpc", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void GoUpRpc()
+    {
         // Enable GoingUp
         player.GetComponent<GoingUp>().enabled = true;
         playerCodingPlatform.GetComponent<GoingUp>().enabled = true;
@@ -67,6 +74,12 @@ public class GoingUpAndDownController : MonoBehaviour
     /// Go down the elevator.
     /// </summary>
     private void GoDown()
+    {
+        photonView.RPC("GoDownRpc", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void GoDownRpc()
     {
         // Enable GoingDown
         player.GetComponent<GoingDown>().enabled = true;

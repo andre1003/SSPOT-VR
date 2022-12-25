@@ -14,6 +14,12 @@ public class AmbientSetup : MonoBehaviour
         {
             instance = this;
         }
+
+        if(PhotonNetwork.OfflineMode)
+        {
+            teleports[2].enabled = false;
+            teleports[2].gameObject.SetActive(false);
+        }
     }
     #endregion
 
@@ -31,6 +37,7 @@ public class AmbientSetup : MonoBehaviour
     // Clone and attaching cube lists
     public List<CloningCube> cloningCubesList;
     public List<AttachingCube> attachingCubesList;
+
 
     // Players list
     private List<GameObject> players = new List<GameObject>();

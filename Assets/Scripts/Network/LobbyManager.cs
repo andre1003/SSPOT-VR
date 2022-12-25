@@ -97,9 +97,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnJoinedRoom()
     {
-        // Set the automatic scene sync to true
-        PhotonNetwork.AutomaticallySyncScene = true;
-        
         // Load tutorial scene
         PhotonNetwork.LoadLevel("Tutorial");
     }

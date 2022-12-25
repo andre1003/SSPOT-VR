@@ -32,6 +32,9 @@ public class Spawner : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        // Set the automatic scene sync to true
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         // Declare spawn position and get the last player index
         Vector3 spawnPosition;
         int index = 0;
