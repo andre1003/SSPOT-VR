@@ -6,6 +6,21 @@ using Photon.Pun;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks
 {
+    // Platform controller
+    public bool isOnPc = false;
+
+    // Settings button reference
+    public GameObject settingsButton;
+
+
+    void Awake()
+    {
+        if(!isOnPc)
+        {
+            settingsButton.SetActive(false);
+        }
+    }
+
     #region Offline
     public void PlayOffline()
     {

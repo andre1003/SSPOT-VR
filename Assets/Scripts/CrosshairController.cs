@@ -42,6 +42,5 @@ public class CrosshairController : MonoBehaviour
     public void SetCrosshairScale(Vector3 scale)
     {
         newScale = scale;
-        Debug.Log(scale);
     }
 }

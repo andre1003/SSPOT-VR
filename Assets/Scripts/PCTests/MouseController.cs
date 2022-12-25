@@ -5,48 +5,46 @@ using UnityEngine;
 
 public class MouseController : MonoBehaviour
 {
+    // Mouse sensitivity
     public float sensitivity = 200f;
+
+    // Player body transform
     public Transform playerBody;
 
 
-    private float xRotation = 0f;
+    // Photon View reference
     private PhotonView photonView;
 
-    float mouseX;
-    float mouseY;
+    // Mouse position
+    private float mouseX;
+    private float mouseY;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get Photon View component
         photonView = GetComponentInParent<PhotonView>();
 
+        // Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //playerBody.Rotate(Vector3.zero);
-        //transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Is this Photon View is not mine, exit
         if(!photonView.IsMine)
         {
             return;
         }
 
+        // Get new mouse position
         mouseX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         mouseY += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
-        //xRotation -= mouseY;
-        //xRotation = Mathf.Clamp(xRotation, -45f, 45f);
-
-        //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //playerBody.Rotate(Vector3.up * mouseX);
-
-        //transform.localRotation = Quaternion.Euler(-mouseY, mouseX, 0f);
-
-        // I don't know why, but this works (with errors)
+        // Rotate player body
         playerBody.rotation = Quaternion.Euler(-mouseY, mouseX, 0f);
     }
 }

@@ -12,8 +12,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Text statusText;
 
 
-    private void Start()
+    void Start()
     {
+        // Clear status text
         statusText.text = "";
     }
 
@@ -96,13 +97,21 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnJoinedRoom()
     {
+        // Set the automatic scene sync to true
+        PhotonNetwork.AutomaticallySyncScene = true;
+        
+        // Load tutorial scene
         PhotonNetwork.LoadLevel("Tutorial");
     }
     #endregion
 
     #region Back to Main Menu
+    /// <summary>
+    /// Disconnect from Photon server and go back to main menu.
+    /// </summary>
     public void BackToMainMenu()
     {
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene("MainMenu");
     }
     #endregion

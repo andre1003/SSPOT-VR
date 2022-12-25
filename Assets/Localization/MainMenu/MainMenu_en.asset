@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: Connecting to SSPOT-VR server...
     m_Metadata:
       m_Items: []
+  - m_Id: 4766751176306688
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

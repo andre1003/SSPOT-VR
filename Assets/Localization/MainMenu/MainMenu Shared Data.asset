@@ -40,7 +40,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 470875045888
-    m_Key: ConnectingText
+    m_Key: CSettingsTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4766751176306688
+    m_Key: SettingsTitle
     m_Metadata:
       m_Items: []
   m_Metadata:

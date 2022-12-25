@@ -20,9 +20,6 @@ public class ChangeScene : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
-        // Set the automatic scene sync to true
-        PhotonNetwork.AutomaticallySyncScene = true;
-
         // If is not master client, exit
         if(!PhotonNetwork.IsMasterClient)
         {
@@ -61,30 +58,5 @@ public class ChangeScene : MonoBehaviour
 
         // Start loading next level
         PhotonNetwork.LoadLevel(level);
-        
-        //StartCoroutine(LoadAsynchronously(level));
-    }
-
-    /// <summary>
-    /// Load level async. It also update progress bar.
-    /// </summary>
-    /// <param name="level">Level index to be loaded</param>
-    /// <returns></returns>
-    private IEnumerator LoadAsynchronously(int level)
-    {
-        // Get the async operation from LoadSceneAsync
-        AsyncOperation operation = SceneManager.LoadSceneAsync(level);
-
-        // While the loading is not done
-        while(!operation.isDone)
-        {
-            // Calculate the loading progress percent
-            float progress = Mathf.Clamp01(operation.progress / .9f);
-
-            // Set slider value acording to progress
-            progressBar.value = progress;
-
-            yield return null;
-        }
     }
 }
