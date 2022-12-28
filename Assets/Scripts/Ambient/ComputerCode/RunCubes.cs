@@ -208,13 +208,6 @@ public class RunCubes : MonoBehaviourPun
     {
         // Try to run code
         photonView.RPC("CheckIsRunnable", RpcTarget.AllBuffered);
-
-        // If there is a cube in player's hand
-        //if(playerHand.transform.childCount != 0)
-        //{
-        //    // Clear the hand
-        //    Destroy(playerHand.transform.GetChild(0).gameObject);
-        //}
     }
 
     /// <summary>
@@ -245,6 +238,9 @@ public class RunCubes : MonoBehaviourPun
 
             // Destroy particle system after 5 seconds
             StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
+
+            // Call challenge check
+            MiniChallenge.instance.CheckMiniChallenge();
         }
     }
 

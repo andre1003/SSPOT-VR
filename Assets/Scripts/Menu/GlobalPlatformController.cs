@@ -47,6 +47,15 @@ public class GlobalPlatformController : MonoBehaviour
     /// </summary>
     private void SetupPlatform()
     {
+        // Get main menu
+        GameObject mainMenu = GameObject.Find("MainMenuManager");
+
+        // If there is a main menu, set game platform
+        if (mainMenu)
+        {
+            mainMenu.GetComponent<MainMenuManager>().SetGamePlatform(isOnPc);
+        }
+
         // Get all players GameObject
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 

@@ -1,4 +1,6 @@
 using Photon.Pun;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +19,20 @@ public class MiniChallenge : MonoBehaviourPun
     }
     #endregion
 
+    #region Attributes
+    #region Public
+    [Space]
+    [Header("Challenge Information")]
+    [Space]
 
     // Mini challenge config
     public float limitTime = 0f;
     public int maxErrors = 3;
+
+
+    [Space]
+    [Header("Challenge UI")]
+    [Space]
 
     // Timer text reference
     public Text timerText;
@@ -28,8 +40,29 @@ public class MiniChallenge : MonoBehaviourPun
 
     // Goal fail text color
     public Color failColor;
+    
+
+    [Space]
+    [Header("Challenge Result UI")]
+    [Space]
+
+    // Challenge result canvas
+    public GameObject challengeResultCanvas;
+
+    // Challenge stars
+    public List<GameObject> stars;
 
 
+    [Space]
+    [Header("Challenge Audio")]
+    [Space]
+
+    public AudioClip newStarAudioClip;
+    public AudioClip challengeFinishedAudioClip;
+    #endregion
+
+
+    #region Private
     // Timer value
     private float timer = 0f;
 
@@ -40,10 +73,19 @@ public class MiniChallenge : MonoBehaviourPun
     private bool isTimeChallengeComplete = true;
     private bool isErrorsChallengeComplete = true;
 
+    private AudioSource audioSource;
+    #endregion
+    #endregion
 
+    #region Methods
+    #region Unity Methods
     // Start is called before the first frame update
     void Start()
     {
+        // Get audio source component and set it's clip to newStarAudioClip
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = newStarAudioClip;
+
         // If this player is master client, start timer synced
         if(PhotonNetwork.IsMasterClient)
         {
@@ -63,6 +105,7 @@ public class MiniChallenge : MonoBehaviourPun
         // Update UI
         UpdateUI();
     }
+    #endregion
 
     #region Time Challenge
     /// <summary>
@@ -148,5 +191,89 @@ public class MiniChallenge : MonoBehaviourPun
         // Set errors text
         errorsText.text = prefix + errors + " / " + (maxErrors < 10 ? "0" + maxErrors.ToString() : maxErrors.ToString());
     }
+    #endregion
+
+    #region Check Mini Challenge
+    /// <summary>
+    /// Check for mini challenge completion.
+    /// </summary>
+    public void CheckMiniChallenge()
+    {
+        // Local stars count
+        int starsCount = 0;
+
+        // If time challenge was completed, add a star
+        if(isTimeChallengeComplete)
+        {
+            starsCount++;
+        }
+
+        // If errors challenge was completed, add a star
+        if(isErrorsChallengeComplete)
+        {
+            starsCount++;
+        }
+
+        // Display challenge result canvas
+        challengeResultCanvas.SetActive(true);
+
+        // If stars count is bigger than 0, start adding the stars
+        if(starsCount > 0)
+        {
+            StartCoroutine(AddStarWithDelay(starsCount, 1));
+        }
+
+        // Start countdown for diabling challenge results canvas
+        StartCoroutine(DisableChallengeResultsAfterSeconds(5f));
+    }
+
+    /// <summary>
+    /// Add a star to challenge result canvas after 0.75 second.
+    /// </summary>
+    /// <param name="starsCount">Number of stars to add.</param>
+    /// <param name="startIndex">Stars list index to add.</param>
+    private IEnumerator AddStarWithDelay(int starsCount, int startIndex)
+    {
+        // Wait for 0.75 second
+        yield return new WaitForSeconds(0.75f);
+
+        // Add a star to UI and play sound
+        stars[startIndex].SetActive(true);
+        audioSource.Play();
+
+        // Decrease stars count
+        starsCount--;
+
+        // If there are stars remaining, call AddStarWithDelay
+        if(starsCount > 0)
+        {
+            StartCoroutine(AddStarWithDelay(starsCount, startIndex + 1));
+        }
+
+        // If there is no stars remaining
+        else
+        {
+            // Wait for 0.75 second
+            yield return new WaitForSeconds(0.75f);
+
+            // Play challenge finished audio clip
+            audioSource.clip = challengeFinishedAudioClip; 
+            audioSource.Play();
+        }
+    }
+
+    /// <summary>
+    /// Disable challenge results after a given amount of seconds.
+    /// </summary>
+    /// <param name="seconds">Seconds to wait.</param>
+    private IEnumerator DisableChallengeResultsAfterSeconds(float seconds)
+    {
+        // Wait some seconds
+        yield return new WaitForSeconds(seconds);
+
+        // Disable challenge result canvas
+        challengeResultCanvas.SetActive(false);
+    }
+    #endregion
     #endregion
 }
