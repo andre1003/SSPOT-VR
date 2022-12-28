@@ -64,6 +64,9 @@ MonoBehaviour:
   - DisableTeleportMesh
   - GoDownRpc
   - GoUpRpc
+  - IncreaseTimerRpc
+  - StartTimerRpc
+  - IncreaseErrorRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
