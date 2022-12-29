@@ -66,6 +66,9 @@ public class MiniChallenge : MonoBehaviourPun
     // Timer value
     private float timer = 0f;
 
+    // Timer controller
+    private bool isTimerActive = true;
+
     // Current number of errors
     private int errors = 0;
 
@@ -73,6 +76,7 @@ public class MiniChallenge : MonoBehaviourPun
     private bool isTimeChallengeComplete = true;
     private bool isErrorsChallengeComplete = true;
 
+    // Audio source
     private AudioSource audioSource;
     #endregion
     #endregion
@@ -96,8 +100,8 @@ public class MiniChallenge : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        // If this player is master client, increase the timer for all players
-        if(PhotonNetwork.IsMasterClient)
+        // If this player is master client and timer is active, increase the timer for all players
+        if(PhotonNetwork.IsMasterClient && isTimerActive)
         {
             photonView.RPC("IncreaseTimerRpc", RpcTarget.AllBuffered, Time.deltaTime);
         }
@@ -134,6 +138,27 @@ public class MiniChallenge : MonoBehaviourPun
             isTimeChallengeComplete = false;
             timerText.color = failColor;
         }
+    }
+
+    /// <summary>
+    /// Stop mini challenge timer.
+    /// </summary>
+    public void StopTimer()
+    {
+        // If this player is master client, stop timer via RPC
+        if(PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("StopTimerRpc", RpcTarget.AllBuffered);
+        }
+    }
+
+    /// <summary>
+    /// Stop mini challenge timer via RPC.
+    /// </summary>
+    [PunRPC]
+    private void StopTimerRpc()
+    {
+        isTimerActive = false;
     }
     #endregion
 

@@ -272,6 +272,7 @@ public class RunCubes : MonoBehaviourPun
         // Hide error screen after 5 seconds
         StartCoroutine(WaitToDeactivate(5.0f, errorScreen));
 
+        // Increase mini challenge errors
         MiniChallenge.instance.IncreaseError();
     }
 
@@ -298,6 +299,9 @@ public class RunCubes : MonoBehaviourPun
 
         // Close error screen
         errorScreen.SetActive(false);
+
+        // Stop mini challenge timer
+        MiniChallenge.instance.StopTimer();
     }
 
     /// <summary>
