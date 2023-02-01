@@ -64,10 +64,11 @@ public class AttachingCube : MonoBehaviourPun
             selectedCube = hand.transform.GetChild(0).gameObject;
 
 
-            // If is a loop cube (this gives an index out of bounds error!)
+            // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
             if(selectedCube.name.StartsWith("Repeat") && !isLeftCell)
             {
                 ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(true);
+                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
                 ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
                 ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(true);
                 return;
@@ -75,6 +76,7 @@ public class AttachingCube : MonoBehaviourPun
             else if(selectedCube.name.StartsWith("EndRepeat") && !isLeftCell)
             {
                 ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(true);
+                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
                 ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
                 return;
             }
@@ -144,6 +146,11 @@ public class AttachingCube : MonoBehaviourPun
     {
         GameObject hand = PhotonView.Find(playerViewId).gameObject.GetComponent<PlayerSetup>().playerHand;
         playerHands.Add(hand);
+
+        if(isLeftCell)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -167,5 +174,11 @@ public class AttachingCube : MonoBehaviourPun
 
         // If something went wrong, return -1
         return -1;
+    }
+
+
+    public void SetPlayerID(int id)
+    {
+        playerId = id;
     }
 }
