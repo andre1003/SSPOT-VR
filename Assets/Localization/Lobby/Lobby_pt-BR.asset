@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Lobby_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: 2e6412289232a3b4eaed6260ededfe90, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 123465039872
+    m_Localized: 'Nome da sala:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 668460318720
+    m_Localized: Insira o nome da sala...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 835020324864
+    m_Localized: "Avan\xE7ar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 893870604288
+    m_Localized: Criar Sala
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1010946211840
+    m_Localized: Entrar na Sala
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1191070597120
+    m_Localized: Voltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516026064896
+    m_Localized: Menu Principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7473374625792
+    m_Localized: "Uma sala com esse nome j\xE1 existe! Tente outro nome!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7476910424064
+    m_Localized: Algo deu errado ao criar a sala. Tente novamente com outro nome
+      ou mais tarde.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7480643354624
+    m_Localized: "Essa sala j\xE1 est\xE1 cheia!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7482232995840
+    m_Localized: "Essa sala n\xE3o existe! Tente outro nome ou crie ela!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7483952660480
+    m_Localized: "N\xE3o foi poss\xEDvel entrar na sala. Tente novamente com outro
+      nome ou mais tarde."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
