@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsButton: {fileID: 1426210730}
+  firstLevel: LabirinthLevel
 --- !u!4 &72932481
 Transform:
   m_ObjectHideFlags: 0

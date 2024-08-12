@@ -68,6 +68,14 @@ MonoBehaviour:
   - StartTimerRpc
   - IncreaseErrorRpc
   - StopTimerRpc
+  - BasicCodeCheck
+  - RunCode
+  - ExecuteReset
+  - AttachCubeRPC
+  - ClearCellRPC
+  - SyncLoopAuxCells
+  - DecreaseRPC
+  - IncreaseRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

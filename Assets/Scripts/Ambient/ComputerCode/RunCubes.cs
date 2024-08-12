@@ -8,6 +8,7 @@ public class RunCubes : MonoBehaviourPun
 {
     #region Attributes
     #region Screens
+    [Header("Screens")]
     // Error screen GameObject
     public GameObject errorScreen;
 
@@ -16,6 +17,7 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Robot movement
+    [Header("Robot Movement")]
     // Robot GameObject
     public GameObject robot;
 
@@ -30,6 +32,10 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Correct code
+    [Header("Correct Code")]
+    // Novalidate
+    public bool novalidate = false;
+
     // Desired instructions list
     public List<string> instructions;
 
@@ -37,7 +43,8 @@ public class RunCubes : MonoBehaviourPun
     public List<string> loop;
     #endregion
 
-    #region Enviroment
+    #region Environment
+    [Header("Environment")]
     // Programming slots that cube can be attached
     public List<GameObject> codingCell = new List<GameObject>();
 
@@ -58,6 +65,7 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Materials
+    [Header("Materials")]
     // Material for indicate that the algorithm is correct
     public Material successTerminalMaterial;
 
@@ -66,6 +74,7 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Audio-visual resource
+    [Header("Sounds")]
     // Success audio
     public AudioClip success;
 
@@ -74,6 +83,7 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Player
+    [Header("Player Hand")]
     // Player hand
     public GameObject playerHand;
     #endregion
@@ -93,6 +103,7 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Computer commands
+    [Header("Computer Commands Map")]
     // Loop commands list
     public static List<string> loopCommands = new List<string>();
 
@@ -140,10 +151,10 @@ public class RunCubes : MonoBehaviourPun
         // If is waiting for robot's idle
         if(waitingForIdle)
         {
-
+            AnimatorStateInfo robotState = robotAnimator.GetCurrentAnimatorStateInfo(0);
             if(// If robot walk ended
-                    robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") &&
-                    robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
+                    robotState.IsName("Walk") &&
+                    robotState.normalizedTime >= robotState.length &&
                     robotAnimator.GetBool("Forward")
                 )
             {
@@ -157,8 +168,8 @@ public class RunCubes : MonoBehaviourPun
 
 
             if(// If robot is turning left
-                    robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("TurnLeft") &&
-                    robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
+                    robotState.IsName("TurnLeft") &&
+                    robotState.normalizedTime >= robotState.length &&
                     robotAnimator.GetBool("Left")
                 )
             {
@@ -173,8 +184,8 @@ public class RunCubes : MonoBehaviourPun
 
 
             if(// If robot is turning right
-                    robotAnimator.GetCurrentAnimatorStateInfo(0).IsName("TurnRight") &&
-                    robotAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= robotAnimator.GetCurrentAnimatorStateInfo(0).length &&
+                    robotState.IsName("TurnRight") &&
+                    robotState.normalizedTime >= robotState.length &&
                     robotAnimator.GetBool("Right")
                 )
             {
@@ -207,7 +218,10 @@ public class RunCubes : MonoBehaviourPun
     public void OnPointerClick()
     {
         // Try to run code
-        photonView.RPC("CheckIsRunnable", RpcTarget.AllBuffered);
+        if(PhotonNetwork.OfflineMode)
+            CheckIsRunnable();
+        else
+            photonView.RPC("CheckIsRunnable", RpcTarget.AllBuffered);
     }
 
     /// <summary>
@@ -233,8 +247,8 @@ public class RunCubes : MonoBehaviourPun
             mainInstructions.Clear();
 
             // Set final GameObjects
-            instructionsNextScene.SetActive(true);
-            projector.SetActive(true);
+            instructionsNextScene?.SetActive(true);
+            projector?.SetActive(true);
 
             // Destroy particle system after 5 seconds
             StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
@@ -261,9 +275,12 @@ public class RunCubes : MonoBehaviourPun
         audioSource.Play();
 
         // Change terminal material to red (indicates error)
-        mats = terminal.GetComponent<MeshRenderer>().materials;
-        mats[1] = errorTerminalMaterial;
-        terminal.GetComponent<MeshRenderer>().materials = mats;
+        if(terminal != null)
+        {
+            mats = terminal.GetComponent<MeshRenderer>().materials;
+            mats[1] = errorTerminalMaterial;
+            terminal.GetComponent<MeshRenderer>().materials = mats;
+        }
 
         // Display error message to player
         errorScreen.transform.GetComponentInChildren<Text>().text = errorMessage;
@@ -289,19 +306,28 @@ public class RunCubes : MonoBehaviourPun
         audioSource.Play();
 
         // Change terminal material to green (indicates success)
-        mats = terminal.GetComponent<MeshRenderer>().materials;
-        mats[1] = successTerminalMaterial;
-        terminal.GetComponent<MeshRenderer>().materials = mats;
+        if(terminal != null)
+        {
+            mats = terminal.GetComponent<MeshRenderer>().materials;
+            mats[1] = successTerminalMaterial;
+            terminal.GetComponent<MeshRenderer>().materials = mats;
+        }
 
-        // Play robot audio source and next command
-        robotSource.Play();
-        RunNextCommand();
+        RunCode();
 
         // Close error screen
         errorScreen.SetActive(false);
 
         // Stop mini challenge timer
         MiniChallenge.instance.StopTimer();
+    }
+
+    [PunRPC]
+    private void RunCode()
+    {
+        // Play robot audio source and next command
+        robotSource.Play();
+        RunNextCommand();
     }
 
     /// <summary>
@@ -448,12 +474,70 @@ public class RunCubes : MonoBehaviourPun
         return true;
     }
 
+    [PunRPC]
+    private bool BasicCodeCheck()
+    {
+        for(int i = 0; i < codingCell.Count; i++)
+        {
+            // Verify if all the slots are sequentially filled. There can be no empty slots
+            if(codingCell[i].transform.childCount > 0)
+            {
+                // Get child GameObject's name length
+                int length = codingCell[i].transform.GetChild(0).gameObject.name.Length;
+
+                // Remove not desirable name
+                string cube = codingCell[i].transform.GetChild(0).gameObject.name.Remove(length - 16);
+
+                // Add cube to cubes list
+                mainInstructions.Add(cube);
+
+            }
+
+            // If coding cell doesn't have a child
+            else
+            {
+                Error("Deu ERRO! Você deve preencher todas as placas de programação!");
+                return false;
+            }
+
+            // Check if the first cube is not "Begin"
+            if(i == 0 && mainInstructions[i] != "Begin")
+            {
+                Error("Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!");
+                return false;
+            }
+
+            // Check if the last cube is not "End"
+            if(i == (codingCell.Count - 1) && mainInstructions[i] != "End")
+            {
+                Error("Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!");
+                return false;
+            }
+
+            // Check if "Begin" and "End" cubes are in the middle of the algorithm
+            if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i] == "Begin" || mainInstructions[i] == "End"))
+            {
+                Error("Deu ERRO! Início e Fim devem ser usados no lugar certo!");
+                return false;
+            }
+        }
+        loopCommands = ComputerCellsController.instance.GetAllLeftCommands();
+        return true;
+    }
+
     /// <summary>
     /// Check if code is runnable via RPC.
     /// </summary>
     [PunRPC]
     private void CheckIsRunnable()
     {
+        if(novalidate)
+        {
+            if(BasicCodeCheck())
+                RunCode();
+            return;
+        }
+
         // Check loops and instructions
         bool checkLoop = CheckLoop();
         bool checkInstructions = CheckInstructions();

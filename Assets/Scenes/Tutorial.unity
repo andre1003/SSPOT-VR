@@ -9375,7 +9375,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairController: {fileID: 1086550948}
   uiCamera: {fileID: 0}
-  playerHands: {fileID: 0}
 --- !u!224 &7889371149248282995
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9435,6 +9434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f064f868c88300409b90fcace282d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBody: {fileID: 0}
 --- !u!1 &7889371149248283006
 GameObject:
   m_ObjectHideFlags: 0
@@ -9531,7 +9531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a8ef5ada663964da5284121d8f6cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOnPC: 1
 --- !u!4 &7889371149694069132
 Transform:
   m_ObjectHideFlags: 0

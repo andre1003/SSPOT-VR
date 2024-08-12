@@ -8,6 +8,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
 {
     // Settings button reference
     public GameObject settingsButton;
+    [SerializeField] private string firstLevel = "Tutorial";
 
 
     // Platform controller
@@ -37,7 +38,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Tutorial");
+        PhotonNetwork.LoadLevel(firstLevel);
     }
     #endregion
 
