@@ -33,6 +33,7 @@ public class LabirinthManager : MonoBehaviour
     [SerializeField] private GameObject instructions2;
 
     [SerializeField] private GameObject projector;
+    [SerializeField] private GameObject invisibleWall;
 
     [Header("UI")]
     [SerializeField] private Text instructionPlayer1;
@@ -115,5 +116,8 @@ public class LabirinthManager : MonoBehaviour
 
         // Activate projector
         projector.SetActive(true);
+
+        // Destroy invisible wall
+        Destroy(invisibleWall);
     }
 }

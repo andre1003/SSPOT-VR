@@ -248,10 +248,11 @@ public class RunCubes : MonoBehaviourPun
 
             // Set final GameObjects
             instructionsNextScene?.SetActive(true);
-            projector?.SetActive(true);
+            if(projector != null) projector.SetActive(true);
 
             // Destroy particle system after 5 seconds
-            StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
+            if(projectorParticleSystem != null)
+                StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
 
             // Call challenge check
             MiniChallenge.instance.CheckMiniChallenge();

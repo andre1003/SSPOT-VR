@@ -161,6 +161,6 @@ public class AmbientSetup : MonoBehaviour
         {
             attachingCube.AddPlayerHand(playerViewId);
         }
-        computerToHide?.SetActive(false);
+        if(computerToHide != null) computerToHide.SetActive(false);
     }
 }
