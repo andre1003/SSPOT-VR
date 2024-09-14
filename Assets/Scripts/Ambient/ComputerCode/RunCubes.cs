@@ -255,7 +255,7 @@ public class RunCubes : MonoBehaviourPun
                 StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
 
             // Call challenge check
-            MiniChallenge.instance.CheckMiniChallenge();
+            MiniChallenge.instance?.CheckMiniChallenge();
         }
     }
 
@@ -320,7 +320,7 @@ public class RunCubes : MonoBehaviourPun
         errorScreen.SetActive(false);
 
         // Stop mini challenge timer
-        MiniChallenge.instance.StopTimer();
+        MiniChallenge.instance?.StopTimer();
     }
 
     [PunRPC]

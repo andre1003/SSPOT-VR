@@ -15,6 +15,13 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     private bool isOnPc = false;
 
 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+
     public void SetGamePlatform(bool isOnPc)
     {
         // Set isOnPc

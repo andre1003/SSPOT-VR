@@ -2,6 +2,9 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 
@@ -38,7 +41,11 @@ public class MiniChallenge : MonoBehaviourPun
     public Text timerText;
     public Text errorsText;
 
+    public LocalizeStringEvent timerEvent;
+    public LocalizeStringEvent errorEvent;
+
     // Goal fail text color
+    public Color successColor;
     public Color failColor;
     
 
@@ -51,6 +58,8 @@ public class MiniChallenge : MonoBehaviourPun
 
     // Challenge stars
     public List<GameObject> stars;
+    public Text timeCheck;
+    public Text errorCheck;
 
 
     [Space]
@@ -202,19 +211,36 @@ public class MiniChallenge : MonoBehaviourPun
         // Get rounded timer value
         int roundedTimer = Mathf.RoundToInt(timer);
 
-        // Get timer prefix
-        string prefix = "Time: ";
-        prefix += roundedTimer < 10 ? "0" : "";
-
         // Set timer text
-        timerText.text = prefix + roundedTimer.ToString() + " / " + (limitTime < 10 ? "0" + limitTime.ToString() : limitTime.ToString());
+        string currentTimer = roundedTimer.ToString("D2") + " / " + (limitTime < 10 ? "0" + limitTime.ToString() : limitTime.ToString());
+        if(timerEvent != null)
+        {
+            // Obtém a variável local 'timer' do Localize String Event
+            if(timerEvent.StringReference["timer"] is StringVariable stringVariable)
+            {
+                // Atualiza o valor da variável local
+                stringVariable.Value = currentTimer;
 
-        // Get errors prefix
-        prefix = "Errors: ";
-        prefix += errors < 10 ? "0" : "";
+                // Recarrega o texto localizado
+                timerEvent.RefreshString();
+            }
+        }
+
 
         // Set errors text
-        errorsText.text = prefix + errors + " / " + (maxErrors < 10 ? "0" + maxErrors.ToString() : maxErrors.ToString());
+        string currentErrors = errors.ToString("D2") + " / " + maxErrors.ToString("D2");
+        if(errorEvent != null)
+        {
+            // Obtém a variável local 'timer' do Localize String Event
+            if(errorEvent.StringReference["errors"] is StringVariable stringVariable)
+            {
+                // Atualiza o valor da variável local
+                stringVariable.Value = currentErrors;
+
+                // Recarrega o texto localizado
+                errorEvent.RefreshString();
+            }
+        }
     }
     #endregion
 
@@ -231,12 +257,22 @@ public class MiniChallenge : MonoBehaviourPun
         if(isTimeChallengeComplete)
         {
             starsCount++;
+            timeCheck.color = successColor;
+        }
+        else
+        {
+            timeCheck.color = failColor;
         }
 
         // If errors challenge was completed, add a star
         if(isErrorsChallengeComplete)
         {
             starsCount++;
+            errorCheck.color = successColor;
+        }
+        else
+        {
+            errorCheck.color = failColor;
         }
 
         // Display challenge result canvas

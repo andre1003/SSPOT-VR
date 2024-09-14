@@ -1472,9 +1472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:4cd60ccf85cd22d4bb21fdd871671b7c
+      m_TableCollectionName: GUID:080e2119d5fd7cd48b057e9f9679ed4f
     m_TableEntryReference:
-      m_KeyId: 3843611361280
+      m_KeyId: 1461057675264
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -1531,8 +1531,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.65
-  m_Text: "Muito bem!\n\nO Mark parece estar se\nrecuperando muito bem,\ngra\xE7as
-    a voc\xEAs\n\nMuito obrigado!"
+  m_Text: "Well done!\r\n\r\nMark seems to be\nrecovering very well,\r thanks to
+    you\r\n\r\nThank you very much!"
 --- !u!222 &40953352
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3424,6 +3424,7 @@ GameObject:
   - component: {fileID: 90100614}
   - component: {fileID: 90100613}
   - component: {fileID: 90100611}
+  - component: {fileID: 90100615}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3499,14 +3500,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'PARA VOLTAR AO
+  m_Text: 'TO RETURN TO
 
-    MENU PRINCIPAL
-
-
+    MAIN MENU
 
 
-    CLIQUE AQUI'
+
+
+    CLICK HERE'
 --- !u!222 &90100614
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3515,6 +3516,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90100609}
   m_CullTransparentMesh: 0
+--- !u!114 &90100615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90100609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:080e2119d5fd7cd48b057e9f9679ed4f
+    m_TableEntryReference:
+      m_KeyId: 2239654715392
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &90819953
 GameObject:
   m_ObjectHideFlags: 0
@@ -7632,7 +7661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 7684ef4acf4f4964182a38e4bcef0b06, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7684ef4acf4f4964182a38e4bcef0b06, type: 3}
       propertyPath: m_RootOrder
@@ -9471,6 +9500,7 @@ MonoBehaviour:
   instructions1: {fileID: 277072537}
   instructions2: {fileID: 1770846296}
   projector: {fileID: 2060338656}
+  invisibleWall: {fileID: 0}
   instructionPlayer1: {fileID: 1208303862}
   instructionPlayer2: {fileID: 1133663401}
 --- !u!1 &320410303
@@ -13008,8 +13038,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7901390214683255513, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+    - target: {fileID: 7901390214683255513, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2239654715392
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901390214683255513, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:080e2119d5fd7cd48b057e9f9679ed4f
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
 --- !u!4 &419406810 stripped
 Transform:
@@ -17548,7 +17585,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 9
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &627537389
 Canvas:
   m_ObjectHideFlags: 0
@@ -19995,7 +20032,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 7684ef4acf4f4964182a38e4bcef0b06, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cf7d1df284ec608418718d117abc3b1a, type: 2}
+      objectReference: {fileID: 2100000, guid: ea252885e95b2f44ea49be8ee400aa17, type: 2}
     - target: {fileID: 2300000, guid: 7684ef4acf4f4964182a38e4bcef0b06, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -29294,9 +29331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:4cd60ccf85cd22d4bb21fdd871671b7c
+      m_TableCollectionName: GUID:080e2119d5fd7cd48b057e9f9679ed4f
     m_TableEntryReference:
-      m_KeyId: 3843611361280
+      m_KeyId: 1461057675264
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -29606,6 +29643,7 @@ GameObject:
   - component: {fileID: 1133663400}
   - component: {fileID: 1133663402}
   - component: {fileID: 1133663401}
+  - component: {fileID: 1133663403}
   m_Layer: 5
   m_Name: Instructions2Text
   m_TagString: Untagged
@@ -29645,7 +29683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: be63355dca1e6ae498971a7e8cf4c4f4, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 0.29814878, g: 0.9433962, b: 0.32345268, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -29666,9 +29704,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Vamos ver se o Mark est\xE1 funcionando!\n\nAjudem o Mark a atravessar
-    \no labirinto!\n\nUse a TV atr\xE1s de voc\xEA para ajudar seu parceiro a programar
-    o c\xF3digo!"
+  m_Text: 'Let''s see if Mark is working!
+
+
+
+
+    Help Mark get through the maze!
+
+
+
+
+    Use
+    the TV behind you to help your partner program the code!'
 --- !u!222 &1133663402
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29677,6 +29724,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133663399}
   m_CullTransparentMesh: 0
+--- !u!114 &1133663403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133663399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:080e2119d5fd7cd48b057e9f9679ed4f
+    m_TableEntryReference:
+      m_KeyId: 898211438592
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1133663401}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1138984302
 GameObject:
   m_ObjectHideFlags: 0
@@ -31967,6 +32054,7 @@ GameObject:
   - component: {fileID: 1208303861}
   - component: {fileID: 1208303863}
   - component: {fileID: 1208303862}
+  - component: {fileID: 1208303864}
   m_Layer: 5
   m_Name: Instructions1Text
   m_TagString: Untagged
@@ -32006,7 +32094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: be63355dca1e6ae498971a7e8cf4c4f4, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 0.29814878, g: 0.9433962, b: 0.32345268, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -32027,8 +32115,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Vamos ver se o Mark est\xE1 funcionando!\n\nAjudem o Mark a atravessar
-    \no labirinto!\n\nSeu pareceiro deve te falar o c\xF3digo para atravessar o labirinto!"
+  m_Text: 'Let''s see if Mark is working!
+
+
+
+
+    Help Mark get through the maze!
+
+
+
+
+    Your
+    partner should tell you the code to get through the maze!'
 --- !u!222 &1208303863
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32037,6 +32135,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208303860}
   m_CullTransparentMesh: 0
+--- !u!114 &1208303864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208303860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:080e2119d5fd7cd48b057e9f9679ed4f
+    m_TableEntryReference:
+      m_KeyId: 56146190336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1208303862}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &1208393574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46010,7 +46148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 7684ef4acf4f4964182a38e4bcef0b06, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7684ef4acf4f4964182a38e4bcef0b06, type: 3}
       propertyPath: m_RootOrder
@@ -48368,12 +48506,17 @@ MonoBehaviour:
   maxErrors: 3
   timerText: {fileID: 697867945}
   errorsText: {fileID: 1649526235}
+  timerEvent: {fileID: 0}
+  errorEvent: {fileID: 0}
+  successColor: {r: 0, g: 0, b: 0, a: 0}
   failColor: {r: 0.8039216, g: 0.21568628, b: 0.21568628, a: 1}
   challengeResultCanvas: {fileID: 1363068629}
   stars:
   - {fileID: 716385791}
   - {fileID: 1781285353}
   - {fileID: 1286734417}
+  timeCheck: {fileID: 0}
+  errorCheck: {fileID: 0}
   newStarAudioClip: {fileID: 8300000, guid: 918b96722f7644e54977c1d0923a7061, type: 3}
   challengeFinishedAudioClip: {fileID: 8300000, guid: c2b566cfddcd5492cb4d897297ca3ebe, type: 3}
 --- !u!4 &1818005681
