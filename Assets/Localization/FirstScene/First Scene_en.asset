@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: e1817dd86e2dd964689e891a667ab9e6, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 6199766798708244502
   m_TableData:
   - m_Id: 28317253632
     m_Localized: 'Oh no! Mark bugged again!
@@ -82,4 +83,8 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6199766798708244502
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00e01213d7ee9003

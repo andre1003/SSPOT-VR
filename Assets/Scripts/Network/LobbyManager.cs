@@ -10,6 +10,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public InputField roomNameInput;
     public Text statusText;
+    public string level = "Tutorial";
 
 
     void Start()
@@ -98,7 +99,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // Load tutorial scene
-        PhotonNetwork.LoadLevel("Tutorial");
+        PhotonNetwork.LoadLevel(level);
     }
     #endregion
 

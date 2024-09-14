@@ -51,6 +51,26 @@ MonoBehaviour:
     m_Key: PreviousLevel
     m_Metadata:
       m_Items: []
+  - m_Id: 256968324407287808
+    m_Key: MiniChallengeTimer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256975076695662592
+    m_Key: MiniChallengeErrors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256977986196267008
+    m_Key: MiniChallengeCongrats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256980319835709440
+    m_Key: MiniChallengeTimeCheck
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256980446419804160
+    m_Key: MiniChallengeError
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

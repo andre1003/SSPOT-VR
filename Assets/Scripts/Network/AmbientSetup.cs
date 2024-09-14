@@ -15,7 +15,7 @@ public class AmbientSetup : MonoBehaviour
             instance = this;
         }
 
-        if(PhotonNetwork.OfflineMode)
+        if(PhotonNetwork.OfflineMode && teleports.Count > 0)
         {
             teleports[2].enabled = false;
             teleports[2].gameObject.SetActive(false);
@@ -29,7 +29,7 @@ public class AmbientSetup : MonoBehaviour
     public ResetCubes resetCubes;
 
     // Teleport
-    public List<TeleportToObject> teleports;
+    public List<TeleportToObject> teleports = new List<TeleportToObject>();
 
     // Elevator
     public GoingUpAndDownController elevator;
@@ -41,6 +41,9 @@ public class AmbientSetup : MonoBehaviour
 
     // Players list
     private List<GameObject> players = new List<GameObject>();
+
+    // Hide computer
+    [SerializeField] private GameObject computerToHide;
 
 
     /// <summary>
@@ -57,7 +60,7 @@ public class AmbientSetup : MonoBehaviour
         players.Add(player);
 
         // Setup computer
-        if(runCubes && resetCubes)
+        if(runCubes)
         {
             ConfigureComputer(playerHand);
         }
@@ -111,7 +114,6 @@ public class AmbientSetup : MonoBehaviour
     private void ConfigureComputer(GameObject playerHand)
     {
         runCubes.playerHand = playerHand;
-        resetCubes.playerHand = playerHand;
     }
 
     /// <summary>
@@ -159,5 +161,6 @@ public class AmbientSetup : MonoBehaviour
         {
             attachingCube.AddPlayerHand(playerViewId);
         }
+        if(computerToHide != null) computerToHide.SetActive(false);
     }
 }

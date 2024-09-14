@@ -21,11 +21,19 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
-    private int playerId;
+    [SerializeField] private int playerId;
 
     // Audio source
     [SerializeField] private AudioSource audioSource;    // Audio source
 
+    [SerializeField] private ComputerCellsController cellController;
+
+
+    void Start()
+    {
+        if(cellController == null)
+            cellController = ComputerCellsController.instance;
+    }
 
     /// <summary>
     /// When player click on this object, it attaches a cube in the coding cell
@@ -48,11 +56,10 @@ public class AttachingCube : MonoBehaviourPun
     private void Attaching()
     {
         // Attach cube via RPC
-        photonView.RPC("AttachingRpc", RpcTarget.AllBuffered, playerId);
+        AttachingHandler(playerId);
     }
 
-    [PunRPC]
-    private void AttachingRpc(int id)
+    private void AttachingHandler(int id)
     {
         // Get hand
         GameObject hand = PhotonView.Find(id).gameObject.GetComponent<PlayerSetup>().playerHand;
@@ -63,66 +70,84 @@ public class AttachingCube : MonoBehaviourPun
             // Set selected cube
             selectedCube = hand.transform.GetChild(0).gameObject;
 
-
             // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
             if(selectedCube.name.StartsWith("Repeat") && !isLeftCell)
             {
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(true);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
-                ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(true);
+                photonView.RPC("SyncLoopAuxCells", RpcTarget.AllBuffered);
+                cellController?.GetLeftCellAtIndex(cubeIndex)?.GetComponent<AttachingCube>()?.OnPointerClick();
                 return;
             }
             else if(selectedCube.name.StartsWith("EndRepeat") && !isLeftCell)
             {
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(true);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
+                cellController?.GetLeftCellAtIndex(cubeIndex)?.SetActive(true);
+                cellController?.GetLeftCellAtIndex(cubeIndex)?.GetComponent<AttachingCube>()?.SetPlayerID(playerId);
+                cellController?.GetLeftCellAtIndex(cubeIndex)?.GetComponent<AttachingCube>()?.Attaching();
                 return;
             }
 
             // If cube holder has no child
             if(cubeHolder.transform.childCount == 0)
             {
-                // Attach the selected cube to cubeHolder
-                selectedCube.transform.SetParent(cubeHolder.transform);
-
-                // Disable BoxCollider and EvenTrigger from selected cube
-                selectedCube.GetComponent<BoxCollider>().enabled = false;
-
-                // Set selected cube transform
-                selectedCube.transform.localPosition = new Vector3(0f, 0f, 0f);     // Position
-                selectedCube.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);   // Rotation
-                selectedCube.transform.localScale = new Vector3(1f, 1f, 1f);        // Scale
-
-                // Set selected cube to null
-                selectedCube = null;
-
-                // Play select cube sound
-                audioSource.clip = selectingCube;
-                audioSource.Play();
+                int selectedCubeID = selectedCube.GetComponent<PhotonView>().ViewID;
+                photonView.RPC("AttachCubeRPC", RpcTarget.AllBuffered, selectedCubeID);
             }
         }
 
         // If cube holder has a child and player hand has no child 
         else if(cubeHolder.transform.childCount == 1 && hand.transform.childCount == 0)
         {
-            // Destroy cube from cube holder
-            Destroy(cubeHolder.transform.GetChild(0).gameObject);
-
-            // Play release sound
-            audioSource.clip = releasingCube;
-            audioSource.Play();
-
-            // If is left cell, clear it and the correponding right cell
-            if(isLeftCell)
-            {
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(false);
-                ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(false);
-            }
+            photonView.RPC("ClearCellRPC", RpcTarget.AllBuffered);
         }
     }
 
+    [PunRPC]
+    private void SyncLoopAuxCells()
+    {
+        cellController?.GetRightCellAtIndex(cubeIndex)?.SetActive(true);
+        cellController?.GetLeftCellAtIndex(cubeIndex)?.SetActive(true);
+    }
+
+    [PunRPC]
+    private void AttachCubeRPC(int selectedCubeID)
+    {
+        GameObject selectedCube = PhotonView.Find(selectedCubeID).gameObject;
+
+        // Attach the selected cube to cubeHolder
+        selectedCube.transform.SetParent(cubeHolder.transform);
+
+        // Disable BoxCollider and EvenTrigger from selected cube
+        selectedCube.GetComponent<BoxCollider>().enabled = false;
+
+        // Set selected cube transform
+        selectedCube.transform.localPosition = new Vector3(0f, 0f, 0f);     // Position
+        selectedCube.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);   // Rotation
+        selectedCube.transform.localScale = new Vector3(1f, 1f, 1f);        // Scale
+
+        // Set selected cube to null
+        selectedCube = null;
+
+        // Play select cube sound
+        audioSource.clip = selectingCube;
+        audioSource.Play();
+    }
+
+    [PunRPC]
+    private void ClearCellRPC()
+    {
+        // Destroy cube from cube holder
+        Destroy(cubeHolder.transform.GetChild(0).gameObject);
+
+        // Play release sound
+        audioSource.clip = releasingCube;
+        audioSource.Play();
+
+        // If is left cell, clear it and the correponding right cell
+        if(isLeftCell)
+        {
+            cellController?.GetLeftCellAtIndex(cubeIndex).SetActive(false);
+            cellController?.GetRightCellAtIndex(cubeIndex).SetActive(false);
+        }
+    }
 
     /// <summary>
     /// Call RPC add player hand.

@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoopController : MonoBehaviour
+public class LoopController : MonoBehaviourPun
 {
     public int iterations;
     public Text amountText;
@@ -17,6 +18,12 @@ public class LoopController : MonoBehaviour
 
     public void IncreaseIterations()
     {
+        photonView.RPC("IncreaseRPC", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void IncreaseRPC()
+    {
         iterations++;
 
         if(iterations > maxIterarions)
@@ -28,6 +35,12 @@ public class LoopController : MonoBehaviour
     }
 
     public void DecreaseIterations()
+    {
+        photonView.RPC("DecreaseRPC", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void DecreaseRPC()
     {
         iterations--;
 

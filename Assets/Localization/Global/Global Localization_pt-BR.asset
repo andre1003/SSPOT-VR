@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: pt-BR
   m_SharedData: {fileID: 11400000, guid: c41a65fbb7947ae4fa1c2c42eae88b37, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 6199766798708244504
   m_TableData:
   - m_Id: 7668695040
     m_Localized: "In\xEDcio"
@@ -61,6 +62,32 @@ MonoBehaviour:
     m_Localized: "PARA VOLTAR PARA O\nN\xCDVEL ANTERIOR\n\n\n\nCLIQUE AQUI"
     m_Metadata:
       m_Items: []
+  - m_Id: 256968324407287808
+    m_Localized: 'Tempo: {timer}'
+    m_Metadata:
+      m_Items:
+      - rid: 6199766798708244504
+  - m_Id: 256975076695662592
+    m_Localized: 'Erros: {errors}'
+    m_Metadata:
+      m_Items:
+      - rid: 6199766798708244504
+  - m_Id: 256977986196267008
+    m_Localized: "Parab\xE9ns!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256980319835709440
+    m_Localized: Limite de tempo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 256980446419804160
+    m_Localized: Limite de erros
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6199766798708244504
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00e0d25e54ef900300e0928278f59003
