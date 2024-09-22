@@ -8,6 +8,8 @@ namespace SSpot.Grids
     {
         [SerializeField] private int gridSize = 10;
 
+        [SerializeField] private GameObject nodePrefab;
+
         public int GridSize => gridSize;
 
         public Grid InternalGrid { get; private set; }
@@ -46,12 +48,19 @@ namespace SSpot.Grids
                 for (int j = 0; j < gridSize; j++)
                 {
                     _nodes[i][j] = new();
+                    if (nodePrefab != null)
+                    {
+                        var obj = Instantiate(nodePrefab, transform);
+                        obj.transform.position = GetCellCenterWorld(new(i, j));
+                    }
                 }
             }
             
             foreach (var obj in GetComponentsInChildren<ILevelGridObject>())
             {
                 obj.Grid = this;
+                var cell = InternalGrid.WorldToCell(transform.position);
+                obj.GridPosition = new(cell.x, cell.y);
                 this[obj.GridPosition].Objects.Add(obj);
             }
         }
