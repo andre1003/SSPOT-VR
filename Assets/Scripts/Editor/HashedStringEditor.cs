@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using JetBrains.Annotations;
-using SSpot;
+using SSpot.AnimatorUtilities;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace SSPot.Editor
                 return;
             }
          
-            var targetAttribute = fieldInfo.GetCustomAttribute<AnimatorParamNameAttribute>();
+            var targetAttribute = fieldInfo.GetCustomAttribute<AnimatorHashedStringAttribute>();
             if (targetAttribute == null)
             {
                 EditorGUI.PropertyField(position, valueProp, label);
@@ -41,29 +41,24 @@ namespace SSPot.Editor
                 return;
             }
             
-            DrawParameterDropdown(position, label, animator, valueProp);
-        }
-
-        private static void DrawParameterDropdown(Rect position, GUIContent label, Animator animator,
-            SerializedProperty valueProp)
-        {
-
             if (!animator.isInitialized)
             {
                 animator.enabled = false;
                 animator.enabled = true;
+                EditorGUI.PropertyField(position, valueProp, label);
                 return;
             }
             
-            var parameters = animator.parameters;
-            var values = new GUIContent[parameters.Length];
+            DrawDropdown(position, label, targetAttribute.GetValues(animator), valueProp);
+        }
+
+        private static void DrawDropdown(Rect position, GUIContent label, GUIContent[] values,
+            SerializedProperty valueProp)
+        {
             int currentIndex = -1;
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                values[i] = new(parameters[i].name);
-                if (parameters[i].name == valueProp.stringValue)
+            for (int i = 0; i < values.Length; i++)
+                if (values[i].text == valueProp.stringValue)
                     currentIndex = i;
-            }
             
             int newIndex = EditorGUI.Popup(position, label, currentIndex, values);
 

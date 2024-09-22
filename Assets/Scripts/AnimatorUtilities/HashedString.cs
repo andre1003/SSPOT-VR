@@ -1,17 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SSpot
+namespace SSpot.AnimatorUtilities
 {
-    /// <summary>
-    /// Place on a <see cref="HashedString"/> field and the editor will show animator parameter names in the dropdown.
-    /// The field must be a property of a component attached to an object with an Animator. 
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    public class AnimatorParamNameAttribute : Attribute
-    {
-    }
-    
     /// <summary>
     /// Represents a string and its cached int hash value from <see cref="Animator.StringToHash"/>.
     /// Used for faster access of animator parameters and animation states.
