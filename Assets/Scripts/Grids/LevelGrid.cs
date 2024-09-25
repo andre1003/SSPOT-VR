@@ -34,7 +34,7 @@ namespace SSpot.Grids
 
         public bool InGrid(Vector2Int cell) => InGrid(cell.x) && InGrid(cell.y);
 
-        public bool InGrid(Vector3 worldPos) => InGrid(WorldToCell(worldPos));
+        public bool IsWorldPosInGrid(Vector3 worldPos) => InGrid(WorldToCell(worldPos));
         
         
         private void Awake()
@@ -124,7 +124,7 @@ namespace SSpot.Grids
             Gizmos.DrawLine(from, to);
         }
         
-        private void DrawSquare(Vector3 worldPos, Vector3 cellSize)
+        private static void DrawSquare(Vector3 worldPos, Vector2 cellSize)
         {
             Vector3 a = worldPos;
             Vector3 b = a;
