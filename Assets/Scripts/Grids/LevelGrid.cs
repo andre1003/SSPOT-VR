@@ -72,5 +72,41 @@ namespace SSpot.Grids
             obj.GridPosition = target;
             obj.GameObject.transform.position = GetCellCenterWorld(target);
         }
+        
+        #if UNITY_EDITOR
+        
+        private void OnDrawGizmos()
+        {
+            var cellSize = GetComponent<Grid>().cellSize;
+            
+            Gizmos.color = Color.blue;
+            
+            for (int i = 0; i <= gridSize; i++)
+            {
+                DrawVertical(transform.position, i, gridSize, cellSize);
+                DrawHorizontal(transform.position, i, gridSize, cellSize);
+            }
+            
+            Gizmos.color = Color.white;
+        }
+        
+        private static void DrawVertical(Vector3 origin, int i, int gridSize, Vector2 cellSize)
+        {
+            Vector3 from = origin;
+            from.x += i * cellSize.x;
+            Vector3 to = from;
+            to.z += gridSize * cellSize.y;
+            Gizmos.DrawLine(from, to);
+        }
+
+        private static void DrawHorizontal(Vector3 origin, int i, int gridSize, Vector2 cellSize)
+        {
+            Vector3 from = origin;
+            from.z += i * cellSize.y;
+            Vector3 to = from;
+            to.x += gridSize * cellSize.x;
+            Gizmos.DrawLine(from, to);
+        }
+        #endif
     }
 }
