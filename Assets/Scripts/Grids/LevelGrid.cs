@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using SSpot.Grids.NodeModifiers;
 using UnityEngine;
 
 namespace SSpot.Grids
@@ -42,16 +43,16 @@ namespace SSpot.Grids
             InternalGrid = GetComponent<Grid>();
             
             _nodes = new Node[gridSize][];
-            for (int i = 0; i < gridSize; i++)
+            for (int x = 0; x < gridSize; x++)
             {
-                _nodes[i] = new Node[gridSize];
-                for (int j = 0; j < gridSize; j++)
+                _nodes[x] = new Node[gridSize];
+                for (int y = 0; y < gridSize; y++)
                 {
-                    _nodes[i][j] = new();
+                    _nodes[x][y] = new(new(x, y));
                     if (nodePrefab != null)
                     {
                         var obj = Instantiate(nodePrefab, transform);
-                        obj.transform.position = GetCellCenterWorld(new(i, j));
+                        obj.transform.position = GetCellCenterWorld(new(x, y));
                     }
                 }
             }
@@ -59,9 +60,15 @@ namespace SSpot.Grids
             foreach (var obj in GetComponentsInChildren<ILevelGridObject>())
             {
                 obj.Grid = this;
-                var cell = InternalGrid.WorldToCell(transform.position);
-                obj.GridPosition = new(cell.x, cell.y);
-                this[obj.GridPosition].Objects.Add(obj);
+                var cell = WorldToCell(obj.GameObject.transform.position);
+                obj.GridPosition = cell;
+                this[cell].Objects.Add(obj);
+            }
+
+            foreach (var modifier in GetComponentsInChildren<IGridNodeModifier>())
+            {
+                var cell = WorldToCell(modifier.GameObject.transform.position);
+                modifier.Modify(this, _nodes[cell.x][cell.y]);
             }
         }
 

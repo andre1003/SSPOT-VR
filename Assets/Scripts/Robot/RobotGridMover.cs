@@ -45,6 +45,12 @@ namespace SSpot.Robot
                 yield break;
             }
 
+            if (!Grid[toCell].CanWalk)
+            {
+                Debug.Log("Can't walk there!");
+                yield break;
+            }
+
             Vector3 from = Grid.GetCellCenterWorld(fromCell);
             Vector3 to = Grid.GetCellCenterWorld(toCell);
 
