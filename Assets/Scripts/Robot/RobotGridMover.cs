@@ -25,6 +25,8 @@ namespace SSpot.Robot
             get => _facing;
             set => SetFacing(value);
         }
+        
+        bool ILevelGridObject.CanWalkThrough => false;
 
         private RobotAnimator _animator;
         

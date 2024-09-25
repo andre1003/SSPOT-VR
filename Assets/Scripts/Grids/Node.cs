@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SSpot.Grids
@@ -9,7 +10,12 @@ namespace SSpot.Grids
         
         public List<ILevelGridObject> Objects { get; } = new();
 
-        public bool CanWalk { get; set; } = true;
+        private bool _canWalk = true;
+        public bool CanWalk
+        {
+            get => _canWalk && Objects.All(o => o.CanWalkThrough);
+            set => _canWalk = value;
+        }
 
         public Node(Vector2Int cell)
         {
