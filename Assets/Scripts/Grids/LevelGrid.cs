@@ -60,14 +60,14 @@ namespace SSpot.Grids
             foreach (var obj in GetComponentsInChildren<ILevelGridObject>())
             {
                 obj.Grid = this;
-                var cell = WorldToCell(obj.GameObject.transform.position);
+                var cell = WorldToCell(obj.gameObject.transform.position);
                 obj.GridPosition = cell;
                 this[cell].Objects.Add(obj);
             }
 
             foreach (var modifier in GetComponentsInChildren<IGridNodeModifier>())
             {
-                var cell = WorldToCell(modifier.GameObject.transform.position);
+                var cell = WorldToCell(modifier.gameObject.transform.position);
                 modifier.Modify(this, _nodes[cell.x][cell.y]);
             }
         }
@@ -77,7 +77,7 @@ namespace SSpot.Grids
             this[obj.GridPosition].Objects.Remove(obj);
             this[target].Objects.Add(obj);
             obj.GridPosition = target;
-            obj.GameObject.transform.position = GetCellCenterWorld(target);
+            obj.gameObject.transform.position = GetCellCenterWorld(target);
         }
         
         #if UNITY_EDITOR

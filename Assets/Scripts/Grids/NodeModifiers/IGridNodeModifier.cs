@@ -1,11 +1,7 @@
-﻿using UnityEngine;
-
-namespace SSpot.Grids.NodeModifiers
+﻿namespace SSpot.Grids.NodeModifiers
 {
-    public interface IGridNodeModifier
+    public interface IGridNodeModifier : IGameObjectProvider
     {
-        GameObject GameObject { get; }
-        
         void Modify(LevelGrid grid, Node node);
     }
 }

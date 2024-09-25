@@ -11,7 +11,5 @@ namespace SSpot.Grids.NodeModifiers
         {
             node.CanWalk = canWalk;
         }
-        
-        GameObject IGridNodeModifier.GameObject => gameObject;
     }
 }

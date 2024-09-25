@@ -102,8 +102,6 @@ namespace SSpot.Robot
             transform.forward = new(_facing.x, 0, _facing.y);
         }
 
-        GameObject ILevelGridObject.GameObject => gameObject;
-
         private static Vector2Int RotateFacingLeft(Vector2Int facing)
         {
             if (facing == Vector2Int.right) return Vector2Int.up;
