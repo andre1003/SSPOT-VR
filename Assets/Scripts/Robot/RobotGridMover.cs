@@ -28,6 +28,8 @@ namespace SSpot.Robot
         
         bool ILevelGridObject.CanWalkThrough => false;
 
+        bool ILevelGridObject.TriggerOnSteppedOn => true;
+
         private RobotAnimator _animator;
         
         private void Awake()

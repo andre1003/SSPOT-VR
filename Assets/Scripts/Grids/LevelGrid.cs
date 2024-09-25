@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using SSpot.Grids.NodeModifiers;
 using UnityEngine;
 
 namespace SSpot.Grids
@@ -64,12 +63,6 @@ namespace SSpot.Grids
                 obj.GridPosition = cell;
                 this[cell].Objects.Add(obj);
             }
-
-            foreach (var modifier in GetComponentsInChildren<IGridNodeModifier>())
-            {
-                var cell = WorldToCell(modifier.gameObject.transform.position);
-                modifier.Modify(this, _nodes[cell.x][cell.y]);
-            }
         }
 
         public void ChangeNode(ILevelGridObject obj, Vector2Int target)
@@ -78,6 +71,10 @@ namespace SSpot.Grids
             this[target].Objects.Add(obj);
             obj.GridPosition = target;
             obj.gameObject.transform.position = GetCellCenterWorld(target);
+            
+            if (obj.TriggerOnSteppedOn)
+                foreach (var gridObject in this[target].Objects)
+                    gridObject.OnSteppedOn();
         }
         
         #if UNITY_EDITOR
@@ -93,10 +90,22 @@ namespace SSpot.Grids
                 DrawVertical(transform.position, i, gridSize, cellSize);
                 DrawHorizontal(transform.position, i, gridSize, cellSize);
             }
+
+            Gizmos.color = Color.red;
+            
+            var internalGrid = GetComponent<Grid>();
+            foreach (var obj in GetComponentsInChildren<ILevelGridObject>())
+            {
+                if (obj.CanWalkThrough) continue;
+                
+                var cell = internalGrid.WorldToCell(obj.gameObject.transform.position);
+                var worldPos = internalGrid.CellToWorld(cell);
+                DrawSquare(worldPos, cellSize);
+            }
             
             Gizmos.color = Color.white;
         }
-        
+
         private static void DrawVertical(Vector3 origin, int i, int gridSize, Vector2 cellSize)
         {
             Vector3 from = origin;
@@ -114,6 +123,24 @@ namespace SSpot.Grids
             to.x += gridSize * cellSize.x;
             Gizmos.DrawLine(from, to);
         }
+        
+        private void DrawSquare(Vector3 worldPos, Vector3 cellSize)
+        {
+            Vector3 a = worldPos;
+            Vector3 b = a;
+            b.x += cellSize.x;
+            Vector3 c = a;
+            c.x += cellSize.x;
+            c.z += cellSize.y;
+            Vector3 d = a;
+            d.z += cellSize.y;
+            
+            Gizmos.DrawLine(a, b);
+            Gizmos.DrawLine(b, c);
+            Gizmos.DrawLine(c, d);
+            Gizmos.DrawLine(d, a);
+        }
+        
         #endif
     }
 }

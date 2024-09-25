@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SSpot.Grids
 {
@@ -9,5 +10,8 @@ namespace SSpot.Grids
         Vector2Int GridPosition { get; set; }
         
         bool CanWalkThrough { get; }
+
+        bool TriggerOnSteppedOn => false;
+        void OnSteppedOn() {}
     }
 }
