@@ -9,6 +9,7 @@ namespace SSpot.Grids
         [SerializeField] private int gridSize = 10;
 
         [SerializeField] private GameObject nodePrefab;
+        [SerializeField] private bool prefabOnlyInWalkable = true;
 
         public int GridSize => gridSize;
 
@@ -52,6 +53,7 @@ namespace SSpot.Grids
                     {
                         var obj = Instantiate(nodePrefab, transform);
                         obj.transform.position = GetCellCenterWorld(new(x, y));
+                        _nodes[x][y].NodeObject = obj;
                     }
                 }
             }
@@ -62,6 +64,9 @@ namespace SSpot.Grids
                 var cell = WorldToCell(obj.gameObject.transform.position);
                 obj.GridPosition = cell;
                 this[cell].Objects.Add(obj);
+                
+                if (prefabOnlyInWalkable && !this[cell].CanWalk)
+                    Destroy(this[cell].NodeObject);
             }
         }
 

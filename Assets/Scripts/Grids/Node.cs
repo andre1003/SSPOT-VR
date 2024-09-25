@@ -9,6 +9,8 @@ namespace SSpot.Grids
         public Vector2Int Cell { get; }
         
         public List<ILevelGridObject> Objects { get; } = new();
+        
+        public GameObject NodeObject { get; set; }
 
         private bool _canWalk = true;
         public bool CanWalk
