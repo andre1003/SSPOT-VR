@@ -2,6 +2,7 @@
 using System.Collections;
 using Photon.Pun;
 using SSpot.Grids;
+using SSpot.Utilities;
 using UnityEngine;
 
 namespace SSpot.Robot
@@ -59,7 +60,7 @@ namespace SSpot.Robot
             Vector3 to = Grid.GetCellCenterWorld(toCell);
 
             _animator.BeginWalking();
-            yield return SmoothCoroutine(walkTime, t => transform.position = Vector3.Lerp(from, to, t));
+            yield return CoroutineUtilities.SmoothCoroutine(walkTime, t => transform.position = Vector3.Lerp(from, to, t));
             _animator.StopWalking();
             yield return _animator.WaitForAnimationCoroutine();
             
@@ -84,7 +85,7 @@ namespace SSpot.Robot
             Vector3 originalForward = transform.forward;
             Vector2Int target = left ? RotateFacingLeft(Facing) : RotateFacingRight(Facing);
             Vector3 targetForward = new(target.x, 0, target.y);
-            yield return SmoothCoroutine(turnTime,
+            yield return CoroutineUtilities.SmoothCoroutine(turnTime,
                 t => transform.forward = Vector3.Slerp(originalForward, targetForward, t));
             if (!useRootRotation) yield return _animator.WaitForAnimationCoroutine();
             
@@ -122,18 +123,6 @@ namespace SSpot.Robot
             if (facing == Vector2Int.left) return Vector2Int.up;
             if (facing == Vector2Int.up) return Vector2Int.right;
             throw new ArgumentException();
-        }
-
-        private static IEnumerator SmoothCoroutine(float duration, Action<float> action)
-        {
-            float time = 0;
-            while (time < duration)
-            {
-                action(time / duration);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            action(1);
         }
     }
 }

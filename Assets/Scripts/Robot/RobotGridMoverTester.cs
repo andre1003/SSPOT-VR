@@ -7,7 +7,10 @@ namespace SSpot.Robot
     public class RobotGridMoverTester : MonoBehaviourPun
     {
         [SerializeField] private RobotGridMover mover;
-
+        [SerializeField] private RobotAnimator animator;
+        [SerializeField] private AnimationClip testClip;
+        
+        
         private bool _isActing;
 
         private IEnumerator ActCoroutine(IEnumerator action)
@@ -32,6 +35,10 @@ namespace SSpot.Robot
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 StartCoroutine(ActCoroutine(mover.TurnRightCoroutine()));
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StartCoroutine(ActCoroutine(animator.PlayClipCoroutine(testClip)));
             }
         }
     }
