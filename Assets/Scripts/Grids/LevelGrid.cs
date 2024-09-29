@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using System.Diagnostics.CodeAnalysis;
+using Photon.Pun;
 using UnityEngine;
 
 namespace SSpot.Grids
@@ -36,6 +37,18 @@ namespace SSpot.Grids
         public bool InGrid(Vector2Int cell) => InGrid(cell.x) && InGrid(cell.y);
 
         public bool IsWorldPosInGrid(Vector3 worldPos) => InGrid(WorldToCell(worldPos));
+
+        public bool TryGetNode(Vector2Int cell, [NotNullWhen(true)] out Node node)
+        {
+            if (InGrid(cell))
+            {
+                node = this[cell];
+                return true;
+            }
+
+            node = null;
+            return false;
+        }
         
         
         private void Awake()

@@ -58,7 +58,6 @@ namespace SSPot.Editor
                 case 0 when existingObject == null && _selectedPrefab != null:
                 {
                     var instance = (GridObject)PrefabUtility.InstantiatePrefab(_selectedPrefab, grid.transform);
-                    Debug.Log(instance.GetType());
                     instance.name = $"({cell.x}, {cell.y}) {instance.name}";
                     instance.transform.position = grid.GetCellCenterWorld(cell);
                 

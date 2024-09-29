@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Linq;
 using Photon.Pun;
+using SSpot.Grids;
 using UnityEngine;
 
 namespace SSpot.Robot
@@ -9,7 +11,6 @@ namespace SSpot.Robot
         [SerializeField] private RobotGridMover mover;
         [SerializeField] private RobotAnimator animator;
         [SerializeField] private AnimationClip testClip;
-        
         
         private bool _isActing;
 
@@ -40,6 +41,27 @@ namespace SSpot.Robot
             {
                 StartCoroutine(ActCoroutine(animator.PlayClipCoroutine(testClip)));
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                StartCoroutine(ActCoroutine(InteractCoroutine()));
+            }
+        }
+
+        private IEnumerator InteractCoroutine()
+        {
+            var interactTile = mover.GridPosition + mover.Facing;
+            if (!mover.Grid.TryGetNode(interactTile, out var node))
+                yield break;
+
+            var interactable = node.Objects
+                .Select(o => o.gameObject.GetComponent<ExampleInteractable>())
+                .FirstOrDefault(o => o );
+            if (!interactable) 
+                yield break;
+
+            if (interactable.InteractionAnimation)
+                yield return animator.PlayClipCoroutine(interactable.InteractionAnimation);
+            Debug.Log("Interacted with " + interactable.Value);
         }
     }
 }
