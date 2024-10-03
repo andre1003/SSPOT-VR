@@ -7,6 +7,8 @@ public class ResetCubesAlt : MonoBehaviourPun
 {
     // Terminal coding cells
     public List<GameObject> codingCell = new List<GameObject>();
+    public List<GameObject> leftCells = new List<GameObject>();
+    public List<GameObject> rightCells = new List<GameObject>();
 
     [SerializeField] private RunCubesAlt runCubes;
 
@@ -63,6 +65,20 @@ public class ResetCubesAlt : MonoBehaviourPun
                 // Clear this cell
                 Destroy(codingCell[i].transform.GetChild(0).gameObject);
             }
+        }
+
+        for(int i = 0; i < leftCells.Count; i++)
+        {
+            if(leftCells[i].transform.childCount > 0)
+            {
+                Destroy(leftCells[i].transform.GetChild(0).gameObject);
+                leftCells[i].transform.parent.gameObject.SetActive(false);
+            }
+        }
+
+        for(int i = 0; i < rightCells.Count; i++)
+        {
+            rightCells[i].SetActive(false);
         }
 
         // Stop robot movment and reset its position
