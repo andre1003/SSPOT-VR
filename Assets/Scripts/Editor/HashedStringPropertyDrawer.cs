@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using JetBrains.Annotations;
 using SSpot.AnimatorUtilities;
 using UnityEditor;
@@ -7,7 +8,7 @@ using UnityEngine;
 namespace SSPot.Editor
 {
     [CustomPropertyDrawer(typeof(HashedString))]
-    public class HashedStringEditor : PropertyDrawer
+    public class HashedStringPropertyDrawer : PropertyDrawer
     {
         private const string ValueFieldName = "value";
         
@@ -48,18 +49,21 @@ namespace SSPot.Editor
                 EditorGUI.PropertyField(position, valueProp, label);
                 return;
             }
+
+            var values = targetAttribute.GetValues(animator);
+            if (values == null)
+            {
+                EditorGUI.PropertyField(position, valueProp, label);
+                return;
+            }
             
-            DrawDropdown(position, label, targetAttribute.GetValues(animator), valueProp);
+            DrawDropdown(position, label, values, valueProp);
         }
 
         private static void DrawDropdown(Rect position, GUIContent label, GUIContent[] values,
             SerializedProperty valueProp)
         {
-            int currentIndex = -1;
-            for (int i = 0; i < values.Length; i++)
-                if (values[i].text == valueProp.stringValue)
-                    currentIndex = i;
-            
+            int currentIndex = Array.FindIndex(values, val => val.text == valueProp.stringValue);
             int newIndex = EditorGUI.Popup(position, label, currentIndex, values);
 
             if (currentIndex != newIndex)
