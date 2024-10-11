@@ -4678,6 +4678,9 @@ MonoBehaviour:
   loadSceneCanvas: {fileID: 1047926014}
   progressBar: {fileID: 1250956779}
   goForward: 1
+  nextSceneOffline: 
+  nextSceneOnline: 
+  buttonTextCanvas: {fileID: 1681006565}
 --- !u!114 &1143003497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6725,7 +6728,7 @@ RectTransform:
   m_GameObject: {fileID: 1681006565}
   m_LocalRotation: {x: 0.19281624, y: -0, z: -0, w: 0.9812349}
   m_LocalPosition: {x: 0, y: 0, z: -11.77654}
-  m_LocalScale: {x: 0.038999997, y: 0.039000005, z: 0.039000005}
+  m_LocalScale: {x: 0.038999997, y: 0.03900001, z: 0.03900001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 811732536}

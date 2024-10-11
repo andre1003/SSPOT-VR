@@ -26,7 +26,7 @@ public class GoingUpAndDownController : MonoBehaviourPun
     public void OnPointerClick()
     {
         // If player is on the floor and player is on the platform, go up
-        if(isDown && location1Initial.activeInHierarchy)
+        if(isDown)
         {
             GoUp();
         }
@@ -58,7 +58,6 @@ public class GoingUpAndDownController : MonoBehaviourPun
 
         // Setup GameObjects
         instructionsCodingPlatform.SetActive(false);
-        location1Initial.SetActive(false);
         instructionsInitial.SetActive(false);
         instructionsProgramming.SetActive(true);
 
@@ -92,7 +91,6 @@ public class GoingUpAndDownController : MonoBehaviourPun
         // Setup GameObjects
         instructionsCodingPlatform.SetActive(true);
         instructionsProgramming.SetActive(false);
-        location1Initial.SetActive(true);
         instructionsInitial.SetActive(true);
 
         // Rotate this object
