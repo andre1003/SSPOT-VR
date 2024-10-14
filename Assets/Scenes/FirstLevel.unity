@@ -13664,6 +13664,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2075081099}
     m_Modifications:
     - target: {fileID: 4920422631457568807, guid: 100a93eb84f7bbb4e8c3431f86080c27, type: 3}
+      propertyPath: level
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920422631457568807, guid: 100a93eb84f7bbb4e8c3431f86080c27, type: 3}
       propertyPath: progressBar
       value: 
       objectReference: {fileID: 1123882849663909850}
@@ -13718,6 +13722,15 @@ PrefabInstance:
     - target: {fileID: 4920422631519921347, guid: 100a93eb84f7bbb4e8c3431f86080c27, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920422632133592976, guid: 100a93eb84f7bbb4e8c3431f86080c27, type: 3}
+      propertyPath: m_Text
+      value: 'PARA VOLTAR
+
+        PARA O TUTORIAL
+
+
+        CLIQUE AQUI'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100a93eb84f7bbb4e8c3431f86080c27, type: 3}

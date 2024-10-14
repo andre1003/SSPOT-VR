@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,17 @@ public class BackToTutorial : MonoBehaviour
     public Slider progressBar;          // Progress bar slider
     public GameObject loadLevelCanvas;  // Load level screen canvas
     public string level = "Tutorial";
+    public GameObject buttonTextCanvas;
 
+
+    void Awake()
+    {
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            Destroy(buttonTextCanvas);
+            Destroy(gameObject);
+        }
+    }
 
     /// <summary>
     /// When player click this object, load tutorial

@@ -19052,10 +19052,18 @@ PrefabInstance:
     - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: progressBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 635836664}
     - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: loadSceneCanvas
       value: 
+      objectReference: {fileID: 1308749931}
+    - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: nextSceneOnline
+      value: FirstLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: nextSceneOffline
+      value: FirstLevel
       objectReference: {fileID: 0}
     - target: {fileID: 3021839316782635762, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: rotation.y
