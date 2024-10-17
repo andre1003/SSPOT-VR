@@ -16,6 +16,7 @@ public class ComputerCellsController : MonoBehaviour
     public List<GameObject> mainCells;
     public List<GameObject> leftCells;
     public List<GameObject> rightCells;
+    public List<GameObject> loopPanels;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,11 @@ public class ComputerCellsController : MonoBehaviour
     public GameObject GetLeftCellAtIndex(int index)
     {
         return leftCells[index];
+    }
+
+    public GameObject GetLoopPanelAtIndex(int index)
+    {
+        return loopPanels[index];
     }
 
     public GameObject GetRightCellAtIndex(int index)

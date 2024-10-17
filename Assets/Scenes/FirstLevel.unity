@@ -341,6 +341,42 @@ MonoBehaviour:
   - Forward
   - Right
   - End
+  cubeInstructions:
+  - type: 1
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 5
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 5
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 3
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 5
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 4
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 2
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
   loop: []
   codingCell:
   - {fileID: 89653333}
@@ -350,6 +386,7 @@ MonoBehaviour:
   - {fileID: 1063282959}
   - {fileID: 254457485}
   - {fileID: 1270671417}
+  testingCubes: []
   terminal: {fileID: 2140996822}
   projector: {fileID: 1313105665}
   projectorParticleSystem: {fileID: 1931098619}
@@ -1710,6 +1747,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1063282959}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 297680690}
@@ -4072,6 +4115,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands:
   - {fileID: 0}
+  Cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   audioSource: {fileID: 798027281}
 --- !u!1 &801900394
 GameObject:
@@ -5157,6 +5206,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 61745897}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 958899065}
@@ -6867,6 +6922,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 2125969834}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 1275469263}
@@ -8037,6 +8098,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1270671417}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 1447979096}
@@ -8473,6 +8540,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1441171122}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 1510664675}
@@ -10840,6 +10913,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 89653333}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 2006081139}
@@ -11153,6 +11232,12 @@ MonoBehaviour:
   isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 254457485}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   audioSource: {fileID: 2023542848}
@@ -11990,6 +12075,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 211222090199010168, guid: 77af4647f102ccc4cb7e759f95c3e4ac, type: 3}
+      propertyPath: Cube.type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 211222090199010168, guid: 77af4647f102ccc4cb7e759f95c3e4ac, type: 3}
+      propertyPath: PlayerCube.type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 211222090199010171, guid: 77af4647f102ccc4cb7e759f95c3e4ac, type: 3}
       propertyPath: sceneViewId
       value: 3
@@ -12005,6 +12098,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 462939132697353544, guid: 92c4e714bf2e20f4b84685ee29e135b3, type: 3}
       propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 462939132697353545, guid: 92c4e714bf2e20f4b84685ee29e135b3, type: 3}
+      propertyPath: Cube.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 462939132697353545, guid: 92c4e714bf2e20f4b84685ee29e135b3, type: 3}
+      propertyPath: PlayerCube.type
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 462939132697353546, guid: 92c4e714bf2e20f4b84685ee29e135b3, type: 3}
@@ -12993,6 +13094,14 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5437964729124874347, guid: 6ff127160e26d864bb29c7873ff8c2d6, type: 3}
+      propertyPath: Cube.type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5437964729124874347, guid: 6ff127160e26d864bb29c7873ff8c2d6, type: 3}
+      propertyPath: PlayerCube.type
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ff127160e26d864bb29c7873ff8c2d6, type: 3}
 --- !u!1001 &5484245823487781230
@@ -13002,6 +13111,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1315685917}
     m_Modifications:
+    - target: {fileID: 5484245825408492546, guid: e2f886a0741b9ba4cb2f032e2ac91ebd, type: 3}
+      propertyPath: Cube.type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484245825408492546, guid: e2f886a0741b9ba4cb2f032e2ac91ebd, type: 3}
+      propertyPath: PlayerCube.type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5484245825408492547, guid: e2f886a0741b9ba4cb2f032e2ac91ebd, type: 3}
       propertyPath: sceneViewId
       value: 5
@@ -13069,6 +13186,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5966115215313958601, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
       propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: Cube.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: Cube.isLoop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: PlayerCube.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: PlayerCube.isLoop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: Cube.loopRangeIndexes.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: Cube.loopRangeIndexes.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: PlayerCube.loopRangeIndexes.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966115215313958603, guid: 438f29adec9767046af1956fb13c86c6, type: 3}
+      propertyPath: PlayerCube.loopRangeIndexes.y
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5966115215313958605, guid: 438f29adec9767046af1956fb13c86c6, type: 3}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using NaughtyAttributes;
+using static Cube;
 
 public class RunCubes : MonoBehaviourPun
 {
@@ -31,15 +33,26 @@ public class RunCubes : MonoBehaviourPun
 
     #region Correct code
     // Desired instructions list
-    public List<string> instructions;
+    [BoxGroup ("CubeInfo")]
+    [Label("Expected Instructions")]
+    public List<CubeClass> cubeInstructions;
 
     // Desierd loop commands list
-    public List<string> loop;
+    public List<LoopController> loop;
     #endregion
 
     #region Enviroment
     // Programming slots that cube can be attached
-    public List<GameObject> codingCell = new List<GameObject>();
+    public List<GameObject> codingCell = new();
+
+    // Instructions list
+    [BoxGroup("CubeInfo")]
+    [Label("CodingCell Instructions")]
+    public static List<Cube> mainInstructions = new();
+
+    [BoxGroup("CubeInfo")]
+    [Label("Tried Instructions")]
+    public List<Cube> triedInstructions = new();
 
     // Programming slots
     public GameObject terminal;
@@ -94,10 +107,7 @@ public class RunCubes : MonoBehaviourPun
 
     #region Computer commands
     // Loop commands list
-    public static List<string> loopCommands = new List<string>();
-
-    // Instructions list
-    public static List<string> mainInstructions = new List<string>();
+    public static List<string> loopCommands = new();
     #endregion
 
     #region Iteration
@@ -219,7 +229,7 @@ public class RunCubes : MonoBehaviourPun
         // If have any coammand left
         if(animationIndex < (mainInstructions.Count - 1))
         {
-            robotAnimator.SetBool(mainInstructions[animationIndex], true); // Set animation according to command
+            robotAnimator.SetBool(mainInstructions[animationIndex].type.ToString(), true); // Set animation according to command
             waitingForIdle = true;                              // Wait for robot idle
             animationIndex++;                                   // Increase animationIndex
         }
@@ -332,62 +342,88 @@ public class RunCubes : MonoBehaviourPun
     /// Check if all loop commands are correct.
     /// </summary>
     /// <returns>TRUE if all loop commands are correct. FALSE if not.</returns>
-    [PunRPC]
-    private bool CheckLoop()
-    {
-        // Get all loop commands
-        loopCommands = ComputerCellsController.instance.GetAllLeftCommands();
+    //[PunRPC]
+    //private bool CheckLoop()
+    //{
+    //    // Get all loop commands
+    //    loopCommands = ComputerCellsController.instance.GetAllLeftCommands();
 
-        // If loop command number are different than expected, give an error and exit
-        if(loopCommands.Count != loop.Count)
-        {
-            Error("As repetições estão erradas!");
-            return false;
-        }
+    //    // If loop command number are different than expected, give an error and exit
+    //    if(loopCommands.Count != loop.Count)
+    //    {
+    //        Error("As repetições estão erradas!");
+    //        return false;
+    //    }
 
-        // Loop loop commands
-        for(int i = 0; i < loopCommands.Count; i++)
-        {
-            // If loop command is different than expected, give an error and exit
-            if(loopCommands[i] != loop[i])
-            {
-                Error("A repetição na linha " + i + " está incorreta!");
-                Debug.Log("LoopCommands: " + loopCommands[i] + "\nEsperado: " + loop[i]);
-                return false;
-            }
-        }
+    //    // Loop loop commands
+    //    for(int i = 0; i < loopCommands.Count; i++)
+    //    {
+    //        // If loop command is different than expected, give an error and exit
+    //        if(loopCommands[i] != loop[i])
+    //        {
+    //            Error("A repetição na linha " + i + " está incorreta!");
+    //            Debug.Log("LoopCommands: " + loopCommands[i] + "\nEsperado: " + loop[i]);
+    //            return false;
+    //        }
+    //    }
 
-        // Loop commands are correct
-        return true;
-    }
+    //    // Loop commands are correct
+    //    return true;
+    //}
 
     /// <summary>
     /// Check if all instructions are correct.
     /// </summary>
     /// <returns>TRUE if all instructions are correct. FALSE if not.</returns>
     [PunRPC]
+    [Button] 
     private bool CheckInstructions()
     {
         // Local variables
-        string cube;    // Cube name
-        int length = 0; // Name length
+        List<Cube> cubeInfo;
+        List<Cube> correctInstructions = new();
+        foreach (var item in cubeInstructions)
+            correctInstructions.AddRange(item.GetCommandList());
 
         // Compiler
         for(int i = 0; i < codingCell.Count; i++)
         {
+            Debug.Log(i);
+            int j = 0;
+
             #region Valid Coding Cell
             // Verify if all the slots are sequentially filled. There can be no empty slots
-            if(codingCell[i].transform.childCount > 0)
+            if (codingCell[i].transform.childCount > 0)
             {
-                // Get child GameObject's name length
-                length = codingCell[i].transform.GetChild(0).gameObject.name.Length;
+                // Verify if it initiates a Loop Command
+                if (loop.Count != 0 && loop[i].isActiveAndEnabled)
+                {
+                    CubeClass cB = new();
+                    cB.type = CubeType.Loop;
+                    cB.loopNumber = loop[i].iterations;
+                    cB.loopRangeIndexes[0] = i;
+                    for (j = 0; j < loop[i].curRange; j++)
+                    {
+                        cB.loopList.loopList.Add(new Cube(codingCell[i+j].transform.GetChild(0).GetComponent<CloningCube>().Cube.type));
+                        cB.loopRangeIndexes[1] = i+j;
+                    }
+                    j--;
+                    cubeInfo = cB.GetCommandList();
+                    foreach (Cube c in cubeInfo)
+                    {
+                        Debug.Log(c.type);
+                    }
+                }
+                else
+                {
+                    // Get Command List from Cube
+                    cubeInfo = codingCell[i].transform.GetChild(0).GetComponent<CloningCube>().Cube.GetCommandList();
+                }
+                
 
-                // Remove not desirable name
-                cube = codingCell[i].transform.GetChild(0).gameObject.name.Remove(length - 16);
-
-                // Add cube to cubes list
-                mainInstructions.Add(cube);
-
+                // Add Commands to Cubes list
+                mainInstructions.AddRange(cubeInfo);
+                triedInstructions.AddRange(cubeInfo);
             }
             #endregion Valid Coding Cell
 
@@ -402,10 +438,10 @@ public class RunCubes : MonoBehaviourPun
                 return false;
             }
             // If code cell is not correct
-            if(mainInstructions[i] != instructions[i])
+            if(mainInstructions[i].type != correctInstructions[i].type)
             {
                 // Check if the first cube is not "Begin"
-                if(i == 0 && mainInstructions[i] != "Begin")
+                if(i == 0 && mainInstructions[i].type != CubeType.Begin)
                 {
                     // Call Error method
                     Error("Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!");
@@ -415,7 +451,7 @@ public class RunCubes : MonoBehaviourPun
                 }
 
                 // Check if the last cube is not "End"
-                if(i == (codingCell.Count - 1) && mainInstructions[i] != "End")
+                if(i == (codingCell.Count - 1) && mainInstructions[i].type != CubeType.End)
                 {
                     // Call Error method
                     Error("Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!");
@@ -424,11 +460,8 @@ public class RunCubes : MonoBehaviourPun
                     return false;
                 }
 
-                // Debug code information
-                Debug.Log("Code: " + instructions[i] + ", Cubes: " + mainInstructions[i] + ", Index: " + i);
-
                 // Check if "Begin" and "End" cubes are in the middle of the algorithm
-                if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i] == "Begin" || mainInstructions[i] == "End"))
+                if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i].type == CubeType.Begin || mainInstructions[i].type == CubeType.End))
                 {
                     // Call Error method
                     Error("Deu ERRO! Início e Fim devem ser usados no lugar certo!");
@@ -442,8 +475,9 @@ public class RunCubes : MonoBehaviourPun
                 return false;
             }
             #endregion Errors
+            i += j;
+            Debug.Log(i);
         }
-
         // Instructions are correct
         return true;
     }
@@ -455,11 +489,11 @@ public class RunCubes : MonoBehaviourPun
     private void CheckIsRunnable()
     {
         // Check loops and instructions
-        bool checkLoop = CheckLoop();
+        //bool checkLoop = CheckLoop();
         bool checkInstructions = CheckInstructions();
 
         // If both loops and instructions are correct, run animations
-        if(checkLoop && checkInstructions)
+        if(checkInstructions)
         {
             Success();
         }
@@ -484,7 +518,7 @@ public class RunCubes : MonoBehaviourPun
             else if(i != startIndex && loopCommands[i] == "Repeat")
                 break;
         }
-
+        Debug.Log("AAAAA");
         // Return startIndex if there is no end loop command
         return startIndex + 1;
     }

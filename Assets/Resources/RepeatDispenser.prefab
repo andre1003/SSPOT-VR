@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 7
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3215334924613231364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +313,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands:
   - {fileID: 0}
+  Cube:
+    type: 7
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   audioSource: {fileID: 3215334925022620542}
 --- !u!114 &3215334925022620517
 MonoBehaviour:

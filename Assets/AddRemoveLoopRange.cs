@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddRemoveIterations : MonoBehaviour
+public class AddRemoveLoopRange : MonoBehaviour
 {
     public bool isAdding;
     public LoopController loopController;
 
     /// <summary>
-    /// When player clicks on this object, it adds one iteraction at LoopController.
+    /// When player clicks on this object, it adds one block at the range of LoopController.
     /// </summary>
     public void OnPointerClick()
     {
-        if(isAdding)
+        if (isAdding)
         {
-            loopController.IncreaseIterations();
+            loopController.IncreaseRange();
         }
         else
         {
-            loopController.DecreaseIterations();
+            loopController.DecreaseRange();
         }
     }
 }

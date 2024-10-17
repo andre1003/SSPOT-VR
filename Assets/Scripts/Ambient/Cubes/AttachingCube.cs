@@ -2,6 +2,8 @@
 using UnityEngine.EventSystems;
 using Photon.Pun;
 using System.Collections.Generic;
+using NaughtyAttributes;
+using static Cube;
 
 public class AttachingCube : MonoBehaviourPun
 {
@@ -13,6 +15,8 @@ public class AttachingCube : MonoBehaviourPun
 
     // Coding cell
     public GameObject cubeHolder;       // Coding cell cube holder
+    [BoxGroup("CubeInfo")]
+    public CubeClass cube;
 
     // Audio
     public AudioClip selectingCube;     // Cube select audio
@@ -21,6 +25,7 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
+    private CubeClass curCube;
     private int playerId;
 
     // Audio source
@@ -62,15 +67,17 @@ public class AttachingCube : MonoBehaviourPun
         {
             // Set selected cube
             selectedCube = hand.transform.GetChild(0).gameObject;
+            curCube = selectedCube.GetComponent<CloningCube>().Cube;
 
 
             // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
-            if(selectedCube.name.StartsWith("Repeat") && !isLeftCell)
+            if(curCube.IsLoop && !isLeftCell)
             {
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(true);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
-                ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(true);
+                ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).SetActive(true);
+                ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
+                PlayerSetup.instance.DestroyCubeOnHand();
+                //ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
+                
                 return;
             }
             else if(selectedCube.name.StartsWith("EndRepeat") && !isLeftCell)
@@ -79,6 +86,11 @@ public class AttachingCube : MonoBehaviourPun
                 ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
                 ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
                 return;
+            }
+            //TODO: change loop code to new serializable class logic
+            if (curCube.IsLoop)
+            {
+
             }
 
             // If cube holder has no child
