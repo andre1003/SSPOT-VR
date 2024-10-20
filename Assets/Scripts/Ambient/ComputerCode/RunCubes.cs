@@ -339,39 +339,6 @@ public class RunCubes : MonoBehaviourPun
     }
 
     /// <summary>
-    /// Check if all loop commands are correct.
-    /// </summary>
-    /// <returns>TRUE if all loop commands are correct. FALSE if not.</returns>
-    //[PunRPC]
-    //private bool CheckLoop()
-    //{
-    //    // Get all loop commands
-    //    loopCommands = ComputerCellsController.instance.GetAllLeftCommands();
-
-    //    // If loop command number are different than expected, give an error and exit
-    //    if(loopCommands.Count != loop.Count)
-    //    {
-    //        Error("As repetições estão erradas!");
-    //        return false;
-    //    }
-
-    //    // Loop loop commands
-    //    for(int i = 0; i < loopCommands.Count; i++)
-    //    {
-    //        // If loop command is different than expected, give an error and exit
-    //        if(loopCommands[i] != loop[i])
-    //        {
-    //            Error("A repetição na linha " + i + " está incorreta!");
-    //            Debug.Log("LoopCommands: " + loopCommands[i] + "\nEsperado: " + loop[i]);
-    //            return false;
-    //        }
-    //    }
-
-    //    // Loop commands are correct
-    //    return true;
-    //}
-
-    /// <summary>
     /// Check if all instructions are correct.
     /// </summary>
     /// <returns>TRUE if all instructions are correct. FALSE if not.</returns>
@@ -388,7 +355,6 @@ public class RunCubes : MonoBehaviourPun
         // Compiler
         for(int i = 0; i < codingCell.Count; i++)
         {
-            Debug.Log(i);
             int j = 0;
 
             #region Valid Coding Cell
@@ -398,6 +364,7 @@ public class RunCubes : MonoBehaviourPun
                 // Verify if it initiates a Loop Command
                 if (loop.Count != 0 && loop[i].isActiveAndEnabled)
                 {
+                    // Creating Cube Class to insert full loop comand on answerList (mainInstructions)
                     CubeClass cB = new();
                     cB.type = CubeType.Loop;
                     cB.loopNumber = loop[i].iterations;
@@ -409,10 +376,6 @@ public class RunCubes : MonoBehaviourPun
                     }
                     j--;
                     cubeInfo = cB.GetCommandList();
-                    foreach (Cube c in cubeInfo)
-                    {
-                        Debug.Log(c.type);
-                    }
                 }
                 else
                 {
@@ -488,8 +451,7 @@ public class RunCubes : MonoBehaviourPun
     [PunRPC]
     private void CheckIsRunnable()
     {
-        // Check loops and instructions
-        //bool checkLoop = CheckLoop();
+        // Check instructions
         bool checkInstructions = CheckInstructions();
 
         // If both loops and instructions are correct, run animations

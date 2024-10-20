@@ -8,7 +8,6 @@ using static Cube;
 public class AttachingCube : MonoBehaviourPun
 {
     public int cubeIndex;
-    public bool isLeftCell;
 
     // Player
     public List<GameObject> playerHands;      // Player hands GameObject
@@ -71,26 +70,13 @@ public class AttachingCube : MonoBehaviourPun
 
 
             // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
-            if(curCube.IsLoop && !isLeftCell)
+            if(curCube.IsLoop)
             {
                 ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).SetActive(true);
                 ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
                 PlayerSetup.instance.DestroyCubeOnHand();
-                //ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
                 
                 return;
-            }
-            else if(selectedCube.name.StartsWith("EndRepeat") && !isLeftCell)
-            {
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(true);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).GetComponent<AttachingCube>().Attaching();
-                return;
-            }
-            //TODO: change loop code to new serializable class logic
-            if (curCube.IsLoop)
-            {
-
             }
 
             // If cube holder has no child
@@ -125,13 +111,6 @@ public class AttachingCube : MonoBehaviourPun
             // Play release sound
             audioSource.clip = releasingCube;
             audioSource.Play();
-
-            // If is left cell, clear it and the correponding right cell
-            if(isLeftCell)
-            {
-                ComputerCellsController.instance.GetLeftCellAtIndex(cubeIndex).SetActive(false);
-                ComputerCellsController.instance.GetRightCellAtIndex(cubeIndex).SetActive(false);
-            }
         }
     }
 
@@ -158,11 +137,6 @@ public class AttachingCube : MonoBehaviourPun
     {
         GameObject hand = PhotonView.Find(playerViewId).gameObject.GetComponent<PlayerSetup>().playerHand;
         playerHands.Add(hand);
-
-        if(isLeftCell)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     /// <summary>

@@ -1431,6 +1431,7 @@ MonoBehaviour:
   iterationsText: {fileID: 1960017204655535892}
   rangeText: {fileID: 2448679471215975931}
   maxIterarions: 10
+  maxRange: 6
   Plane: {fileID: 1487370848967090293}
   planeSize: 0.9
   curRange: 1

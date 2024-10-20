@@ -1,17 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
-
+using System.Collections.Generic;
+using System.Data.Common;
+// TODO: comentar a classe e revisar algumas funções
 public class LoopController : MonoBehaviour
 {
+    [BoxGroup("LoopSettings")]
     public int iterations;
-    public Text iterationsText;
-    public Text rangeText;
 
+    [BoxGroup("LoopSettings")]
     public int maxIterarions = 10;
 
+    [BoxGroup("LoopSettings")]
+    public int maxRange = 6;
+
+    [BoxGroup("LoopSettings")]
+    public bool globalMaxRange = false;
+
+    [BoxGroup("LoopSettings")]
+    [ShowIf("globalMaxRange")]
+    [MinValue(1)]
+    public int globalRange = 1;
+
+    [BoxGroup("Visuals")]
+    public Text iterationsText;
+    [BoxGroup("Visuals")]
+    public Text rangeText;
     [BoxGroup("Visuals")]
     public GameObject Plane;
     [BoxGroup("Visuals")]
@@ -21,9 +36,14 @@ public class LoopController : MonoBehaviour
     [BoxGroup("Visuals")]
     public GameObject IncreaseAmountButton;
 
-    void Awake()
+    private void OnEnable()
     {
-        UpdateUI();
+        UpdateAllPanels();
+    }
+
+    private void OnDisable()
+    {
+        UpdateAllPanels();
     }
 
     public void IncreaseIterations()
@@ -52,23 +72,17 @@ public class LoopController : MonoBehaviour
 
     public void IncreaseRange() 
     {
-        if (curRange < ComputerCellsController.instance.mainCells.Count)
+        if (curRange < maxRange)
         {
-            Vector3 positionVector = Plane.transform.localPosition;
-            positionVector = new (positionVector.x, positionVector.y - (planeSize / 2), positionVector.z);
-            Vector3 scaleVector = Plane.transform.localScale;
-            scaleVector = new (scaleVector.x, scaleVector.y, scaleVector.z * (1 + (1 / curRange)));
-            Plane.transform.localPosition = positionVector;
-            Plane.transform.localScale = scaleVector;
+            Vector3 tempVector = Plane.transform.localPosition;
+            Plane.transform.localPosition = new (tempVector.x, tempVector.y - (planeSize / 2), tempVector.z);
+            
+            tempVector = Plane.transform.localScale;
+            Plane.transform.localScale = new (tempVector.x, tempVector.y, tempVector.z * (1 + (1 / curRange)));
+            
             curRange++;
-            if (curRange == ComputerCellsController.instance.mainCells.Count)
-            {
-                IncreaseAmountButton.SetActive(false);
-            }
-            else if(curRange == 2)
-            {
-                rangeText.text = "A";
-            }
+            UpdateUI();
+
         }
     }
     public void DecreaseRange() 
@@ -82,14 +96,7 @@ public class LoopController : MonoBehaviour
             Plane.transform.localPosition = positionVector;
             Plane.transform.localScale = scaleVector;
             curRange--;
-            if (curRange == 1)
-            {
-                rangeText.text = "X";
-            }
-            else if (curRange == ComputerCellsController.instance.mainCells.Count - 1)
-            {
-                IncreaseAmountButton.SetActive(true);
-            }
+            UpdateUI();
         }
         else if (curRange == 1) gameObject.SetActive(false);
     }
@@ -102,6 +109,51 @@ public class LoopController : MonoBehaviour
     private void UpdateUI()
     {
         iterationsText.text = iterations.ToString();
+        IncreaseAmountButton.SetActive(curRange != maxRange);
+        rangeText.text = curRange == 1 ? "X" : "A";
+    }
+
+    private void UpdateRange()
+    {
+        // updating maxRange
+        List<GameObject> Panels = ComputerCellsController.instance.loopPanels;
+        int panelCount = Panels.Count;
+
+        
+        for (int i = 0; i < panelCount; i++)
+        {
+            if (Panels[i].GetComponent<LoopController>() == this)
+            {
+                maxRange = panelCount - i;
+                if(i == panelCount - 1) { maxRange = 1; return; }
+
+                i++;
+                for (int rangeCount = 1; i < panelCount; rangeCount++, i++)
+                {
+                    if (Panels[i].activeInHierarchy) 
+                    { 
+                        maxRange = rangeCount;
+                    }
+                }
+            }
+        }
+        while (curRange > maxRange) DecreaseRange();
+        if (globalMaxRange && maxRange > globalRange) maxRange = globalRange;
+    }
+
+    public void UpdateAllPanels()
+    {
+        List<GameObject> Panels = ComputerCellsController.instance.loopPanels;
+        int panelCount = Panels.Count;
+
+        for (int i = 0; i < panelCount; i++)
+        {
+            if (Panels[i].activeInHierarchy) 
+            {
+                Panels[i].GetComponent<LoopController>().UpdateRange();
+                Panels[i].GetComponent<LoopController>().UpdateUI();
+            } 
+        } 
     }
 
 }
