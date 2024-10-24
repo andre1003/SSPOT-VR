@@ -99,7 +99,8 @@ namespace SSpot.Grids
         
         private void OnDrawGizmos()
         {
-            var cellSize = GetComponent<Grid>().cellSize;
+            var internalGrid = GetComponent<Grid>();
+            var cellSize = new Vector2(internalGrid.cellSize.x, internalGrid.cellSize.z);
             
             Gizmos.color = Color.blue;
             
@@ -111,7 +112,6 @@ namespace SSpot.Grids
 
             Gizmos.color = Color.red;
             
-            var internalGrid = GetComponent<Grid>();
             foreach (var obj in GetComponentsInChildren<ILevelGridObject>())
             {
                 if (obj.CanWalkThrough) continue;

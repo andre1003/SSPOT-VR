@@ -19,6 +19,7 @@ namespace SSPot.Editor
             if (grid == null) return;
             var internalGrid = grid.GetComponent<Grid>();
             if (internalGrid == null) return;
+            var cellSize = new Vector2(internalGrid.cellSize.x, internalGrid.cellSize.z);
             
             HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
 
@@ -34,7 +35,7 @@ namespace SSPot.Editor
             if (!TryGetCell(internalGrid, out var cell) || !grid.InGrid(new Vector2Int(cell.x, cell.y)))
                 return;
             
-            DrawSquare(internalGrid.CellToWorld(cell), internalGrid.cellSize);
+            DrawSquare(internalGrid.CellToWorld(cell), cellSize);
             if (cell != _lastCell)
             {
                 view.Repaint();
