@@ -282,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce93ee401334e5ca8275788d601b8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clipTransitionLength: 0.1
   idleStateName:
     value: Idle
   walk:
@@ -305,3 +306,18 @@ MonoBehaviour:
   walkTime: 0.7
   turnTime: 0.7
   useRootRotation: 0
+--- !u!114 &7610415275689052037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967524446638801332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca538f0bd6545f7bcd63d88f33a6983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 1804518065}
+  animator: {fileID: 1804518063}
+  audioSource: {fileID: 1804518062}
