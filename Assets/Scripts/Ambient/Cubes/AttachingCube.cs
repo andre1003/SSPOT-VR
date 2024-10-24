@@ -24,21 +24,11 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
-
     private CubeClass curCube;
     [SerializeField] private int playerId;
 
     // Audio source
     [SerializeField] private AudioSource audioSource;    // Audio source
-
-    [SerializeField] private ComputerCellsController cellController;
-
-
-    void Start()
-    {
-        if(cellController == null)
-            cellController = ComputerCellsController.instance;
-    }
 
     /// <summary>
     /// When player click on this object, it attaches a cube in the coding cell
@@ -103,13 +93,6 @@ public class AttachingCube : MonoBehaviourPun
 
 
     [PunRPC]
-    private void SyncLoopAuxCells()
-    {
-        cellController?.GetRightCellAtIndex(cubeIndex)?.SetActive(true);
-        cellController?.GetLeftCellAtIndex(cubeIndex)?.SetActive(true);
-    }
-
-    [PunRPC]
     private void AttachCubeRPC(int selectedCubeID)
     {
         GameObject selectedCube = PhotonView.Find(selectedCubeID).gameObject;
@@ -142,13 +125,6 @@ public class AttachingCube : MonoBehaviourPun
         // Play release sound
         audioSource.clip = releasingCube;
         audioSource.Play();
-
-        // If is left cell, clear it and the correponding right cell
-        if(isLeftCell)
-        {
-            cellController?.GetLeftCellAtIndex(cubeIndex).SetActive(false);
-            cellController?.GetRightCellAtIndex(cubeIndex).SetActive(false);
-        }
     }
 
     /// <summary>

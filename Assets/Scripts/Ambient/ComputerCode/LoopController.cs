@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Data.Common;
+using Photon.Pun;
 // TODO: comentar a classe e revisar algumas fun��es
-public class LoopController : MonoBehaviour
+public class LoopController : MonoBehaviourPun
 
 {
     [BoxGroup("LoopSettings")]
@@ -46,6 +47,7 @@ public class LoopController : MonoBehaviour
     {
         UpdateAllPanels();
     }
+
 
     public void IncreaseIterations()
     {
