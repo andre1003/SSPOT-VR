@@ -380,7 +380,7 @@ public class RunCubes : MonoBehaviourPun
             correctInstructions.AddRange(item.GetCommandList());
 
         // Compiler
-        for(int i = 0; i < codingCell.Count; i++)
+        for (int i = 0; i < codingCell.Count; i++)
         {
             int j = 0;
 
@@ -398,8 +398,8 @@ public class RunCubes : MonoBehaviourPun
                     cB.loopRangeIndexes[0] = i;
                     for (j = 0; j < loop[i].curRange; j++)
                     {
-                        cB.loopList.loopList.Add(new Cube(codingCell[i+j].transform.GetChild(0).GetComponent<CloningCube>().Cube.type));
-                        cB.loopRangeIndexes[1] = i+j;
+                        cB.loopList.loopList.Add(new Cube(codingCell[i + j].transform.GetChild(0).GetComponent<CloningCube>().Cube.type));
+                        cB.loopRangeIndexes[1] = i + j;
                     }
                     j--;
                     cubeInfo = cB.GetCommandList();
@@ -409,7 +409,7 @@ public class RunCubes : MonoBehaviourPun
                     // Get Command List from Cube
                     cubeInfo = codingCell[i].transform.GetChild(0).GetComponent<CloningCube>().Cube.GetCommandList();
                 }
-                
+
 
                 // Add Commands to Cubes list
                 mainInstructions.AddRange(cubeInfo);
@@ -428,10 +428,10 @@ public class RunCubes : MonoBehaviourPun
                 return false;
             }
             // If code cell is not correct
-            if(mainInstructions[i].type != correctInstructions[i].type)
+            if (mainInstructions[i].type != correctInstructions[i].type)
             {
                 // Check if the first cube is not "Begin"
-                if(i == 0 && mainInstructions[i].type != CubeType.Begin)
+                if (i == 0 && mainInstructions[i].type != CubeType.Begin)
                 {
                     // Call Error method
                     Error("Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!");
@@ -441,7 +441,7 @@ public class RunCubes : MonoBehaviourPun
                 }
 
                 // Check if the last cube is not "End"
-                if(i == (codingCell.Count - 1) && mainInstructions[i].type != CubeType.End)
+                if (i == (codingCell.Count - 1) && mainInstructions[i].type != CubeType.End)
                 {
                     // Call Error method
                     Error("Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!");
@@ -451,7 +451,7 @@ public class RunCubes : MonoBehaviourPun
                 }
 
                 // Check if "Begin" and "End" cubes are in the middle of the algorithm
-                if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i].type == CubeType.Begin || mainInstructions[i].type == CubeType.End))
+                if ((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i].type == CubeType.Begin || mainInstructions[i].type == CubeType.End))
                 {
                     // Call Error method
                     Error("Deu ERRO! Início e Fim devem ser usados no lugar certo!");
@@ -466,7 +466,6 @@ public class RunCubes : MonoBehaviourPun
             }
             #endregion Errors
             i += j;
-            Debug.Log(i);
         }
         // Instructions are correct
         return true;
@@ -475,21 +474,47 @@ public class RunCubes : MonoBehaviourPun
     [PunRPC]
     private bool BasicCodeCheck()
     {
-        for(int i = 0; i < codingCell.Count; i++)
+        #region Valid Coding Cell
+        // Compiler
+        for (int i = 0; i < codingCell.Count; i++)
         {
+            int j = 0;
+
             // Verify if all the slots are sequentially filled. There can be no empty slots
-            if(codingCell[i].transform.childCount > 0)
+            if (codingCell[i].transform.childCount > 0)
             {
-                // Get child GameObject's name length
-                int length = codingCell[i].transform.GetChild(0).gameObject.name.Length;
+                List<Cube> cubeInfo;
+                
+                // Verify if it initiates a Loop Command
+                if (loop.Count != 0 && loop[i].isActiveAndEnabled)
+                {
+                    // Creating Cube Class to insert full loop comand on answerList (mainInstructions)
+                    CubeClass cB = new();
+                    cB.type = CubeType.Loop;
+                    cB.loopNumber = loop[i].iterations;
+                    cB.loopRangeIndexes[0] = i;
 
-                // Remove not desirable name
-                string cube = codingCell[i].transform.GetChild(0).gameObject.name.Remove(length - 16);
+                    for (j = 0; j < loop[i].curRange; j++)
+                    {
+                        cB.loopList.loopList.Add(new Cube(codingCell[i + j].transform.GetChild(0).GetComponent<CloningCube>().Cube.type));
+                        cB.loopRangeIndexes[1] = i + j;
+                    }
+                    j--;
+                    cubeInfo = cB.GetCommandList();
+                }
+                else
+                {
+                    // Get Command List from Cube
+                    cubeInfo = codingCell[i].transform.GetChild(0).GetComponent<CloningCube>().Cube.GetCommandList();
+                }
 
-                // Add cube to cubes list
-                mainInstructions.Add(cube);
+
+                // Add Commands to Cubes list
+                mainInstructions.AddRange(cubeInfo);
+                triedInstructions.AddRange(cubeInfo);
 
             }
+            #endregion Valid Coding Cell
 
             // If coding cell doesn't have a child
             else
@@ -499,27 +524,26 @@ public class RunCubes : MonoBehaviourPun
             }
 
             // Check if the first cube is not "Begin"
-            if(i == 0 && mainInstructions[i] != "Begin")
+            if(i == 0 && mainInstructions[i].type != CubeType.Begin)
             {
                 Error("Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!");
                 return false;
             }
 
             // Check if the last cube is not "End"
-            if(i == (codingCell.Count - 1) && mainInstructions[i] != "End")
+            if(i == (codingCell.Count - 1) && mainInstructions[i].type != CubeType.End)
             {
                 Error("Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!");
                 return false;
             }
 
             // Check if "Begin" and "End" cubes are in the middle of the algorithm
-            if((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i] == "Begin" || mainInstructions[i] == "End"))
+            if ((i != 0) && (i != codingCell.Count - 1) && (mainInstructions[i].type == CubeType.Begin || mainInstructions[i].type == CubeType.End))
             {
                 Error("Deu ERRO! Início e Fim devem ser usados no lugar certo!");
                 return false;
             }
         }
-        loopCommands = ComputerCellsController.instance.GetAllLeftCommands();
         return true;
     }
 
@@ -529,11 +553,15 @@ public class RunCubes : MonoBehaviourPun
     [PunRPC]
     private void CheckIsRunnable()
     {
-        // Check instructions
-        bool checkInstructions = CheckInstructions();
+        if (novalidate)
+        {
+            if (BasicCodeCheck())
+                RunCode();
+            return;
+        }
 
         // If both loops and instructions are correct, run animations
-        if(checkInstructions)
+        if (CheckInstructions())
         {
             Success();
         }

@@ -239,7 +239,6 @@ public class RunCubesAlt : MonoBehaviourPun
                 return false;
             }
         }
-        loopCommands = cellsController.GetAllLeftCommands();
         return true;
     }
 
