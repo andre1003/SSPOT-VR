@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;
+using NaughtyAttributes;
 
 public class CloningCube : MonoBehaviourPun
 {
     // Player
     public List<GameObject> playerHands;      // Player hands GameObject
+
+    [BoxGroup("CubeInfo")]
+    public CubeClass Cube;
 
     // Audio source
     public AudioSource audioSource;     // Audio source
@@ -35,6 +39,9 @@ public class CloningCube : MonoBehaviourPun
         // Instanciate the selected object
         GameObject _selectedCube = PhotonNetwork.Instantiate(gameObject.name, Vector3.zero, Quaternion.identity);
         int cubeId = _selectedCube.GetComponent<PhotonView>().ViewID;
+
+        // Cloning Cube Class
+        _selectedCube.GetComponent<CloningCube>().Cube = Cube;
 
         // Setup selected cube via RPC
         photonView.RPC("SetupSelectedCube", RpcTarget.AllBuffered, cubeId, playerId);

@@ -211,6 +211,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHands: []
+  Cube:
+    type: 5
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   audioSource: {fileID: 5437964729124874336}
 --- !u!114 &5437964729124874346
 MonoBehaviour:
@@ -230,7 +236,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -3596416704598901838}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
