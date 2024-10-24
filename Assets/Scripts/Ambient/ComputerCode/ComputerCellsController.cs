@@ -15,8 +15,8 @@ public class ComputerCellsController : MonoBehaviour
     #endregion
 
     public List<GameObject> mainCells;
-    public List<GameObject> leftCells;
     public List<GameObject> rightCells;
+    public List<GameObject> loopPanels;
 
     // Start is called before the first frame update
     void Start()
@@ -35,49 +35,13 @@ public class ComputerCellsController : MonoBehaviour
         return mainCells[index];
     }
 
-    public GameObject GetLeftCellAtIndex(int index)
+    public GameObject GetLoopPanelAtIndex(int index)
     {
-        return leftCells[index];
+        return loopPanels[index];
     }
 
     public GameObject GetRightCellAtIndex(int index)
     {
         return rightCells[index];
-    }
-
-    public List<string> GetAllLeftCommands()
-    {
-        // Create commands local list
-        List<string> commands = new List<string>();
-
-        // Loop all left cells
-        foreach(GameObject cell in leftCells)
-        {
-            GameObject cube;
-
-            try
-            {
-                cube = cell.transform.GetChild(0).transform.GetChild(0).gameObject;
-                // If there is a repeat cube, add its name to local list
-                if(cube.name.Contains("Repeat"))
-                {
-                    int length = cube.name.Length;
-                    commands.Add(cube.name.Remove(length - 16));
-                }
-                else
-                {
-                    commands.Add("None");
-                }
-            }
-            catch
-            {
-                commands.Add("None");
-            }
-
-
-        }
-
-        // Return commands
-        return commands;
     }
 }

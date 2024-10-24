@@ -2,17 +2,20 @@
 using UnityEngine.EventSystems;
 using Photon.Pun;
 using System.Collections.Generic;
+using NaughtyAttributes;
+using static Cube;
 
 public class AttachingCube : MonoBehaviourPun
 {
     public int cubeIndex;
-    public bool isLeftCell;
 
     // Player
     public List<GameObject> playerHands;      // Player hands GameObject
 
     // Coding cell
     public GameObject cubeHolder;       // Coding cell cube holder
+    [BoxGroup("CubeInfo")]
+    public CubeClass cube;
 
     // Audio
     public AudioClip selectingCube;     // Cube select audio
@@ -21,6 +24,8 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
+
+    private CubeClass curCube;
     [SerializeField] private int playerId;
 
     // Audio source
@@ -69,19 +74,15 @@ public class AttachingCube : MonoBehaviourPun
         {
             // Set selected cube
             selectedCube = hand.transform.GetChild(0).gameObject;
+            curCube = selectedCube.GetComponent<CloningCube>().Cube;
 
             // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
-            if(selectedCube.name.StartsWith("Repeat") && !isLeftCell)
+            if(curCube.IsLoop)
             {
-                photonView.RPC("SyncLoopAuxCells", RpcTarget.AllBuffered);
-                cellController?.GetLeftCellAtIndex(cubeIndex)?.GetComponent<AttachingCube>()?.OnPointerClick();
-                return;
-            }
-            else if(selectedCube.name.StartsWith("EndRepeat") && !isLeftCell)
-            {
-                cellController?.GetLeftCellAtIndex(cubeIndex)?.SetActive(true);
-                cellController?.GetLeftCellAtIndex(cubeIndex)?.GetComponent<AttachingCube>()?.SetPlayerID(playerId);
-                cellController?.GetLeftCellAtIndex(cubeIndex)?.GetComponent<AttachingCube>()?.Attaching();
+                ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).SetActive(true);
+                ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
+                PlayerSetup.instance.DestroyCubeOnHand();
+                
                 return;
             }
 
@@ -99,6 +100,7 @@ public class AttachingCube : MonoBehaviourPun
             photonView.RPC("ClearCellRPC", RpcTarget.AllBuffered);
         }
     }
+
 
     [PunRPC]
     private void SyncLoopAuxCells()
@@ -171,11 +173,6 @@ public class AttachingCube : MonoBehaviourPun
     {
         GameObject hand = PhotonView.Find(playerViewId).gameObject.GetComponent<PlayerSetup>().playerHand;
         playerHands.Add(hand);
-
-        if(isLeftCell)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     /// <summary>

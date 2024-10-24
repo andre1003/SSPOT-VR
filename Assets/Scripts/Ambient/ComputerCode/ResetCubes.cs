@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResetCubes : MonoBehaviourPun
 {
     // Terminal stuff
-    public List<GameObject> codingCell = new List<GameObject>();    // List of all coding cells
+    public List<GameObject> codingCell = new();    // List of all coding cells
     public GameObject terminal;                                     // Terminal GameObject
     public Material originalTerminalMaterial;                       // Original terminal material
 
@@ -74,8 +74,7 @@ public class ResetCubes : MonoBehaviourPun
         }
 
         // Reset robot postion and rotation
-        robot.transform.position = new Vector3(6.59f, 0.07f, 5.89f);
-        robot.transform.rotation = initialRotation;
+        robot.transform.SetPositionAndRotation(new Vector3(6.59f, 0.07f, 5.89f), initialRotation);
 
         // Reset terminal materials
         mats = terminal.GetComponent<MeshRenderer>().materials;
@@ -86,7 +85,7 @@ public class ResetCubes : MonoBehaviourPun
         audioSource.Play();
 
         // Reset cubes list from RunCubes script
-        RunCubes.mainInstructions = new List<string>();
+        RunCubes.mainInstructions = new List<Cube>();
         RunCubes.loopCommands = new List<string>();
     }
 }
