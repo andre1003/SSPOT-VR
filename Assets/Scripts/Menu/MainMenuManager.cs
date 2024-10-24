@@ -19,6 +19,11 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        
+        if(PhotonNetwork.InLobby)
+            PhotonNetwork.LeaveLobby();
+        if(PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
     }
 
 

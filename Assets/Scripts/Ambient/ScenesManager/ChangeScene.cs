@@ -17,6 +17,17 @@ public class ChangeScene : MonoBehaviour
     public string nextSceneOffline;
     public string nextSceneOnline;
 
+    public GameObject buttonTextCanvas;
+
+    void Awake()
+    {
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            Destroy(buttonTextCanvas);
+            Destroy(gameObject);
+        }
+    }
+
 
     /// <summary>
     /// When player clicks on this object, the next level is loaded

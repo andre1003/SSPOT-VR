@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 0}
   loadLevelCanvas: {fileID: 0}
+  level: Tutorial
+  buttonTextCanvas: {fileID: 4920422632132430432}
 --- !u!114 &4920422631457568806
 MonoBehaviour:
   m_ObjectHideFlags: 0

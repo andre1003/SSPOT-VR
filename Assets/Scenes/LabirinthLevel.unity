@@ -13068,13 +13068,34 @@ PrefabInstance:
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
       value: GUID:080e2119d5fd7cd48b057e9f9679ed4f
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
 --- !u!4 &419406810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3021839316855342615, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
   m_PrefabInstance: {fileID: 419406809}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &419406811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3021839316782635761, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+  m_PrefabInstance: {fileID: 419406809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &419406812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419406811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa74919999bf634ead8549a3e45e929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadSceneCanvas: {fileID: 1308749931}
+  progressBar: {fileID: 635836664}
+  mainMenuLevelName: MainMenu
 --- !u!1 &430999863
 GameObject:
   m_ObjectHideFlags: 0
@@ -48978,10 +48999,18 @@ PrefabInstance:
     - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: progressBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 635836664}
     - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: loadSceneCanvas
       value: 
+      objectReference: {fileID: 1308749931}
+    - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: nextSceneOnline
+      value: SecondLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3021839316782635747, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: nextSceneOffline
+      value: SecondLevel
       objectReference: {fileID: 0}
     - target: {fileID: 3021839316782635762, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: rotation.y
