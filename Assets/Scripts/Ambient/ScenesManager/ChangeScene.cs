@@ -14,23 +14,39 @@ public class ChangeScene : MonoBehaviour
     // Controller
     public bool goForward = false;      // Go to next or previous level controller
 
+    public string nextSceneOffline;
+    public string nextSceneOnline;
+
+    public GameObject buttonTextCanvas;
+
+    void Awake()
+    {
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            Destroy(buttonTextCanvas);
+            Destroy(gameObject);
+        }
+    }
+
 
     /// <summary>
     /// When player clicks on this object, the next level is loaded
     /// </summary>
     public void OnPointerClick()
     {
-        // If is not master client, exit
-        if(!PhotonNetwork.IsMasterClient)
-        {
-            return;
-        }
-
         // Load next level
         if(goForward)
         {
             
             LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        else if(nextSceneOffline != "" && nextSceneOnline != "")
+        {
+            if(PhotonNetwork.OfflineMode)
+                LoadLevel(nextSceneOffline);
+            else
+                LoadLevel(nextSceneOnline);
         }
 
         // Load previous level
@@ -57,6 +73,12 @@ public class ChangeScene : MonoBehaviour
         loadSceneCanvas.SetActive(true);
 
         // Start loading next level
+        PhotonNetwork.LoadLevel(level);
+    }
+
+    private void LoadLevel(string level)
+    {
+        loadSceneCanvas.SetActive(true);
         PhotonNetwork.LoadLevel(level);
     }
 }

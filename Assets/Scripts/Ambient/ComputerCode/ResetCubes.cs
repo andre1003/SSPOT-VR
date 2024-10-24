@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Photon.Pun;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetCubes : MonoBehaviour
+public class ResetCubes : MonoBehaviourPun
 {
     // Terminal stuff
     public List<GameObject> codingCell = new();    // List of all coding cells
@@ -40,15 +41,20 @@ public class ResetCubes : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
+        if(PhotonNetwork.OfflineMode)
+            ExecuteReset();
+        else
+            photonView.RPC("ExecuteReset", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void ExecuteReset()
+    {
         // Call ResetBlocks method
         ResetBlocks();
 
         // If there is a cube in player's hand
-        if(playerHand.transform.childCount != 0)
-        {
-            // Clear the hand
-            Destroy(playerHand.transform.GetChild(0).gameObject);
-        }
+        PlayerSetup.instance.DestroyCubeOnHand();
     }
 
     /// <summary>

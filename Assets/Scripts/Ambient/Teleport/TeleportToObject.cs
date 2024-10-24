@@ -7,9 +7,16 @@ public class TeleportToObject : MonoBehaviourPun
     public GameObject player;                               // Player GameObject
 
     // Locations
-    public GameObject initialLocation;                      // Initial location GameObject
     public MeshRenderer teleportLocationMesh;               // Teleport location mesh
 
+    public bool isForPlayer1 = false;
+
+
+    void Awake()
+    {
+        if(isForPlayer1 != PhotonNetwork.IsMasterClient)
+            Destroy(gameObject);
+    }
 
     /// <summary>
     /// When player clicks on this object, it teleports the player to current GameObject position.
@@ -32,9 +39,5 @@ public class TeleportToObject : MonoBehaviourPun
     {
         // Disable elevator teleport button mesh
         teleportLocationMesh.enabled = false;
-
-        // Activate initial location for teleport
-        initialLocation.SetActive(true);
-        initialLocation.GetComponent<MeshRenderer>().enabled = true;
     }
 }

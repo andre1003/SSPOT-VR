@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,22 +10,32 @@ public class BackToTutorial : MonoBehaviour
     // UI Objects
     public Slider progressBar;          // Progress bar slider
     public GameObject loadLevelCanvas;  // Load level screen canvas
+    public string level = "Tutorial";
+    public GameObject buttonTextCanvas;
 
+
+    void Awake()
+    {
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            Destroy(buttonTextCanvas);
+            Destroy(gameObject);
+        }
+    }
 
     /// <summary>
     /// When player click this object, load tutorial
     /// </summary>
     public void OnPointerClick()
     {
-        StartCoroutine(LoadAsynchronously(0));
+        StartCoroutine(LoadAsynchronously());
     }
 
     /// <summary>
     /// Load level async. It also update progress bar.
-    /// </summary>
     /// <param name="level">Level index to be loaded</param>
     /// <returns></returns>
-    private IEnumerator LoadAsynchronously(int level)
+    private IEnumerator LoadAsynchronously()
     {
         AsyncOperation loadLevel = SceneManager.LoadSceneAsync(level);  // Get the async operation from LoadSceneAsync
 

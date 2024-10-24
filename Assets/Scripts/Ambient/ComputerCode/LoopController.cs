@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Data.Common;
-// TODO: comentar a classe e revisar algumas funções
+// TODO: comentar a classe e revisar algumas funï¿½ï¿½es
 public class LoopController : MonoBehaviour
+
 {
     [BoxGroup("LoopSettings")]
     public int iterations;
@@ -48,6 +49,12 @@ public class LoopController : MonoBehaviour
 
     public void IncreaseIterations()
     {
+        photonView.RPC("IncreaseRPC", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void IncreaseRPC()
+    {
         iterations++;
 
         if(iterations > maxIterarions)
@@ -59,6 +66,12 @@ public class LoopController : MonoBehaviour
     }
 
     public void DecreaseIterations()
+    {
+        photonView.RPC("DecreaseRPC", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void DecreaseRPC()
     {
         iterations--;
 

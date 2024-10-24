@@ -3032,6 +3032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomNameInput: {fileID: 569948694}
   statusText: {fileID: 1809981136}
+  level: Tutorial
 --- !u!114 &2081311106
 MonoBehaviour:
   m_ObjectHideFlags: 0

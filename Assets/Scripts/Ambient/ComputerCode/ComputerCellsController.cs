@@ -9,7 +9,8 @@ public class ComputerCellsController : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if(instance == null)
+            instance = this;
     }
     #endregion
 

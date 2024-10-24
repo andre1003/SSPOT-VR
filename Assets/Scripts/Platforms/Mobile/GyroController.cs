@@ -10,6 +10,9 @@ public class GyroController : MonoBehaviour
     private const float DRAG_RATE = .2f;    // Drag left/right to rotate the world.
     private float dragYawDegrees;
 
+    // Player body transform
+    public Transform playerBody;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -51,7 +54,7 @@ public class GyroController : MonoBehaviour
         CheckDrag();
 
         // Set local rotation
-        transform.localRotation =
+        playerBody.localRotation =
           // Allow user to drag left/right to adjust direction they're facing.
           Quaternion.Euler(0f, -dragYawDegrees, 0f) *
 

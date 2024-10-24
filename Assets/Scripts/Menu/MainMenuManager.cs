@@ -8,10 +8,23 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
 {
     // Settings button reference
     public GameObject settingsButton;
+    [SerializeField] private string firstLevel = "Tutorial";
 
 
     // Platform controller
     private bool isOnPc = false;
+
+
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
+        if(PhotonNetwork.InLobby)
+            PhotonNetwork.LeaveLobby();
+        if(PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
+    }
 
 
     public void SetGamePlatform(bool isOnPc)
@@ -37,7 +50,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Tutorial");
+        PhotonNetwork.LoadLevel(firstLevel);
     }
     #endregion
 
