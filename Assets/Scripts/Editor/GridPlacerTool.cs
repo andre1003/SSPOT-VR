@@ -19,7 +19,7 @@ namespace SSPot.Editor
             if (grid == null) return;
             var internalGrid = grid.GetComponent<Grid>();
             if (internalGrid == null) return;
-            var cellSize = new Vector2(internalGrid.cellSize.x, internalGrid.cellSize.z);
+            var cellSize = new Vector2(internalGrid.cellSize.x, internalGrid.cellSize.y);
             
             HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
 

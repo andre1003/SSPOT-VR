@@ -50,7 +50,6 @@ namespace SSpot.Grids
             return false;
         }
         
-        
         private void Awake()
         {
             InternalGrid = GetComponent<Grid>();
@@ -94,13 +93,18 @@ namespace SSpot.Grids
                 foreach (var gridObject in this[target].Objects)
                     gridObject.OnSteppedOn();
         }
-        
-        #if UNITY_EDITOR
+
+        private void OnValidate()
+        {
+            GetComponent<Grid>().cellSwizzle = GridLayout.CellSwizzle.XZY;
+        }
+
+        #region GIZMOS_DRAWING
         
         private void OnDrawGizmos()
         {
             var internalGrid = GetComponent<Grid>();
-            var cellSize = new Vector2(internalGrid.cellSize.x, internalGrid.cellSize.z);
+            var cellSize = new Vector2(internalGrid.cellSize.x, internalGrid.cellSize.y);
             
             Gizmos.color = Color.blue;
             
@@ -159,6 +163,6 @@ namespace SSpot.Grids
             Gizmos.DrawLine(d, a);
         }
         
-        #endif
+        #endregion
     }
 }
