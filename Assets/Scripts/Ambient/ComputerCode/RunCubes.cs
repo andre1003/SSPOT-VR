@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using NaughtyAttributes;
+using SSpot.Robot;
 using static Cube;
 
 public class RunCubes : MonoBehaviourPun
@@ -16,21 +17,6 @@ public class RunCubes : MonoBehaviourPun
 
     // Next level instructions screen GameObject
     public GameObject instructionsNextScene;
-    #endregion
-
-    #region Robot movement
-    [Header("Robot Movement")]
-    // Robot GameObject
-    public GameObject robot;
-
-    // Robot animation
-    public Animation robotAnimation;
-
-    // Index of animation
-    public int animationIndex;
-
-    // Boolean varible for wait for idle
-    public bool waitingForIdle;
     #endregion
 
     #region Correct code
@@ -102,17 +88,16 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
     #region Robot variables
+    [Header("Robot")]
     // Audio source
     private AudioSource audioSource;
 
     // Material vector
     private Material[] mats;
+    
+    // Robot
+    public Robot robot;
 
-    // Robot animator
-    private Animator robotAnimator;
-
-    // Robot audio source
-    private AudioSource robotSource;
     #endregion
 
     #region Computer commands
@@ -134,80 +119,18 @@ public class RunCubes : MonoBehaviourPun
     #endregion
 
 
+    private int _currentIndex;
+
     #region Methods
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        // Setup robot audio-visual attributes
-        robotAnimator = robot.GetComponent<Animator>();
-        robotAnimation = robot.GetComponent<Animation>();
-        robotSource = robot.GetComponent<AudioSource>();
-
-        // Setup robot movement attributes
-        animationIndex = 1;
-        waitingForIdle = false;
-
         // Setup iteration attributes
         iterationStart = -1;
         iterationEnd = -1;
 
         // Setup ambient audio source
         audioSource = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        // If is waiting for robot's idle
-        if(waitingForIdle)
-        {
-            AnimatorStateInfo robotState = robotAnimator.GetCurrentAnimatorStateInfo(0);
-            if(// If robot walk ended
-                    robotState.IsName("Walk") &&
-                    robotState.normalizedTime >= robotState.length &&
-                    robotAnimator.GetBool("Forward")
-                )
-            {
-                // Stop robot
-                robotAnimator.SetBool("Forward", false);
-                waitingForIdle = false;
-
-                // Go to next command after 0.5 seconds (enought time to refresh robot animation)
-                StartCoroutine(WaitToNextCommand(0.5f));
-            }
-
-
-            if(// If robot is turning left
-                    robotState.IsName("TurnLeft") &&
-                    robotState.normalizedTime >= robotState.length &&
-                    robotAnimator.GetBool("Left")
-                )
-            {
-
-                // Stop robot
-                robotAnimator.SetBool("Left", false);
-                waitingForIdle = false;
-
-                // Go to next command after 0.5 seconds (enought time to refresh robot animation)
-                StartCoroutine(WaitToNextCommand(0.5f));
-            }
-
-
-            if(// If robot is turning right
-                    robotState.IsName("TurnRight") &&
-                    robotState.normalizedTime >= robotState.length &&
-                    robotAnimator.GetBool("Right")
-                )
-            {
-
-                // Stop robot
-                robotAnimator.SetBool("Right", false);
-                waitingForIdle = false;
-
-                // Go to next command after 0.5 seconds (enought time to refresh robot animation)
-                StartCoroutine(WaitToNextCommand(0.5f));
-            }
-        }
     }
 
     /// <summary>
@@ -234,39 +157,42 @@ public class RunCubes : MonoBehaviourPun
             photonView.RPC("CheckIsRunnable", RpcTarget.AllBuffered);
     }
 
+    private IEnumerator ExecuteCubeCoroutine(Cube cube)
+    {
+        yield return cube.ExecuteCoroutine(robot);
+        yield return WaitToNextCommand(.5f);
+    }
+    
     /// <summary>
     /// Run next command from the algorithm.
     /// </summary>
     [PunRPC]
     public void NextCommand()
     {
-        // If have any coammand left
-        if(animationIndex < (mainInstructions.Count - 1))
+        // If has commands left
+        if(_currentIndex < (mainInstructions.Count - 1))
         {
-            robotAnimator.SetBool(mainInstructions[animationIndex].type.ToString(), true); // Set animation according to command
-            waitingForIdle = true;                              // Wait for robot idle
-            animationIndex++;                                   // Increase animationIndex
+            StartCoroutine(ExecuteCubeCoroutine(mainInstructions[_currentIndex]));
+            _currentIndex++;
+            return;
         }
-        // If doesn't have any command left
-        else
-        {
-            // Set animationIndex to 1
-            animationIndex = 1;
 
-            // Clear cubes
-            mainInstructions.Clear();
+        // Set animationIndex to 1
+        _currentIndex = 1;
 
-            // Set final GameObjects
-            instructionsNextScene?.SetActive(true);
-            if(projector != null) projector.SetActive(true);
+        // Clear cubes
+        mainInstructions.Clear();
 
-            // Destroy particle system after 5 seconds
-            if(projectorParticleSystem != null)
-                StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
+        // Set final GameObjects
+        instructionsNextScene?.SetActive(true);
+        if(projector != null) projector.SetActive(true);
 
-            // Call challenge check
-            MiniChallenge.instance?.CheckMiniChallenge();
-        }
+        // Destroy particle system after 5 seconds
+        if(projectorParticleSystem != null)
+            StartCoroutine(WaitToDestroy(5.0f, projectorParticleSystem));
+
+        // Call challenge check
+        MiniChallenge.instance?.CheckMiniChallenge();
     }
 
     /// <summary>
@@ -336,8 +262,7 @@ public class RunCubes : MonoBehaviourPun
     [PunRPC]
     private void RunCode()
     {
-        // Play robot audio source and next command
-        robotSource.Play();
+        robot.AudioSource.Play();
         RunNextCommand();
     }
 
@@ -597,8 +522,8 @@ public class RunCubes : MonoBehaviourPun
     [PunRPC]
     public void RunNextCommand()
     {
-        // If there is an iterarion start index and the animation index is equal to iteration end
-        if(iterationStart != -1 && animationIndex == iterationEnd)
+        // If there is an iteration start index and the animation index is equal to iteration end
+        if(iterationStart != -1 && _currentIndex == iterationEnd)
         {
             // Decrease iteration
             iteration--;
@@ -607,7 +532,7 @@ public class RunCubes : MonoBehaviourPun
             if(iteration > 0)
             {
                 // Set animation index to iteration start
-                animationIndex = iterationStart;
+                _currentIndex = iterationStart;
             }
 
             // If there are no remaining iterations, clear iteration variables
@@ -622,15 +547,15 @@ public class RunCubes : MonoBehaviourPun
         }
 
         // Else, if the animation index is on loop commands range
-        else if(animationIndex < (loopCommands.Count))
+        else if(_currentIndex < loopCommands.Count)
         {
             // If the loop comand is repeat begin
-            if(loopCommands[animationIndex] == "Repeat")
+            if(loopCommands[_currentIndex] == "Repeat")
             {
                 // Setup iterations variables
-                iteration = ComputerCellsController.instance.GetRightCellAtIndex(animationIndex).GetComponent<LoopController>().iterations;
+                iteration = ComputerCellsController.instance.GetRightCellAtIndex(_currentIndex).GetComponent<LoopController>().iterations;
                 Debug.Log(iteration);
-                iterationStart = animationIndex;
+                iterationStart = _currentIndex;
                 iterationEnd = FindRepeatEnd(iterationStart);
             }
         }

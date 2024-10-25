@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using NaughtyAttributes;
+using SSpot.Robot;
+
 [Serializable]
 public class Cube
 {
@@ -19,4 +22,27 @@ public class Cube
 	public CubeType type;
 
 	public Cube(CubeType type) {  this.type = type; }
+
+	//Consider using polymorphism
+	public IEnumerator ExecuteCoroutine(Robot robot)
+	{
+		switch (type)
+		{
+			case CubeType.Begin:
+				yield return robot.Animator.SetBrokenCoroutine(false);
+				break;
+			case CubeType.Left:
+				yield return robot.Mover.TurnLeftCoroutine();
+				break;
+			case CubeType.Right:
+				yield return robot.Mover.TurnRightCoroutine();
+				break;
+			case CubeType.Forward:
+				yield return robot.Mover.MoveForwardCoroutine();
+				break;
+			case CubeType.Back:
+				yield return robot.Mover.MoveBackwardCoroutine();
+				break;
+		}
+	}
 }

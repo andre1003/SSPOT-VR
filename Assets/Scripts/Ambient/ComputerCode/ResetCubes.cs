@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using System.Collections.Generic;
+using SSpot.Robot;
 using UnityEngine;
 
 public class ResetCubes : MonoBehaviourPun
@@ -10,7 +11,7 @@ public class ResetCubes : MonoBehaviourPun
     public Material originalTerminalMaterial;                       // Original terminal material
 
     // Robot
-    public GameObject robot;                                        // Robot GameObject
+    public Robot robot;                                        // Robot GameObject
 
     // Player
     public GameObject playerHand;                                   // Player hand
@@ -22,18 +23,11 @@ public class ResetCubes : MonoBehaviourPun
     // Audio source
     private AudioSource audioSource;                                // Audio source
 
-    // Rotation
-    private Quaternion initialRotation;                             // Initial rotation
-
-
     // Start is called before the first frame update
     void Start()
     {
         // Set audio source
         audioSource = GetComponent<AudioSource>();
-
-        // Set robot initial rotation
-        initialRotation = robot.transform.rotation;
     }
 
     /// <summary>
@@ -73,8 +67,8 @@ public class ResetCubes : MonoBehaviourPun
             }
         }
 
-        // Reset robot postion and rotation
-        robot.transform.SetPositionAndRotation(new Vector3(6.59f, 0.07f, 5.89f), initialRotation);
+        // Reset robot
+        robot.Reset();
 
         // Reset terminal materials
         mats = terminal.GetComponent<MeshRenderer>().materials;
