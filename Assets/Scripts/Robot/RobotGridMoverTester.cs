@@ -39,7 +39,7 @@ namespace SSpot.Robot
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartCoroutine(ActCoroutine(animator.PlayClipCoroutine(testClip)));
+                StartCoroutine(ActCoroutine(animator.PlayOneShotCoroutine(testClip)));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
@@ -60,7 +60,7 @@ namespace SSpot.Robot
                 yield break;
 
             if (interactable.InteractionAnimation)
-                yield return animator.PlayClipCoroutine(interactable.InteractionAnimation);
+                yield return animator.PlayOneShotCoroutine(interactable.InteractionAnimation);
             Debug.Log("Interacted with " + interactable.Value);
         }
     }

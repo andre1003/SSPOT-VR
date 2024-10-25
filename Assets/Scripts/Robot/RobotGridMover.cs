@@ -13,8 +13,6 @@ namespace SSpot.Robot
         [SerializeField] private float walkTime = 1;
         
         [SerializeField] private float turnTime = 1;
-
-        [SerializeField] private bool useRootRotation;
         
         public LevelGrid Grid { get; set; }
         
@@ -24,7 +22,20 @@ namespace SSpot.Robot
         public Vector2Int Facing
         {
             get => _facing;
-            set => SetFacing(value);
+            set
+            {
+                value.x = Mathf.Clamp(value.x, -1, 1);
+                value.y = Mathf.Clamp(value.y, -1, 1);
+                
+                if (value is { x: 0, y: 0 } or { x: 1, y: 1 })
+                {
+                    Debug.LogWarning($"Invalid facing {value} for robot. Correcting to {Vector2Int.right}.");
+                    value = Vector2Int.right;
+                }
+
+                _facing = value;
+                transform.forward = new(_facing.x, 0, _facing.y);
+            }
         }
         
         bool ILevelGridObject.CanWalkThrough => false;
@@ -32,6 +43,9 @@ namespace SSpot.Robot
         bool ILevelGridObject.TriggerOnSteppedOn => true;
 
         private RobotAnimator _animator;
+
+        private Vector2Int _originalFacing;
+        private Vector2Int _originalGridPosition;
         
         private void Awake()
         {
@@ -39,33 +53,48 @@ namespace SSpot.Robot
             _animator = GetComponent<RobotAnimator>();
         }
 
-        public IEnumerator MoveForwardCoroutine()
+        private void Start()
+        {
+            _originalFacing = Facing;
+            _originalGridPosition = GridPosition;
+        }
+
+        #region MOVE
+        
+        public IEnumerator MoveForwardCoroutine() => MoveCoroutine(backward: false);
+        public IEnumerator MoveBackwardCoroutine() => MoveCoroutine(backward: true);
+
+        private IEnumerator MoveCoroutine(bool backward)
         {
             var fromCell = GridPosition;
-            var toCell = fromCell + Facing;
+            var toCell = fromCell + (backward ? -Facing : Facing);
 
             if (!Grid.InGrid(toCell))
             {
-                Debug.Log("Can't walk out of grid!");
+                Debug.Log($"Can't walk out of grid, from {fromCell} to {toCell}");
                 yield break;
             }
 
             if (!Grid[toCell].CanWalk)
             {
-                Debug.Log("Can't walk there!");
+                Debug.Log($"Can't walk from {fromCell} to {toCell}");
                 yield break;
             }
 
             Vector3 from = Grid.GetCellCenterWorld(fromCell);
             Vector3 to = Grid.GetCellCenterWorld(toCell);
-
-            _animator.BeginWalking();
+            
+            _animator.StartWalking(backward);
             yield return CoroutineUtilities.SmoothCoroutine(walkTime, t => transform.position = Vector3.Lerp(from, to, t));
-            _animator.StopWalking();
-            yield return _animator.WaitForAnimationCoroutine();
+            _animator.StopWalking(backward);
+            yield return _animator.WaitForIdle();
             
             Grid.ChangeNode(this, toCell);
         }
+        
+        #endregion
+        
+        #region TURN
 
         public IEnumerator TurnLeftCoroutine() => TurnCoroutine(left: true);
         public IEnumerator TurnRightCoroutine() => TurnCoroutine(left: false);
@@ -75,36 +104,23 @@ namespace SSpot.Robot
             if (left) _animator.TurnLeft();
             else _animator.TurnRight();
             
-            if (useRootRotation)
-            {
-                _animator.EnableRootMotion();
-                yield return _animator.WaitForAnimationCoroutine();
-                _animator.DisableRootMotion();
-            }
-            
             Vector3 originalForward = transform.forward;
             Vector2Int target = left ? RotateFacingLeft(Facing) : RotateFacingRight(Facing);
             Vector3 targetForward = new(target.x, 0, target.y);
+            
             yield return CoroutineUtilities.SmoothCoroutine(turnTime,
                 t => transform.forward = Vector3.Slerp(originalForward, targetForward, t));
-            if (!useRootRotation) yield return _animator.WaitForAnimationCoroutine();
+            yield return _animator.WaitForIdle();
             
             Facing = target;
         }
         
-        private void SetFacing(Vector2Int value)
-        {
-            if (value.x > 1) value.x = 1;
-            if (value.y > 1) value.y = 1;
-                
-            if (value is { x: 0, y: 0 } or { x: 1, y: 1 })
-            {
-                Debug.LogWarning($"Invalid facing for robot. Correcting to {Vector2Int.right}.");
-                value = Vector2Int.right;
-            }
+        #endregion
 
-            _facing = value;
-            transform.forward = new(_facing.x, 0, _facing.y);
+        public void Reset()
+        {
+            Facing = _originalFacing;
+            Grid.ChangeNode(this, _originalGridPosition);
         }
 
         private static Vector2Int RotateFacingLeft(Vector2Int facing)

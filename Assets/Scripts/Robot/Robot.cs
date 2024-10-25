@@ -29,5 +29,12 @@ namespace SSpot.Robot
             if (!component)
                 Debug.LogError($"Missing component of type {typeof(T).Name} in {nameof(Robot)}", gameObject);
         }
+
+        public void Reset()
+        {
+            mover.Reset();
+            animator.Reset();
+            audioSource.Stop();
+        }
     }
 }
