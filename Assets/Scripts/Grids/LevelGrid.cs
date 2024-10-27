@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using NaughtyAttributes;
 using Photon.Pun;
+using SSpot.Utilities;
 using UnityEngine;
 
 namespace SSpot.Grids
@@ -7,12 +9,13 @@ namespace SSpot.Grids
     [RequireComponent(typeof(Grid))]
     public class LevelGrid : MonoBehaviourPun
     {
-        [SerializeField] private int gridSize = 10;
+        [LinkedVector] [MinValue(1)]
+        [SerializeField] private Vector2Int gridSize = new(10, 10);
 
         [SerializeField] private GameObject nodePrefab;
         [SerializeField] private bool prefabOnlyInWalkable = true;
 
-        public int GridSize => gridSize;
+        public Vector2Int GridSize => gridSize;
 
         public Grid InternalGrid { get; private set; }
 
@@ -32,9 +35,8 @@ namespace SSpot.Grids
 
         public Vector3 GetCellCenterWorld(Vector2Int cell) => InternalGrid.GetCellCenterWorld(new(cell.x, cell.y, 0));
 
-        public bool InGrid(int coord) => coord >= 0 && coord < gridSize;
-
-        public bool InGrid(Vector2Int cell) => InGrid(cell.x) && InGrid(cell.y);
+        public bool InGrid(Vector2Int cell) => cell.x >= 0 && cell.x < gridSize.x &&
+                                               cell.y >= 0 && cell.y < gridSize.y;
 
         public bool IsWorldPosInGrid(Vector3 worldPos) => InGrid(WorldToCell(worldPos));
 
@@ -54,11 +56,11 @@ namespace SSpot.Grids
         {
             InternalGrid = GetComponent<Grid>();
             
-            _nodes = new Node[gridSize][];
-            for (int x = 0; x < gridSize; x++)
+            _nodes = new Node[gridSize.x][];
+            for (int x = 0; x < gridSize.x; x++)
             {
-                _nodes[x] = new Node[gridSize];
-                for (int y = 0; y < gridSize; y++)
+                _nodes[x] = new Node[gridSize.y];
+                for (int y = 0; y < gridSize.y; y++)
                 {
                     _nodes[x][y] = new(new(x, y));
                     if (nodePrefab != null)
@@ -108,10 +110,13 @@ namespace SSpot.Grids
             
             Gizmos.color = Color.blue;
             
-            for (int i = 0; i <= gridSize; i++)
+            for (int i = 0; i <= Mathf.Max(gridSize.x, gridSize.y); i++)
             {
-                DrawVertical(transform.position, i, gridSize, cellSize);
-                DrawHorizontal(transform.position, i, gridSize, cellSize);
+                if (i <= gridSize.x)
+                    DrawVertical(transform.position, i, gridSize.y, cellSize);
+                
+                if (i <= gridSize.y)
+                    DrawHorizontal(transform.position, i, gridSize.x, cellSize);
             }
 
             Gizmos.color = Color.red;
