@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce93ee401334e5ca8275788d601b8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionDuration: 0.1
+  transitionDuration: 0.25
   idleClip: {fileID: -203655887218126122, guid: 97f85fe9fb9476647a6fda6e5a04e812, type: 3}
   walkClip: {fileID: -203655887218126122, guid: ede61ed597011c6468813178a987efad, type: 3}
   walkBackClip: {fileID: -203655887218126122, guid: ede61ed597011c6468813178a987efad, type: 3}

@@ -61,13 +61,12 @@ namespace SSpot.Robot
 
         #region MOVE
         
-        public IEnumerator MoveForwardCoroutine() => MoveCoroutine(backward: false);
-        public IEnumerator MoveBackwardCoroutine() => MoveCoroutine(backward: true);
+        public IEnumerator MoveForwardCoroutine() => MoveCoroutine();
 
-        private IEnumerator MoveCoroutine(bool backward)
+        private IEnumerator MoveCoroutine()
         {
             var fromCell = GridPosition;
-            var toCell = fromCell + (backward ? -Facing : Facing);
+            var toCell = fromCell + Facing;
 
             if (!Grid.InGrid(toCell))
             {
@@ -84,9 +83,9 @@ namespace SSpot.Robot
             Vector3 from = Grid.GetCellCenterWorld(fromCell);
             Vector3 to = Grid.GetCellCenterWorld(toCell);
             
-            _animator.StartWalking(backward);
+            _animator.StartWalking();
             yield return CoroutineUtilities.SmoothCoroutine(walkTime, t => transform.position = Vector3.Lerp(from, to, t));
-            _animator.StopWalking(backward);
+            _animator.StopWalking();
             yield return _animator.WaitForIdle();
             
             Grid.ChangeNode(this, toCell);

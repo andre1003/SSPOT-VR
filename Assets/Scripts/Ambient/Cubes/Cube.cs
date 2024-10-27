@@ -14,7 +14,6 @@ public class Cube
 		Left,
 		Right,
 		Forward,
-		Back, 
 		Loop
 	}
 
@@ -39,9 +38,6 @@ public class Cube
 				break;
 			case CubeType.Forward:
 				yield return robot.Mover.MoveForwardCoroutine();
-				break;
-			case CubeType.Back:
-				yield return robot.Mover.MoveBackwardCoroutine();
 				break;
 		}
 	}
