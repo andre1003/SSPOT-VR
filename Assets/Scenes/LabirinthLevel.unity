@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorScreen: {fileID: 1027583545}
-  robot: {fileID: 1804518061}
+  robot: {fileID: 0}
   robotAnimation: {fileID: 0}
   robotMovement: {fileID: 1572056920}
   animationIndex: 0
@@ -2010,14 +2010,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 5
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1540874595}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &45973937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2291,7 +2295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorScreen: {fileID: 1915267755}
-  robot: {fileID: 1804518061}
+  robot: {fileID: 0}
   robotAnimation: {fileID: 0}
   robotMovement: {fileID: 1572056920}
   animationIndex: 0
@@ -2765,8 +2769,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 1897960556}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &63005635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,7 +2879,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1804518060}
   - {fileID: 101676694}
   - {fileID: 1532587302}
   - {fileID: 1088630776}
@@ -4419,8 +4430,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1410231237}
-  - {fileID: 1062147865}
   - {fileID: 1298593012}
   - {fileID: 779852648}
   - {fileID: 801332385}
@@ -4439,7 +4448,7 @@ Transform:
   - {fileID: 470885365}
   - {fileID: 2085819645}
   m_Father: {fileID: 67575221}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103366461
 GameObject:
@@ -4788,14 +4797,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 1
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 58897948}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &108582846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5008,8 +5021,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 258095341}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &125482526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6106,8 +6127,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 53266269}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &191834540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7278,8 +7307,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 380310162}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &251283351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7495,8 +7532,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 1540883068}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!23 &259299666
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8263,14 +8308,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 4
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1063282959}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!82 &297680690
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9492,8 +9541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81e6a316c8bb9648b889e6e82647936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robot: {fileID: 1804518061}
-  robotAnimator: {fileID: 1804518064}
+  robot: {fileID: 0}
+  robotAnimator: {fileID: 0}
   firstPoint: {fileID: 1302087804}
   secondPoint: {fileID: 1369703663}
   reloadCheckpoint: 0
@@ -9883,8 +9932,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 2113134729}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &327956900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10408,14 +10465,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 5
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 257930684}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &336574697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10589,7 +10650,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &356751829
 BoxCollider:
@@ -10928,8 +10989,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 1244193012}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &365479803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11515,14 +11584,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 6
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 745430360}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &378111788
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11819,15 +11892,6 @@ MonoBehaviour:
   - {fileID: 45973932}
   - {fileID: 981936333}
   - {fileID: 1422730941}
-  leftCells:
-  - {fileID: 1950383116}
-  - {fileID: 108582841}
-  - {fileID: 550045720}
-  - {fileID: 683797957}
-  - {fileID: 1239429797}
-  - {fileID: 336574692}
-  - {fileID: 1774443070}
-  - {fileID: 2037961888}
   rightCells:
   - {fileID: 1287363094}
   - {fileID: 1859240202}
@@ -11837,6 +11901,7 @@ MonoBehaviour:
   - {fileID: 125482523}
   - {fileID: 365479800}
   - {fileID: 742417065}
+  loopPanels: []
 --- !u!1 &385068392
 GameObject:
   m_ObjectHideFlags: 0
@@ -12327,14 +12392,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 3
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1529355975}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &390314584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13944,14 +14013,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 0
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1588365860}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &470560430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14071,7 +14144,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 17
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &470885366
 BoxCollider:
@@ -16190,14 +16263,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 2
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1271518939}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &550045725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18200,14 +18277,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 8
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 245339579}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &636473820
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18839,14 +18920,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 0
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 681748921}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &676995778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18992,7 +19077,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &682813906
 BoxCollider:
@@ -19255,14 +19340,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 3
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 386899094}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &683797962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19726,8 +19815,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 2041855610}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &709007979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19851,8 +19948,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 323138148}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &709699344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20672,8 +20777,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 1803713305}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &742417068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21298,7 +21411,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &779852649
 BoxCollider:
@@ -21606,7 +21719,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &801332386
 BoxCollider:
@@ -22465,6 +22578,127 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844748157}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &855646937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 55.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5996886183011680927, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: gridSize.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5996886183011680927, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: gridSize.y
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689952, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_Name
+      value: GameGrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689954, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_CellSize.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689954, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_CellSize.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372851955058689955, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gridSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gridSize.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gridSize.y
+      value: 16
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e3be146540ddec84191d600de5334aa5, type: 3}
 --- !u!1 &861440280
 GameObject:
   m_ObjectHideFlags: 0
@@ -22820,8 +23054,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 1541724442}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!23 &887454942
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24395,14 +24637,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 2
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 61745897}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!82 &958899065
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24931,14 +25177,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 6
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1973822803}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &981936337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25053,7 +25303,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &983927842
 BoxCollider:
@@ -25833,14 +26083,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 2
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1761047406}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1011722724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26056,7 +26310,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1012110439
 BoxCollider:
@@ -27050,16 +27304,6 @@ MonoBehaviour:
   - {fileID: 378111783}
   - {fileID: 1083502719}
   - {fileID: 1470317468}
-  leftCells:
-  - {fileID: 470560426}
-  - {fileID: 1214740668}
-  - {fileID: 1777366005}
-  - {fileID: 390314579}
-  - {fileID: 1895907873}
-  - {fileID: 1399044187}
-  - {fileID: 1943047307}
-  - {fileID: 1856124607}
-  - {fileID: 636473815}
   rightCells:
   - {fileID: 887454939}
   - {fileID: 2129338080}
@@ -27070,6 +27314,7 @@ MonoBehaviour:
   - {fileID: 1288373220}
   - {fileID: 1051480702}
   - {fileID: 709699341}
+  loopPanels: []
 --- !u!82 &1049273615
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27217,8 +27462,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 512929235}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &1051480705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27654,133 +27907,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &1062147864
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1062147865}
-  - component: {fileID: 1062147868}
-  - component: {fileID: 1062147867}
-  - component: {fileID: 1062147866}
-  - component: {fileID: 1062147869}
-  - component: {fileID: 1062147870}
-  m_Layer: 0
-  m_Name: LabirinthWall (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1062147865
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062147864}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11, y: 0.75, z: 19.2741}
-  m_LocalScale: {x: 1, y: 5, z: 23.548601}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 101676694}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1062147866
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062147864}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.9076293, y: 1, z: 1.0479593}
-  m_Center: {x: -0.31867492, y: 0, z: -0.023980116}
---- !u!23 &1062147867
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062147864}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1062147868
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062147864}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1062147869
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062147864}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
---- !u!114 &1062147870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062147864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948e2c33247a89340827253716f30ce3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1063282959
 GameObject:
   m_ObjectHideFlags: 0
@@ -28003,14 +28129,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 3
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1452028441}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1066352544
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28439,14 +28569,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 7
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1858765552}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1083502724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28621,7 +28755,7 @@ Transform:
   - {fileID: 1088640032}
   - {fileID: 1544679370}
   m_Father: {fileID: 67575221}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1088640031
 GameObject:
@@ -28901,7 +29035,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1088800164
 BoxCollider:
@@ -32477,14 +32611,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 1
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1192406210}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1214740673
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33001,14 +33139,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 4
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 2075833314}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1222843800
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33778,14 +33920,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 4
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 996184608}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1239429802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34951,14 +35097,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 1
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 2125969834}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!82 &1275469263
 AudioSource:
   m_ObjectHideFlags: 0
@@ -35305,8 +35455,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 409430634}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &1287363097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35430,8 +35588,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 2046324731}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &1288373223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35538,7 +35704,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1298593013
 BoxCollider:
@@ -37686,14 +37852,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 5
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1435309657}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1399044191
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37779,133 +37949,6 @@ MonoBehaviour:
   sceneViewId: 25
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!1 &1410231236
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1410231237}
-  - component: {fileID: 1410231240}
-  - component: {fileID: 1410231239}
-  - component: {fileID: 1410231238}
-  - component: {fileID: 1410231241}
-  - component: {fileID: 1410231242}
-  m_Layer: 0
-  m_Name: LabirinthWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1410231237
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410231236}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19, y: 0.75, z: 19.1599}
-  m_LocalScale: {x: 1, y: 5, z: 23.320599}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 101676694}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1410231238
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410231236}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.8620358, y: 1, z: 1.0519044}
-  m_Center: {x: 0.43101788, y: 0, z: -0.02595183}
---- !u!23 &1410231239
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410231236}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1410231240
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410231236}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1410231241
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410231236}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
---- !u!114 &1410231242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410231236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948e2c33247a89340827253716f30ce3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1422730941
 GameObject:
   m_ObjectHideFlags: 0
@@ -38059,14 +38102,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 7
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 588939316}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1422730945
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38865,7 +38912,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1456309451
 BoxCollider:
@@ -39324,14 +39371,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 8
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 2018166617}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1470317473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40056,14 +40107,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 3
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 1441171122}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!82 &1510664675
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40426,7 +40481,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1517648135
 BoxCollider:
@@ -40666,7 +40721,7 @@ Transform:
   - {fileID: 1674326034}
   - {fileID: 1479357039}
   m_Father: {fileID: 67575221}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540874595
 GameObject:
@@ -41635,7 +41690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe275c26bb24ea04bbcd403735f63833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotTransform: {fileID: 1804518060}
+  robotTransform: {fileID: 0}
   movementTime: 1.25
   rotationTime: 1
 --- !u!1 &1572958570
@@ -46645,14 +46700,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 6
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 477165412}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1774443075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46965,14 +47024,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 2
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1938972879}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1777366010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48007,311 +48070,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803713303}
   m_CullTransparentMesh: 0
---- !u!1001 &1804518059
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 67575221}
-    m_Modifications:
-    - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1a6cfda6fa8cd1b40b261b1f7c211541, type: 2}
-    - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_UpdateMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_CullingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.7999998
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.7999998
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.650602
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.007121
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.336205
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.30614865
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.95198375
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 215.655
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_Name
-      value: Robot
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_TagString
-      value: Robot
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 00dfe6d1415ea7f43aed18a01bd1dfef, type: 2}
-    - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_WarningMessage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0aa851515cd3747d6b3b3e461199a2ed, type: 2}
-    - target: {fileID: 3019434827382264486, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.00064981356
-      objectReference: {fileID: 0}
-    - target: {fileID: 3019434827382264486, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.010304518
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639563195007307007, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.00064981356
-      objectReference: {fileID: 0}
-    - target: {fileID: 5639563195007307007, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.010304518
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
---- !u!4 &1804518060 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-  m_PrefabInstance: {fileID: 1804518059}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1804518061 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-  m_PrefabInstance: {fileID: 1804518059}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1804518062
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804518061}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!82 &1804518063
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804518061}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 911a659011c88e04c83fd2550965b73c, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!95 &1804518064 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
-  m_PrefabInstance: {fileID: 1804518059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1805694308
 GameObject:
   m_ObjectHideFlags: 0
@@ -49139,7 +48897,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1843939975
 BoxCollider:
@@ -49603,14 +49361,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 7
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 476207813}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1856124612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -49756,8 +49518,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 1561845930}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &1859240205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50869,14 +50639,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 4
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 512191383}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1895907878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52290,14 +52064,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 6
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 2112505217}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!65 &1943047312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52531,14 +52309,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 0
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1659110426}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &1950383121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54180,14 +53962,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 0
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 89653333}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!82 &2006081139
 AudioSource:
   m_ObjectHideFlags: 0
@@ -54414,7 +54200,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &2014606423
 BoxCollider:
@@ -54638,7 +54424,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 15
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2016613436
 BoxCollider:
@@ -55150,14 +54936,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 1
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 103366461}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &2022018955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55353,14 +55143,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 5
-  isLeftCell: 0
   playerHands: []
   cubeHolder: {fileID: 254457485}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 1049273615}
-  cellController: {fileID: 1049273614}
 --- !u!82 &2023542848
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55722,7 +55516,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 16
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2029314229
 BoxCollider:
@@ -56181,14 +55975,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeIndex: 7
-  isLeftCell: 1
   playerHands: []
   cubeHolder: {fileID: 1761839292}
+  cube:
+    type: 0
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 1}
+    loopList:
+      loopList: []
   selectingCube: {fileID: 8300000, guid: aa3697133dec5435ea95a3c15aa7b7dd, type: 3}
   releasingCube: {fileID: 8300000, guid: e21d51e259f7c4f26aa1a7d9225cfd91, type: 3}
   playerId: 0
   audioSource: {fileID: 382416044}
-  cellController: {fileID: 382416045}
 --- !u!65 &2037961893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57289,7 +57087,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &2081016097
 BoxCollider:
@@ -57512,7 +57310,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101676694}
-  m_RootOrder: 18
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &2085819646
 MonoBehaviour:
@@ -57927,8 +57725,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 617399968}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &2115443131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58378,8 +58184,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
-  amountText: {fileID: 108197715}
   maxIterarions: 10
+  maxRange: 6
+  globalMaxRange: 0
+  globalRange: 1
+  iterationsText: {fileID: 0}
+  rangeText: {fileID: 0}
+  Plane: {fileID: 0}
+  planeSize: 0.9
+  curRange: 1
+  IncreaseAmountButton: {fileID: 0}
 --- !u!114 &2129338085
 MonoBehaviour:
   m_ObjectHideFlags: 0
