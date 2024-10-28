@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SSpot.Robot
 {
-    public class Robot : MonoBehaviourPun
+    public class RobotData : MonoBehaviourPun
     {
         [SerializeField] private RobotGridMover mover;
         public RobotGridMover Mover => mover;
@@ -27,7 +27,7 @@ namespace SSpot.Robot
                 component = GetComponent<T>();
             
             if (!component)
-                Debug.LogError($"Missing component of type {typeof(T).Name} in {nameof(Robot)}", gameObject);
+                Debug.LogError($"Missing component of type {typeof(T).Name} in {nameof(RobotData)}", gameObject);
         }
 
         public void Reset()

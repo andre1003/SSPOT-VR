@@ -46,6 +46,8 @@ namespace SSpot.Robot
 
         private Vector2Int _originalFacing;
         private Vector2Int _originalGridPosition;
+
+        public void ChangeNode(Vector2Int target) => Grid.ChangeNode(this, target);
         
         private void Awake()
         {
@@ -88,7 +90,7 @@ namespace SSpot.Robot
             _animator.StopWalking();
             yield return _animator.WaitForIdle();
             
-            Grid.ChangeNode(this, toCell);
+            ChangeNode(toCell);
         }
         
         #endregion
