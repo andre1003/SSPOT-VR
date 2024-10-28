@@ -37,7 +37,7 @@ namespace SSPot.Editor
             if (go == null || !go.TryGetComponent(out Animator animator))
             {
                 Debug.LogError($"{nameof(HashedString)} property {property.name} with custom attribute " +
-                               $"{nameof(AnimatorParamNameAttribute)} must be in a GameObject with " +
+                               $"{targetAttribute.GetType().Name} must be in a GameObject with " +
                                "an attached Animator.");
                 return;
             }
