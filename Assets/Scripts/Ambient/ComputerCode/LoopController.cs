@@ -34,7 +34,7 @@ public class LoopController : MonoBehaviourPun
     [BoxGroup("Visuals")]
     public float planeSize = 0.9f;
     [BoxGroup("Visuals")]
-    public float curRange = 1;
+    public int curRange = 1;
     [BoxGroup("Visuals")]
     public GameObject IncreaseAmountButton;
 
@@ -93,7 +93,7 @@ public class LoopController : MonoBehaviourPun
             Plane.transform.localPosition = new (tempVector.x, tempVector.y - (planeSize / 2), tempVector.z);
             
             tempVector = Plane.transform.localScale;
-            Plane.transform.localScale = new (tempVector.x, tempVector.y, tempVector.z * (1 + (1 / curRange)));
+            Plane.transform.localScale = new (tempVector.x, tempVector.y, tempVector.z * (1 + (1f / curRange)));
             
             curRange++;
             UpdateUI();
@@ -107,7 +107,7 @@ public class LoopController : MonoBehaviourPun
             Vector3 positionVector = Plane.transform.localPosition;
             positionVector = new(positionVector.x, positionVector.y + (planeSize / 2), positionVector.z);
             Vector3 scaleVector = Plane.transform.localScale;
-            scaleVector = new(scaleVector.x, scaleVector.y, scaleVector.z * (1 - (1 / curRange)));
+            scaleVector = new(scaleVector.x, scaleVector.y, scaleVector.z * (1 - (1f / curRange)));
             Plane.transform.localPosition = positionVector;
             Plane.transform.localScale = scaleVector;
             curRange--;

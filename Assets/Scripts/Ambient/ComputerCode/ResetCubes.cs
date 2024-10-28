@@ -5,81 +5,69 @@ using UnityEngine;
 
 public class ResetCubes : MonoBehaviourPun
 {
+    [SerializeField] private bool clearBlocksOnReset = true;
+    
     // Terminal stuff
-    public List<GameObject> codingCell = new();    // List of all coding cells
-    public GameObject terminal;                                     // Terminal GameObject
-    public Material originalTerminalMaterial;                       // Original terminal material
+    [SerializeField] private List<GameObject> codingCells = new();
+    [SerializeField] private GameObject terminal;
+    [SerializeField] private Material originalTerminalMaterial;
+    [SerializeField] private RunCubes runCubes;
 
-    // Robot
-    public Robot robot;                                        // Robot GameObject
+    //Environment
+    [SerializeField] private RobotData robot;
+    private AudioSource _audioSource;
 
-    // Player
-    public GameObject playerHand;                                   // Player hand
-
-
-    // Material
-    private Material[] mats;                                        // Material vector
-
-    // Audio source
-    private AudioSource audioSource;                                // Audio source
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        // Set audio source
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
-    /// <summary>
-    /// When player clicks on this object, it reset all coding cells.
-    /// </summary>
-    public void OnPointerClick()
+    public void OnPointerClick() => Reset();
+
+    public void Reset()
     {
         if(PhotonNetwork.OfflineMode)
-            ExecuteReset();
+            ResetRpc();
         else
-            photonView.RPC("ExecuteReset", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(ResetRpc), RpcTarget.AllBuffered);
     }
-
+    
     [PunRPC]
-    private void ExecuteReset()
+    private void ResetRpc()
     {
-        // Call ResetBlocks method
-        ResetBlocks();
-
-        // If there is a cube in player's hand
         PlayerSetup.instance.DestroyCubeOnHand();
-    }
-
-    /// <summary>
-    /// Reset all coding cells of terminal.
-    /// </summary>
-    private void ResetBlocks()
-    {
-        // Check every coding cell
-        for(int i = 0; i < codingCell.Count; i++)
+        
+        if (clearBlocksOnReset)
         {
-            // If the coding cell has a child
-            if(codingCell[i].transform.childCount > 0)
-            {
-                // Clear this cell
-                Destroy(codingCell[i].transform.GetChild(0).gameObject);
-            }
+            ClearCubes();
         }
-
+        
         // Reset robot
         robot.Reset();
 
         // Reset terminal materials
-        mats = terminal.GetComponent<MeshRenderer>().materials;
+        var mats = terminal.GetComponent<MeshRenderer>().materials;
         mats[1] = originalTerminalMaterial;
         terminal.GetComponent<MeshRenderer>().materials = mats;
 
         // Play audio source
-        audioSource.Play();
+        _audioSource.Play();
 
         // Reset cubes list from RunCubes script
-        RunCubes.mainInstructions = new List<Cube>();
-        RunCubes.loopCommands = new List<string>();
+        //TODO ResetComputer was used in ResetCubesAlt
+        //runCubes.ResetComputer();
+        runCubes.mainInstructions.Clear();
+    }
+
+    /// <summary> Destroys all the code cubes. </summary>
+    private void ClearCubes()
+    {
+        foreach (var cell in codingCells)
+        {
+            if(cell.transform.childCount > 0)
+            {
+                Destroy(cell.transform.GetChild(0).gameObject);
+            }
+        }
     }
 }

@@ -113,7 +113,7 @@ public class AmbientSetup : MonoBehaviour
     /// <param name="playerHand">Player hand reference.</param>
     private void ConfigureComputer(GameObject playerHand)
     {
-        runCubes.playerHand = playerHand;
+        //runCubes.playerHand = playerHand;
     }
 
     /// <summary>

@@ -1,8 +1,8 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using SSpot.Utilities;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
@@ -11,14 +11,17 @@ using UnityEngine.UI;
 public class MiniChallenge : MonoBehaviourPun
 {
     #region Singleton
-    public static MiniChallenge instance;
+    public static MiniChallenge Instance { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
-        if(instance == null)
+        if (Instance != null)
         {
-            instance = this;
+            Destroy(gameObject);
+            return;
         }
+        
+        Instance = this;
     }
     #endregion
 
@@ -215,10 +218,10 @@ public class MiniChallenge : MonoBehaviourPun
         string currentTimer = roundedTimer.ToString("D2") + " / " + (limitTime < 10 ? "0" + limitTime.ToString() : limitTime.ToString());
         if(timerEvent != null)
         {
-            // Obtém a variável local 'timer' do Localize String Event
+            // ObtÃ©m a variÃ¡vel local 'timer' do Localize String Event
             if(timerEvent.StringReference["timer"] is StringVariable stringVariable)
             {
-                // Atualiza o valor da variável local
+                // Atualiza o valor da variÃ¡vel local
                 stringVariable.Value = currentTimer;
 
                 // Recarrega o texto localizado
@@ -231,10 +234,10 @@ public class MiniChallenge : MonoBehaviourPun
         string currentErrors = errors.ToString("D2") + " / " + maxErrors.ToString("D2");
         if(errorEvent != null)
         {
-            // Obtém a variável local 'timer' do Localize String Event
+            // ObtÃ©m a variÃ¡vel local 'timer' do Localize String Event
             if(errorEvent.StringReference["errors"] is StringVariable stringVariable)
             {
-                // Atualiza o valor da variável local
+                // Atualiza o valor da variÃ¡vel local
                 stringVariable.Value = currentErrors;
 
                 // Recarrega o texto localizado
@@ -284,8 +287,8 @@ public class MiniChallenge : MonoBehaviourPun
             StartCoroutine(AddStarWithDelay(starsCount, 1));
         }
 
-        // Start countdown for diabling challenge results canvas
-        StartCoroutine(DisableChallengeResultsAfterSeconds(5f));
+        // Start countdown for disabling challenge results canvas
+        StartCoroutine(CoroutineUtilities.WaitThenDeactivate(5f, challengeResultCanvas));
     }
 
     /// <summary>
@@ -321,19 +324,6 @@ public class MiniChallenge : MonoBehaviourPun
             audioSource.clip = challengeFinishedAudioClip; 
             audioSource.Play();
         }
-    }
-
-    /// <summary>
-    /// Disable challenge results after a given amount of seconds.
-    /// </summary>
-    /// <param name="seconds">Seconds to wait.</param>
-    private IEnumerator DisableChallengeResultsAfterSeconds(float seconds)
-    {
-        // Wait some seconds
-        yield return new WaitForSeconds(seconds);
-
-        // Disable challenge result canvas
-        challengeResultCanvas.SetActive(false);
     }
     #endregion
     #endregion

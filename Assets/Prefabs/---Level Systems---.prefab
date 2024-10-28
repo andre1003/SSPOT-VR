@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8329425646640905646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8329425646640905647}
+  - component: {fileID: 8329425646640905644}
+  m_Layer: 0
+  m_Name: Objective
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8329425646640905647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329425646640905646}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8329425647613975106}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8329425646640905644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329425646640905646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a8487aab624c7ebe28ccc1bce5e6aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  errorMessage: "Deu ERRO!\nC\xF3digo incorreto! Tente novamente!"
+  sequence:
+  - type: 1
+    loopNumber: 0
+    loopRangeIndexes: {x: 0, y: 0}
+    loopList:
+      loopList: []
+  - type: 6
+    loopNumber: 1
+    loopRangeIndexes: {x: 0, y: 4}
+    loopList:
+      loopList:
+      - type: 3
+      - type: 3
+      - type: 3
+      - type: 3
+  - type: 5
+    loopNumber: 1
+    loopRangeIndexes: {x: 0, y: 4}
+    loopList:
+      loopList:
+      - type: 3
+      - type: 3
+      - type: 3
+      - type: 3
+  - type: 6
+    loopNumber: 1
+    loopRangeIndexes: {x: 0, y: 5}
+    loopList:
+      loopList:
+      - type: 4
+      - type: 4
+      - type: 4
+      - type: 4
+      - type: 4
+  - type: 5
+    loopNumber: 1
+    loopRangeIndexes: {x: 0, y: 4}
+    loopList:
+      loopList:
+      - type: 3
+      - type: 3
+      - type: 3
+      - type: 3
+  - type: 2
+    loopNumber: 1
+    loopRangeIndexes: {x: 0, y: 4}
+    loopList:
+      loopList:
+      - type: 3
+      - type: 3
+      - type: 3
+      - type: 3
+--- !u!1 &8329425647613975117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8329425647613975106}
+  m_Layer: 0
+  m_Name: ---Level Systems---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8329425647613975106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329425647613975117}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8329425648281629965}
+  - {fileID: 8329425646640905647}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8329425648281629964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8329425648281629965}
+  - component: {fileID: 8329425648281629954}
+  m_Layer: 0
+  m_Name: Compiler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8329425648281629965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329425648281629964}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8329425647613975106}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8329425648281629954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329425648281629964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a0586d9bd3478eaf5900dca645dfcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mustUseAllSlots: 1
+  emptyError: Preencha o algoritmo!
+  beginError: Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!
+  endError: Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!
+  allSlotsError: "Deu ERRO! Voc\xEA deve preencher todas as placas de programa\xE7\xE3o!"
+  noHolesError: "Deu ERRO! Seu algoritmo n\xE3o pode ter placas vazias!"
+  beginEndInMiddleError: "Deu ERRO! In\xEDcio e Fim devem ser usados no lugar certo!"

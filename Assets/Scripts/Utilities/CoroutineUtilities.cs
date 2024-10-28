@@ -17,5 +17,17 @@ namespace SSpot.Utilities
             }
             action(1);
         }
+
+        public static IEnumerator WaitThen(float waitSeconds, Action action)
+        {
+            yield return new WaitForSeconds(waitSeconds);
+            action();
+        }
+
+        public static IEnumerator WaitThenDeactivate(float waitSeconds, GameObject objectToDeactivate)
+        {
+            yield return new WaitForSeconds(waitSeconds);
+            objectToDeactivate.SetActive(false);
+        }
     }
 }
