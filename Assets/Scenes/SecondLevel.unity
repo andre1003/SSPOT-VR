@@ -3133,7 +3133,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Tenho uma formulinha nova pra te\r\najudar! Vale a pena tentar:\r\n\r\nRepita
-    esqueda 5 vezes e depois frente.\r\nA\xED repita direita 4 vezes e depois frente.\r\n\r\nN\xE3o
+    esquerda 5 vezes e depois frente.\r\nA\xED repita direita 4 vezes e depois frente.\r\n\r\nN\xE3o
     esque\xE7a de marcar o in\xEDcio e fim do c\xF3digo!!"
 --- !u!222 &263444607
 CanvasRenderer:
