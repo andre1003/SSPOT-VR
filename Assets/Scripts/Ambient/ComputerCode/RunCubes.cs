@@ -165,9 +165,6 @@ public class RunCubes : MonoBehaviourPun
         if(projectorParticleSystem)
             Destroy(projectorParticleSystem, 5.0f);
 
-        // Call challenge check
-        if (MiniChallenge.Instance)
-            MiniChallenge.Instance.CheckMiniChallenge();
     }
 
     private Coroutine _errorDisableCoroutine;
@@ -203,8 +200,6 @@ public class RunCubes : MonoBehaviourPun
         // Hide error screen after 5 seconds
         _errorDisableCoroutine = StartCoroutine(CoroutineUtilities.WaitThenDeactivate(5.0f, errorScreen));
 
-        // Increase mini challenge errors
-        MiniChallenge.Instance.IncreaseError();
     }
 
     /// <summary>
@@ -236,7 +231,7 @@ public class RunCubes : MonoBehaviourPun
     [PunRPC]
     private void TryRun()
     {
-        var compilationResult = compiler.Compile(codingCell, loop);
+        CompilationResult compilationResult = default;
         if (compilationResult.IsError)
         {
             Error(compilationResult.Error);
@@ -246,19 +241,17 @@ public class RunCubes : MonoBehaviourPun
         mainInstructions.AddRange(compilationResult.Result);
         triedInstructions.AddRange(compilationResult.Result);
 
-        var objectiveResult = objective
+        /*var objectiveResult = objective
             ? objective.EvaluateCubes(mainInstructions)
             : ObjectiveResult.None();
         
         HandleObjectiveResult(objectiveResult);
         if (objectiveResult.Type == ObjectiveResult.ResultType.Error)
-            return;
+            return;*/
 
         //Play audio and begin running commands
         robot.AudioSource.Play();
         NextCommand();
         
-        if (MiniChallenge.Instance)
-            MiniChallenge.Instance.StopTimer();
     }
 }

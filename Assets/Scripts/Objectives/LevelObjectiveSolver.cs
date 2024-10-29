@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SSpot.Level;
 using UnityEngine;
 
 namespace SSpot.Objectives
@@ -14,15 +15,21 @@ namespace SSpot.Objectives
         
         protected void ReportResult(ObjectiveResult result) => _reportCallback(result);
 
-        protected void None() => ReportResult(ObjectiveResult.None());
-        
-        protected void Success() => ReportResult(ObjectiveResult.Success());
-        
-        protected void Error(string message) => ReportResult(ObjectiveResult.Error(message));
-
-        public virtual ObjectiveResult EvaluateCubes(IReadOnlyList<Cube> cubes)
+        protected void ReportResultOnRunningEnd(ObjectiveResult result)
         {
-            return ObjectiveResult.Success();
+            LevelManager.Instance.OnFinishRunning.AddListener(ReportDelayed);
+            
+            return;
+            
+            void ReportDelayed()
+            {
+                ReportResult(result);
+                LevelManager.Instance.OnFinishRunning.RemoveListener(ReportDelayed);
+            }
+        }
+
+        public virtual void EvaluateCubes(IReadOnlyList<Cube> cubes)
+        {
         }
     }
 }
