@@ -25,28 +25,26 @@ namespace SSpot.ComputerCode
         /// <summary>
         /// Compiles a list of coding cells into a sequence of cubes, checking for syntax and logical errors.
         /// </summary>
-        /// <param name="codingCells">The list of GameObjects representing the coding cells.</param>
-        /// <param name="loopControllers">The list of LoopControllers to determine loop slices in the code.</param>
         /// <returns>A CompilationResult containing the compiled list of cubes or an error if compilation fails.</returns>
-        public CompilationResult Compile(IReadOnlyList<AttachingCube> codingCells, IReadOnlyList<LoopController> loopControllers)
+        public CompilationResult Compile(IReadOnlyList<CodingCell> cells)
         {
-            int lastIndex = codingCells.FindLastIndex(cell => cell.CurrentCube != null);
+            int lastIndex = cells.FindLastIndex(cell => cell.CurrentCube != null);
             if (lastIndex == -1)
                 return Error(emptyError);
             
-            if (mustUseAllSlots && lastIndex < codingCells.Count - 1)
+            if (mustUseAllSlots && lastIndex < cells.Count - 1)
                 return Error(allSlotsError);
             
-            if (codingCells[0].CurrentCube is not {type: Cube.CubeType.Begin})
+            if (cells[0].CurrentCube is not {type: Cube.CubeType.Begin})
                 return Error(beginError);
 
-            if (codingCells[lastIndex].CurrentCube is not {type: Cube.CubeType.End})
+            if (cells[lastIndex].CurrentCube is not {type: Cube.CubeType.End})
                 return Error(endError);
 
             var result = new List<Cube> {new(Cube.CubeType.Begin)};
-            foreach (var (start, end, count) in GetCodeSlices(loopControllers, 1, lastIndex))
+            foreach (var (start, end, count) in GetCodeSlices(cells, 1, lastIndex))
             {
-                var sliceResult = CompileSlice(codingCells, start, end);
+                var sliceResult = CompileSlice(cells, start, end);
                 if (sliceResult.IsError)
                     return sliceResult;
                 
@@ -70,7 +68,7 @@ namespace SSpot.ComputerCode
         /// <param name="start">The starting index of the range to compile (inclusive).</param>
         /// <param name="end">The ending index of the range to compile (exclusive).</param>
         /// <returns>A <see cref="CompilationResult"/> containing the compiled cubes or an error if compilation fails.</returns>
-        private CompilationResult CompileSlice(IReadOnlyList<AttachingCube> codingCells, int start, int end)
+        private CompilationResult CompileSlice(IReadOnlyList<CodingCell> codingCells, int start, int end)
         {
             List<Cube> result = new();
 
@@ -94,16 +92,16 @@ namespace SSpot.ComputerCode
         /// Given a list of LoopControllers and a range of indices, this method yields a sequence of tuples,
         /// each containing the start index, end index, and iteration count of a given slice of code.
         /// </summary>
-        /// <param name="loopControllers">The list of LoopControllers to determine loop slices in the code.</param>
+        /// <param name="cells">The list of cells to determine loop slices in the code.</param>
         /// <param name="firstIndex">The starting index of the range to slice (inclusive).</param>
         /// <param name="lastIndex">The ending index of the range to slice (exclusive).</param>
         private static IEnumerable<(int start, int end, int count)> GetCodeSlices(
-            IReadOnlyList<LoopController> loopControllers, int firstIndex, int lastIndex)
+            IReadOnlyList<CodingCell> cells, int firstIndex, int lastIndex)
         {
             int sliceStartIndex = firstIndex;
             for (int i = firstIndex; i < lastIndex; i++)
             {
-                if (i >= loopControllers.Count || !loopControllers[i].gameObject.activeSelf) 
+                if (i >= cells.Count || !cells[i].HasLoop) 
                     continue;
 
                 // If there was non-looped code before the loop, return it as a single-iteration slice.
@@ -113,7 +111,7 @@ namespace SSpot.ComputerCode
                 }
 
                 // Return the loop
-                var loop = loopControllers[i];
+                var loop = cells[i].LoopController;
                 yield return (i, i + loop.curRange, loop.iterations);
 
                 i += loop.curRange;

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using SSpot.ComputerCode;
 using SSpot.UI;
 using SSpot.Utilities;
 using UnityEngine;
@@ -7,15 +9,14 @@ namespace SSpot.Level
     public class CubeComputer : MonoBehaviour
     {
         [Header("Cells")]
-        [SerializeField] private AttachingCube[] cubeCells = {};
-        [SerializeField] private LoopController[] loopCells = {};
+        [SerializeField] private CodingCell[] cells = {};
 
         [Header("Buttons")]
         [SerializeField] private PointerButton runButton;
         [SerializeField] private PointerButton resetButton;
         [SerializeField] private PointerButton clearButton;
         
-        [Header("Sound")]
+        [Header("Sounds")]
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip successSound;
         [SerializeField] private AudioClip errorSound;
@@ -25,6 +26,8 @@ namespace SSpot.Level
         [SerializeField] private Material successTerminalMaterial;
         [SerializeField] private Material errorTerminalMaterial;
         [SerializeField] private float materialResetDelay = 5f;
+        
+        public IReadOnlyList<CodingCell> Cells => cells;
 
         private Material _originalTerminalMaterial;
 
@@ -54,17 +57,22 @@ namespace SSpot.Level
                 LevelManager.Instance.OnReset.RemoveListener(OnReset);
             }
         }
+        
+        public void AddPlayerHand(int playerViewId)
+        {
+            foreach (var cell in cells)
+                cell.AddPlayerHand(playerViewId);
+        }
 
         public void ClearCells()
         {
-            foreach (var cube in cubeCells)
-                if (cube.CurrentCube != null)
-                    cube.ClearCellRPC();
+            foreach (var cell in cells)
+                cell.Clear();
         }
         
         #region Button Callbacks
         
-        private void OnRunButtonPressed() => LevelManager.Instance.Run(cubeCells, loopCells);
+        private void OnRunButtonPressed() => LevelManager.Instance.Run(cells);
         
         private void OnResetButtonPressed() => LevelManager.Instance.Reset();
         
@@ -108,13 +116,5 @@ namespace SSpot.Level
         private void OnReset() => SetMaterial(_originalTerminalMaterial, reset: false); 
         
         #endregion
-
-        public void AddPlayerHand(int playerViewId)
-        {
-            foreach(var attachingCube in cubeCells)
-            {
-                attachingCube.AddPlayerHand(playerViewId);
-            }
-        }
     }
 }

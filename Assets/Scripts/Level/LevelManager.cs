@@ -61,21 +61,21 @@ namespace SSpot.Level
 
         #region Run Methods
         
-        public void Run(IReadOnlyList<AttachingCube> cubeCells, IReadOnlyList<LoopController> loopCells)
+        public void Run(IReadOnlyList<CodingCell> cells)
         {
             if (PhotonNetwork.OfflineMode)
-                RunRpc(cubeCells, loopCells);
+                RunRpc(cells);
             else
-                photonView.RPC(nameof(RunRpc), RpcTarget.AllBuffered, cubeCells, loopCells);
+                photonView.RPC(nameof(RunRpc), RpcTarget.AllBuffered, cells);
         }
 
         [PunRPC]
-        private void RunRpc(IReadOnlyList<AttachingCube> cubeCells, IReadOnlyList<LoopController> loopCells)
+        private void RunRpc(IReadOnlyList<CodingCell> cells)
         {
             if (IsRunning)
                 return;
 
-            var compilation = compiler.Compile(cubeCells, loopCells);
+            var compilation = compiler.Compile(cells);
             if (compilation.IsError)
             {
                 Error(compilation.Error, compilation.ErrorIndex);
