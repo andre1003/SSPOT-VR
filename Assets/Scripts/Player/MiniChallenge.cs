@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using SSpot.Level;
 using SSpot.Utilities;
 using UnityEngine;
 using UnityEngine.Localization.Components;
@@ -10,21 +11,6 @@ using UnityEngine.UI;
 
 public class MiniChallenge : MonoBehaviourPun
 {
-    #region Singleton
-    public static MiniChallenge Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        Instance = this;
-    }
-    #endregion
-
     #region Attributes
     #region Public
     [Space]
@@ -95,32 +81,47 @@ public class MiniChallenge : MonoBehaviourPun
 
     #region Methods
     #region Unity Methods
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
-        // Get audio source component and set it's clip to newStarAudioClip
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = newStarAudioClip;
 
         // If this player is master client, start timer synced
         if(PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("StartTimerRpc", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(StartTimerRpc), RpcTarget.AllBuffered);
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         // If this player is master client and timer is active, increase the timer for all players
         if(PhotonNetwork.IsMasterClient && isTimerActive)
         {
-            photonView.RPC("IncreaseTimerRpc", RpcTarget.AllBuffered, Time.deltaTime);
+            photonView.RPC(nameof(IncreaseTimerRpc), RpcTarget.AllBuffered, Time.deltaTime);
         }
 
-        // Update UI
         UpdateUI();
     }
+    
+    private void OnEnable()
+    {
+        LevelManager.Instance.OnFinishRunning.AddListener(CheckMiniChallenge);
+        LevelManager.Instance.OnError.AddListener(IncreaseError);
+        LevelManager.Instance.OnSuccess.AddListener(StopTimer);
+    }
+    
+    private void OnDisable()
+    {
+        if (LevelManager.Instance)
+        {
+            LevelManager.Instance.OnFinishRunning.RemoveListener(CheckMiniChallenge);
+            LevelManager.Instance.OnError.RemoveListener(IncreaseError);
+            LevelManager.Instance.OnSuccess.RemoveListener(StopTimer);
+        }
+    }
+    
     #endregion
 
     #region Time Challenge
@@ -160,7 +161,7 @@ public class MiniChallenge : MonoBehaviourPun
         // If this player is master client, stop timer via RPC
         if(PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("StopTimerRpc", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(StopTimerRpc), RpcTarget.AllBuffered);
         }
     }
 
@@ -182,7 +183,7 @@ public class MiniChallenge : MonoBehaviourPun
     {
         if(PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("IncreaseErrorRpc", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(IncreaseErrorRpc), RpcTarget.AllBuffered);
         }
     }
 

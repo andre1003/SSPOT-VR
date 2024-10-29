@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using Photon.Pun;
 using System.Collections.Generic;
 using NaughtyAttributes;
-using static Cube;
 
 public class AttachingCube : MonoBehaviourPun
 {
+    public CubeClass CurrentCube { get; private set; }
+
     public int cubeIndex;
 
     // Player
@@ -24,7 +24,6 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
-    private CubeClass curCube;
     [SerializeField] private int playerId;
 
     // Audio source
@@ -64,10 +63,10 @@ public class AttachingCube : MonoBehaviourPun
         {
             // Set selected cube
             selectedCube = hand.transform.GetChild(0).gameObject;
-            curCube = selectedCube.GetComponent<CloningCube>().Cube;
+            CurrentCube = selectedCube.GetComponent<CloningCube>().Cube;
 
             // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
-            if(curCube.IsLoop)
+            if(CurrentCube.IsLoop)
             {
                 ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).SetActive(true);
                 ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
@@ -117,7 +116,7 @@ public class AttachingCube : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void ClearCellRPC()
+    public void ClearCellRPC()
     {
         // Destroy cube from cube holder
         Destroy(cubeHolder.transform.GetChild(0).gameObject);

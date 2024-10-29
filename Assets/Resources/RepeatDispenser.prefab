@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHands: []
   Cube:
-    type: 7
+    type: 6
     loopNumber: 0
     loopRangeIndexes: {x: 0, y: 1}
     loopList:
