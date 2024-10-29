@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SSpot.ComputerCode;
 using SSpot.UI;
@@ -9,7 +10,7 @@ namespace SSpot.Level
     public class CubeComputer : MonoBehaviour
     {
         [Header("Cells")]
-        [SerializeField] private CodingCell[] cells = {};
+        [SerializeField] private Transform cellsParent;
 
         [Header("Buttons")]
         [SerializeField] private PointerButton runButton;
@@ -26,12 +27,18 @@ namespace SSpot.Level
         [SerializeField] private Material successTerminalMaterial;
         [SerializeField] private Material errorTerminalMaterial;
         [SerializeField] private float materialResetDelay = 5f;
-        
-        public IReadOnlyList<CodingCell> Cells => cells;
+
+        private CodingCell[] _cells = Array.Empty<CodingCell>();
+        public IReadOnlyList<CodingCell> Cells => _cells;
 
         private Material _originalTerminalMaterial;
 
-        private void Awake() => _originalTerminalMaterial = terminalRenderer.materials[1];
+        private void Awake()
+        {
+            _originalTerminalMaterial = terminalRenderer.materials[1];
+            
+            _cells = transform.GetComponentsInChildren<CodingCell>();
+        }
 
         private void OnEnable()
         {
@@ -60,19 +67,19 @@ namespace SSpot.Level
         
         public void AddPlayerHand(int playerViewId)
         {
-            foreach (var cell in cells)
+            foreach (var cell in _cells)
                 cell.AddPlayerHand(playerViewId);
         }
 
         public void ClearCells()
         {
-            foreach (var cell in cells)
+            foreach (var cell in _cells)
                 cell.Clear();
         }
         
         #region Button Callbacks
         
-        private void OnRunButtonPressed() => LevelManager.Instance.Run(cells);
+        private void OnRunButtonPressed() => LevelManager.Instance.Run(Cells);
         
         private void OnResetButtonPressed() => LevelManager.Instance.Reset();
         

@@ -15,11 +15,7 @@ namespace SSpot.Cubes
         
         private bool _dirty;
         
-        private void OnValidate() 
-        {
-            if (IsInPrefabStage()) return;
-            _dirty = true;
-        }
+        private void OnValidate() => _dirty = true;
 
         private void Update()
         {
@@ -56,6 +52,9 @@ namespace SSpot.Cubes
                 }
                 
                 child.name = cellPrefab.name + i;
+
+                var codingCell = child.GetComponent<CodingCell>();
+                codingCell.AttachingCube.cubeIndex = i;
             }
         }
         
@@ -74,7 +73,6 @@ namespace SSpot.Cubes
         private GameObject InstantiateCell()
         {
             var result = (CodingCell)UnityEditor.PrefabUtility.InstantiatePrefab(cellPrefab, cellHolder);
-            result.gameObject.hideFlags = HideFlags.DontSave;
             return result.gameObject;
         }
 
