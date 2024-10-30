@@ -4,7 +4,6 @@ using Photon.Pun;
 using SSpot.ComputerCode;
 using SSpot.Objectives;
 using SSpot.Robot;
-using SSpot.UI;
 using SSpot.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,18 +14,21 @@ namespace SSpot.Level
     {
         #region Serialized Properties
         
-        [field: Header("Level"), SerializeField]
-        public LevelObjectiveSolver Objective { get; private set; }
-        [SerializeField] private CubeCompiler compiler;
-        [SerializeField] private CubeRunner runner;
-        
-        [field: Header("Environment"), SerializeField]
+        [field: SerializeField]
         public RobotData Robot { get; private set; }
-        [SerializeField] private TextScreen errorScreen;
+        
+        [field: SerializeField]
+        public LevelObjectiveSolver Objective { get; private set; }
+        
+        [SerializeField] private CubeCompiler compiler;
+        
+        [SerializeField] private CubeRunner runner;
         
         #endregion
         
         #region Events
+        
+        //Consider using event bus ScriptableObjects
         
         [field: Header("Events"), SerializeField]
         public UnityEvent OnReset { get; private set; } = new();
@@ -78,7 +80,8 @@ namespace SSpot.Level
             var compilation = compiler.Compile(cells);
             if (compilation.IsError)
             {
-                Error(compilation.Error, compilation.ErrorIndex);
+                var compilationError = ObjectiveResult.Error(compilation.Error, compilation.ErrorIndex);
+                HandleObjectiveResult(compilationError);
                 return;
             }
 
@@ -149,7 +152,7 @@ namespace SSpot.Level
             switch (result.Type)
             {
                 case ObjectiveResult.ResultType.Error:
-                    Error(result.Message, runner.CurrentIndex);
+                    Error();
                     break;
                 case ObjectiveResult.ResultType.Success:
                     Success();
@@ -157,7 +160,7 @@ namespace SSpot.Level
             }
         }
         
-        private void Error(string error, int errorIndex)
+        private void Error()
         {
             if (IsRunning)
             {
@@ -167,15 +170,11 @@ namespace SSpot.Level
             }
             
             OnError.Invoke();
-
-            errorScreen.ShowText(error);
         }
         
         private void Success()
         {
             OnSuccess.Invoke();
-
-            errorScreen.Close();
         }
         
         #endregion

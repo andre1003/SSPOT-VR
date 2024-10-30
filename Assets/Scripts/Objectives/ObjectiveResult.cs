@@ -10,13 +10,18 @@ namespace SSpot.Objectives
         };
        
         public string Message;
+
+        public int Index;
         
         public ResultType Type;
-        
-        public static ObjectiveResult None() => new() {Type = ResultType.None, Message = null};
-        
-        public static ObjectiveResult Success() => new() {Type = ResultType.Success, Message = null};
 
-        public static ObjectiveResult Error(string message) => new() {Type = ResultType.Error, Message = message};
+        private ObjectiveResult(ResultType type, string message = "", int index = -1) =>
+            (Type, Message, Index) = (type, message, index);
+
+        public static ObjectiveResult None() => new(ResultType.None);
+
+        public static ObjectiveResult Success() => new(ResultType.Success);
+
+        public static ObjectiveResult Error(string message, int index = -1) => new(ResultType.Error, message, index);
     }
 }
