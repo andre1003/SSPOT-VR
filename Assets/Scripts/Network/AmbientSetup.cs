@@ -12,7 +12,7 @@ public class AmbientSetup : Singleton<AmbientSetup>
     public List<TeleportToObject> teleports = new();
     
     private List<GameObject> players = new List<GameObject>();
-    public IReadOnlyList<GameObject> GetPlayers() => players;
+    public IReadOnlyList<GameObject> Players => players;
     
     [SerializeField] private GameObject computerToHide;
 
@@ -68,10 +68,10 @@ public class AmbientSetup : Singleton<AmbientSetup>
 
     private void ConfigureCloningCubes(int playerId)
     {
-        foreach (CloningCube cloningCube in cloningCubesList)
+        /*foreach (CloningCube cloningCube in cloningCubesList)
         {
             cloningCube.AddPlayerHand(playerId);
-        }
+        }*/
     }
     
     private void ConfigureTeleport(GameObject player)

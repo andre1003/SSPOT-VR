@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 
 public class AttachingCube : MonoBehaviourPun
@@ -156,21 +157,10 @@ public class AttachingCube : MonoBehaviourPun
     /// <returns>PhotonView local player ID.</returns>
     private int GetPlayerID()
     {
-        // Loop player hands list
-        foreach(GameObject hand in playerHands)
-        {
-            // Get PhotonView component of player
-            PhotonView playerHandView = hand.GetComponentInParent<PhotonView>();
-
-            // If is local player, return ViewID
-            if(playerHandView.IsMine)
-            {
-                return playerHandView.ViewID;
-            }
-        }
-
-        // If something went wrong, return -1
-        return -1;
+        return AmbientSetup.Instance.Players
+            .Select(p => p.GetComponentInParent<PhotonView>())
+            .First(v => v.IsMine)
+            .ViewID;
     }
 
 

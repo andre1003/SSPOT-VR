@@ -37,8 +37,8 @@ public class ChangeScene : MonoBehaviour
         // Load next level
         if(goForward)
         {
-            
-            LoadLevel(SceneManager.GetActiveScene().buildIndex + 2);
+            //TODO change this back
+            LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         else if(nextSceneOffline != "" && nextSceneOnline != "")

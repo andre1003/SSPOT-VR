@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 
 public class CloningCube : MonoBehaviourPun
@@ -28,7 +29,7 @@ public class CloningCube : MonoBehaviourPun
         playerId = GetPlayerID();
 
         // Destroy cube on hand, if there is any
-        //PlayerSetup.instance.DestroyCubeOnHand();
+        PlayerSetup.instance.DestroyCubeOnHand();
 
         // Attach the selected cube to the player's hand
         AttachCubeToHand();
@@ -99,49 +100,14 @@ public class CloningCube : MonoBehaviourPun
     }
 
     /// <summary>
-    /// Call RPC add player hand.
-    /// </summary>
-    /// <param name="playerViewId"></param>
-    public void AddPlayerHand(int playerViewId)
-    {
-        // If this player is master, than add the hand to the list
-        if(PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("AddPlayerHandRPC", RpcTarget.AllBuffered, playerViewId);
-        }
-    }
-
-    /// <summary>
-    /// Add player hand or playerHands list via RPC.
-    /// </summary>
-    /// <param name="playerViewId">Player ID.</param>
-    [PunRPC]
-    private void AddPlayerHandRPC(int playerViewId)
-    {
-        GameObject hand = PhotonView.Find(playerViewId).gameObject.GetComponent<PlayerSetup>().playerHand;
-        playerHands.Add(hand);
-    }
-
-    /// <summary>
     /// Get local player ID.
     /// </summary>
     /// <returns>PhotonView local player ID.</returns>
     private int GetPlayerID()
     {
-        // Loop player hands list
-        foreach(GameObject hand in playerHands)
-        {
-            // Get PhotonView component of player
-            PhotonView playerHandView = hand.GetComponentInParent<PhotonView>();
-
-            // If is local player, return ViewID
-            if(playerHandView.IsMine)
-            {
-                return playerHandView.ViewID;
-            }
-        }
-
-        // If something went wrong, return -1
-        return -1;
+        return AmbientSetup.Instance.Players
+            .Select(p => p.GetComponentInParent<PhotonView>())
+            .First(v => v.IsMine)
+            .ViewID;
     }
 }
