@@ -14,10 +14,20 @@ namespace SSpot.Robot
 
         [Header("Clips")]
         [SerializeField] private AnimationClip idleClip;
+        public AnimationClip IdleClip => idleClip;
+        
         [SerializeField] private AnimationClip walkClip;
+        public AnimationClip WalkClip => walkClip;
+        
         [SerializeField] private AnimationClip turnLeftClip;
+        public AnimationClip TurnLeftClip => turnLeftClip;
+        
         [SerializeField] private AnimationClip turnRightClip;
+        public AnimationClip TurnRightClip => turnRightClip;
+        
         [SerializeField] private AnimationClip brokenClip;
+        public AnimationClip BrokenClip => brokenClip;
+        
 
         private PlayableGraph _graph;
         private AnimationMixerPlayable _outputMixer;

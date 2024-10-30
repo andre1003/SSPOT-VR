@@ -1300,6 +1300,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2021953492}
     - target: {fileID: 2077013578408520964, guid: 5367be8663fc8284fbf5384b7bfe15c5, type: 3}
+      propertyPath: <Objective>k__BackingField
+      value: 
+      objectReference: {fileID: 1610526723}
+    - target: {fileID: 2077013578408520964, guid: 5367be8663fc8284fbf5384b7bfe15c5, type: 3}
       propertyPath: <OnLevelCompleted>k__BackingField.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2391,20 +2395,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fcacb12f9f42f419674b1f79ec1c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elevator: {fileID: 1418575958}
-  computer: {fileID: 0}
-  cloningCubesList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  computerToHide: {fileID: 0}
   teleports:
   - {fileID: 1014606302}
   - {fileID: 1948088697}
   - {fileID: 1717716195}
-  computerToHide: {fileID: 0}
 --- !u!114 &892839705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2708,7 +2703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed87f0821f07d42835cdd596dca750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   teleportLocationMesh: {fileID: 1014606298}
   isForPlayer1: 0
 --- !u!82 &1014606303
@@ -4773,7 +4767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146fa3ab926c940498f3d36a0170396b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   playerCodingPlatform: {fileID: 1316088282}
   instructionsCodingPlatform: {fileID: 566334977}
   location1Initial: {fileID: 1014606297}
@@ -5929,7 +5922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed87f0821f07d42835cdd596dca750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   teleportLocationMesh: {fileID: 1717716194}
   isForPlayer1: 0
 --- !u!114 &1717716196
@@ -7330,7 +7322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed87f0821f07d42835cdd596dca750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   teleportLocationMesh: {fileID: 1948088693}
   isForPlayer1: 1
 --- !u!82 &1948088698

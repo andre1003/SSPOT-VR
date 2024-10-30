@@ -285,7 +285,6 @@ MonoBehaviour:
   transitionDuration: 0.25
   idleClip: {fileID: -203655887218126122, guid: 97f85fe9fb9476647a6fda6e5a04e812, type: 3}
   walkClip: {fileID: -203655887218126122, guid: ede61ed597011c6468813178a987efad, type: 3}
-  walkBackClip: {fileID: -203655887218126122, guid: ede61ed597011c6468813178a987efad, type: 3}
   turnLeftClip: {fileID: -203655887218126122, guid: 04aefedba3eb6474486a7d8788d425d0, type: 3}
   turnRightClip: {fileID: -203655887218126122, guid: 260c5f03c4d07ad4f96f63cb13ed1741, type: 3}
   brokenClip: {fileID: -203655887218126122, guid: 88c123332f889b449a35e1d02d05215a, type: 3}
@@ -301,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8f36a2a85f4f0197414d07d3e4378f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useClipDuration: 1
   walkTime: 0.7
   turnTime: 0.7
 --- !u!114 &7610415275689052037

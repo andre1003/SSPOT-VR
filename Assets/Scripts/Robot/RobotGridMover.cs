@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using NaughtyAttributes;
 using Photon.Pun;
 using SSpot.Grids;
 using SSpot.Utilities;
@@ -10,8 +11,12 @@ namespace SSpot.Robot
     [RequireComponent(typeof(RobotAnimator))]
     public class RobotGridMover : MonoBehaviourPun, ILevelGridObject
     {
+        [SerializeField] private bool useClipDuration; 
+        
+        [HideIf(nameof(useClipDuration))]
         [SerializeField] private float walkTime = 1;
         
+        [HideIf(nameof(useClipDuration))]
         [SerializeField] private float turnTime = 1;
         
         public LevelGrid Grid { get; set; }
@@ -85,8 +90,10 @@ namespace SSpot.Robot
             Vector3 from = Grid.GetCellCenterWorld(fromCell);
             Vector3 to = Grid.GetCellCenterWorld(toCell);
             
+            float duration = useClipDuration ? _animator.WalkClip.length : walkTime;
+            
             _animator.StartWalking();
-            yield return CoroutineUtilities.SmoothCoroutine(walkTime, t => transform.position = Vector3.Lerp(from, to, t));
+            yield return CoroutineUtilities.SmoothCoroutine(duration, t => transform.position = Vector3.Lerp(from, to, t));
             _animator.StopWalking();
             yield return _animator.WaitForIdle();
             
@@ -108,6 +115,10 @@ namespace SSpot.Robot
             Vector3 originalForward = transform.forward;
             Vector2Int target = left ? RotateFacingLeft(Facing) : RotateFacingRight(Facing);
             Vector3 targetForward = new(target.x, 0, target.y);
+
+            float duration = useClipDuration
+                ? (left ? _animator.TurnLeftClip.length : _animator.TurnRightClip.length)
+                : turnTime;
             
             yield return CoroutineUtilities.SmoothCoroutine(turnTime,
                 t => transform.forward = Vector3.Slerp(originalForward, targetForward, t));
