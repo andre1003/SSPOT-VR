@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using Photon.Pun;
-using System.Collections.Generic;
-using System.Linq;
 using NaughtyAttributes;
 
 public class AttachingCube : MonoBehaviourPun
@@ -9,9 +7,6 @@ public class AttachingCube : MonoBehaviourPun
     public CubeClass CurrentCube { get; private set; }
 
     public int cubeIndex;
-
-    // Player
-    public List<GameObject> playerHands;      // Player hands GameObject
 
     // Coding cell
     public GameObject cubeHolder;       // Coding cell cube holder
@@ -25,7 +20,6 @@ public class AttachingCube : MonoBehaviourPun
 
     // Selected cube
     private GameObject selectedCube;    // Selected cube GameObject
-    [SerializeField] private int playerId;
 
     // Audio source
     [SerializeField] private AudioSource audioSource;    // Audio source
@@ -35,11 +29,8 @@ public class AttachingCube : MonoBehaviourPun
     /// </summary>
     public void OnPointerClick()
     {
-        // Get local player Photon View ID
-        playerId = GetPlayerID();
-
-        // Attach a cube to a coding cell.
-        Attaching();
+        int localPlayerId = AmbientSetup.Instance.LocalPlayer.ViewID;
+        AttachingHandler(localPlayerId);
     }
 
     /// <summary>
@@ -48,16 +39,11 @@ public class AttachingCube : MonoBehaviourPun
     /// <para>If there is a cube in player hand and the coding cell cube holder is free, then attach it to the clicked cube holder.</para>
     /// <para>If there is a cube in the coding cell but not in the player hand, remove the cube from coding cell.</para>
     /// </summary>
-    private void Attaching()
+    private void AttachingHandler(int playerId)
     {
-        // Attach cube via RPC
-        AttachingHandler(playerId);
-    }
-
-    private void AttachingHandler(int id)
-    {
+        //TODO dude I think I can get rid of AmbientSetup and just use PhotonView.Find
         // Get hand
-        GameObject hand = PhotonView.Find(id).gameObject.GetComponent<PlayerSetup>().playerHand;
+        GameObject hand = PhotonView.Find(playerId).gameObject.GetComponent<PlayerSetup>().playerHand;
 
         // Check if player hand has a child
         if(hand.transform.childCount == 1)
@@ -70,7 +56,6 @@ public class AttachingCube : MonoBehaviourPun
             if(CurrentCube.IsLoop)
             {
                 ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).SetActive(true);
-                ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).GetComponent<AttachingCube>().SetPlayerID(playerId);
                 PlayerSetup.instance.DestroyCubeOnHand();
                 
                 return;
@@ -80,14 +65,14 @@ public class AttachingCube : MonoBehaviourPun
             if(cubeHolder.transform.childCount == 0)
             {
                 int selectedCubeID = selectedCube.GetComponent<PhotonView>().ViewID;
-                photonView.RPC("AttachCubeRPC", RpcTarget.AllBuffered, selectedCubeID);
+                photonView.RPC(nameof(AttachCubeRPC), RpcTarget.AllBuffered, selectedCubeID);
             }
         }
 
         // If cube holder has a child and player hand has no child 
         else if(cubeHolder.transform.childCount == 1 && hand.transform.childCount == 0)
         {
-            photonView.RPC("ClearCellRPC", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(ClearCellRPC), RpcTarget.AllBuffered);
         }
     }
 
@@ -108,9 +93,6 @@ public class AttachingCube : MonoBehaviourPun
         selectedCube.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);   // Rotation
         selectedCube.transform.localScale = new Vector3(1f, 1f, 1f);        // Scale
 
-        // Set selected cube to null
-        selectedCube = null;
-
         // Play select cube sound
         audioSource.clip = selectingCube;
         audioSource.Play();
@@ -125,47 +107,5 @@ public class AttachingCube : MonoBehaviourPun
         // Play release sound
         audioSource.clip = releasingCube;
         audioSource.Play();
-    }
-
-    /// <summary>
-    /// Call RPC add player hand.
-    /// </summary>
-    /// <param name="playerViewId"></param>
-    public void AddPlayerHand(int playerViewId)
-    {
-        // If this player is master, than add the hand to the list
-        if(PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("AddPlayerHandRPC", RpcTarget.AllBuffered, playerViewId);
-        }
-    }
-
-    /// <summary>
-    /// Add player hand or playerHands list via RPC.
-    /// </summary>
-    /// <param name="playerViewId">Player ID.</param>
-    [PunRPC]
-    private void AddPlayerHandRPC(int playerViewId)
-    {
-        GameObject hand = PhotonView.Find(playerViewId).gameObject.GetComponent<PlayerSetup>().playerHand;
-        playerHands.Add(hand);
-    }
-
-    /// <summary>
-    /// Get local player ID.
-    /// </summary>
-    /// <returns>PhotonView local player ID.</returns>
-    private int GetPlayerID()
-    {
-        return AmbientSetup.Instance.Players
-            .Select(p => p.GetComponentInParent<PhotonView>())
-            .First(v => v.IsMine)
-            .ViewID;
-    }
-
-
-    public void SetPlayerID(int id)
-    {
-        playerId = id;
     }
 }

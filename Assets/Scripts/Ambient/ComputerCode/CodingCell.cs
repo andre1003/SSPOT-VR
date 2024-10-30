@@ -23,10 +23,5 @@ namespace SSpot.ComputerCode
             //if (LoopController)
             //    LoopController.Reset();
         }
-
-        public void AddPlayerHand(int playerViewId)
-        {
-            AttachingCube.AddPlayerHand(playerViewId);
-        }
     }
 }

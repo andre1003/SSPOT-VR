@@ -64,12 +64,6 @@ namespace SSpot.Level
                 LevelManager.Instance.OnReset.RemoveListener(OnReset);
             }
         }
-        
-        public void AddPlayerHand(int playerViewId)
-        {
-            foreach (var cell in _cells)
-                cell.AddPlayerHand(playerViewId);
-        }
 
         public void ClearCells()
         {

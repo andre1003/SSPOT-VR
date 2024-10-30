@@ -1,6 +1,4 @@
 using Photon.Pun;
-using Photon.Realtime;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,17 +71,6 @@ public class Spawner : MonoBehaviourPun
         if(ambientSetup != null)
         {
             ambientSetup.ConfigureAmbient(viewId);
-            photonView.RPC("AmbientSetup", RpcTarget.AllBuffered, viewId);
         }
-    }
-
-    /// <summary>
-    /// Perform RPC ambient setup.
-    /// </summary>
-    /// <param name="id">Player Photon View ID.</param>
-    [PunRPC]
-    private void AmbientSetup(int id)
-    {
-        ambientSetup.AddHands(id);
     }
 }

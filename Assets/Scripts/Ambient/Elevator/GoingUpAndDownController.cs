@@ -3,8 +3,9 @@ using Photon.Pun;
 
 public class GoingUpAndDownController : MonoBehaviourPun
 {
+    private static GameObject Player => AmbientSetup.Instance.LocalPlayer.gameObject;
+    
     // GameObjects
-    public GameObject player;                       // Player GameObject
     public GameObject playerCodingPlatform;         // Elevator platform GameObject
     public GameObject instructionsCodingPlatform;   // Elevator instructions blackboard GameObject
     public GameObject location1Initial;             // Initial location GameObject
@@ -52,7 +53,7 @@ public class GoingUpAndDownController : MonoBehaviourPun
     private void GoUpRpc()
     {
         // Enable GoingUp
-        player.GetComponent<GoingUp>().enabled = true;
+        Player.GetComponent<GoingUp>().enabled = true;
         playerCodingPlatform.GetComponent<GoingUp>().enabled = true;
         GetComponent<GoingUp>().enabled = true;
 
@@ -81,12 +82,12 @@ public class GoingUpAndDownController : MonoBehaviourPun
     private void GoDownRpc()
     {
         // Enable GoingDown
-        player.GetComponent<GoingDown>().enabled = true;
+        Player.GetComponent<GoingDown>().enabled = true;
         playerCodingPlatform.GetComponent<GoingDown>().enabled = true;
         GetComponent<GoingDown>().enabled = true;
 
         // Player cannot attach any cube when going down
-        player.GetComponent<InstantiateAttachAndDestroyBlocks>().enabled = false;
+        Player.GetComponent<InstantiateAttachAndDestroyBlocks>().enabled = false;
 
         // Setup GameObjects
         instructionsCodingPlatform.SetActive(true);
