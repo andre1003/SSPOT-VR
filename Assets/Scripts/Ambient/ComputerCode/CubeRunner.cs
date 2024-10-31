@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SSpot.Robot;
 using UnityEngine;
 
-namespace SSpot.ComputerCode
+namespace SSpot.Ambient.ComputerCode
 {
     [Serializable]
     public class CubeRunner

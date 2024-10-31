@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SSpot.ComputerCode
+namespace SSpot.Ambient.ComputerCode
 {
     public readonly struct CompilationResult
     {

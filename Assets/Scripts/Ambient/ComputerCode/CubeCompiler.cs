@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SSpot.Utilities;
 using UnityEngine;
 
-namespace SSpot.ComputerCode
+namespace SSpot.Ambient.ComputerCode
 {
     [Serializable]
     public class CubeCompiler

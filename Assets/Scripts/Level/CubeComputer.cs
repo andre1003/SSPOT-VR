@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using SSpot.ComputerCode;
+using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
 using SSpot.Utilities;
 using UnityEngine;
@@ -31,6 +31,10 @@ namespace SSpot.Level
         private CodingCell[] _cells = Array.Empty<CodingCell>();
         public IReadOnlyList<CodingCell> Cells => _cells;
 
+        //Consider having an index in each cell, and have AttachingCube and LoopController keep a reference to parent cell
+        public int IndexOf(AttachingCube cube) => _cells.FindIndex(cell => cell.AttachingCube == cube);
+        public int IndexOf(LoopController loop) => _cells.FindIndex(cell => cell.LoopController == loop);
+
         private Material _originalTerminalMaterial;
 
         private void Awake()
@@ -38,6 +42,10 @@ namespace SSpot.Level
             _originalTerminalMaterial = terminalRenderer.materials[1];
             
             _cells = transform.GetComponentsInChildren<CodingCell>();
+            for (int i = 0; i < _cells.Length; i++)
+            {
+                _cells[i].Init(i, this);
+            }
         }
 
         private void OnEnable()
@@ -73,7 +81,10 @@ namespace SSpot.Level
         
         #region Button Callbacks
         
-        private void OnRunButtonPressed() => LevelManager.Instance.Run(Cells);
+        private void OnRunButtonPressed()
+        {
+            LevelManager.Instance.Run(Cells);
+        }
         
         private void OnResetButtonPressed() => LevelManager.Instance.Reset();
         

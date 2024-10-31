@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NaughtyAttributes;
 using Photon.Pun;
-using SSpot.Utilities;
+using SSpot.Utilities.Attributes;
 using UnityEngine;
 
 namespace SSpot.Grids
@@ -9,7 +9,7 @@ namespace SSpot.Grids
     [RequireComponent(typeof(Grid))]
     public class LevelGrid : MonoBehaviourPun
     {
-        [LinkedVector] [MinValue(1)]
+        [LinkedVector, MinValue(1)]
         [SerializeField] private Vector2Int gridSize = new(10, 10);
 
         [SerializeField] private GameObject nodePrefab;

@@ -1,94 +1,102 @@
+using System;
+using System.Linq;
+using JetBrains.Annotations;
+using NaughtyAttributes;
+using Photon.Pun;
+using SSpot.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
-using NaughtyAttributes;
-using System.Collections.Generic;
-using System.Data.Common;
-using Photon.Pun;
+
 // TODO: comentar a classe e revisar algumas fun��es
-public class LoopController : MonoBehaviourPun
-
+namespace SSpot.Ambient.ComputerCode
 {
-    [BoxGroup("LoopSettings")]
-    public int iterations;
-
-    [BoxGroup("LoopSettings")]
-    public int maxIterarions = 10;
-
-    [BoxGroup("LoopSettings")]
-    public int maxRange = 6;
-
-    [BoxGroup("LoopSettings")]
-    public bool globalMaxRange = false;
-
-    [BoxGroup("LoopSettings")]
-    [ShowIf("globalMaxRange")]
-    [MinValue(1)]
-    public int globalRange = 1;
-
-    [BoxGroup("Visuals")]
-    public Text iterationsText;
-    [BoxGroup("Visuals")]
-    public Text rangeText;
-    [BoxGroup("Visuals")]
-    public GameObject Plane;
-    [BoxGroup("Visuals")]
-    public float planeSize = 0.9f;
-    [BoxGroup("Visuals")]
-    public int curRange = 1;
-    [BoxGroup("Visuals")]
-    public GameObject IncreaseAmountButton;
-
-    private void OnEnable()
+    public class LoopController : MonoBehaviourPun
     {
-        UpdateAllPanels();
-    }
+        public CodingCell ParentCell { get; set; }
+        
+        [BoxGroup("LoopSettings")]
+        public int iterations;
 
-    private void OnDisable()
-    {
-        UpdateAllPanels();
-    }
+        [BoxGroup("LoopSettings")]
+        public int maxIterations = 10;
 
+        [BoxGroup("LoopSettings")]
+        public int maxRange = 6;
 
-    public void IncreaseIterations()
-    {
-        photonView.RPC("IncreaseRPC", RpcTarget.AllBuffered);
-    }
+        [BoxGroup("LoopSettings")]
+        public bool globalMaxRange = false;
 
-    [PunRPC]
-    private void IncreaseRPC()
-    {
-        iterations++;
+        [BoxGroup("LoopSettings")]
+        [ShowIf("globalMaxRange")]
+        [MinValue(1)]
+        public int globalRange = 1;
 
-        if(iterations > maxIterarions)
+        [BoxGroup("Visuals")]
+        public Text iterationsText;
+        [BoxGroup("Visuals")]
+        public Text rangeText;
+        [BoxGroup("Visuals")]
+        public GameObject Plane;
+        [BoxGroup("Visuals")]
+        public float planeSize = 0.9f;
+        [BoxGroup("Visuals")]
+        public int curRange = 1;
+        [BoxGroup("Visuals")]
+        public GameObject IncreaseAmountButton;
+
+        private void OnEnable()
         {
-            iterations = maxIterarions;
+            UpdateAllPanels();
         }
 
-        UpdateUI();
-    }
-
-    public void DecreaseIterations()
-    {
-        photonView.RPC("DecreaseRPC", RpcTarget.AllBuffered);
-    }
-
-    [PunRPC]
-    private void DecreaseRPC()
-    {
-        iterations--;
-
-        if(iterations < 1)
+        private void OnDisable()
         {
-            iterations = 1;
+            UpdateAllPanels();
+        }
+        
+        [UsedImplicitly]
+        public void IncreaseIterations()
+        {
+            photonView.RPC(nameof(IncreaseRPC), RpcTarget.AllBuffered);
         }
 
-        UpdateUI();
-    }
-
-    public void IncreaseRange() 
-    {
-        if (curRange < maxRange)
+        [PunRPC]
+        private void IncreaseRPC()
         {
+            iterations++;
+
+            if(iterations > maxIterations)
+            {
+                iterations = maxIterations;
+            }
+
+            UpdateUI();
+        }
+
+        [UsedImplicitly]
+        public void DecreaseIterations()
+        {
+            photonView.RPC(nameof(DecreaseRPC), RpcTarget.AllBuffered);
+        }
+
+        [PunRPC]
+        private void DecreaseRPC()
+        {
+            iterations--;
+
+            if(iterations < 1)
+            {
+                iterations = 1;
+            }
+
+            UpdateUI();
+        }
+
+        public void IncreaseRange()
+        {
+            if (curRange >= maxRange) 
+                return;
+        
             Vector3 tempVector = Plane.transform.localPosition;
             Plane.transform.localPosition = new (tempVector.x, tempVector.y - (planeSize / 2), tempVector.z);
             
@@ -97,78 +105,66 @@ public class LoopController : MonoBehaviourPun
             
             curRange++;
             UpdateUI();
-
         }
-    }
-    public void DecreaseRange() 
-    {
-        if (curRange > 1)
+        
+        public void DecreaseRange()
         {
+            if (curRange == 1)
+                gameObject.SetActive(false);
+        
+            if (curRange <= 1)
+                return;
+
             Vector3 positionVector = Plane.transform.localPosition;
             positionVector = new(positionVector.x, positionVector.y + (planeSize / 2), positionVector.z);
+            Plane.transform.localPosition = positionVector;
+        
             Vector3 scaleVector = Plane.transform.localScale;
             scaleVector = new(scaleVector.x, scaleVector.y, scaleVector.z * (1 - (1f / curRange)));
-            Plane.transform.localPosition = positionVector;
             Plane.transform.localScale = scaleVector;
+        
             curRange--;
             UpdateUI();
         }
-        else if (curRange == 1) gameObject.SetActive(false);
-    }
 
-    public void DestroyLooper() 
-    { 
-        Destroy(gameObject);
-    }
+        [UsedImplicitly]
+        public void DestroyLooper() 
+        { 
+            Destroy(gameObject);
+        }
 
-    private void UpdateUI()
-    {
-        iterationsText.text = iterations.ToString();
-        IncreaseAmountButton.SetActive(curRange != maxRange);
-        rangeText.text = curRange == 1 ? "X" : "A";
-    }
-
-    private void UpdateRange()
-    {
-        // updating maxRange
-        List<GameObject> Panels = ComputerCellsController.instance.loopPanels;
-        int panelCount = Panels.Count;
-
-        
-        for (int i = 0; i < panelCount; i++)
+        private void UpdateUI()
         {
-            if (Panels[i].GetComponent<LoopController>() == this)
-            {
-                maxRange = panelCount - i;
-                if(i == panelCount - 1) { maxRange = 1; return; }
+            iterationsText.text = iterations.ToString();
+            IncreaseAmountButton.SetActive(curRange != maxRange);
+            rangeText.text = curRange == 1 ? "X" : "A";
+        }
 
-                i++;
-                for (int rangeCount = 1; i < panelCount; rangeCount++, i++)
-                {
-                    if (Panels[i].activeInHierarchy) 
-                    { 
-                        maxRange = rangeCount;
-                    }
-                }
+        private void UpdateRange()
+        {
+            int index = ParentCell.Index;
+            int panelCount = ParentCell.Computer.Cells.Count;
+            int nextPanelIndex  = ParentCell.Computer.Cells.FindIndex(index + 1, cell => cell.HasLoop);
+            if (nextPanelIndex == -1) nextPanelIndex = panelCount;
+            
+            int rangeToNext = nextPanelIndex - index;
+            if (maxRange > rangeToNext) maxRange = rangeToNext;
+            
+            while (curRange > maxRange) 
+                DecreaseRange();
+            
+            if (globalMaxRange && maxRange > globalRange) 
+                maxRange = globalRange;
+        }
+
+        public void UpdateAllPanels()
+        {
+            foreach (var cell in ParentCell.Computer.Cells.Where(cell => cell.HasLoop))
+            {
+                cell.LoopController.UpdateRange();
+                cell.LoopController.UpdateUI();
             }
         }
-        while (curRange > maxRange) DecreaseRange();
-        if (globalMaxRange && maxRange > globalRange) maxRange = globalRange;
+
     }
-
-    public void UpdateAllPanels()
-    {
-        List<GameObject> Panels = ComputerCellsController.instance.loopPanels;
-        int panelCount = Panels.Count;
-
-        for (int i = 0; i < panelCount; i++)
-        {
-            if (Panels[i].activeInHierarchy) 
-            {
-                Panels[i].GetComponent<LoopController>().UpdateRange();
-                Panels[i].GetComponent<LoopController>().UpdateUI();
-            } 
-        } 
-    }
-
 }
