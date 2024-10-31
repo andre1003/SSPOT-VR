@@ -112,9 +112,9 @@ namespace SSpot.Ambient.ComputerCode
 
                 // Return the loop
                 var loop = cells[i].LoopController;
-                yield return (i, i + loop.curRange, loop.iterations);
+                yield return (i, i + loop.Range, loop.Iterations);
 
-                i += loop.curRange;
+                i += loop.Range;
                 sliceStartIndex = i;
             }
 

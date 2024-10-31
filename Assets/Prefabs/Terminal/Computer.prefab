@@ -1687,7 +1687,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7611308878448017415}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.576925, z: -0.070007324}
+  m_LocalPosition: {x: 0, y: 6.25, z: -0.070007324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1707,8 +1707,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.9
-  direction: 0
-  reverseOrder: 0
+  direction: 1
+  reverseOrder: 1
 --- !u!1 &7611308878625908568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,6 +1938,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellsParent: {fileID: 7611308878448017414}
+  loopSettings:
+    maxIterations: 10
+    maxRange: 1
   runButton: {fileID: 7155983885504161854}
   resetButton: {fileID: 7501771532610822891}
   clearButton: {fileID: 5697558897301738254}

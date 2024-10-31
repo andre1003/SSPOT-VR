@@ -45,8 +45,8 @@ namespace SSpot.Objectives
             if (!IsLoop) return cell.CurrentCube.type == Type;
                 
             // Both are loops, compare data and content
-            if (cell.LoopController.iterations != Iterations) return false;
-            if (cell.LoopController.curRange != Loop.Count) return false;
+            if (cell.LoopController.Iterations != Iterations) return false;
+            if (cell.LoopController.Range != Loop.Count) return false;
                 
             for (int j = 0; j < Loop.Count; j++)
                 if (Loop[j] != cells[i + j].CurrentCube.type) 

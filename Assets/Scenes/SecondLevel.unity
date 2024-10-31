@@ -233,6 +233,26 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 39
       objectReference: {fileID: 0}
+    - target: {fileID: 7001557836082142722, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
+      propertyPath: maxRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001557836082142722, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
+      propertyPath: globalMaxRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001557836082142722, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
+      propertyPath: settings.maxRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001557836082142722, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
+      propertyPath: overrideGlobalSettings
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001557836082142722, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
+      propertyPath: settings.maxIterations
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7323437514248997556, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
       propertyPath: sceneViewId
       value: 44
@@ -3526,6 +3546,14 @@ PrefabInstance:
     - target: {fileID: 804617555319394543, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
       propertyPath: sceneViewId
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2170496132997414244, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
+      propertyPath: loopSettings.maxRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2170496132997414244, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
+      propertyPath: loopSettings.maxIterations
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3556090188591174452, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
       propertyPath: sceneViewId

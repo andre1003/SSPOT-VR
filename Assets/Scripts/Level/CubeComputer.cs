@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using NaughtyAttributes;
 using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
 using SSpot.Utilities;
@@ -9,29 +11,41 @@ namespace SSpot.Level
 {
     public class CubeComputer : MonoBehaviour
     {
-        [Header("Cells")]
+        public bool CanHaveLoops => cellsParent.Children().Any(c => c.GetComponent<CodingCell>().LoopController);
+        
+        [BoxGroup("Cells")]
         [SerializeField] private Transform cellsParent;
 
-        [Header("Buttons")]
+        [BoxGroup("Cells"), ShowIf(nameof(CanHaveLoops))] 
+        [SerializeField] private LoopController.LoopSettings loopSettings;
+        public LoopController.LoopSettings GlobalLoopSettings => loopSettings;
+
+        [BoxGroup("Buttons")]
         [SerializeField] private PointerButton runButton;
+        [BoxGroup("Buttons")]
         [SerializeField] private PointerButton resetButton;
+        [BoxGroup("Buttons")]
         [SerializeField] private PointerButton clearButton;
         
-        [Header("Sounds")]
+        [BoxGroup("Sounds")]
         [SerializeField] private AudioSource audioSource;
+        [BoxGroup("Sounds")]
         [SerializeField] private AudioClip successSound;
+        [BoxGroup("Sounds")]
         [SerializeField] private AudioClip errorSound;
         
-        [Header("Materials")]
+        [BoxGroup("Materials")]
         [SerializeField] private MeshRenderer terminalRenderer;
+        [BoxGroup("Materials")]
         [SerializeField] private Material successTerminalMaterial;
+        [BoxGroup("Materials")]
         [SerializeField] private Material errorTerminalMaterial;
+        [BoxGroup("Materials")]
         [SerializeField] private float materialResetDelay = 5f;
 
         private CodingCell[] _cells = Array.Empty<CodingCell>();
         public IReadOnlyList<CodingCell> Cells => _cells;
 
-        //Consider having an index in each cell, and have AttachingCube and LoopController keep a reference to parent cell
         public int IndexOf(AttachingCube cube) => _cells.FindIndex(cell => cell.AttachingCube == cube);
         public int IndexOf(LoopController loop) => _cells.FindIndex(cell => cell.LoopController == loop);
 
@@ -81,10 +95,7 @@ namespace SSpot.Level
         
         #region Button Callbacks
         
-        private void OnRunButtonPressed()
-        {
-            LevelManager.Instance.Run(Cells);
-        }
+        private void OnRunButtonPressed() => LevelManager.Instance.Run(Cells);
         
         private void OnResetButtonPressed() => LevelManager.Instance.Reset();
         

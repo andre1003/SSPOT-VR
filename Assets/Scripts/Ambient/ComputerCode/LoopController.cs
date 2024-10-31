@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using Photon.Pun;
@@ -12,37 +11,45 @@ namespace SSpot.Ambient.ComputerCode
 {
     public class LoopController : MonoBehaviourPun
     {
+        [Serializable]
+        public class LoopSettings
+        {
+            [AllowNesting, MinValue(2)]
+            public int maxIterations = 10;
+            
+            [AllowNesting, MinValue(1)]
+            public int maxRange = 1;
+        }
+        
         public CodingCell ParentCell { get; set; }
         
-        [BoxGroup("LoopSettings")]
-        public int iterations;
+        [field: BoxGroup("Current Values"), SerializeField, ReadOnly]
+        public int Iterations { get; private set; } = 2;
+        
+        [field: BoxGroup("Current Values"), SerializeField, ReadOnly]
+        public int Range { get; private set; } = 1;
+        
+        [BoxGroup("Loop Settings"), SerializeField]
+        private bool overrideGlobalSettings;
+        [BoxGroup("Loop Settings"), SerializeField, ShowIf(nameof(overrideGlobalSettings))]
+        private LoopSettings settings;
 
-        [BoxGroup("LoopSettings")]
-        public int maxIterations = 10;
+        [BoxGroup("Visuals"), SerializeField]
+        private Text iterationsText;
+        [BoxGroup("Visuals"), SerializeField]
+        private Text rangeText;
+        [BoxGroup("Visuals"), SerializeField]
+         private GameObject Plane;
+        [BoxGroup("Visuals"), SerializeField]
+        private float planeSize = 0.9f;
+        [BoxGroup("Visuals"), SerializeField]
+        private GameObject IncreaseAmountButton;
 
-        [BoxGroup("LoopSettings")]
-        public int maxRange = 6;
+        private LoopSettings Settings => overrideGlobalSettings 
+            ? settings 
+            : ParentCell.Computer.GlobalLoopSettings;
 
-        [BoxGroup("LoopSettings")]
-        public bool globalMaxRange = false;
-
-        [BoxGroup("LoopSettings")]
-        [ShowIf("globalMaxRange")]
-        [MinValue(1)]
-        public int globalRange = 1;
-
-        [BoxGroup("Visuals")]
-        public Text iterationsText;
-        [BoxGroup("Visuals")]
-        public Text rangeText;
-        [BoxGroup("Visuals")]
-        public GameObject Plane;
-        [BoxGroup("Visuals")]
-        public float planeSize = 0.9f;
-        [BoxGroup("Visuals")]
-        public int curRange = 1;
-        [BoxGroup("Visuals")]
-        public GameObject IncreaseAmountButton;
+        private int _cachedMaxRange;
 
         private void OnEnable()
         {
@@ -63,11 +70,11 @@ namespace SSpot.Ambient.ComputerCode
         [PunRPC]
         private void IncreaseRPC()
         {
-            iterations++;
+            Iterations++;
 
-            if(iterations > maxIterations)
+            if(Iterations > Settings.maxIterations)
             {
-                iterations = maxIterations;
+                Iterations = Settings.maxIterations;
             }
 
             UpdateUI();
@@ -82,11 +89,11 @@ namespace SSpot.Ambient.ComputerCode
         [PunRPC]
         private void DecreaseRPC()
         {
-            iterations--;
+            Iterations--;
 
-            if(iterations < 1)
+            if(Iterations < 1)
             {
-                iterations = 1;
+                Iterations = 1;
             }
 
             UpdateUI();
@@ -94,25 +101,25 @@ namespace SSpot.Ambient.ComputerCode
 
         public void IncreaseRange()
         {
-            if (curRange >= maxRange) 
+            if (Range >= _cachedMaxRange) 
                 return;
         
             Vector3 tempVector = Plane.transform.localPosition;
             Plane.transform.localPosition = new (tempVector.x, tempVector.y - (planeSize / 2), tempVector.z);
             
             tempVector = Plane.transform.localScale;
-            Plane.transform.localScale = new (tempVector.x, tempVector.y, tempVector.z * (1 + (1f / curRange)));
+            Plane.transform.localScale = new (tempVector.x, tempVector.y, tempVector.z * (1 + (1f / Range)));
             
-            curRange++;
+            Range++;
             UpdateUI();
         }
         
         public void DecreaseRange()
         {
-            if (curRange == 1)
+            if (Range == 1)
                 gameObject.SetActive(false);
         
-            if (curRange <= 1)
+            if (Range <= 1)
                 return;
 
             Vector3 positionVector = Plane.transform.localPosition;
@@ -120,10 +127,10 @@ namespace SSpot.Ambient.ComputerCode
             Plane.transform.localPosition = positionVector;
         
             Vector3 scaleVector = Plane.transform.localScale;
-            scaleVector = new(scaleVector.x, scaleVector.y, scaleVector.z * (1 - (1f / curRange)));
+            scaleVector = new(scaleVector.x, scaleVector.y, scaleVector.z * (1 - (1f / Range)));
             Plane.transform.localScale = scaleVector;
         
-            curRange--;
+            Range--;
             UpdateUI();
         }
 
@@ -135,9 +142,9 @@ namespace SSpot.Ambient.ComputerCode
 
         private void UpdateUI()
         {
-            iterationsText.text = iterations.ToString();
-            IncreaseAmountButton.SetActive(curRange != maxRange);
-            rangeText.text = curRange == 1 ? "X" : "A";
+            iterationsText.text = Iterations.ToString();
+            IncreaseAmountButton.SetActive(Range < _cachedMaxRange);
+            rangeText.text = Range == 1 ? "X" : "A";
         }
 
         private void UpdateRange()
@@ -148,23 +155,16 @@ namespace SSpot.Ambient.ComputerCode
             if (nextPanelIndex == -1) nextPanelIndex = panelCount;
             
             int rangeToNext = nextPanelIndex - index;
-            if (maxRange > rangeToNext) maxRange = rangeToNext;
+            _cachedMaxRange = Mathf.Min(Settings.maxRange, rangeToNext);
             
-            while (curRange > maxRange) 
+            while (Range > _cachedMaxRange) 
                 DecreaseRange();
-            
-            if (globalMaxRange && maxRange > globalRange) 
-                maxRange = globalRange;
         }
 
         public void UpdateAllPanels()
         {
-            foreach (var cell in ParentCell.Computer.Cells.Where(cell => cell.HasLoop))
-            {
-                cell.LoopController.UpdateRange();
-                cell.LoopController.UpdateUI();
-            }
+            UpdateRange();
+            UpdateUI();
         }
-
     }
 }
