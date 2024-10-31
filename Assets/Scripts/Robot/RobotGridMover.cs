@@ -120,7 +120,7 @@ namespace SSpot.Robot
                 ? (left ? _animator.TurnLeftClip.length : _animator.TurnRightClip.length)
                 : turnTime;
             
-            yield return CoroutineUtilities.SmoothCoroutine(turnTime,
+            yield return CoroutineUtilities.SmoothCoroutine(duration,
                 t => transform.forward = Vector3.Slerp(originalForward, targetForward, t));
             yield return _animator.WaitForIdle();
             

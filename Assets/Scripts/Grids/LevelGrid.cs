@@ -76,8 +76,7 @@ namespace SSpot.Grids
             {
                 obj.Grid = this;
                 var cell = WorldToCell(obj.gameObject.transform.position);
-                obj.GridPosition = cell;
-                this[cell].Objects.Add(obj);
+                ChangeNode(obj, cell);
                 
                 if (prefabOnlyInWalkable && !this[cell].CanWalk)
                     Destroy(this[cell].NodeObject);
@@ -86,7 +85,9 @@ namespace SSpot.Grids
 
         public void ChangeNode(ILevelGridObject obj, Vector2Int target)
         {
-            this[obj.GridPosition].Objects.Remove(obj);
+            if (InGrid(obj.GridPosition)) 
+                this[obj.GridPosition].Objects.Remove(obj);
+            
             this[target].Objects.Add(obj);
             obj.GridPosition = target;
             obj.gameObject.transform.position = GetCellCenterWorld(target);
