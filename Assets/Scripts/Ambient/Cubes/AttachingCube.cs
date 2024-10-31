@@ -51,6 +51,7 @@ public class AttachingCube : MonoBehaviourPun
         if(selectedCube.Cube.IsLoop)
         {
             ParentCell.SetLoop(true);
+            PlayerSetup.Local.DestroyCubeOnHand();
         }
         else
         {
@@ -91,11 +92,16 @@ public class AttachingCube : MonoBehaviourPun
     [PunRPC]
     public void ClearCellRPC()
     {
+        if (CurrentCube == null)
+            return;
+        
         // Destroy cube from cube holder
         Destroy(cubeHolder.transform.GetChild(0).gameObject);
 
         // Play release sound
         audioSource.clip = releasingCube;
         audioSource.Play();
+
+        CurrentCube = null;
     }
 }
