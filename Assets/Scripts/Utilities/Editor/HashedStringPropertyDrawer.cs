@@ -5,7 +5,7 @@ using SSpot.AnimatorUtilities;
 using UnityEditor;
 using UnityEngine;
 
-namespace SSPot.Editor
+namespace SSPot.Utilities.Editor
 {
     [CustomPropertyDrawer(typeof(HashedString))]
     public class HashedStringPropertyDrawer : PropertyDrawer

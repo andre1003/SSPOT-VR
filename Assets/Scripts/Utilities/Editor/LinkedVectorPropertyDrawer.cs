@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using SSpot.Utilities;
+using SSpot.Utilities.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace SSPot.Editor
+namespace SSPot.Utilities.Editor
 {
     [CustomPropertyDrawer(typeof(LinkedVectorAttribute))]
     public class LinkedVectorPropertyDrawer : PropertyDrawer

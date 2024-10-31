@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace SSPot.Editor
+namespace SSPot.Utilities.Editor
 {
     /// <summary>
     /// A utility struct to temporarily set the label width in the Unity editor GUI.
