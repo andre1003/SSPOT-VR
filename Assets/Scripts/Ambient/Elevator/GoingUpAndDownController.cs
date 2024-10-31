@@ -3,8 +3,6 @@ using Photon.Pun;
 
 public class GoingUpAndDownController : MonoBehaviourPun
 {
-    private static GameObject Player => AmbientSetup.Instance.LocalPlayer.gameObject;
-    
     // GameObjects
     public GameObject playerCodingPlatform;         // Elevator platform GameObject
     public GameObject instructionsCodingPlatform;   // Elevator instructions blackboard GameObject
@@ -46,14 +44,14 @@ public class GoingUpAndDownController : MonoBehaviourPun
     /// </summary>
     private void GoUp()
     {
-        photonView.RPC("GoUpRpc", RpcTarget.AllBuffered);
+        photonView.RPC(nameof(GoUpRpc), RpcTarget.AllBuffered);
     }
 
     [PunRPC]
     private void GoUpRpc()
     {
         // Enable GoingUp
-        Player.GetComponent<GoingUp>().enabled = true;
+        PlayerSetup.Local.GetComponent<GoingUp>().enabled = true;
         playerCodingPlatform.GetComponent<GoingUp>().enabled = true;
         GetComponent<GoingUp>().enabled = true;
 
@@ -75,19 +73,19 @@ public class GoingUpAndDownController : MonoBehaviourPun
     /// </summary>
     private void GoDown()
     {
-        photonView.RPC("GoDownRpc", RpcTarget.AllBuffered);
+        photonView.RPC(nameof(GoDownRpc), RpcTarget.AllBuffered);
     }
 
     [PunRPC]
     private void GoDownRpc()
     {
         // Enable GoingDown
-        Player.GetComponent<GoingDown>().enabled = true;
+        PlayerSetup.Local.GetComponent<GoingDown>().enabled = true;
         playerCodingPlatform.GetComponent<GoingDown>().enabled = true;
         GetComponent<GoingDown>().enabled = true;
 
         // Player cannot attach any cube when going down
-        Player.GetComponent<InstantiateAttachAndDestroyBlocks>().enabled = false;
+        PlayerSetup.Local.GetComponent<InstantiateAttachAndDestroyBlocks>().enabled = false;
 
         // Setup GameObjects
         instructionsCodingPlatform.SetActive(true);

@@ -7,11 +7,6 @@ public class AmbientSetup : Singleton<AmbientSetup>
 {
     [SerializeField] private GameObject computerToHide;
     public List<TeleportToObject> teleports = new();
-
-    private readonly List<PhotonView> _players = new();
-    public IReadOnlyList<PhotonView> Players => _players;
-    
-    public PhotonView LocalPlayer { get; private set; }
     
     private void Start()
     {
@@ -23,18 +18,5 @@ public class AmbientSetup : Singleton<AmbientSetup>
         
         if (computerToHide)
             computerToHide.SetActive(false);
-    }
-
-    /// <summary>
-    /// Configure ambient with local player settings.
-    /// </summary>
-    /// <param name="playerId">Local player Photon View ID.</param>
-    public void ConfigureAmbient(int playerId)
-    {
-        PhotonView player = PhotonView.Find(playerId);
-        _players.Add(player);
-        
-        if (player.IsMine)
-            LocalPlayer = player;
     }
 }

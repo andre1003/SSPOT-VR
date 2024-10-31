@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviourPun
 {
-    // Ambient setup reference
-    public AmbientSetup ambientSetup;
-
     // Player prefab
     public GameObject playerPrefab;
 
@@ -66,11 +63,5 @@ public class Spawner : MonoBehaviourPun
 
         // Setup player crosshair
         hudCanvas.worldCamera = player.GetComponentInChildren<CameraPointer>().uiCamera;
-
-        // Ambient setup
-        if(ambientSetup != null)
-        {
-            ambientSetup.ConfigureAmbient(viewId);
-        }
     }
 }

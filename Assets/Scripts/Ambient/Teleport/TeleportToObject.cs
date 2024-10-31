@@ -24,7 +24,7 @@ public class TeleportToObject : MonoBehaviourPun
         photonView.RPC(nameof(DisableTeleportMesh), RpcTarget.AllBuffered);
 
         // Teleport player
-        AmbientSetup.Instance.LocalPlayer.transform.position = transform.position;
+        PlayerSetup.Local.transform.position = transform.position;
 
         // Add player on elevator
         ElevatorSync.instance.AddPlayerOnElevator();

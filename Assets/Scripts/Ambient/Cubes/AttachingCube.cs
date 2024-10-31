@@ -1,25 +1,19 @@
 ﻿using UnityEngine;
 using Photon.Pun;
-using NaughtyAttributes;
+using SSpot.Ambient.ComputerCode;
 
 public class AttachingCube : MonoBehaviourPun
 {
+    public CodingCell ParentCell { get; set; }
+    
     public CubeClass CurrentCube { get; private set; }
-
-    public int cubeIndex;
 
     // Coding cell
     public GameObject cubeHolder;       // Coding cell cube holder
-    [BoxGroup("CubeInfo")]
-    public CubeClass cube;
 
     // Audio
     public AudioClip selectingCube;     // Cube select audio
     public AudioClip releasingCube;     // Cube release audio
-
-
-    // Selected cube
-    private GameObject selectedCube;    // Selected cube GameObject
 
     // Audio source
     [SerializeField] private AudioSource audioSource;    // Audio source
@@ -29,8 +23,8 @@ public class AttachingCube : MonoBehaviourPun
     /// </summary>
     public void OnPointerClick()
     {
-        int localPlayerId = AmbientSetup.Instance.LocalPlayer.ViewID;
-        AttachingHandler(localPlayerId);
+        GameObject hand = PlayerSetup.Local.Hand;
+        AttachingHandler(hand);
     }
 
     /// <summary>
@@ -39,49 +33,43 @@ public class AttachingCube : MonoBehaviourPun
     /// <para>If there is a cube in player hand and the coding cell cube holder is free, then attach it to the clicked cube holder.</para>
     /// <para>If there is a cube in the coding cell but not in the player hand, remove the cube from coding cell.</para>
     /// </summary>
-    private void AttachingHandler(int playerId)
+    private void AttachingHandler(GameObject hand)
     {
-        //TODO dude I think I can get rid of AmbientSetup and just use PhotonView.Find
-        // Get hand
-        GameObject hand = PhotonView.Find(playerId).gameObject.GetComponent<PlayerSetup>().playerHand;
-
-        // Check if player hand has a child
-        if(hand.transform.childCount == 1)
+        if (hand.transform.childCount == 1)
         {
-            // Set selected cube
-            selectedCube = hand.transform.GetChild(0).gameObject;
-            CurrentCube = selectedCube.GetComponent<CloningCube>().Cube;
-
-            // If is a loop cube (This gives an object reference not set because playerID is null when calling the left cell)
-            if(CurrentCube.IsLoop)
-            {
-                ComputerCellsController.instance.GetLoopPanelAtIndex(cubeIndex).SetActive(true);
-                PlayerSetup.instance.DestroyCubeOnHand();
-                
-                return;
-            }
-
-            // If cube holder has no child
-            if(cubeHolder.transform.childCount == 0)
-            {
-                int selectedCubeID = selectedCube.GetComponent<PhotonView>().ViewID;
-                photonView.RPC(nameof(AttachCubeRPC), RpcTarget.AllBuffered, selectedCubeID);
-            }
+            var cube = hand.transform.GetChild(0).GetComponent<CloningCube>();
+            AttachCube(cube);
         }
-
-        // If cube holder has a child and player hand has no child 
-        else if(cubeHolder.transform.childCount == 1 && hand.transform.childCount == 0)
+        else if (cubeHolder.transform.childCount == 1)
         {
-            photonView.RPC(nameof(ClearCellRPC), RpcTarget.AllBuffered);
+            ClearCellRPC();
         }
+    }
+
+    private void AttachCube(CloningCube selectedCube)
+    {
+        if(selectedCube.Cube.IsLoop)
+        {
+            ParentCell.SetLoop(true);
+        }
+        else
+        {
+            photonView.RPC(nameof(ReplaceCubeRPC), RpcTarget.AllBuffered, selectedCube);
+        }
+    }
+
+    [PunRPC]
+    private void ReplaceCubeRPC(CloningCube newCube)
+    {
+        if (CurrentCube != null)
+            ClearCellRPC();
+        AttachCubeRPC(newCube);
     }
 
 
     [PunRPC]
-    private void AttachCubeRPC(int selectedCubeID)
+    private void AttachCubeRPC(CloningCube selectedCube)
     {
-        GameObject selectedCube = PhotonView.Find(selectedCubeID).gameObject;
-
         // Attach the selected cube to cubeHolder
         selectedCube.transform.SetParent(cubeHolder.transform);
 
@@ -89,13 +77,15 @@ public class AttachingCube : MonoBehaviourPun
         selectedCube.GetComponent<BoxCollider>().enabled = false;
 
         // Set selected cube transform
-        selectedCube.transform.localPosition = new Vector3(0f, 0f, 0f);     // Position
-        selectedCube.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);   // Rotation
-        selectedCube.transform.localScale = new Vector3(1f, 1f, 1f);        // Scale
+        selectedCube.transform.localPosition = Vector3.zero;
+        selectedCube.transform.rotation = Quaternion.identity;
+        selectedCube.transform.localScale = Vector3.one;
 
         // Play select cube sound
         audioSource.clip = selectingCube;
         audioSource.Play();
+        
+        CurrentCube = selectedCube.GetComponent<CloningCube>().Cube;
     }
 
     [PunRPC]
