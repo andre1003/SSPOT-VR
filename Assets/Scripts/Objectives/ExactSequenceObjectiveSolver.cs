@@ -7,8 +7,13 @@ namespace SSpot.Objectives
 {
     public class ExactSequenceObjectiveSolver : LevelObjectiveSolver
     {
+        [Tooltip("If true, the solver will only report an error or success when the entire code is executed.")]
         [SerializeField] private bool waitForEndOfSequence;
+        
+        [Tooltip("If true, the solver will evaluate the compiled code. If false, the solver will evaluate the raw code.\n" +
+                 "If evaluating compiled code, unrolled loops will be equivalent to normal loops.")]
         [SerializeField] private bool evaluateCompiledCode;
+        
         [SerializeField, Multiline] private string errorMessage = "Deu ERRO!\nCódigo incorreto! Tente novamente!";
         [SerializeField] private List<ExpectedCube> sequence = new();
         
@@ -33,18 +38,16 @@ namespace SSpot.Objectives
                 ReportResult(result);
         }
 
-        public override void EvaluatePreCompilation(IReadOnlyList<CodingCell> cubes)
+        public override void EvaluatePreCompilation(IReadOnlyList<CodingCell> cells)
         {
             if (evaluateCompiledCode) return;
 
-            var expected = sequence;
-            var actual = cubes
-                .SkipWhile(c => c.CurrentCube.type == Cube.CubeType.Begin)
-                .TakeWhile(c => c.CurrentCube.type != Cube.CubeType.End)
-                //.Where(c => c.CurrentCube is {type: not Cube.CubeType.Begin and not Cube.CubeType.End})
-                .ToList();
+            // Begin and end are optional
+            List<CodingCell> actual = new(cells);
+            actual.RemoveAt(0);
+            actual.RemoveAt(actual.Count - 1);
             
-            Report(AreCellsEqualToCubes(actual, expected));
+            Report(AreCellsEqualToCubes(sequence, actual));
         }
 
         public override void EvaluatePostCompilation(IReadOnlyList<Cube> cubes)
@@ -62,15 +65,16 @@ namespace SSpot.Objectives
             Report(expected.SequenceEqual(actual));
         }
 
-        private static bool AreCellsEqualToCubes(List<CodingCell> cells, List<ExpectedCube> cubes)
+        private static bool AreCellsEqualToCubes(List<ExpectedCube> expected, List<CodingCell> actual)
         {
-            for (int i = 0; i < cells.Count; i++)
+            // We know expected.Count <= actual.Count because loops are collapsed into a single entry in expected
+            for (int actualIndex = 0, expectedIndex = 0; actualIndex < actual.Count; actualIndex++, expectedIndex++)
             {
-                if (!cubes[i].IsEquivalentTo(cells, i)) 
+                if (!expected[expectedIndex].IsEquivalentTo(actual, actualIndex)) 
                     return false;
                 
-                if (cubes[i].IsLoop)
-                    i += cubes[i].Loop.Count - 1;
+                if (expected[expectedIndex].IsLoop)
+                    actualIndex += expected[expectedIndex].Loop.Count - 1;
             }
 
             return true;

@@ -18,7 +18,7 @@ namespace SSpot.Objectives
         public int Iterations;
         
         [ShowIf(nameof(IsLoop)), AllowNesting, Inline]
-        public NestedList<ExpectedCube> Loop;
+        public NestedList<Cube.CubeType> Loop;
         
         public IEnumerable<Cube.CubeType> GetCubeTypes()
         {
@@ -30,7 +30,7 @@ namespace SSpot.Objectives
                 
             for (var i = 0; i < Iterations; i++)
                 foreach (var expectedCube in Loop)
-                    yield return expectedCube.Type;
+                    yield return expectedCube;
         }
 
         public bool IsEquivalentTo(List<CodingCell> cells, int i)
@@ -49,7 +49,7 @@ namespace SSpot.Objectives
             if (cell.LoopController.curRange != Loop.Count) return false;
                 
             for (int j = 0; j < Loop.Count; j++)
-                if (Loop[j].Type != cells[i + j].CurrentCube.type) 
+                if (Loop[j] != cells[i + j].CurrentCube.type) 
                     return false;
                 
             return true;

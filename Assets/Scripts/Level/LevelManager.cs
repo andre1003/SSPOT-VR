@@ -78,10 +78,6 @@ namespace SSpot.Level
             if (IsRunning)
                 return;
             
-            Objective.EvaluatePreCompilation(cells);
-            if (CurrentResult.Type == ObjectiveResult.ResultType.Error)
-                return;
-
             var compilation = compiler.Compile(cells);
             if (compilation.IsError)
             {
@@ -89,6 +85,10 @@ namespace SSpot.Level
                 HandleObjectiveResult(compilationError);
                 return;
             }
+            
+            Objective.EvaluatePreCompilation(cells);
+            if (CurrentResult.Type == ObjectiveResult.ResultType.Error)
+                return;
 
             Objective.EvaluatePostCompilation(compilation.Result);
             if (CurrentResult.Type == ObjectiveResult.ResultType.Error)

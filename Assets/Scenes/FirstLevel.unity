@@ -727,7 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba089ca6019aac469382e9b5111b520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambientSetup: {fileID: 272385113}
   playerPrefab: {fileID: 7192900133275044985, guid: 07543ddc30ead5e488692b1bd695b6e9, type: 3}
   hudCanvas: {fileID: 1123882849483805622}
   pingText: {fileID: 0}
@@ -750,19 +749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fcacb12f9f42f419674b1f79ec1c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elevator: {fileID: 1418575958}
-  computer: {fileID: 7611308877597067553}
-  cloningCubesList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  computerToHide: {fileID: 0}
   teleports:
   - {fileID: 1846614451}
   - {fileID: 1184875453}
   - {fileID: 331138569}
-  computerToHide: {fileID: 0}
 --- !u!114 &272385114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,7 +1110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed87f0821f07d42835cdd596dca750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   teleportLocationMesh: {fileID: 331138566}
   isForPlayer1: 0
 --- !u!82 &331138570
@@ -4300,7 +4290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed87f0821f07d42835cdd596dca750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   teleportLocationMesh: {fileID: 1184875456}
   isForPlayer1: 1
 --- !u!82 &1184875454
@@ -4775,7 +4764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146fa3ab926c940498f3d36a0170396b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   playerCodingPlatform: {fileID: 811475837}
   instructionsCodingPlatform: {fileID: 566334977}
   location1Initial: {fileID: 1846614450}
@@ -5383,43 +5371,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitForEndOfSequence: 0
+  evaluateCompiledCode: 0
   errorMessage: "Deu ERRO!\nC\xF3digo incorreto! Tente novamente!"
   sequence:
-  - type: 1
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
-  - type: 5
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
-  - type: 5
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
-  - type: 3
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
-  - type: 5
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
-  - type: 4
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
-  - type: 2
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 0}
-    loopList:
-      loopList: []
+  - Type: 5
+    Iterations: 0
+    Loop:
+      List: 
+  - Type: 5
+    Iterations: 0
+    Loop:
+      List: 
+  - Type: 3
+    Iterations: 0
+    Loop:
+      List: 
+  - Type: 5
+    Iterations: 0
+    Loop:
+      List: 
+  - Type: 4
+    Iterations: 0
+    Loop:
+      List: 
 --- !u!1001 &1523305272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6731,7 +6705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ed87f0821f07d42835cdd596dca750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   teleportLocationMesh: {fileID: 27969751}
   isForPlayer1: 0
 --- !u!82 &1846614453
@@ -9466,17 +9439,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7611308878448017414, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
   m_PrefabInstance: {fileID: 7611308877597067551}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7611308877597067553 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2170496132997414244, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
-  m_PrefabInstance: {fileID: 7611308877597067551}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e5e5db632f04fa6a65f328d7e77d476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7901390213523946707
 PrefabInstance:
   m_ObjectHideFlags: 0
