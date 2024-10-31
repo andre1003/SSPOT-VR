@@ -23,11 +23,11 @@ namespace SSpot.Labirinth
         [field: SerializeField]
         public Text InstructionsText { get; private set; }
         
-        [field: SerializeField]
+        /*[field: SerializeField]
         public ResetCubes ResetCubes { get; private set; }
         
         [field: SerializeField]
-        public RunCubes RunCubes { get; private set; }
+        public RunCubes RunCubes { get; private set; }*/
     
         public int Index { get; private set; }
     

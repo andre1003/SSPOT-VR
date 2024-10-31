@@ -70,13 +70,13 @@ namespace SSpot.Labirinth
         // Run command coroutine
         private Coroutine runCommandCoroutine;
 
-        public ComputerCellsController cellsController;
+        //public ComputerCellsController cellsController;
 
         // Start is called before the first frame update
         void Start()
         {
-            if(cellsController == null)
-                cellsController = ComputerCellsController.instance;
+            /*if(cellsController == null)
+                cellsController = ComputerCellsController.instance;*/
 
             // Setup robot audio-visual attributes
             robotAnimator = robot.GetComponent<Animator>();
@@ -303,7 +303,7 @@ namespace SSpot.Labirinth
                 if(loopCommands[animationIndex] == "Repeat")
                 {
                     // Setup iterations variables
-                    iteration = cellsController.GetRightCellAtIndex(animationIndex).GetComponent<LoopController>().iterations;
+                    //iteration = cellsController.GetRightCellAtIndex(animationIndex).GetComponent<LoopController>().iterations;
                     iterationStart = animationIndex;
                     iterationEnd = FindRepeatEnd(iterationStart);
                 }

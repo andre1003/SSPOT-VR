@@ -5644,17 +5644,33 @@ MonoBehaviour:
   errorMessage: "Deu ERRO!\nC\xF3digo incorreto! Tente novamente!"
   sequence:
   - Type: 6
-    Iterations: 2
+    Iterations: 4
     Loop:
-      List: []
-  - Type: 0
+      List:
+      - Type: 69
+        Iterations: 0
+        Loop:
+          List: []
+  - Type: 5
     Iterations: 0
     Loop:
       List: []
-  - Type: 0
-    Iterations: 0
+  - Type: 6
+    Iterations: 5
     Loop:
-      List: []
+      List:
+      - Type: 0
+        Iterations: 0
+        Loop:
+          List: []
+  - Type: 5
+    Iterations: 5
+    Loop:
+      List:
+      - Type: 0
+        Iterations: 0
+        Loop:
+          List: []
 --- !u!1 &1649526232
 GameObject:
   m_ObjectHideFlags: 0

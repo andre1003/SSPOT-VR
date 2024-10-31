@@ -50,7 +50,7 @@ namespace SSpot.Labirinth
             ResetBlocks();
 
             // If there is a cube in player's hand
-            PlayerSetup.instance.DestroyCubeOnHand();
+            //PlayerSetup.instance.DestroyCubeOnHand();
         }
 
         /// <summary>

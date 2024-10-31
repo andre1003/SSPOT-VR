@@ -114,7 +114,7 @@ namespace SSpot.Labirinth
 
         public void ResetRobot()
         {
-            _currentCoder.ResetCubes.Reset();
+            //_currentCoder.ResetCubes.Reset();
 
             robot.Animator.Reset();
             
