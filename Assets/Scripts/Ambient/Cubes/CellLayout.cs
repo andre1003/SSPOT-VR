@@ -1,15 +1,16 @@
+using NaughtyAttributes;
 using Photon.Pun;
-using SSpot.ComputerCode;
+using SSpot.Ambient.ComputerCode;
 using UnityEngine;
 
-namespace SSpot.Cubes
+namespace SSpot.Ambient.Cubes
 {
     [ExecuteAlways]
     public class CellLayout : MonoBehaviourPun
     {
         [SerializeField] private CodingCell cellPrefab;
         [SerializeField] private Transform cellHolder;
-        [SerializeField] private int cellCount = 7;
+        [SerializeField, MinValue(0)] private int cellCount = 7;
         
 #if UNITY_EDITOR
         
@@ -52,9 +53,6 @@ namespace SSpot.Cubes
                 }
                 
                 child.name = cellPrefab.name + i;
-
-                var codingCell = child.GetComponent<CodingCell>();
-                codingCell.AttachingCube.cubeIndex = i;
             }
         }
         

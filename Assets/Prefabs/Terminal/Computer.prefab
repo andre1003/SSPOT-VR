@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.75
   direction: 0
+  reverseOrder: 0
 --- !u!1 &360400169230193069
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 1.35
   direction: 6
+  reverseOrder: 0
 --- !u!1 &4725060520288128858
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.9
   direction: 4
+  reverseOrder: 0
 --- !u!1 &5146865312679728961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1492,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 15
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7611308878067479612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1668,7 +1671,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7611308878448017414}
-  - component: {fileID: 7611308878448017413}
   - component: {fileID: 770880051515192698}
   m_Layer: 0
   m_Name: CodingCells
@@ -1692,21 +1694,6 @@ Transform:
   m_Father: {fileID: 7611308879639158656}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7611308878448017413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7611308878448017415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c23ea15b375d0d4896c4afc392192c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCells: []
-  rightCells: []
-  loopPanels: []
 --- !u!114 &770880051515192698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1721,6 +1708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.9
   direction: 0
+  reverseOrder: 0
 --- !u!1 &7611308878625908568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,14 +2267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744dbe48a6b2cba408e480a14896dbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands:
-  - {fileID: 0}
   Cube:
     type: 0
-    loopNumber: 0
-    loopRangeIndexes: {x: 0, y: 1}
-    loopList:
-      loopList: []
   audioSource: {fileID: 2216187242356557927}
 --- !u!1 &7904828765507935333
 GameObject:
@@ -2336,6 +2318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 1.35
   direction: 6
+  reverseOrder: 0
 --- !u!1 &8397500771242085627
 GameObject:
   m_ObjectHideFlags: 0

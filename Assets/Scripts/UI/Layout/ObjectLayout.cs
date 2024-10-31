@@ -13,6 +13,7 @@ namespace SSpot.UI.Layout
         
         public float distanceBetweenObjects = 1f;
         public LayoutDirection direction = LayoutDirection.Down;
+        public bool reverseOrder = false;
 
         private readonly List<Transform> _activeChildren = new();
         public IReadOnlyList<Transform> ActiveChildren => _activeChildren;
@@ -50,8 +51,11 @@ namespace SSpot.UI.Layout
         
         private void UpdatePositions()
         {
+            IEnumerable<Transform> children = _activeChildren;
+            if (reverseOrder) children = children.Reverse();
+            
             Vector3 pos = LocalOrigin;
-            foreach (var child in _activeChildren)
+            foreach (var child in children)
             {
                 child.localPosition = pos;
                 pos += direction.GetDirection() * distanceBetweenObjects;

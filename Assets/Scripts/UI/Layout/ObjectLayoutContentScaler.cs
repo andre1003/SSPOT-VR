@@ -11,9 +11,9 @@ namespace SSpot.UI.Layout
         public float paddingStart;
         public float paddingEnd;
 
-        private void OnEnable() => objectLayout.OnLayoutChanged += Update;
+        private void OnEnable() => RegisterEvents(objectLayout);
 
-        private void OnDisable() => objectLayout.OnLayoutChanged -= Update;
+        private void OnDisable() => DeregisterEvents(_oldLayout);
         
         private void Update()
         {
@@ -43,22 +43,29 @@ namespace SSpot.UI.Layout
             finalScale[axis] = finalLen / baseMeshLen;
             transformToScale.localScale = finalScale;
         }
+        
+        private void RegisterEvents(ObjectLayout layout)
+        {
+            if (!layout) return;
+            
+            layout.OnLayoutChanged -= Update;
+            layout.OnLayoutChanged += Update;
+        }
+        
+        private void DeregisterEvents(ObjectLayout layout)
+        {
+            if (!layout) return;
+            
+            layout.OnLayoutChanged -= Update;
+        }
 
         private ObjectLayout _oldLayout;
         private void OnValidate()
         {
             if (_oldLayout == objectLayout) return;
             
-            if (_oldLayout)
-            {
-                _oldLayout.OnLayoutChanged -= Update;
-            }
-
-            if (objectLayout)
-            {
-                objectLayout.OnLayoutChanged -= Update;
-                objectLayout.OnLayoutChanged += Update;
-            }
+            DeregisterEvents(_oldLayout);
+            RegisterEvents(objectLayout);
                         
             _oldLayout = objectLayout;
         } 
