@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SSpot.Ambient.ComputerCode;
 using SSpot.Level;
 using UnityEngine;
 
@@ -28,7 +29,12 @@ namespace SSpot.Objectives
             }
         }
 
-        public virtual void EvaluateCubes(IReadOnlyList<Cube> cubes)
+        public virtual void EvaluatePreCompilation(IReadOnlyList<CodingCell> cubes)
+        {
+            
+        }
+
+        public virtual void EvaluatePostCompilation(IReadOnlyList<Cube> cubes)
         {
         }
     }

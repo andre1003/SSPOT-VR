@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
-using SSpot.ComputerCode;
+using SSpot.Ambient.ComputerCode;
 using SSpot.Objectives;
 using SSpot.Robot;
 using SSpot.Utilities;
@@ -76,6 +77,10 @@ namespace SSpot.Level
         {
             if (IsRunning)
                 return;
+            
+            Objective.EvaluatePreCompilation(cells);
+            if (CurrentResult.Type == ObjectiveResult.ResultType.Error)
+                return;
 
             var compilation = compiler.Compile(cells);
             if (compilation.IsError)
@@ -85,15 +90,13 @@ namespace SSpot.Level
                 return;
             }
 
-            var cubes = compilation.Result;
-            
-            Objective.EvaluateCubes(cubes);
+            Objective.EvaluatePostCompilation(compilation.Result);
             if (CurrentResult.Type == ObjectiveResult.ResultType.Error)
                 return;
 
             IsRunning = true;
             OnStartRunning.Invoke();
-            _runCoroutine = StartCoroutine(runner.RunCubesCoroutine(cubes, Robot, () =>
+            _runCoroutine = StartCoroutine(runner.RunCubesCoroutine(compilation.Result, Robot, () =>
             {
                 IsRunning = false;
                 _runCoroutine = null;
@@ -157,6 +160,10 @@ namespace SSpot.Level
                 case ObjectiveResult.ResultType.Success:
                     Success();
                     break;
+                case ObjectiveResult.ResultType.None:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
         
