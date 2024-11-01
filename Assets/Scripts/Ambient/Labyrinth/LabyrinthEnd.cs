@@ -1,6 +1,6 @@
 using SSpot.Grids;
 
-namespace SSpot.Labirinth
+namespace SSPot.Ambient.Labyrinth
 {
     public class LabyrinthEnd : GridObject
     {

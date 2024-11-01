@@ -4,7 +4,7 @@ using SSpot.Robot;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SSpot.Labirinth
+namespace SSPot.Ambient.Labyrinth
 {
     public class LabyrinthManager : MonoBehaviour
     {

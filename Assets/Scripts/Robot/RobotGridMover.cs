@@ -31,8 +31,8 @@ namespace SSpot.Robot
             {
                 value.x = Mathf.Clamp(value.x, -1, 1);
                 value.y = Mathf.Clamp(value.y, -1, 1);
-                
-                if (value is { x: 0, y: 0 } or { x: 1, y: 1 })
+
+                if (value is {x: 0, y: 0} or {x: 1, y: 1} or {x: -1, y: -1}) 
                 {
                     Debug.LogWarning($"Invalid facing {value} for robot. Correcting to {Vector2Int.right}.");
                     value = Vector2Int.right;

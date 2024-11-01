@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-namespace SSpot.Labirinth
+namespace SSPot.Ambient.Labyrinth
 {
     //TODO delete
     public class ResetCubesAlt : MonoBehaviourPun

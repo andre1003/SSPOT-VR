@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace SSpot.Labirinth
+namespace SSPot.Ambient.Labyrinth
 {
     public class RobotPreciseMovement : MonoBehaviour
     {

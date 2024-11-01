@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SSpot.Labirinth
+namespace SSPot.Ambient.Labyrinth
 {
     [Serializable]
     public class LabyrinthPlayer : MonoBehaviour
