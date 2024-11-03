@@ -11,6 +11,9 @@ namespace SSpot.Robot
     [RequireComponent(typeof(RobotAnimator))]
     public class RobotGridMover : MonoBehaviourPun, ILevelGridObject
     {
+        public event Action OnFailedToMove;
+        
+        [Tooltip("If true, the time to walk and turn is determined by the duration of the walk and turn animations.")]
         [SerializeField] private bool useClipDuration; 
         
         [HideIf(nameof(useClipDuration))]
@@ -51,7 +54,10 @@ namespace SSpot.Robot
 
         private Vector2Int _originalFacing;
         private Vector2Int _originalGridPosition;
-
+        
+        public void SetOriginalPosition(Vector2Int position, Vector2Int facing) =>
+            (_originalGridPosition, _originalFacing) = (position, facing);
+        
         public void ChangeNode(Vector2Int target) => Grid.ChangeNode(this, target);
         
         private void Awake()
@@ -62,8 +68,7 @@ namespace SSpot.Robot
 
         private void Start()
         {
-            _originalFacing = Facing;
-            _originalGridPosition = GridPosition;
+            SetOriginalPosition(GridPosition, Facing);
         }
 
         #region MOVE
@@ -75,15 +80,16 @@ namespace SSpot.Robot
             var fromCell = GridPosition;
             var toCell = fromCell + Facing;
 
+            //I think it could be cute to have an animation for failed moves, like a head nod or a stumble
             if (!Grid.InGrid(toCell))
             {
-                Debug.Log($"Can't walk out of grid, from {fromCell} to {toCell}");
+                OnFailedToMove?.Invoke();
                 yield break;
             }
 
             if (!Grid[toCell].CanWalk)
             {
-                Debug.Log($"Can't walk from {fromCell} to {toCell}");
+                OnFailedToMove?.Invoke();
                 yield break;
             }
 

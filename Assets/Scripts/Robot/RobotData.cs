@@ -30,7 +30,7 @@ namespace SSpot.Robot
                 Debug.LogError($"Missing component of type {typeof(T).Name} in {nameof(RobotData)}", gameObject);
         }
 
-        public void Reset()
+        public void ResetRobot()
         {
             mover.Reset();
             animator.Reset();

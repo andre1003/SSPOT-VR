@@ -9,8 +9,9 @@ namespace SSPot.Ambient.Labyrinth
     {
         [field: SerializeField]
         public GameObject Computer { get; private set; }
-    
-        [field: SerializeField]
+        
+        //TODO move roof handling to an array in LabyrinthManager
+        [field: SerializeField, Tooltip("The roof which covers this player's view of the map.")]
         public GameObject Roof { get; private set; }
     
         [field: SerializeField]
@@ -19,15 +20,11 @@ namespace SSPot.Ambient.Labyrinth
         [field: SerializeField]
         public GameObject Instructions { get; private set; }
     
-        //TODO why are we not using TMPro
         [field: SerializeField]
         public Text InstructionsText { get; private set; }
         
-        /*[field: SerializeField]
-        public ResetCubes ResetCubes { get; private set; }
-        
         [field: SerializeField]
-        public RunCubes RunCubes { get; private set; }*/
+        public GameObject ErrorScreen { get; private set; }
     
         public int Index { get; private set; }
     
@@ -37,14 +34,14 @@ namespace SSPot.Ambient.Labyrinth
         {
             Index = index;
             IsLocal = localIndex == index;
-        
-            Roof.SetActive(IsLocal);
         }
     
         public void SetCoder(bool isCoder)
         {
-            Computer.SetActive(isCoder);
             TV.SetActive(!isCoder);
+            Computer.SetActive(isCoder);
+            Roof.SetActive(isCoder);
+            ErrorScreen.SetActive(isCoder);
         }
     
         public void SetInstructions(string instructions)
@@ -52,12 +49,13 @@ namespace SSPot.Ambient.Labyrinth
             InstructionsText.text = instructions;
         }
     
-        public void SetActive(bool isActive)
+        public void SetObjectsActive(bool isActive)
         {
             Computer.SetActive(isActive);
             Roof.SetActive(isActive);
             TV.SetActive(isActive);
             Instructions.SetActive(isActive);
+            ErrorScreen.SetActive(isActive);
         }
     }
 }

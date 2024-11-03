@@ -814,6 +814,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CanWalkThrough>k__BackingField: 0
+  <SteppedOnEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9017481011150166914
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09594ef32db6485cb3bb47dfeb075c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editorOnly: 1
   avoidParallelLineConnection: 1
   straight: {fileID: 3813068359271527682}
   cornerUpRight: {fileID: 1931613263479968047}

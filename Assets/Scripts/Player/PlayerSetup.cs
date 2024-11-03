@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Photon.Pun;
+using SSpot.Utilities;
 using UnityEngine;
 
 public class PlayerSetup : MonoBehaviourPun
@@ -14,6 +15,8 @@ public class PlayerSetup : MonoBehaviourPun
     public static PlayerSetup GetPlayer(int id) => _players.Find(p => p.photonView.ViewID == id);
     
     #endregion
+
+    public int PlayerIndex => Players.IndexOf(this);
     
     public GameObject Hand => playerHand;
 
@@ -26,7 +29,7 @@ public class PlayerSetup : MonoBehaviourPun
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject uiCamera;
     
-    private void Start()
+    private void Awake()
     {
         //Register global
         _players.Add(this);
@@ -41,6 +44,14 @@ public class PlayerSetup : MonoBehaviourPun
         playerCamera.GetComponent<AudioListener>().enabled = false;
         Destroy(uiCamera);
         enabled = false;
+    }
+    
+    private void OnDestroy()
+    {
+        _players.Remove(this);
+
+        if (photonView.IsMine)
+            Local = null;
     }
 
     /// <summary>

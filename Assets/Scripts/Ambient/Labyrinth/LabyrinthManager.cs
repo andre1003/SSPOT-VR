@@ -1,54 +1,21 @@
-using System;
-using Photon.Pun;
-using SSpot.Robot;
+using SSpot.Grids;
+using SSpot.Level;
+using SSPot.Level;
+using SSpot.Utilities;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SSPot.Ambient.Labyrinth
 {
     public class LabyrinthManager : MonoBehaviour
     {
-        #region Singleton
-        public static LabyrinthManager Instance { get; private set; }
-
-        private void Awake()
-        {
-            if(Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-        
-            Instance = this;
-        }
-        #endregion
-
-        //TODO remove all these old fields
-        [SerializeField] private GameObject computer1;
-        [SerializeField] private GameObject computer2;
-
-        [SerializeField] private GameObject roof1;
-        [SerializeField] private GameObject roof2;
-
-        [SerializeField] private GameObject tv1;
-        [SerializeField] private GameObject tv2;
-
-        [SerializeField] private GameObject instructions1;
-        [SerializeField] private GameObject instructions2;
-
-        [SerializeField] private Text instructionPlayer1;
-        [SerializeField] private Text instructionPlayer2;
-
-        [Header("Environment")] 
-        [SerializeField] private RobotData robot;
+        [Header("Environment")]
         [SerializeField] private GameObject projector;
         [SerializeField] private GameObject invisibleWall;
         
-        [Header("Checkpoints")]
-        [Tooltip("If true, the player is allowed to activate checkpoints older than the current one.")]
-        [SerializeField] private bool allowActivatingPrevious;
-        [SerializeField] private Checkpoint[] checkpoints;
-        private int _checkpointIndex = 0;
+        [Header("Objectives")]
+        [SerializeField] private GridObject objective;
+        [SerializeField] private GridObject[] switchPlayerPoints;
+        [SerializeField, TextArea] private string wrongMoveError = "Caminho errado!";
 
         [Header("Players")]
         [SerializeField] private LabyrinthPlayer player1;
@@ -56,6 +23,10 @@ namespace SSPot.Ambient.Labyrinth
         
         private LabyrinthPlayer _currentWatcher;
         private LabyrinthPlayer _currentCoder;
+        
+        private void ReportWrongMove() => LevelManager.Instance.ReportResult(LevelResult.Error(wrongMoveError));
+        
+        private static void ReportSuccess() => LevelManager.Instance.ReportResult(LevelResult.Success());
 
         private void SwitchPlayers()
         {
@@ -72,9 +43,7 @@ namespace SSPot.Ambient.Labyrinth
         
         private void Start()
         {
-            // Find local player's index on network
-            int localIndex = Array.FindIndex(PhotonNetwork.PlayerList, player => player.IsLocal);
-        
+            int localIndex = PlayerSetup.Local.PlayerIndex;
             player1.Init(0, localIndex);
             player2.Init(1, localIndex);
 
@@ -83,44 +52,36 @@ namespace SSPot.Ambient.Labyrinth
         
             player2.SetCoder(false);
             _currentWatcher = player2;
+            
+            switchPlayerPoints.ForEach(c => c.SteppedOnEvent.AddListener(SwitchPlayers));
+            objective.SteppedOnEvent.AddListener(ReportSuccess);
+        }
+        
+        private void OnEnable()
+        {
+            LevelManager.Instance.Robot.Mover.OnFailedToMove += ReportWrongMove;
+            LevelManager.Instance.OnSuccess.AddListener(LabyrinthSuccess);
         }
 
-        public void SetCheckpoint(Checkpoint checkpoint)
+        private void OnDisable()
         {
-            int newIndex = Array.IndexOf(checkpoints, checkpoint);
-            if (!allowActivatingPrevious && newIndex < _checkpointIndex)
-                return;
-
-            _checkpointIndex = newIndex;
-            SwitchPlayers();
+            if (!LevelManager.Instance) return;
+            
+            LevelManager.Instance.Robot.Mover.OnFailedToMove -= ReportWrongMove;
+            LevelManager.Instance.OnSuccess.RemoveListener(LabyrinthSuccess);
         }
 
-        public void LabyrinthSuccess()
+        private void LabyrinthSuccess()
         {
-            // Reset computer
-            //TODO fix
-            //_currentCoder.RunCubes.ResetComputer();
-
             // Deactivate objects for both players
-            player1.SetActive(false);
-            player2.SetActive(false);
+            player1.SetObjectsActive(false);
+            player2.SetObjectsActive(false);
 
             // Activate projector
             projector.SetActive(true);
 
             // Destroy invisible wall
             Destroy(invisibleWall);
-        }
-
-        public void ResetRobot()
-        {
-            //_currentCoder.ResetCubes.Reset();
-
-            robot.Animator.Reset();
-            
-            var checkpoint = checkpoints[_checkpointIndex];
-            robot.Mover.Facing = checkpoint.Facing;
-            robot.Mover.ChangeNode(checkpoint.GridPosition);
         }
     }
 }
