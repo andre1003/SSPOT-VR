@@ -11,6 +11,7 @@ namespace SSPot.Editor
     {
         private GridObject _selectedPrefab;
         private Vector3Int _lastCell;
+        private bool _startedDragInGrid;
         
         public override void OnToolGUI(EditorWindow window)
         {
@@ -34,8 +35,18 @@ namespace SSPot.Editor
             
             var e = Event.current;
             
+            if (e.type is EventType.MouseUp) 
+                _startedDragInGrid = false;
+            
             if (!TryGetCell(internalGrid, out var cell) || !grid.InGrid(new Vector2Int(cell.x, cell.y)))
+            {
+                if (_startedDragInGrid && e.type is EventType.MouseDown or EventType.MouseUp or EventType.MouseDrag)
+                    e.Use();
                 return;
+            }
+            
+            if (e.type is EventType.MouseDown) 
+                _startedDragInGrid = true;
             
             DrawSquare(internalGrid.CellToWorld(cell), cellSize);
             if (cell != _lastCell)
@@ -46,10 +57,12 @@ namespace SSPot.Editor
 
             HandleInput(cell, internalGrid, e);
         }
-
+        
         private void HandleInput(Vector3Int cell, Grid grid, Event e)
         {
             if (e.type is not EventType.MouseDown and not EventType.MouseUp and not EventType.MouseDrag) return;
+
+            if (!_startedDragInGrid) return;
             
             e.Use();
             
@@ -68,8 +81,10 @@ namespace SSPot.Editor
                     break;
                 }
                 case 1 when existingObject != null:
+                {
                     Undo.DestroyObjectImmediate(existingObject.gameObject);
                     break;
+                }
             }
         }
 
