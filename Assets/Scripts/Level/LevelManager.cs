@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using SSpot.Ambient.ComputerCode;
-using SSpot.Objectives;
+using SSPot.Level;
+using SSpot.Evaluators;
 using SSpot.Robot;
 using SSpot.Utilities;
 using UnityEngine;
@@ -14,12 +15,6 @@ namespace SSpot.Level
     public class LevelManager : NetworkedSingleton<LevelManager>
     {
         #region Serialized Properties
-        
-        [field: SerializeField]
-        public RobotData Robot { get; private set; }
-        
-        [field: SerializeField]
-        public LevelObjectiveSolver Objective { get; private set; }
         
         [SerializeField] private CubeCompiler compiler;
         
@@ -48,18 +43,36 @@ namespace SSpot.Level
         
         [field: SerializeField]
         public UnityEvent OnLevelCompleted { get; private set; } = new();
-                
+
         #endregion
 
-        public bool IsRunning { get; private set; }
+        private RobotData _robot;
+
+        public RobotData Robot
+        {
+            get
+            {
+                if (!_robot)
+                    _robot = FindObjectOfType<RobotData>();
+                
+                if (!_robot)
+                    Debug.LogError($"{nameof(RobotData)} not found in scene", gameObject);
+                
+                return _robot;
+            }
+        }
+
+        public bool IsRunning => _runCoroutine != null;
         
-        public ObjectiveResult CurrentResult { get; private set; } = ObjectiveResult.None();
+        public LevelResult CurrentResult { get; private set; } = LevelResult.None();
+
+        private CodeEvaluator[] _evaluators = Array.Empty<CodeEvaluator>(); 
         
         private Coroutine _runCoroutine;
 
         protected void Start()
         {
-            Objective.Init(HandleObjectiveResult);
+            _evaluators = GetComponentsInChildren<CodeEvaluator>();
         }
 
         #region Run Methods
@@ -81,24 +94,22 @@ namespace SSpot.Level
             var compilation = compiler.Compile(cells);
             if (compilation.IsError)
             {
-                var compilationError = ObjectiveResult.Error(compilation.Error, compilation.ErrorIndex);
-                HandleObjectiveResult(compilationError);
+                var compilationError = LevelResult.Error(compilation.Error, compilation.ErrorIndex);
+                ReportResult(compilationError);
                 return;
             }
             
-            Objective.EvaluatePreCompilation(cells);
-            if (CurrentResult.Type == ObjectiveResult.ResultType.Error)
+            _evaluators.ForEach(e => e.EvaluatePreCompilation(cells));
+            if (CurrentResult.Type == LevelResult.ResultType.Error)
                 return;
 
-            Objective.EvaluatePostCompilation(compilation.Result);
-            if (CurrentResult.Type == ObjectiveResult.ResultType.Error)
+            _evaluators.ForEach(e => e.EvaluatePostCompilation(compilation.Result));
+            if (CurrentResult.Type == LevelResult.ResultType.Error)
                 return;
 
-            IsRunning = true;
             OnStartRunning.Invoke();
             _runCoroutine = StartCoroutine(runner.RunCubesCoroutine(compilation.Result, Robot, () =>
             {
-                IsRunning = false;
                 _runCoroutine = null;
                 
                 OnFinishRunning.Invoke();
@@ -106,11 +117,12 @@ namespace SSpot.Level
             }));
         }
 
+        //Waits until a result is reported if still haven't had any results
         private IEnumerator OnFinishRunningCoroutine()
         {
-            yield return new WaitUntil(() => CurrentResult.Type != ObjectiveResult.ResultType.None);
+            yield return new WaitUntil(() => CurrentResult.Type != LevelResult.ResultType.None);
 
-            if (CurrentResult.Type == ObjectiveResult.ResultType.Success)
+            if (CurrentResult.Type == LevelResult.ResultType.Success)
             {
                 OnLevelCompleted.Invoke();
             }
@@ -120,7 +132,7 @@ namespace SSpot.Level
         
         #region Reset Methods
         
-        public void Reset()
+        public void ResetExecution()
         {
             if (PhotonNetwork.OfflineMode)
                 ResetRpc();
@@ -139,28 +151,26 @@ namespace SSpot.Level
             StopCoroutine(_runCoroutine);
             _runCoroutine = null;
             
-            Robot.Reset();
+            Robot.ResetRobot();
             runner.Reset();
-            
-            IsRunning = false;
         }
         
         #endregion
 
         #region Result methods
         
-        private void HandleObjectiveResult(ObjectiveResult result)
+        public void ReportResult(LevelResult result)
         {
             CurrentResult = result;
             switch (result.Type)
             {
-                case ObjectiveResult.ResultType.Error:
+                case LevelResult.ResultType.Error:
                     Error();
                     break;
-                case ObjectiveResult.ResultType.Success:
+                case LevelResult.ResultType.Success:
                     Success();
                     break;
-                case ObjectiveResult.ResultType.None:
+                case LevelResult.ResultType.None:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -173,7 +183,6 @@ namespace SSpot.Level
             {
                 StopCoroutine(_runCoroutine);
                 _runCoroutine = null;
-                IsRunning = false;
             }
             
             OnError.Invoke();

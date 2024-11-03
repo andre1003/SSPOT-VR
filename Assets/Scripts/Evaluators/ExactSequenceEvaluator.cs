@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using SSpot.Ambient.ComputerCode;
+using SSPot.Level;
 using UnityEngine;
 
-namespace SSpot.Objectives
+namespace SSpot.Evaluators
 {
-    public class ExactSequenceObjectiveSolver : LevelObjectiveSolver
+    public class ExactSequenceEvaluator : CodeEvaluator
     {
         [Tooltip("If true, the solver will only report an error or success when the entire code is executed.")]
         [SerializeField] private bool waitForEndOfSequence;
@@ -25,12 +26,11 @@ namespace SSpot.Objectives
             if (sequence[^1].Type == Cube.CubeType.End) sequence.RemoveAt(sequence.Count - 1);
         }
 
-
         private void Report(bool isCorrect)
         {
             var result = isCorrect
-                ? ObjectiveResult.Success()
-                : ObjectiveResult.Error(errorMessage);
+                ? LevelResult.Success()
+                : LevelResult.Error(errorMessage);
             
             if (waitForEndOfSequence)
                 ReportResultOnRunningEnd(result);

@@ -5,7 +5,7 @@ using SSpot.Ambient.ComputerCode;
 using SSpot.Utilities;
 using SSpot.Utilities.Attributes;
 
-namespace SSpot.Objectives
+namespace SSpot.Evaluators
 {
     [Serializable]
     public struct ExpectedCube
