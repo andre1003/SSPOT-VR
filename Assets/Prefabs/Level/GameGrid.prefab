@@ -59,8 +59,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 10, y: 10}
-  nodePrefab: {fileID: 0}
-  prefabOnlyInWalkable: 1
 --- !u!1001 &7372851954312117564
 PrefabInstance:
   m_ObjectHideFlags: 0

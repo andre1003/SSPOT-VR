@@ -23,7 +23,9 @@ namespace SSPot.Editor
             
             HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
 
-            if (Selection.activeObject is GameObject obj && obj.TryGetComponent(out GridObject selected))
+            if (Selection.activeObject is GameObject obj &&
+                PrefabUtility.IsPartOfPrefabAsset(obj) &&
+                obj.TryGetComponent(out GridObject selected)) 
             {
                 _selectedPrefab = selected;
             }
