@@ -1,3 +1,4 @@
+using System;
 using SSpot.Grids;
 using SSpot.Level;
 using SSPot.Level;
@@ -8,13 +9,20 @@ namespace SSPot.Ambient.Labyrinth
 {
     public class LabyrinthManager : MonoBehaviour
     {
+        [Serializable]
+        private struct Section
+        {
+            public GridObject endMarker;
+            public GameObject coveringRoof;
+        }
+        
         [Header("Environment")]
         [SerializeField] private GameObject projector;
         [SerializeField] private GameObject invisibleWall;
         
         [Header("Objectives")]
         [SerializeField] private GridObject objective;
-        [SerializeField] private GridObject[] switchPlayerPoints;
+        [SerializeField] private Section[] sections = Array.Empty<Section>();
         [SerializeField, TextArea] private string wrongMoveError = "Caminho errado!";
 
         [Header("Players")]
@@ -23,6 +31,8 @@ namespace SSPot.Ambient.Labyrinth
         
         private LabyrinthPlayer _currentWatcher;
         private LabyrinthPlayer _currentCoder;
+
+        private int _currentSectionIndex = -1;
         
         private void ReportWrongMove() => LevelManager.Instance.ReportResult(LevelResult.Error(wrongMoveError));
         
@@ -40,6 +50,23 @@ namespace SSPot.Ambient.Labyrinth
             _currentCoder.SetCoder(false);
             (_currentWatcher, _currentCoder) = (_currentCoder, _currentWatcher);
         }
+
+        private void OnSectionEndReached()
+        {
+            //Stop listening to section
+            if (_currentSectionIndex >= 0)
+            {
+                sections[_currentSectionIndex].endMarker.SteppedOnEvent.RemoveListener(OnSectionEndReached);
+            }
+            
+            //Uncover next section and start listening
+            _currentSectionIndex++;
+            if (_currentSectionIndex < sections.Length)
+            {
+                sections[_currentSectionIndex].coveringRoof.SetActive(false);
+                sections[_currentSectionIndex].endMarker.SteppedOnEvent.AddListener(OnSectionEndReached);
+            }
+        }
         
         private void Start()
         {
@@ -53,22 +80,25 @@ namespace SSPot.Ambient.Labyrinth
             player2.SetCoder(false);
             _currentWatcher = player2;
             
-            switchPlayerPoints.ForEach(c => c.SteppedOnEvent.AddListener(SwitchPlayers));
-            objective.SteppedOnEvent.AddListener(ReportSuccess);
+            //Cover all sections and begin listening to the first
+            sections.ForEach(s => s.coveringRoof.SetActive(true));
+            _currentSectionIndex = -1;
+            OnSectionEndReached();
         }
         
         private void OnEnable()
         {
-            LevelManager.Instance.Robot.Mover.OnFailedToMove += ReportWrongMove;
             LevelManager.Instance.OnSuccess.AddListener(LabyrinthSuccess);
+            LevelManager.Instance.Robot.Mover.OnFailedToMove += ReportWrongMove;
         }
 
         private void OnDisable()
         {
             if (!LevelManager.Instance) return;
-            
-            LevelManager.Instance.Robot.Mover.OnFailedToMove -= ReportWrongMove;
             LevelManager.Instance.OnSuccess.RemoveListener(LabyrinthSuccess);
+            
+            if (!LevelManager.Instance.Robot) return;
+            LevelManager.Instance.Robot.Mover.OnFailedToMove -= ReportWrongMove;
         }
 
         private void LabyrinthSuccess()
