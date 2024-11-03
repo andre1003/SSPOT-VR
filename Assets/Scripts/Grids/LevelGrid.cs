@@ -1,19 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NaughtyAttributes;
-using Photon.Pun;
 using SSpot.Utilities.Attributes;
 using UnityEngine;
 
 namespace SSpot.Grids
 {
     [RequireComponent(typeof(Grid))]
-    public class LevelGrid : MonoBehaviourPun
+    public class LevelGrid : MonoBehaviour
     {
         [LinkedVector, MinValue(1)]
         [SerializeField] private Vector2Int gridSize = new(10, 10);
-
-        [SerializeField] private GameObject nodePrefab;
-        [SerializeField] private bool prefabOnlyInWalkable = true;
 
         public Vector2Int GridSize => gridSize;
 
@@ -56,6 +52,12 @@ namespace SSpot.Grids
         {
             InternalGrid = GetComponent<Grid>();
             
+            if (InternalGrid.cellSwizzle != GridLayout.CellSwizzle.XZY)
+            {
+                Debug.LogWarning("CellSwizzle was not XZY.", gameObject);
+                InternalGrid.cellSwizzle = GridLayout.CellSwizzle.XZY;
+            }
+            
             _nodes = new Node[gridSize.x][];
             for (int x = 0; x < gridSize.x; x++)
             {
@@ -63,12 +65,6 @@ namespace SSpot.Grids
                 for (int y = 0; y < gridSize.y; y++)
                 {
                     _nodes[x][y] = new(new(x, y));
-                    if (nodePrefab != null)
-                    {
-                        var obj = Instantiate(nodePrefab, transform);
-                        obj.transform.position = GetCellCenterWorld(new(x, y));
-                        _nodes[x][y].NodeObject = obj;
-                    }
                 }
             }
             
@@ -77,9 +73,6 @@ namespace SSpot.Grids
                 obj.Grid = this;
                 var cell = WorldToCell(obj.gameObject.transform.position);
                 ChangeNode(obj, cell);
-                
-                if (prefabOnlyInWalkable && !this[cell].CanWalk)
-                    Destroy(this[cell].NodeObject);
             }
         }
 
@@ -95,11 +88,6 @@ namespace SSpot.Grids
             if (obj.TriggerOnSteppedOn)
                 foreach (var gridObject in this[target].Objects)
                     gridObject.OnSteppedOn();
-        }
-
-        private void OnValidate()
-        {
-            GetComponent<Grid>().cellSwizzle = GridLayout.CellSwizzle.XZY;
         }
 
         #region GIZMOS_DRAWING
