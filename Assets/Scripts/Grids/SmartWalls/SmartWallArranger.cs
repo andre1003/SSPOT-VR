@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NaughtyAttributes;
 using SSpot.Grids;
 using SSpot.Utilities;
 using UnityEngine;
@@ -17,14 +18,21 @@ namespace SSPot.Grids.SmartWalls
             Right = 1<<0,
             Up = 1<<2,
             Left = 1<<3,
-            Down = 1<<4
+            Down = 1<<4,
+            
+            UpRight = 1<<5,
+            UpLeft = 1<<6,
+            DownRight = 1<<7,
+            DownLeft = 1<<8
         }
 
-        //Consider using meshes instead, with optimization to merge meshes
-        [SerializeField] private GameObject straight, cornerUpRight, tripleCornerUpRightDown, quadCorner;
-
-        private Direction _currentFlags = Direction.None;
+        [Tooltip("If true, parallel lines of walls won't connect to each other.")]
+        [SerializeField] private bool avoidParallelLineConnection = true;
         
+        //Consider using meshes instead, with optimization to merge meshes
+        [SerializeField, BoxGroup("Meshes")] 
+        private GameObject straight, cornerUpRight, tripleCornerUpRightDown, quadCorner;
+
         private LevelGrid _grid;
 
         private Vector2Int GridPosition => _grid && _grid.TryGetComponent(out Grid internalGrid)
@@ -37,6 +45,8 @@ namespace SSPot.Grids.SmartWalls
         private void OnEnable()
         {
             if (!this) return;
+
+            if (!straight | !cornerUpRight | !tripleCornerUpRightDown | !quadCorner) return;
             
             _grid = GetComponentInParent<LevelGrid>();
             if (!_grid) return;
@@ -51,7 +61,6 @@ namespace SSPot.Grids.SmartWalls
                 if (obj == this) continue;
                 
                 var dir = DirectionToNeighbor(obj);
-                Debug.Log($"From {this} to {obj} is {dir}");
                 if (dir == Direction.None) continue;
                 
                 _neighbors.Add(obj);
@@ -61,20 +70,20 @@ namespace SSPot.Grids.SmartWalls
             UpdateMesh();
         }
 
+        private bool _fieldsDirty;
         private void Update()
         {
-            if (transform.hasChanged)
+            if (transform.hasChanged || _fieldsDirty)
             {
-
                 transform.hasChanged = false;
+                _fieldsDirty = false;
                 OnEnable();
             }
         }
-        
-        private void OnDisable()
-        {
-            ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
-        }
+
+        private void OnValidate() => _fieldsDirty = true;
+
+        private void OnDisable() => ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
 
         private void UpdateMesh()
         {
@@ -82,14 +91,14 @@ namespace SSPot.Grids.SmartWalls
             
             Direction flags = ValidNeighbors.Aggregate(Direction.None, (a, n) => a | DirectionToNeighbor(n));
             
-            var (oldMesh, _) = GetMesh(_currentFlags);
-            if (oldMesh) oldMesh.SetActive(false);
+            straight.gameObject.SetActive(false);
+            cornerUpRight.gameObject.SetActive(false);
+            tripleCornerUpRightDown.gameObject.SetActive(false);
+            quadCorner.gameObject.SetActive(false);
             
             var (mesh, rotation) = GetMesh(flags);
             mesh.SetActive(true);
             mesh.transform.forward = Quaternion.AngleAxis(rotation, Vector3.up) * Vector3.forward;
-
-            _currentFlags = flags;
         }
 
         private void NotifyNeighborCreated(SmartWallArranger neighbor)
@@ -111,30 +120,54 @@ namespace SSPot.Grids.SmartWalls
             if (dir == Vector2Int.up) return Direction.Up;
             if (dir == Vector2Int.left) return Direction.Left;
             if (dir == Vector2Int.down) return Direction.Down;
+            
+            if (!avoidParallelLineConnection) return Direction.None;
+            
+            if (dir == Vector2Int.right + Vector2Int.up) return Direction.UpRight;
+            if (dir == Vector2Int.right + Vector2Int.down) return Direction.DownRight;
+            if (dir == Vector2Int.left + Vector2Int.up) return Direction.UpLeft;
+            if (dir == Vector2Int.left + Vector2Int.down) return Direction.DownLeft;
+            
             return Direction.None;
         }
         
         private (GameObject mesh, float rotation) GetMesh(Direction flags)
         {
-            return flags switch
-            {
-                Direction.Up or Direction.Down or Direction.Up | Direction.Down => (straight, 0),
-                Direction.Right or Direction.Left or Direction.Right | Direction.Left => (straight, 90),
+           if (avoidParallelLineConnection)
+           {
+               // Remove parallel line neighbors
+               if (flags.HasFlag(Direction.Down | Direction.Up | Direction.Right | Direction.UpRight | Direction.DownRight))
+                   flags &= ~Direction.Right;
+               else if (flags.HasFlag(Direction.Down | Direction.Up | Direction.Left | Direction.UpLeft | Direction.DownLeft))
+                   flags &= ~Direction.Left;
+               else if (flags.HasFlag(Direction.Right | Direction.Left | Direction.Up | Direction.UpRight | Direction.UpLeft))
+                   flags &= ~Direction.Up;
+               else if (flags.HasFlag(Direction.Right | Direction.Left | Direction.Down | Direction.DownRight | Direction.DownLeft))
+                   flags &= ~Direction.Down;
+           }
+           
+           // Don't consider corners when actually choosing the mesh
+           flags &= ~(Direction.UpRight | Direction.DownRight | Direction.UpLeft | Direction.DownLeft);
+            
+           return flags switch
+           {
+               Direction.Up or Direction.Down or Direction.Up | Direction.Down => (straight, 0),
+               Direction.Right or Direction.Left or Direction.Right | Direction.Left => (straight, 90),
                 
-                Direction.Up | Direction.Right => (cornerUpRight, 0),
-                Direction.Right | Direction.Down => (cornerUpRight, 90),
-                Direction.Down | Direction.Left => (cornerUpRight, 180),
-                Direction.Left | Direction.Up => (cornerUpRight, 270),
+               Direction.Up | Direction.Right => (cornerUpRight, 0),
+               Direction.Right | Direction.Down => (cornerUpRight, 90),
+               Direction.Down | Direction.Left => (cornerUpRight, 180),
+               Direction.Left | Direction.Up => (cornerUpRight, 270),
                 
-                Direction.Up | Direction.Right | Direction.Down => (tripleCornerUpRightDown, 0),
-                Direction.Right | Direction.Down | Direction.Left => (tripleCornerUpRightDown, 90),
-                Direction.Down | Direction.Left | Direction.Up => (tripleCornerUpRightDown, 180),
-                Direction.Left | Direction.Up | Direction.Right => (tripleCornerUpRightDown, 270),
+               Direction.Up | Direction.Right | Direction.Down => (tripleCornerUpRightDown, 0),
+               Direction.Right | Direction.Down | Direction.Left => (tripleCornerUpRightDown, 90),
+               Direction.Down | Direction.Left | Direction.Up => (tripleCornerUpRightDown, 180),
+               Direction.Left | Direction.Up | Direction.Right => (tripleCornerUpRightDown, 270),
                 
-                Direction.Up | Direction.Right | Direction.Down | Direction.Left => (quadCorner, 0),
+               Direction.Up | Direction.Right | Direction.Down | Direction.Left => (quadCorner, 0),
                 
-                _ => (straight, 0)
-            };
+               _ => (straight, 0)
+           };
         }
     }
 }
