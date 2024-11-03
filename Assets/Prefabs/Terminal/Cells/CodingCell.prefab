@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AttachingCube>k__BackingField: {fileID: 8338316748421315279}
   <LoopController>k__BackingField: {fileID: 0}
+  <Renderer>k__BackingField: {fileID: 8338316748421315283}
 --- !u!114 &4198973362055838279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747e832de44acae409ccfd0d191bc483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &8338316748421315283 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 104526575441034165, guid: 72ddf2eb3290ea541bcc663437032f89, type: 3}
+  m_PrefabInstance: {fileID: 8270012692905296230}
+  m_PrefabAsset: {fileID: 0}

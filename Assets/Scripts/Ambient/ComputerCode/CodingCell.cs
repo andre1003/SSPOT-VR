@@ -16,6 +16,9 @@ namespace SSpot.Ambient.ComputerCode
         [field: SerializeField]
         public LoopController LoopController { get; private set; }
         
+        [field: SerializeField]
+        public MeshRenderer Renderer { get; private set; }
+        
         public CubeComputer Computer { get; private set; }
         public int Index { get; private set; }
         

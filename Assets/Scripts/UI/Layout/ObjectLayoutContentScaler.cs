@@ -5,6 +5,7 @@ namespace SSpot.UI.Layout
     [ExecuteAlways]
     public class ObjectLayoutContentScaler : MonoBehaviour
     {
+        public float minLength;
         public ObjectLayout objectLayout;
         public MeshRenderer meshToScale;
         public Transform transformToScale;
@@ -22,12 +23,20 @@ namespace SSpot.UI.Layout
             if (!transformToScale) return;
             
             float finalLen = paddingStart + paddingEnd + objectLayout.LengthAlongAxis;
+
+            bool overrideLen = finalLen < minLength; 
+            if (overrideLen)
+                finalLen = minLength;
             
             // Move the center of the mesh to the center of the layout
             int axis = objectLayout.direction.IsHorizontal() ? 0 : 1;
             Vector3 center = objectLayout.Center;
             center[axis] += paddingStart / 2;
             center[axis] -= paddingEnd / 2;
+            
+            if (overrideLen)
+                center = objectLayout.Origin + objectLayout.direction.GetDirection() * (finalLen / 2);
+            
             transformToScale.position = center;
             
             

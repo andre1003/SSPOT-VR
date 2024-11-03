@@ -11,6 +11,7 @@ namespace SSpot.Ambient.Cubes
         [SerializeField] private CodingCell cellPrefab;
         [SerializeField] private Transform cellHolder;
         [SerializeField, MinValue(0)] private int cellCount = 7;
+        [SerializeField] private Material cellMaterial;
         
 #if UNITY_EDITOR
         
@@ -26,6 +27,11 @@ namespace SSpot.Ambient.Cubes
             if (Application.isPlaying) return;
             if (IsInPrefabStage()) return;
             if (!cellHolder) return;
+            if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(cellHolder))
+            {
+                Debug.LogWarning("Cell holder can't be a prefab", gameObject);
+                return;
+            }
          
             if (!cellPrefab || cellCount == 0)
             {
@@ -53,6 +59,15 @@ namespace SSpot.Ambient.Cubes
                 }
                 
                 child.name = cellPrefab.name + i;
+                
+                var cell = child.GetComponent<CodingCell>();
+                if (cell.Renderer)
+                {
+                    if (cellMaterial)
+                        cell.Renderer.material = cellMaterial;
+                    else if (cellPrefab.Renderer.sharedMaterial)
+                        cell.Renderer.material = cellPrefab.Renderer.sharedMaterial;
+                }
             }
         }
         

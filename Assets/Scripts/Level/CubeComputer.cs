@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using NaughtyAttributes;
 using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
@@ -11,7 +10,15 @@ namespace SSpot.Level
 {
     public class CubeComputer : MonoBehaviour
     {
-        public bool CanHaveLoops => cellsParent.Children().Any(c => c.GetComponent<CodingCell>().LoopController);
+        public bool CanHaveLoops
+        {
+            get
+            {
+                if (!cellsParent) return false;
+                var cell = cellsParent.GetComponentInChildren<CodingCell>();
+                return cell && cell.LoopController;
+            }
+        }
         
         [BoxGroup("Cells")]
         [SerializeField] private Transform cellsParent;
@@ -34,27 +41,19 @@ namespace SSpot.Level
         [BoxGroup("Sounds")]
         [SerializeField] private AudioClip errorSound;
         
-        [BoxGroup("Materials")]
-        [SerializeField] private MeshRenderer terminalRenderer;
-        [BoxGroup("Materials")]
-        [SerializeField] private Material successTerminalMaterial;
-        [BoxGroup("Materials")]
-        [SerializeField] private Material errorTerminalMaterial;
-        [BoxGroup("Materials")]
-        [SerializeField] private float materialResetDelay = 5f;
-
+        [SerializeField] private ComputerRenderer[] renderers = Array.Empty<ComputerRenderer>();
+        
         private CodingCell[] _cells = Array.Empty<CodingCell>();
         public IReadOnlyList<CodingCell> Cells => _cells;
 
+        public int IndexOff(CodingCell cell) => _cells.IndexOf(cell);
+        
         public int IndexOf(AttachingCube cube) => _cells.FindIndex(cell => cell.AttachingCube == cube);
+        
         public int IndexOf(LoopController loop) => _cells.FindIndex(cell => cell.LoopController == loop);
-
-        private Material _originalTerminalMaterial;
 
         private void Awake()
         {
-            _originalTerminalMaterial = terminalRenderer.materials[1];
-            
             _cells = transform.GetComponentsInChildren<CodingCell>();
             for (int i = 0; i < _cells.Length; i++)
             {
@@ -97,7 +96,7 @@ namespace SSpot.Level
         
         private void OnRunButtonPressed() => LevelManager.Instance.Run(Cells);
         
-        private void OnResetButtonPressed() => LevelManager.Instance.Reset();
+        private void OnResetButtonPressed() => LevelManager.Instance.ResetExecution();
         
         private void OnClearPressed()
         {
@@ -109,34 +108,20 @@ namespace SSpot.Level
 
         #region  LevelManager Callbacks
 
-        private Coroutine _materialResetCoroutine;
-        
-        private void SetMaterial(Material material, bool reset)
-        {
-            if (_materialResetCoroutine != null)
-                StopCoroutine(_materialResetCoroutine);
-            
-            var mats = terminalRenderer.materials;
-            mats[1] = material;
-            terminalRenderer.materials = mats;
-
-            if (reset)
-                _materialResetCoroutine = StartCoroutine(CoroutineUtilities.WaitThen(materialResetDelay, OnReset));
-        }
         
         private void OnSuccess()
         {
-            SetMaterial(successTerminalMaterial, reset: true);
+            renderers.ForEach(r => r.SetMaterial(true));
             audioSource.PlayOneShot(successSound);
         }
 
         private void OnError()
         {
-            SetMaterial(errorTerminalMaterial, reset: true);
+            renderers.ForEach(r => r.SetMaterial(false));
             audioSource.PlayOneShot(errorSound);
         }
         
-        private void OnReset() => SetMaterial(_originalTerminalMaterial, reset: false); 
+        private void OnReset() => renderers.ForEach(r => r.ResetMaterial()); 
         
         #endregion
     }
