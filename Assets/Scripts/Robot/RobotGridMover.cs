@@ -113,7 +113,7 @@ namespace SSpot.Robot
             else _animator.TurnRight();
             
             Vector3 originalForward = transform.forward;
-            Vector2Int target = left ? RotateFacingLeft(Facing) : RotateFacingRight(Facing);
+            Vector2Int target = left ? Facing.RotateCounterClockwise() : Facing.RotateClockwise();
             Vector3 targetForward = new(target.x, 0, target.y);
 
             float duration = useClipDuration
@@ -133,24 +133,6 @@ namespace SSpot.Robot
         {
             Facing = _originalFacing;
             Grid.ChangeNode(this, _originalGridPosition);
-        }
-
-        private static Vector2Int RotateFacingLeft(Vector2Int facing)
-        {
-            if (facing == Vector2Int.right) return Vector2Int.up;
-            if (facing == Vector2Int.up) return Vector2Int.left;
-            if (facing == Vector2Int.left) return Vector2Int.down;
-            if (facing == Vector2Int.down) return Vector2Int.right;
-            throw new ArgumentException();
-        }
-        
-        private static Vector2Int RotateFacingRight(Vector2Int facing)
-        {
-            if (facing == Vector2Int.right) return Vector2Int.down;
-            if (facing == Vector2Int.down) return Vector2Int.left;
-            if (facing == Vector2Int.left) return Vector2Int.up;
-            if (facing == Vector2Int.up) return Vector2Int.right;
-            throw new ArgumentException();
         }
     }
 }
