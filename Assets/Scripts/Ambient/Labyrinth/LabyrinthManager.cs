@@ -33,6 +33,27 @@ namespace SSPot.Ambient.Labyrinth
         private LabyrinthPlayer _currentCoder;
 
         private int _currentSectionIndex = -1;
+        private int CurrentSectionIndex
+        {
+            get => _currentSectionIndex;
+            set
+            {
+                // Covers current section
+                if (_currentSectionIndex >= 0)
+                {
+                    sections[_currentSectionIndex].endMarker.SteppedOnEvent.RemoveListener(OnSectionEndReached);
+                }
+                
+                // Uncovers next section
+                if (value >= 0 && value < sections.Length)
+                {
+                    sections[value].endMarker.SteppedOnEvent.AddListener(OnSectionEndReached);
+                    sections[value].coveringRoof.SetActive(false);
+                }
+                
+                _currentSectionIndex = value;
+            }
+        }
         
         private void ReportWrongMove() => LevelManager.Instance.ReportResult(LevelResult.Error(wrongMoveError));
         
@@ -53,23 +74,13 @@ namespace SSPot.Ambient.Labyrinth
 
         private void OnSectionEndReached()
         {
-            //Stop listening to section
-            if (_currentSectionIndex >= 0)
-            {
-                sections[_currentSectionIndex].endMarker.SteppedOnEvent.RemoveListener(OnSectionEndReached);
-            }
-            
-            //Uncover next section and start listening
-            _currentSectionIndex++;
-            if (_currentSectionIndex < sections.Length)
-            {
-                sections[_currentSectionIndex].coveringRoof.SetActive(false);
-                sections[_currentSectionIndex].endMarker.SteppedOnEvent.AddListener(OnSectionEndReached);
-            }
+            CurrentSectionIndex++;
+            SwitchPlayers();
         }
         
         private void Start()
         {
+            // Initialize players
             int localIndex = PlayerSetup.Local.PlayerIndex;
             player1.Init(0, localIndex);
             player2.Init(1, localIndex);
@@ -80,10 +91,12 @@ namespace SSPot.Ambient.Labyrinth
             player2.SetCoder(false);
             _currentWatcher = player2;
             
-            //Cover all sections and begin listening to the first
+            // Cover all sections and begin listening to the first
             sections.ForEach(s => s.coveringRoof.SetActive(true));
-            _currentSectionIndex = -1;
-            OnSectionEndReached();
+            CurrentSectionIndex = 0;
+            
+            // Listen to objective
+            objective.SteppedOnEvent.AddListener(ReportSuccess);
         }
         
         private void OnEnable()

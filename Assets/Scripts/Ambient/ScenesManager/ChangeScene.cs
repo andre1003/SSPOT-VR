@@ -37,7 +37,6 @@ public class ChangeScene : MonoBehaviour
         // Load next level
         if(goForward)
         {
-            //TODO change this back
             LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
