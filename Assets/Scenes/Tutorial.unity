@@ -4743,12 +4743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a9a1e0f6a4044889c3d98d2c50ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneCanvas: {fileID: 1047926014}
-  progressBar: {fileID: 1250956779}
-  goForward: 1
-  nextSceneOffline: 
-  nextSceneOnline: 
-  buttonTextCanvas: {fileID: 1681006565}
+  target: 3
 --- !u!114 &1143003497
 MonoBehaviour:
   m_ObjectHideFlags: 0

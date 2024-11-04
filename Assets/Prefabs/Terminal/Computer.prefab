@@ -52,6 +52,54 @@ MonoBehaviour:
   distanceBetweenObjects: 0.75
   direction: 0
   reverseOrder: 0
+--- !u!1 &123512168224529544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543311621945040739}
+  - component: {fileID: 3155496609787473856}
+  m_Layer: 0
+  m_Name: EditorOnly - CellsLayout
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &543311621945040739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123512168224529544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7611308879639158656}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3155496609787473856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123512168224529544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f872d2223f4a4dfb8ebae95220f431fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellPrefab: {fileID: 4146014369732126426, guid: 593d23ae3f5a26e42af5a56c81e930d9, type: 3}
+  cellHolder: {fileID: 7611308878448017414}
+  cellCount: 7
+  cellMaterial: {fileID: 0}
 --- !u!1 &360400169230193069
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +132,7 @@ Transform:
   - {fileID: 8751286977878286716}
   - {fileID: 7381017198512134129}
   m_Father: {fileID: 7611308879639158656}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4587783668538514277
 MonoBehaviour:
@@ -361,7 +409,7 @@ Transform:
   - {fileID: 7611308879363913987}
   - {fileID: 401100133254816446}
   m_Father: {fileID: 7611308879639158656}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2253865583928250924
 GameObject:
@@ -1644,7 +1692,7 @@ Transform:
   - {fileID: 4827650244430055803}
   - {fileID: 8629633691064017140}
   m_Father: {fileID: 7611308879639158656}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5814300477034405561
 MonoBehaviour:
@@ -1694,7 +1742,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7611308879639158656}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &770880051515192698
 MonoBehaviour:
@@ -1899,7 +1947,6 @@ GameObject:
   - component: {fileID: 7611308879639158656}
   - component: {fileID: 2170496132997414244}
   - component: {fileID: 4666902835319995835}
-  - component: {fileID: 6662780325698132569}
   m_Layer: 0
   m_Name: Computer
   m_TagString: Untagged
@@ -1919,6 +1966,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 543311621945040739}
   - {fileID: 7611308878448017414}
   - {fileID: 5602192816590291531}
   - {fileID: 7611308878199084635}
@@ -2047,22 +2095,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6662780325698132569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7611308879639158657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f872d2223f4a4dfb8ebae95220f431fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 4146014369732126426, guid: 593d23ae3f5a26e42af5a56c81e930d9, type: 3}
-  cellHolder: {fileID: 7611308878448017414}
-  cellCount: 7
-  cellMaterial: {fileID: 0}
 --- !u!1 &7727589654217596976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2671,7 +2703,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6696305918270451693, guid: 4f204040ef5b113488e179a4c05c8f22, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6696305918270451693, guid: 4f204040ef5b113488e179a4c05c8f22, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,19 +1,13 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
+using SSPot.Scenes;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks
 {
     // Settings button reference
     public GameObject settingsButton;
-    [SerializeField] private string firstLevel = "Tutorial";
 
-
-    // Platform controller
-    private bool isOnPc = false;
-
-
-    void Awake()
+    private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -27,9 +21,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
 
     public void SetGamePlatform(bool isOnPc)
     {
-        // Set isOnPc
-        this.isOnPc = isOnPc;
-
         // If platform is not PC, disable settings button
         if(!isOnPc)
         {
@@ -48,7 +39,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel(firstLevel);
+        SceneLoader.Instance.LoadTutorial();
     }
     #endregion
 
@@ -61,7 +52,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        SceneManager.LoadScene("Lobby");
+        SceneLoader.Instance.LoadLobby();
     }
     #endregion
 

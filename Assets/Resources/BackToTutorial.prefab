@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4920422631457568810}
   - component: {fileID: 4920422631457568809}
   - component: {fileID: 4920422631457568808}
-  - component: {fileID: 4920422631457568807}
   - component: {fileID: 4920422631457568806}
+  - component: {fileID: 4526584503809987449}
+  - component: {fileID: 3329034103459785224}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Clickable
@@ -99,22 +100,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4920422631457568807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4920422631457568805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc7d536f96450b24c8a35b80816a36ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progressBar: {fileID: 0}
-  loadLevelCanvas: {fileID: 0}
-  level: Tutorial
-  buttonTextCanvas: {fileID: 4920422632132430432}
 --- !u!114 &4920422631457568806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +113,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotation: {x: 20, y: 20, z: 20}
+--- !u!114 &4526584503809987449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920422631457568805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1a9a1e0f6a4044889c3d98d2c50ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: 2
+--- !u!114 &3329034103459785224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920422631457568805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1db67e4155c4ca28a8cdf96353d556a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4920422631519921346
 GameObject:
   m_ObjectHideFlags: 0
