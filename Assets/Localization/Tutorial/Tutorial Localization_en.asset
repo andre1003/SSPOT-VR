@@ -106,6 +106,16 @@ MonoBehaviour:
       Like the BEGIN CUBE!'
     m_Metadata:
       m_Items: []
+  - m_Id: 277376314453307392
+    m_Localized: 'TO EXIT THE
+
+      GAME
+
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -69,6 +69,16 @@ MonoBehaviour:
       o CUBO IN\xCDCIO!"
     m_Metadata:
       m_Items: []
+  - m_Id: 277376314453307392
+    m_Localized: 'PARA SAIR
+
+      DO JOGO
+
+
+
+      CLIQUE AQUI'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
