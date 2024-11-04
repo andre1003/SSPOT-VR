@@ -11,6 +11,7 @@ namespace SSpot.Robot
     public class RobotAnimator : MonoBehaviourPun
     {
         [SerializeField] private float transitionDuration = 0.25f;
+        [SerializeField] private bool startBroken;
 
         [Header("Clips")]
         [SerializeField] private AnimationClip idleClip;
@@ -41,6 +42,8 @@ namespace SSpot.Robot
         private const int OneShotIndex = 5;
         
         private const int OutputInputCount = 6;
+
+        private int StartAnimationIndex => startBroken ? BrokenIndex : IdleIndex;
         
         public bool IsBroken => Mathf.Approximately(_outputMixer.GetInputWeight(BrokenIndex), 1f);
         
@@ -60,9 +63,19 @@ namespace SSpot.Robot
             _outputMixer.ConnectInput(TurnLeftIndex, AnimationClipPlayable.Create(_graph, turnLeftClip), 0);
             _outputMixer.ConnectInput(TurnRightIndex, AnimationClipPlayable.Create(_graph, turnRightClip), 0);
             _outputMixer.ConnectInput(BrokenIndex, AnimationClipPlayable.Create(_graph, brokenClip), 0);
-            _outputMixer.SetInputWeight(BrokenIndex, 1f);
-            
+
+            SetActiveAnimation(StartAnimationIndex);
+
             _graph.Play();
+        }
+
+        private void SetActiveAnimation(int index)
+        {
+            for (int i = 0; i < _outputMixer.GetInputCount(); i++)
+            {
+                float weight = i == index ? 1 : 0;
+                _outputMixer.SetInputWeight(i, weight);
+            }
         }
 
         public void SetBroken(bool broken) => StartCoroutine(SetBrokenCoroutine(broken));
@@ -95,6 +108,7 @@ namespace SSpot.Robot
             yield return new WaitForSeconds(clip.length - 2 * transitionDuration);
             yield return SmoothTransitionCoroutine(OneShotIndex, IdleIndex);
             
+            _outputMixer.DisconnectInput(OneShotIndex);
             _oneShotPlayable.Destroy();
         }
 
@@ -116,11 +130,7 @@ namespace SSpot.Robot
                 _oneShotPlayable.Destroy();
             }
 
-            for (int i = 0; i < _outputMixer.GetInputCount(); i++)
-            {
-                float weight = i == BrokenIndex ? 1 : 0;
-                _outputMixer.SetInputWeight(i, weight);
-            }
+            SetActiveAnimation(StartAnimationIndex);
         }
 
         private void OnDestroy()

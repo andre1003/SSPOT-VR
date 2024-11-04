@@ -31,7 +31,8 @@ public class Cube
 		switch (type)
 		{
 			case CubeType.Begin:
-				yield return robot.Animator.SetBrokenCoroutine(false);
+				if (robot.Animator.IsBroken)
+					yield return robot.Animator.SetBrokenCoroutine(false);
 				break;
 			case CubeType.Left:
 				yield return robot.Mover.TurnLeftCoroutine();
