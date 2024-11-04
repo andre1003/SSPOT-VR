@@ -23,7 +23,6 @@ namespace SSpot.Ambient.ComputerCode
                 CurrentIndex++;
             }
             
-            Reset();
             endCallback?.Invoke();
         }
 

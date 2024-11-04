@@ -19,6 +19,13 @@ namespace SSpot.Level
         [SerializeField] private CubeCompiler compiler;
         
         [SerializeField] private CubeRunner runner;
+
+        [Tooltip("If true, whenever an error is encountered, the robot will be reset before allowing to play again.")]
+        [SerializeField] private bool resetOnExecutionError = true;
+
+        [Tooltip("If true, robot can continue walking from the ending position" +
+                 " if the code was already executed but didnt achieve success or errored out.")]
+        [SerializeField] private bool allowConsecutiveRuns;
         
         #endregion
         
@@ -62,13 +69,26 @@ namespace SSpot.Level
             }
         }
 
-        public bool IsRunning => _runCoroutine != null;
-        
         public LevelResult CurrentResult { get; private set; } = LevelResult.None();
 
         private CodeEvaluator[] _evaluators = Array.Empty<CodeEvaluator>(); 
         
-        private Coroutine _runCoroutine;
+        
+        public enum Stage { None, Running, AwaitingResult, End }
+
+        public Stage CurrentStage { get; private set; }
+        
+        private Coroutine _currentCoroutine;
+
+        private void KillCurrentCoroutine()
+        {
+            CurrentStage = Stage.None;
+            if (_currentCoroutine == null) return;
+            
+            StopCoroutine(_currentCoroutine);
+            _currentCoroutine = null;
+            runner.Reset();
+        }
 
         protected void Start()
         {
@@ -77,6 +97,7 @@ namespace SSpot.Level
 
         #region Run Methods
         
+        /// <inheritdoc cref="RunRpc"/>
         public void Run(IReadOnlyList<CodingCell> cells)
         {
             if (PhotonNetwork.OfflineMode)
@@ -85,12 +106,30 @@ namespace SSpot.Level
                 photonView.RPC(nameof(RunRpc), RpcTarget.AllBuffered, cells);
         }
 
+        /// <summary>
+        /// Compiles and executes the code represented by the cells provided.
+        /// <br/>
+        /// If already running or the level already ended, does nothing.
+        /// </summary>
         [PunRPC]
         private void RunRpc(IReadOnlyList<CodingCell> cells)
         {
-            if (IsRunning)
+            if (CurrentStage is Stage.Running or Stage.End)
                 return;
             
+            // If already executed once, either resets everything or stops awaiting to keep playing.
+            if (CurrentStage == Stage.AwaitingResult || CurrentResult.Type != LevelResult.ResultType.None)
+            {
+                if (allowConsecutiveRuns)
+                    KillCurrentCoroutine();
+                else
+                    ResetRpc();
+            }
+
+            CurrentStage = Stage.None;
+            CurrentResult = LevelResult.None();
+            
+            // Attempt compilation
             var compilation = compiler.Compile(cells);
             if (compilation.IsError)
             {
@@ -99,6 +138,7 @@ namespace SSpot.Level
                 return;
             }
             
+            // Evaluate raw and compiled code
             _evaluators.ForEach(e => e.EvaluatePreCompilation(cells));
             if (CurrentResult.Type == LevelResult.ResultType.Error)
                 return;
@@ -107,32 +147,40 @@ namespace SSpot.Level
             if (CurrentResult.Type == LevelResult.ResultType.Error)
                 return;
 
+            // Run and wait for result
+            CurrentStage = Stage.Running;
             OnStartRunning.Invoke();
-            _runCoroutine = StartCoroutine(runner.RunCubesCoroutine(compilation.Result, Robot, () =>
+            _currentCoroutine = StartCoroutine(runner.RunCubesCoroutine(compilation.Result, Robot, () =>
             {
-                _runCoroutine = null;
-                
                 OnFinishRunning.Invoke();
-                StartCoroutine(OnFinishRunningCoroutine());
+                _currentCoroutine = StartCoroutine(AwaitResultCoroutine());
             }));
         }
 
-        //Waits until a result is reported if still haven't had any results
-        private IEnumerator OnFinishRunningCoroutine()
+        /// <summary>
+        /// Waits until a result is reported and then ends or resets the level.
+        /// </summary>
+        private IEnumerator AwaitResultCoroutine()
         {
+            CurrentStage = Stage.AwaitingResult;
             yield return new WaitUntil(() => CurrentResult.Type != LevelResult.ResultType.None);
 
             if (CurrentResult.Type == LevelResult.ResultType.Success)
             {
+                CurrentStage = Stage.End;
                 OnLevelCompleted.Invoke();
+                yield break;
             }
+
+            CurrentStage = Stage.None;
         }
         
         #endregion
         
         #region Reset Methods
         
-        public void ResetExecution()
+        /// <inheritdoc cref="ResetRpc"/>
+        public void ResetLevel()
         {
             if (PhotonNetwork.OfflineMode)
                 ResetRpc();
@@ -140,19 +188,21 @@ namespace SSpot.Level
                 photonView.RPC(nameof(ResetRpc), RpcTarget.AllBuffered);
         }
 
+        /// <summary>
+        /// Stops execution of code and resets the robot to its original position.
+        /// <br/>
+        /// Does nothing if level is already over.
+        /// </summary>
         [PunRPC]
         private void ResetRpc()
         {
-            if (!IsRunning)
-                return;
+            if (CurrentStage == Stage.End) return;
             
-            OnReset.Invoke();
-            
-            StopCoroutine(_runCoroutine);
-            _runCoroutine = null;
+            KillCurrentCoroutine();
             
             Robot.ResetRobot();
-            runner.Reset();
+            
+            OnReset.Invoke();
         }
         
         #endregion
@@ -179,12 +229,10 @@ namespace SSpot.Level
         
         private void Error()
         {
-            if (IsRunning)
-            {
-                StopCoroutine(_runCoroutine);
-                _runCoroutine = null;
-            }
-            
+            if (resetOnExecutionError)
+                ResetRpc();
+            else
+                KillCurrentCoroutine();
             OnError.Invoke();
         }
         

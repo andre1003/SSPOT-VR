@@ -94,9 +94,10 @@ namespace SSpot.Level
         
         #region Button Callbacks
         
+        
         private void OnRunButtonPressed() => LevelManager.Instance.Run(Cells);
         
-        private void OnResetButtonPressed() => LevelManager.Instance.ResetExecution();
+        private void OnResetButtonPressed() => LevelManager.Instance.ResetLevel();
         
         private void OnClearPressed()
         {

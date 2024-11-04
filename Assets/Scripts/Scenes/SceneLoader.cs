@@ -20,15 +20,20 @@ namespace SSPot.Scenes
         
         [SerializeField, BoxGroup("Scenes")]
         private SerializableScene mainMenu, lobby, tutorial, firstLevel;
-        
-        public Scene CurrentScene { get; private set; }
+
+        public Scene CurrentScene => SceneManager.GetActiveScene();
         
         protected override void Awake()
         {
             base.Awake();
+            if (Instance != this) return;
             
             DontDestroyOnLoad(this);
-            CurrentScene = SceneManager.GetActiveScene();
+            
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.AutomaticallySyncScene = true;
+            }
         }
 
         public void LoadMainMenu() => LoadScene(mainMenu.BuildIndex);
@@ -92,7 +97,6 @@ namespace SSPot.Scenes
             loadSceneCanvas.SetActive(false);
             
             _loadCoroutine = null;
-            CurrentScene = SceneManager.GetActiveScene();
         }
 
         private void SetMessageForIndex(int buildIndex)
