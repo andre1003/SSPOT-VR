@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T: Singleton<T>
     {

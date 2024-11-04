@@ -1,4 +1,4 @@
-using SSpot.Utilities.Attributes;
+using SSPot.Utilities.Attributes;
 using UnityEditor;
 using UnityEngine;
 

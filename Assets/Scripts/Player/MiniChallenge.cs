@@ -2,7 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using SSpot.Level;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;

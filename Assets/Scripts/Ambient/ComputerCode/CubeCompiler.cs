@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 namespace SSpot.Ambient.ComputerCode

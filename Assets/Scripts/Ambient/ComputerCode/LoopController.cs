@@ -2,7 +2,7 @@ using System;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using Photon.Pun;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 

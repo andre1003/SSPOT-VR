@@ -2,7 +2,7 @@ using System;
 using SSpot.Grids;
 using SSpot.Level;
 using SSPot.Level;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 namespace SSPot.Ambient.Labyrinth

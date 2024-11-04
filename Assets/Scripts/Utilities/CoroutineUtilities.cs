@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public static class CoroutineUtilities
     {

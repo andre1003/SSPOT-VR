@@ -2,16 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     /// <summary>
     /// Represents a list that can be used with NaughtyAttributes.
     /// This class is designed to work around Unity's default behavior of
-    /// applying attributes such as HideIf to each individual item in a list.
+    /// applying attributes such as <see cref="NaughtyAttributes.HideIfAttribute"/> to each individual item in a list.
     /// By using this class, you can apply NaughtyAttributes to
     /// the list as a whole, rather than to each element separately.
     /// </summary>
-    /// <remarks>Use with <see cref="SSpot.Utilities.Attributes.InlineAttribute"/> to draw in a single line.</remarks>
+    /// <remarks>Use with <see cref="SSPot.Utilities.Attributes.InlineAttribute"/> to draw in a single line.</remarks>
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     [Serializable]
     public class NestedList<T> : IList<T>

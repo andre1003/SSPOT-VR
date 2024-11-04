@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NaughtyAttributes;
-using SSpot.Utilities.Attributes;
+using SSPot.Utilities.Attributes;
 using UnityEngine;
 
 namespace SSpot.Grids

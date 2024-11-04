@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public static class TransformUtilities
     {

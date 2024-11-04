@@ -1,6 +1,6 @@
 using Photon.Pun;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public abstract class NetworkedSingleton<T> : MonoBehaviourPun where T: NetworkedSingleton<T>
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using SSpot.Utilities.Attributes;
+using SSPot.Utilities.Attributes;
 using UnityEditor;
 using UnityEngine;
 

@@ -3,7 +3,7 @@ using System.Collections;
 using NaughtyAttributes;
 using Photon.Pun;
 using SSpot.Grids;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 namespace SSpot.Robot

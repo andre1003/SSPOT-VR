@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SSpot.Utilities.Attributes
+namespace SSPot.Utilities.Attributes
 {
     /// <summary>
     /// Draws the first child of the property instead of a nested object. 

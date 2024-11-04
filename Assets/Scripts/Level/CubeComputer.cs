@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 namespace SSpot.Level

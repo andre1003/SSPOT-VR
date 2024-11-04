@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
 using SSpot.Grids;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 namespace SSPot.Grids.SmartWalls

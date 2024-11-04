@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public static class Vector2IntUtilities
     {

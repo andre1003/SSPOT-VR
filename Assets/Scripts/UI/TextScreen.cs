@@ -1,4 +1,4 @@
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 

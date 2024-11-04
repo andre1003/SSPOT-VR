@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Photon.Pun;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 public class PlayerSetup : MonoBehaviourPun

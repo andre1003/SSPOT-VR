@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using Photon.Pun;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;

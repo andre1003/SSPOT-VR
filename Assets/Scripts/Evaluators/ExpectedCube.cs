@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using SSpot.Ambient.ComputerCode;
-using SSpot.Utilities;
-using SSpot.Utilities.Attributes;
+using SSPot.Utilities;
+using SSPot.Utilities.Attributes;
 
 namespace SSpot.Evaluators
 {

@@ -1,7 +1,7 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public class DelayedDestroy : MonoBehaviour
     {

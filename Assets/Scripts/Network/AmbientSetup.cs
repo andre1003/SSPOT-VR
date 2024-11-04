@@ -1,6 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
-using SSpot.Utilities;
+using SSPot.Utilities;
 using UnityEngine;
 
 public class AmbientSetup : Singleton<AmbientSetup>

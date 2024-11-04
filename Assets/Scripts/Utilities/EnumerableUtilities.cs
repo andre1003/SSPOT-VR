@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SSpot.Utilities
+namespace SSPot.Utilities
 {
     public static class EnumerableUtilities
     {
