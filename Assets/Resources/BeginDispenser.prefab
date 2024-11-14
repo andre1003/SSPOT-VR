@@ -212,7 +212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube:
     type: 1
-  audioSource: {fileID: 5966115215313958602}
 --- !u!114 &5966115215313958601
 MonoBehaviour:
   m_ObjectHideFlags: 0

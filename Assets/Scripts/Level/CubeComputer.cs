@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Photon.Pun;
 using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
 using SSPot.Utilities;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace SSpot.Level
 {
-    public class CubeComputer : MonoBehaviour
+    public class CubeComputer : MonoBehaviourPun
     {
         public bool CanHaveLoops
         {
@@ -95,7 +96,7 @@ namespace SSpot.Level
         #region Button Callbacks
         
         
-        private void OnRunButtonPressed() => LevelManager.Instance.Run(Cells);
+        private void OnRunButtonPressed() => LevelManager.Instance.Run(this);
         
         private void OnResetButtonPressed() => LevelManager.Instance.ResetLevel();
         

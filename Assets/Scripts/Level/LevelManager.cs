@@ -98,12 +98,9 @@ namespace SSpot.Level
         #region Run Methods
         
         /// <inheritdoc cref="RunRpc"/>
-        public void Run(IReadOnlyList<CodingCell> cells)
+        public void Run(CubeComputer computer)
         {
-            if (PhotonNetwork.OfflineMode)
-                RunRpc(cells);
-            else
-                photonView.RPC(nameof(RunRpc), RpcTarget.AllBuffered, cells);
+            photonView.RPC(nameof(RunRpc), RpcTarget.AllBuffered, computer.photonView.ViewID);
         }
 
         /// <summary>
@@ -112,8 +109,17 @@ namespace SSpot.Level
         /// If already running or the level already ended, does nothing.
         /// </summary>
         [PunRPC]
-        private void RunRpc(IReadOnlyList<CodingCell> cells)
+        private void RunRpc(int computerId)
         {
+            var computerView = PhotonView.Find(computerId);
+            if (!computerView || !computerView.TryGetComponent(out CubeComputer computer))
+            {
+                Debug.LogError($"Can't find computer with id {computerId}");
+                return;
+            }
+
+            var cells = computer.Cells;
+            
             if (CurrentStage is Stage.Running or Stage.End)
                 return;
             
@@ -182,10 +188,7 @@ namespace SSpot.Level
         /// <inheritdoc cref="ResetRpc"/>
         public void ResetLevel()
         {
-            if (PhotonNetwork.OfflineMode)
-                ResetRpc();
-            else
-                photonView.RPC(nameof(ResetRpc), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(ResetRpc), RpcTarget.AllBuffered);
         }
 
         /// <summary>
