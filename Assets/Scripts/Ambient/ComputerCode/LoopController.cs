@@ -73,7 +73,7 @@ namespace SSpot.Ambient.ComputerCode
             {
                 if (value < MinRange)
                 {
-                    range = value;
+                    range = MinRange;
                     gameObject.SetActive(false);
                     return;
                 }
@@ -156,8 +156,7 @@ namespace SSpot.Ambient.ComputerCode
         private void ResetRpc()
         {
             Iterations = MinIterations;
-            while (Range > MinRange)
-                DecreaseRange();
+            Range = MinRange;
         }
     }
 }

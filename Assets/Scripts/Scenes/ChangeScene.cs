@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace SSPot.Scenes
 {
@@ -19,6 +20,7 @@ namespace SSPot.Scenes
         /// <summary>
         /// When player clicks on this object, the next level is loaded
         /// </summary>
+        [UsedImplicitly]
         public void OnPointerClick()
         {
             switch (target)
