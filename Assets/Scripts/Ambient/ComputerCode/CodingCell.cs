@@ -26,23 +26,22 @@ namespace SSpot.Ambient.ComputerCode
         {
             Index = index;
             Computer = computer;
-        }
-
-        private void Awake()
-        {
+            
             AttachingCube.ParentCell = this;
-
             if (LoopController)
+            {
                 LoopController.ParentCell = this;
+                SetLoopRpc(false);
+            }
         }
 
         public void Clear()
         {
-            if (CurrentCube != null)
-                AttachingCube.ClearCellRPC();
+            if (CurrentCube == null)
+                AttachingCube.ClearCell();
             
-            //if (LoopController)
-            //    LoopController.Reset();
+            if (LoopController) 
+                LoopController.ResetLoopData();
         }
         
         public void SetLoop(bool loopActive)

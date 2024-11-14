@@ -1,5 +1,4 @@
 using System;
-using JetBrains.Annotations;
 using NaughtyAttributes;
 using Photon.Pun;
 using SSPot.Utilities;
@@ -11,23 +10,23 @@ namespace SSpot.Ambient.ComputerCode
 {
     public class LoopController : MonoBehaviourPun
     {
+        private const int MinRange = 1;
+        private const int MinIterations = 2;
+        
         [Serializable]
         public class LoopSettings
         {
-            [AllowNesting, MinValue(2)]
+            [AllowNesting, MinValue(MinIterations)]
             public int maxIterations = 10;
             
-            [AllowNesting, MinValue(1)]
+            [AllowNesting, MinValue(MinRange)]
             public int maxRange = 1;
         }
         
         public CodingCell ParentCell { get; set; }
-        
+
         [field: BoxGroup("Current Values"), SerializeField, ReadOnly]
-        public int Iterations { get; private set; } = 2;
-        
-        [field: BoxGroup("Current Values"), SerializeField, ReadOnly]
-        public int Range { get; private set; } = 1;
+        private int iterations = 2, range = 1;
         
         [BoxGroup("Loop Settings"), SerializeField]
         private bool overrideGlobalSettings;
@@ -43,128 +42,122 @@ namespace SSpot.Ambient.ComputerCode
         [BoxGroup("Visuals"), SerializeField]
         private float planeSize = 0.9f;
         [BoxGroup("Visuals"), SerializeField]
+        private float planeGrowthOffset = 0.05f;
+        [BoxGroup("Visuals"), SerializeField]
         private GameObject IncreaseAmountButton;
 
         private LoopSettings Settings => overrideGlobalSettings 
             ? settings 
             : ParentCell.Computer.GlobalLoopSettings;
 
+        [PunRPC]
+        private void SetIterationsRPC(int value) => Iterations = value;
+        public int Iterations
+        {
+            get => iterations;
+            
+            private set
+            {
+                iterations = Mathf.Clamp(value, MinIterations, Settings.maxIterations);
+                iterationsText.text = iterations.ToString();
+            }
+        }
+
+        [PunRPC]
+        private void SetRangeRPC(int value) => Range = value;
+        public int Range
+        {
+            get => range;
+            
+            private set
+            {
+                if (value < MinRange)
+                {
+                    range = value;
+                    gameObject.SetActive(false);
+                    return;
+                }
+                
+                range = Mathf.Clamp(value, MinRange, _cachedMaxRange);
+                IncreaseAmountButton.SetActive(range < _cachedMaxRange);
+                rangeText.text = range == MinRange ? "X" : "A";
+                UpdatePanelScale();
+            }
+        }
+        
         private int _cachedMaxRange;
 
-        private void OnEnable()
+        private void OnEnable() => RefreshEarlierPanels();
+
+        private void OnDisable() 
         {
-            UpdateAllPanels();
+            RefreshEarlierPanels();
+            ResetRpc();
         }
 
-        private void OnDisable()
-        {
-            UpdateAllPanels();
-        }
+        #region Increase/Decrease
         
-        [UsedImplicitly]
-        public void IncreaseIterations()
-        {
-            photonView.RPC(nameof(IncreaseRPC), RpcTarget.AllBuffered);
-        }
+        public void IncreaseIterations() =>
+            photonView.RPC(nameof(SetIterationsRPC), RpcTarget.AllBuffered, Iterations + 1);
 
-        [PunRPC]
-        private void IncreaseRPC()
-        {
-            Iterations++;
+        public void DecreaseIterations() =>
+            photonView.RPC(nameof(SetIterationsRPC), RpcTarget.AllBuffered, Iterations - 1);
 
-            if(Iterations > Settings.maxIterations)
-            {
-                Iterations = Settings.maxIterations;
-            }
-
-            UpdateUI();
-        }
-
-        [UsedImplicitly]
-        public void DecreaseIterations()
-        {
-            photonView.RPC(nameof(DecreaseRPC), RpcTarget.AllBuffered);
-        }
-
-        [PunRPC]
-        private void DecreaseRPC()
-        {
-            Iterations--;
-
-            if(Iterations < 1)
-            {
-                Iterations = 1;
-            }
-
-            UpdateUI();
-        }
-
-        public void IncreaseRange()
-        {
-            if (Range >= _cachedMaxRange) 
-                return;
+        public void IncreaseRange() => 
+            photonView.RPC(nameof(SetRangeRPC), RpcTarget.AllBuffered, Range + 1);
         
-            Vector3 tempVector = Plane.transform.localPosition;
-            Plane.transform.localPosition = new (tempVector.x, tempVector.y - (planeSize / 2), tempVector.z);
+        public void DecreaseRange() => 
+            photonView.RPC(nameof(SetRangeRPC), RpcTarget.AllBuffered, Range - 1);
+        
+        #endregion
+
+        #region Refreshing
+        
+        private void UpdatePanelScale()
+        {
+            Vector3 position = Plane.transform.localPosition;
+            position.y = -(Range - 1) * (.5f + planeGrowthOffset * .5f);
+            Plane.transform.localPosition = position;
+
+            Vector3 scale = Plane.transform.localScale;
+            scale.z = Range * planeSize + (Range - 1) * planeSize * planeGrowthOffset;
+            Plane.transform.localScale = scale;
+        }
+
+        private void RefreshEarlierPanels()
+        {
+            if (!ParentCell) return;
             
-            tempVector = Plane.transform.localScale;
-            Plane.transform.localScale = new (tempVector.x, tempVector.y, tempVector.z * (1 + (1f / Range)));
+            for (int i = 0; i <= ParentCell.Index; i++)
+            {
+                ParentCell.Computer.Cells[i].LoopController.RefreshLimits();
+            }
+        }
+        
+        private void RefreshLimits()
+        {
+            if (!ParentCell) return;
             
-            Range++;
-            UpdateUI();
-        }
-        
-        public void DecreaseRange()
-        {
-            if (Range == 1)
-                gameObject.SetActive(false);
-        
-            if (Range <= 1)
-                return;
-
-            Vector3 positionVector = Plane.transform.localPosition;
-            positionVector = new(positionVector.x, positionVector.y + (planeSize / 2), positionVector.z);
-            Plane.transform.localPosition = positionVector;
-        
-            Vector3 scaleVector = Plane.transform.localScale;
-            scaleVector = new(scaleVector.x, scaleVector.y, scaleVector.z * (1 - (1f / Range)));
-            Plane.transform.localScale = scaleVector;
-        
-            Range--;
-            UpdateUI();
-        }
-
-        [UsedImplicitly]
-        public void DestroyLooper() 
-        { 
-            Destroy(gameObject);
-        }
-
-        private void UpdateUI()
-        {
-            iterationsText.text = Iterations.ToString();
-            IncreaseAmountButton.SetActive(Range < _cachedMaxRange);
-            rangeText.text = Range == 1 ? "X" : "A";
-        }
-
-        private void UpdateRange()
-        {
             int index = ParentCell.Index;
             int panelCount = ParentCell.Computer.Cells.Count;
             int nextPanelIndex  = ParentCell.Computer.Cells.FindIndex(index + 1, cell => cell.HasLoop);
             if (nextPanelIndex == -1) nextPanelIndex = panelCount;
             
-            int rangeToNext = nextPanelIndex - index;
-            _cachedMaxRange = Mathf.Min(Settings.maxRange, rangeToNext);
-            
-            while (Range > _cachedMaxRange) 
-                DecreaseRange();
+            _cachedMaxRange = Mathf.Min(nextPanelIndex - index, Settings.maxRange);
+            Range = Range;
+            Iterations = Iterations;
         }
+        
+        #endregion
 
-        public void UpdateAllPanels()
+        public void ResetLoopData() => photonView.RPC(nameof(ResetRpc), RpcTarget.AllBuffered);
+        
+        [PunRPC]
+        private void ResetRpc()
         {
-            UpdateRange();
-            UpdateUI();
+            Iterations = MinIterations;
+            while (Range > MinRange)
+                DecreaseRange();
         }
     }
 }
