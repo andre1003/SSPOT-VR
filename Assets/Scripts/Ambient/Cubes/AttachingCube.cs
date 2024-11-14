@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using Photon.Pun;
 using SSpot.Ambient.ComputerCode;
 
@@ -21,6 +22,7 @@ public class AttachingCube : MonoBehaviourPun
     /// <summary>
     /// When player click on this object, it attaches a cube in the coding cell
     /// </summary>
+    [UsedImplicitly]
     public void OnPointerClick()
     {
         GameObject hand = PlayerSetup.Local.Hand;
@@ -42,7 +44,7 @@ public class AttachingCube : MonoBehaviourPun
         }
         else if (cubeHolder.transform.childCount == 1)
         {
-            ClearCellRPC();
+            ClearCell();
         }
     }
 
@@ -55,22 +57,23 @@ public class AttachingCube : MonoBehaviourPun
         }
         else
         {
-            photonView.RPC(nameof(ReplaceCubeRPC), RpcTarget.AllBuffered, selectedCube);
+            photonView.RPC(nameof(SetCubeRPC), RpcTarget.AllBuffered, selectedCube.photonView.ViewID);
         }
     }
 
     [PunRPC]
-    private void ReplaceCubeRPC(CloningCube newCube)
+    private void SetCubeRPC(int cubeId)
     {
         if (CurrentCube != null)
             ClearCellRPC();
-        AttachCubeRPC(newCube);
-    }
-
-
-    [PunRPC]
-    private void AttachCubeRPC(CloningCube selectedCube)
-    {
+        
+        var selectedCube = PhotonView.Find(cubeId);
+        if (!selectedCube)
+        {
+            Debug.LogError($"Failed to find cube with id {cubeId}");
+            return;
+        }
+        
         // Attach the selected cube to cubeHolder
         selectedCube.transform.SetParent(cubeHolder.transform);
 
@@ -89,8 +92,10 @@ public class AttachingCube : MonoBehaviourPun
         CurrentCube = selectedCube.GetComponent<CloningCube>().Cube;
     }
 
+    public void ClearCell() => photonView.RPC(nameof(ClearCellRPC), RpcTarget.AllBuffered);
+
     [PunRPC]
-    public void ClearCellRPC()
+    private void ClearCellRPC()
     {
         if (CurrentCube == null)
             return;

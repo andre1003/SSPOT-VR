@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8329425647613975106}
   - component: {fileID: 2077013578408520964}
+  - component: {fileID: 2591362483453708365}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -44,6 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff253c0cf264be1a7075e48aafec764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  compiler:
+    mustUseAllSlots: 1
+    emptyError: Preencha o algoritmo!
+    beginError: Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!
+    endError: Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!
+    allSlotsError: "Deu ERRO! Voc\xEA deve preencher todas as placas de programa\xE7\xE3o!"
+    noHolesError: "Deu ERRO! Seu algoritmo n\xE3o pode ter placas vazias!"
+    beginEndInMiddleError: "Deu ERRO! In\xEDcio e Fim devem ser usados no lugar certo!"
+  runner:
+    timeBetweenCubes: 0.5
+  resetOnExecutionError: 1
+  allowConsecutiveRuns: 0
   <OnReset>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -62,16 +75,25 @@ MonoBehaviour:
   <OnLevelCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  <Objective>k__BackingField: {fileID: 0}
-  <Robot>k__BackingField: {fileID: 0}
-  compiler:
-    mustUseAllSlots: 1
-    emptyError: Preencha o algoritmo!
-    beginError: Deu ERRO! Verifique se o algoritmo foi iniciado corretamente!
-    endError: Deu ERRO! Verifique se o algoritmo foi finalizado corretamente!
-    allSlotsError: "Deu ERRO! Voc\xEA deve preencher todas as placas de programa\xE7\xE3o!"
-    noHolesError: "Deu ERRO! Seu algoritmo n\xE3o pode ter placas vazias!"
-    beginEndInMiddleError: "Deu ERRO! In\xEDcio e Fim devem ser usados no lugar certo!"
-  runner:
-    timeBetweenCubes: 0.5
-  errorScreen: {fileID: 0}
+--- !u!114 &2591362483453708365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329425647613975117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

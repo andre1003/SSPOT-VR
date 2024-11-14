@@ -1947,6 +1947,7 @@ GameObject:
   - component: {fileID: 7611308879639158656}
   - component: {fileID: 2170496132997414244}
   - component: {fileID: 4666902835319995835}
+  - component: {fileID: 2932703332702761445}
   m_Layer: 0
   m_Name: Computer
   m_TagString: Untagged
@@ -2095,6 +2096,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2932703332702761445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611308879639158657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7727589654217596976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,7 +2328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube:
     type: 0
-  audioSource: {fileID: 2216187242356557927}
 --- !u!1 &7904828765507935333
 GameObject:
   m_ObjectHideFlags: 0
