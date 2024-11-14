@@ -17,7 +17,7 @@ namespace SSPot.Utilities
             }
         }
         
-        protected void Awake()
+        protected virtual void Awake()
         {
             if (_instance != null && _instance != this)
             {

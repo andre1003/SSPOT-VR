@@ -16,6 +16,8 @@ public class PlayerSetup : MonoBehaviourPun
     
     #endregion
 
+    public int ViewId => photonView.ViewID;
+    
     public int PlayerIndex => Players.IndexOf(this);
     
     public GameObject Hand => playerHand;

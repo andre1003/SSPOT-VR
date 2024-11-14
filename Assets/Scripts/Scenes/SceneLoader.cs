@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace SSPot.Scenes
 {
-    public class SceneLoader : Singleton<SceneLoader>
+    public class SceneLoader : NetworkedSingleton<SceneLoader>
     {
         [SerializeField, BoxGroup("Canvas")]
         private GameObject loadSceneCanvas;
@@ -27,8 +27,6 @@ namespace SSPot.Scenes
         {
             base.Awake();
             if (Instance != this) return;
-            
-            DontDestroyOnLoad(this);
             
             if (PhotonNetwork.IsMasterClient)
             {
@@ -73,6 +71,19 @@ namespace SSPot.Scenes
         private Coroutine _loadCoroutine;
         private void LoadScene(int buildIndex)
         {
+            if (PhotonNetwork.InRoom)
+            {
+                photonView.RPC(nameof(LoadSceneRpc), RpcTarget.AllBuffered, buildIndex);
+            }
+            else
+            {
+                LoadSceneRpc(buildIndex);
+            }
+        }
+
+        [PunRPC]
+        private void LoadSceneRpc(int buildIndex)
+        {
             if (_loadCoroutine != null)
             {
                 Debug.LogError($"Tried to load scene {buildIndex} while already loading");
@@ -82,13 +93,19 @@ namespace SSPot.Scenes
             _loadCoroutine = StartCoroutine(LoadSceneCoroutine(buildIndex));
         }
 
+
         private IEnumerator LoadSceneCoroutine(int buildIndex)
         {
-            PhotonNetwork.LoadLevel(buildIndex);
-
             SetMessageForIndex(buildIndex);
             
             loadSceneCanvas.SetActive(true);
+            yield return null;
+            
+            if (!PhotonNetwork.InRoom || PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel(buildIndex);
+            }
+            
             while (PhotonNetwork.LevelLoadingProgress < 1)
             {
                 progressBar.value = PhotonNetwork.LevelLoadingProgress;
