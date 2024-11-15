@@ -22,6 +22,8 @@ namespace SSpot.Level
 
         private void SetMaterialInternal(Material material, bool reset)
         {
+            if (!isActiveAndEnabled) return;
+            
             if (_materialResetCoroutine != null)
             {
                 StopCoroutine(_materialResetCoroutine);
@@ -32,7 +34,7 @@ namespace SSpot.Level
             mats[materialIndex] = material;
             terminalRenderer.materials = mats;
             
-            if (reset)
+            if (reset && gameObject.activeSelf)
             {
                 _materialResetCoroutine = StartCoroutine(CoroutineUtilities.WaitThen(materialResetDelay, ResetMaterial));
             }

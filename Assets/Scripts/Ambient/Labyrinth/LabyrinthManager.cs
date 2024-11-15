@@ -38,13 +38,13 @@ namespace SSPot.Ambient.Labyrinth
             get => _currentSectionIndex;
             set
             {
-                // Covers current section
+                // Clears listener for old section
                 if (_currentSectionIndex >= 0)
                 {
                     sections[_currentSectionIndex].endMarker.SteppedOnEvent.RemoveListener(OnSectionEndReached);
                 }
                 
-                // Uncovers next section
+                // Uncovers and listens to new section
                 if (value >= 0 && value < sections.Length)
                 {
                     sections[value].endMarker.SteppedOnEvent.AddListener(OnSectionEndReached);

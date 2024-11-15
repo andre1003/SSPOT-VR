@@ -11634,6 +11634,10 @@ PrefabInstance:
       propertyPath: compiler.mustUseAllSlots
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2591362483453708365, guid: 5367be8663fc8284fbf5384b7bfe15c5, type: 3}
+      propertyPath: sceneViewId
+      value: 204
+      objectReference: {fileID: 0}
     - target: {fileID: 8329425647613975106, guid: 5367be8663fc8284fbf5384b7bfe15c5, type: 3}
       propertyPath: m_RootOrder
       value: 9
