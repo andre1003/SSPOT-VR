@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using SSpot.Grids;
 using SSPot.Utilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SSPot.Grids.SmartWalls
 {
@@ -42,11 +43,19 @@ namespace SSPot.Grids.SmartWalls
         private readonly List<SmartWallArranger> _neighbors = new();
         private IEnumerable<SmartWallArranger> ValidNeighbors => _neighbors.Where(n => n);
 
+        private bool IsInValidState() => this &&
+                                         straight && cornerUpRight && tripleCornerUpRightDown && quadCorner;
+
+        private bool _isUnloading;
+        private void OnSceneUnloaded(Scene scene) => _isUnloading = scene == gameObject.scene;
+        
         private void OnEnable()
         {
-            if (!this) return;
-
-            if (!straight | !cornerUpRight | !tripleCornerUpRightDown | !quadCorner) return;
+            if (!IsInValidState()) return;
+            
+            #if UNITY_EDITOR
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+            #endif
             
             _grid = GetComponentInParent<LevelGrid>();
             if (!_grid) return;
@@ -73,6 +82,8 @@ namespace SSPot.Grids.SmartWalls
         private bool _fieldsDirty;
         private void Update()
         {
+            if (!IsInValidState()) return;
+            
             if (transform.hasChanged || _fieldsDirty)
             {
                 transform.hasChanged = false;
@@ -82,23 +93,45 @@ namespace SSPot.Grids.SmartWalls
         }
 
         private void OnValidate() => _fieldsDirty = true;
-
-        private void OnDisable() => ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
+      
+        private void OnDisable()
+        {
+            #if UNITY_EDITOR
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            #endif
+            
+            // Prevent scene unloading from ruining wall arrangement
+            if (_isUnloading)
+            {
+                _isUnloading = false;
+                return;
+            }
+            
+            if (!IsInValidState()) return;
+            
+            ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
+        }
 
         private void UpdateMesh()
         {
-            if (!this) return;
+            if (!IsInValidState()) return;
+            
+            SetMeshActive(straight, false);
+            SetMeshActive(cornerUpRight, false);
+            SetMeshActive(tripleCornerUpRightDown, false);
+            SetMeshActive(quadCorner, false);
             
             Direction flags = ValidNeighbors.Aggregate(Direction.None, (a, n) => a | DirectionToNeighbor(n));
             
-            straight.gameObject.SetActive(false);
-            cornerUpRight.gameObject.SetActive(false);
-            tripleCornerUpRightDown.gameObject.SetActive(false);
-            quadCorner.gameObject.SetActive(false);
-            
             var (mesh, rotation) = GetMesh(flags);
-            mesh.SetActive(true);
             mesh.transform.forward = Quaternion.AngleAxis(rotation, Vector3.up) * Vector3.forward;
+            SetMeshActive(mesh, true);
+        }
+
+        private static void SetMeshActive(GameObject mesh, bool active)
+        {
+            mesh.SetActive(active);
+            mesh.tag = active ? "Untagged" : "EditorOnly";
         }
 
         private void NotifyNeighborCreated(SmartWallArranger neighbor)
