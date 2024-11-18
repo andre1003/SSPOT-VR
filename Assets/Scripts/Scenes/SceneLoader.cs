@@ -99,6 +99,7 @@ namespace SSPot.Scenes
             SetMessageForIndex(buildIndex);
             
             loadSceneCanvas.SetActive(true);
+            yield return new WaitForEndOfFrame();
             yield return null;
             
             if (!PhotonNetwork.InRoom || PhotonNetwork.IsMasterClient)

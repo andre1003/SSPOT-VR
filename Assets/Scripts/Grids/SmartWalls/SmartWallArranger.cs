@@ -126,12 +126,22 @@ namespace SSPot.Grids.SmartWalls
             var (mesh, rotation) = GetMesh(flags);
             mesh.transform.forward = Quaternion.AngleAxis(rotation, Vector3.up) * Vector3.forward;
             SetMeshActive(mesh, true);
+            
+            #if UNITY_EDITOR
+            UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(gameObject);
+            UnityEditor.EditorUtility.SetDirty(gameObject);
+            #endif
         }
 
         private static void SetMeshActive(GameObject mesh, bool active)
         {
             mesh.SetActive(active);
             mesh.tag = active ? "Untagged" : "EditorOnly";
+            
+            #if UNITY_EDITOR
+            UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(mesh);
+            UnityEditor.EditorUtility.SetDirty(mesh);
+            #endif
         }
 
         private void NotifyNeighborCreated(SmartWallArranger neighbor)

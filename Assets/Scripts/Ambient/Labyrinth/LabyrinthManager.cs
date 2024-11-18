@@ -119,6 +119,10 @@ namespace SSPot.Ambient.Labyrinth
             // Deactivate objects for both players
             player1.SetObjectsActive(false);
             player2.SetObjectsActive(false);
+            
+            // Activate tv for both players
+            player1.TV.SetActive(true);
+            player2.TV.SetActive(true);
 
             // Activate projector
             projector.SetActive(true);
