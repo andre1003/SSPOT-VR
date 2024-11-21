@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
 using SSpot.Grids;
-using SSPot.Utilities;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SSPot.Grids.SmartWalls
 {
@@ -41,27 +39,19 @@ namespace SSPot.Grids.SmartWalls
             : Vector2Int.zero;
 
         private readonly List<SmartWallArranger> _neighbors = new();
-        private IEnumerable<SmartWallArranger> ValidNeighbors => _neighbors.Where(n => n);
 
         private bool IsInValidState() => this &&
                                          straight && cornerUpRight && tripleCornerUpRightDown && quadCorner;
-
-        private bool _isUnloading;
-        private void OnSceneUnloaded(Scene scene) => _isUnloading = scene == gameObject.scene;
         
         private void OnEnable()
         {
             if (!IsInValidState()) return;
             
-            #if UNITY_EDITOR
-            SceneManager.sceneUnloaded += OnSceneUnloaded;
-            #endif
-            
             _grid = GetComponentInParent<LevelGrid>();
             if (!_grid) return;
             
             //Clear neighbors
-            ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
+            //ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
             _neighbors.Clear();
             
             //Get neighbors
@@ -73,12 +63,14 @@ namespace SSPot.Grids.SmartWalls
                 if (dir == Direction.None) continue;
                 
                 _neighbors.Add(obj);
-                obj.NotifyNeighborCreated(this);
+                obj._neighbors.Add(this);
+                obj.UpdateMesh();
             }
             
             UpdateMesh();
         }
 
+        private readonly List<SmartWallArranger> _removedNeighbors = new();
         private bool _fieldsDirty;
         private void Update()
         {
@@ -90,27 +82,17 @@ namespace SSPot.Grids.SmartWalls
                 _fieldsDirty = false;
                 OnEnable();
             }
+            
+            _removedNeighbors.AddRange(_neighbors.Where(n => !n || !n.gameObject.activeSelf));
+            if (_removedNeighbors.Count > 0)
+            {
+                _removedNeighbors.ForEach(n => _neighbors.Remove(n));
+                _removedNeighbors.Clear();
+                UpdateMesh();
+            }
         }
 
         private void OnValidate() => _fieldsDirty = true;
-      
-        private void OnDisable()
-        {
-            #if UNITY_EDITOR
-            SceneManager.sceneUnloaded -= OnSceneUnloaded;
-            #endif
-            
-            // Prevent scene unloading from ruining wall arrangement
-            if (_isUnloading)
-            {
-                _isUnloading = false;
-                return;
-            }
-            
-            if (!IsInValidState()) return;
-            
-            ValidNeighbors.ForEach(n => n.NotifyNeighborDestroyed(this));
-        }
 
         private void UpdateMesh()
         {
@@ -121,39 +103,19 @@ namespace SSPot.Grids.SmartWalls
             SetMeshActive(tripleCornerUpRightDown, false);
             SetMeshActive(quadCorner, false);
             
-            Direction flags = ValidNeighbors.Aggregate(Direction.None, (a, n) => a | DirectionToNeighbor(n));
+            Direction flags = _neighbors
+                .Where(n => n)
+                .Aggregate(Direction.None, (a, n) => a | DirectionToNeighbor(n));
             
             var (mesh, rotation) = GetMesh(flags);
             mesh.transform.forward = Quaternion.AngleAxis(rotation, Vector3.up) * Vector3.forward;
             SetMeshActive(mesh, true);
-            
-            #if UNITY_EDITOR
-            UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(gameObject);
-            UnityEditor.EditorUtility.SetDirty(gameObject);
-            #endif
         }
 
         private static void SetMeshActive(GameObject mesh, bool active)
         {
             mesh.SetActive(active);
             mesh.tag = active ? "Untagged" : "EditorOnly";
-            
-            #if UNITY_EDITOR
-            UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(mesh);
-            UnityEditor.EditorUtility.SetDirty(mesh);
-            #endif
-        }
-
-        private void NotifyNeighborCreated(SmartWallArranger neighbor)
-        {
-            _neighbors.Add(neighbor);
-            UpdateMesh();
-        }
-        
-        private void NotifyNeighborDestroyed(SmartWallArranger neighbor)
-        {
-            _neighbors.Remove(neighbor);
-            UpdateMesh();
         }
 
         private Direction DirectionToNeighbor(SmartWallArranger neighbor)
@@ -164,7 +126,7 @@ namespace SSPot.Grids.SmartWalls
             if (dir == Vector2Int.left) return Direction.Left;
             if (dir == Vector2Int.down) return Direction.Down;
             
-            if (!avoidParallelLineConnection) return Direction.None;
+            //if (!avoidParallelLineConnection) return Direction.None;
             
             if (dir == Vector2Int.right + Vector2Int.up) return Direction.UpRight;
             if (dir == Vector2Int.right + Vector2Int.down) return Direction.DownRight;
