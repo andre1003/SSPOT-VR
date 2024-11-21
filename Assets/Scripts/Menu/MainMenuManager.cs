@@ -18,9 +18,9 @@ namespace SSPot.Menu
             if(PhotonNetwork.InRoom)
                 PhotonNetwork.LeaveRoom();
 
-            // If platform is not PC, disablew settings button
-            bool isOnPc = GlobalPlatformController.Instance.isOnPc;
-            if (!isOnPc) settingsButton.SetActive(false);
+            // If platform is mobile, disable settings button
+            bool isMobile = Application.isMobilePlatform;
+            if (isMobile) settingsButton.SetActive(false);
         }
 
         #region Offline
