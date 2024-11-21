@@ -14,9 +14,6 @@ namespace SSPot.Scenes
         private GameObject loadSceneCanvas;
         [SerializeField, BoxGroup("Canvas")]
         private Slider progressBar;
-
-        [SerializeField, BoxGroup("Message")] 
-        private GameObject nextLevelMessage, connectionMessage;
         
         [SerializeField, BoxGroup("Scenes")]
         private SerializableScene mainMenu, lobby, tutorial, firstLevel;
@@ -36,17 +33,6 @@ namespace SSPot.Scenes
             loadSceneCanvas.SetActive(false);
         }
 
-        public void OpenLoadingScene(bool showConnectionMessage = false)
-        {
-            connectionMessage.SetActive(showConnectionMessage);
-            nextLevelMessage.SetActive(!showConnectionMessage);
-            
-            loadSceneCanvas.SetActive(true);
-        }
-        
-        public void CloseLoadingScene() => loadSceneCanvas.SetActive(false);
-        
-
         public void LoadMainMenu() => LoadScene(mainMenu.BuildIndex);
 
         public void LoadLobby() => LoadScene(lobby.BuildIndex);
@@ -57,8 +43,7 @@ namespace SSPot.Scenes
 
         public void LoadPreviousScene()
         {
-            int index = CurrentScene.buildIndex;
-            int prevIndex = index - 1;
+            int prevIndex = CurrentScene.buildIndex - 1;
             if (prevIndex < 0)
             {
                 Debug.Log("No more scenes to load.");
@@ -70,8 +55,7 @@ namespace SSPot.Scenes
         
         public void LoadNextScene()
         {
-            int index = CurrentScene.buildIndex;
-            int nextIndex = index + 1;
+            int nextIndex = CurrentScene.buildIndex + 1;
             if (nextIndex >= SceneManager.sceneCountInBuildSettings)
             {
                 Debug.Log("No more scenes to load.");
@@ -109,16 +93,19 @@ namespace SSPot.Scenes
 
         private IEnumerator LoadSceneCoroutine(int buildIndex)
         {
-            bool isToLobby = buildIndex == lobby.BuildIndex;
-            OpenLoadingScene(showConnectionMessage: isToLobby);
+            loadSceneCanvas.SetActive(true);
+            
+            // Make sure the loading screen is visible
             yield return new WaitForEndOfFrame();
             yield return null;
             
+            // Only load the scene if we are the master client
             if (!PhotonNetwork.InRoom || PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel(buildIndex);
             }
             
+            // Wait for the scene to load
             while (PhotonNetwork.LevelLoadingProgress < 1)
             {
                 progressBar.value = PhotonNetwork.LevelLoadingProgress;
@@ -127,11 +114,6 @@ namespace SSPot.Scenes
             loadSceneCanvas.SetActive(false);
             
             _loadCoroutine = null;
-        }
-
-        private void SetMessageForIndex(int buildIndex)
-        {
-            
         }
     }
 }

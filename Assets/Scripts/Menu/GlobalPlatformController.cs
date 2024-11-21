@@ -1,68 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
+using SSPot.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GlobalPlatformController : MonoBehaviour
+namespace SSPot.Menu
 {
-    // Is platform a PC?
-    public bool isOnPc = true;
-
-
-    void Awake()
+    public class GlobalPlatformController : Singleton<GlobalPlatformController>
     {
-        // Delegate OnSceneLoaded
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        // Is platform a PC?
+        public bool isOnPc = true;
 
-        // Don't destroy this on scene load
-        DontDestroyOnLoad(gameObject);
-    }
+        [SerializeField] private float playerSetupDelay = .25f; 
 
-    /// <summary>
-    /// Called when a new scene is loaded.
-    /// </summary>
-    /// <param name="scene">Scene loaded.</param>
-    /// <param name="mode">Load scene mode.</param>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Wait 0.25 seconds to setup platform. This is needed, because player spawn have a delay
-        StartCoroutine(Wait(0.25f));
-    }
 
-    /// <summary>
-    /// Wait for seconds and setup platform.
-    /// </summary>
-    /// <param name="seconds">Seconds to wait.</param>
-    private IEnumerator Wait(float seconds)
-    {
-        // Wait for seconds
-        yield return new WaitForSeconds(seconds);
-
-        // Setup platform
-        SetupPlatform();
-    }
-
-    /// <summary>
-    /// Setup game platform for all players.
-    /// </summary>
-    private void SetupPlatform()
-    {
-        // Get main menu
-        GameObject mainMenu = GameObject.Find("MainMenuManager");
-
-        // If there is a main menu, set game platform
-        if (mainMenu)
+        protected override void Awake()
         {
-            mainMenu.GetComponent<MainMenuManager>().SetGamePlatform(isOnPc);
+            base.Awake();
+            if (Instance != this) return;
+            
+            DontDestroyOnLoad(gameObject);
         }
 
-        // Get all players GameObject
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+        private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        // Loop players, setting the proper game platform
-        foreach(GameObject player in players)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            player.GetComponent<GamePlatformController>().SetGamePlatform(isOnPc);
+            // Wait 0.25 seconds to setup platform. This is needed, because player spawn have a delay
+            StartCoroutine(CoroutineUtilities.WaitThen(playerSetupDelay, SetupPlatform));
+        }
+
+        /// <summary>
+        /// Setup game platform for all players.
+        /// </summary>
+        private void SetupPlatform()
+        {
+            // Get all players GameObject
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+            // Loop players, setting the proper game platform
+            foreach(GameObject player in players)
+            {
+                player.GetComponent<GamePlatformController>().SetGamePlatform(isOnPc);
+            }
         }
     }
 }
