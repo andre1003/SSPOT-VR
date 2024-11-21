@@ -32,7 +32,20 @@ namespace SSPot.Scenes
             {
                 PhotonNetwork.AutomaticallySyncScene = true;
             }
+            
+            loadSceneCanvas.SetActive(false);
         }
+
+        public void OpenLoadingScene(bool showConnectionMessage = false)
+        {
+            connectionMessage.SetActive(showConnectionMessage);
+            nextLevelMessage.SetActive(!showConnectionMessage);
+            
+            loadSceneCanvas.SetActive(true);
+        }
+        
+        public void CloseLoadingScene() => loadSceneCanvas.SetActive(false);
+        
 
         public void LoadMainMenu() => LoadScene(mainMenu.BuildIndex);
 
@@ -40,7 +53,7 @@ namespace SSPot.Scenes
         
         public void LoadTutorial() => LoadScene(tutorial.BuildIndex);
 
-        public void LoadFirstLevel() => LoadScene(firstLevel.BuildIndex);
+        public void LoadFirstLevel() => LoadScene(firstLevel.BuildIndex + 2);
 
         public void LoadPreviousScene()
         {
@@ -96,9 +109,8 @@ namespace SSPot.Scenes
 
         private IEnumerator LoadSceneCoroutine(int buildIndex)
         {
-            SetMessageForIndex(buildIndex);
-            
-            loadSceneCanvas.SetActive(true);
+            bool isToLobby = buildIndex == lobby.BuildIndex;
+            OpenLoadingScene(showConnectionMessage: isToLobby);
             yield return new WaitForEndOfFrame();
             yield return null;
             
@@ -119,9 +131,7 @@ namespace SSPot.Scenes
 
         private void SetMessageForIndex(int buildIndex)
         {
-            bool isToLobby = buildIndex == lobby.BuildIndex;
-            connectionMessage.SetActive(isToLobby);
-            nextLevelMessage.SetActive(!isToLobby);
+            
         }
     }
 }

@@ -33,10 +33,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.OfflineMode = true;
     }
-
-    /// <summary>
-    /// On player joined room handler.
-    /// </summary>
+    
     public override void OnJoinedRoom()
     {
         SceneLoader.Instance.LoadTutorial();
@@ -46,10 +43,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks
     #region Online
     public void PlayOnline()
     {
+        SceneLoader.Instance.OpenLoadingScene(showConnectionMessage: true);
+        
         PhotonNetwork.OfflineMode = false;
         PhotonNetwork.ConnectUsingSettings();
     }
-
+    
     public override void OnJoinedLobby()
     {
         SceneLoader.Instance.LoadLobby();
