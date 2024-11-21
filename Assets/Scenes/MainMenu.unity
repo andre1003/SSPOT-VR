@@ -1367,7 +1367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1143619594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3204,6 +3204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOnPc: 1
+  playerSetupDelay: 0.25
 --- !u!4 &2092641728
 Transform:
   m_ObjectHideFlags: 0

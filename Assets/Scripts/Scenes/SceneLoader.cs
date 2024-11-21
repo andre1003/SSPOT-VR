@@ -39,7 +39,7 @@ namespace SSPot.Scenes
         
         public void LoadTutorial() => LoadScene(tutorial.BuildIndex);
 
-        public void LoadFirstLevel() => LoadScene(firstLevel.BuildIndex + 2);
+        public void LoadFirstLevel() => LoadScene(firstLevel.BuildIndex);
 
         public void LoadPreviousScene()
         {
