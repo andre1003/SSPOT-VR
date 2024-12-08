@@ -30,22 +30,15 @@ namespace SSPot.Utilities.Editor
             if (targetAttribute == null)
             {
                 EditorGUI.PropertyField(position, valueProp, label);
+                Debug.LogError($"{nameof(HashedString)} property {property.name} has no custom attribute.");
                 return;
             }
 
             var go = GetGameObjectFromSerializedProperty(property);
-            if (go == null || !go.TryGetComponent(out Animator animator))
+            if (!targetAttribute.TryGetAnimator(go, out var animator))
             {
                 Debug.LogError($"{nameof(HashedString)} property {property.name} with custom attribute " +
-                               $"{targetAttribute.GetType().Name} must be in a GameObject with " +
-                               "an attached Animator.");
-                return;
-            }
-            
-            if (!animator.isInitialized)
-            {
-                animator.enabled = false;
-                animator.enabled = true;
+                               $"{targetAttribute.GetType().Name} couldn't find animator.");
                 EditorGUI.PropertyField(position, valueProp, label);
                 return;
             }
@@ -65,6 +58,11 @@ namespace SSPot.Utilities.Editor
         {
             int currentIndex = Array.FindIndex(values, val => val.text == valueProp.stringValue);
             int newIndex = EditorGUI.Popup(position, label, currentIndex, values);
+
+            if (currentIndex == -1 && !string.IsNullOrEmpty(valueProp.stringValue))
+            {
+                Debug.LogWarning($"Value \"{valueProp.stringValue}\" not found in {nameof(AnimatorHashedStringAttribute)} values.", valueProp.serializedObject.targetObject);
+            }
 
             if (currentIndex != newIndex)
             {

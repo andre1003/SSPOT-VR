@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SSpot.AnimatorUtilities
 {
@@ -10,6 +11,12 @@ namespace SSpot.AnimatorUtilities
     [AttributeUsage(AttributeTargets.Field)]
     public class AnimatorParamNameAttribute : AnimatorHashedStringAttribute
     {
+        public override bool TryGetAnimator(Object target, out Animator animator)
+        {
+            animator = null;
+            return target is GameObject go && go.TryGetComponent(out animator);
+        }
+        
         public override GUIContent[] GetValues(Animator animator)
         {
             var parameters = animator.parameters;

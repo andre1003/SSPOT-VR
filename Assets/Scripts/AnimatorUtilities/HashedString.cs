@@ -24,6 +24,8 @@ namespace SSpot.AnimatorUtilities
 
         private int? _hash;
         public int Hash => _hash ??= Animator.StringToHash(Value);
+        
+        public bool IsValid => !string.IsNullOrEmpty(Value);
 
         public static implicit operator int(HashedString obj) => obj.Hash;
     }

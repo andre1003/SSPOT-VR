@@ -2,6 +2,7 @@
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SSpot.AnimatorUtilities
 {
@@ -12,6 +13,12 @@ namespace SSpot.AnimatorUtilities
     [AttributeUsage(AttributeTargets.Field)]
     public class AnimatorStateNameAttribute : AnimatorHashedStringAttribute
     {
+        public override bool TryGetAnimator(Object target, out Animator animator)
+        {
+            animator = null;
+            return target is GameObject go && go.TryGetComponent(out animator);
+        }
+
         [CanBeNull]
         public override GUIContent[] GetValues(Animator animator)
         {
