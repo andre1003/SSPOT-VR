@@ -96,10 +96,14 @@ namespace SSpot.Robot
             Vector3 from = Grid.GetCellCenterWorld(fromCell);
             Vector3 to = Grid.GetCellCenterWorld(toCell);
             
-            float duration = useClipDuration ? _animator.WalkClip.length : walkTime;
-            
             _animator.StartWalking();
+            yield return new WaitForEndOfFrame();
+            
+            float duration = useClipDuration 
+                ? _animator.Animator.GetNextAnimatorStateInfo(0).length 
+                : walkTime;
             yield return CoroutineUtilities.SmoothCoroutine(duration, t => transform.position = Vector3.Lerp(from, to, t));
+            
             _animator.StopWalking();
             yield return _animator.WaitForIdle();
             
@@ -122,8 +126,9 @@ namespace SSpot.Robot
             Vector2Int target = left ? Facing.RotateCounterClockwise() : Facing.RotateClockwise();
             Vector3 targetForward = new(target.x, 0, target.y);
 
-            float duration = useClipDuration
-                ? (left ? _animator.TurnLeftClip.length : _animator.TurnRightClip.length)
+            yield return new WaitForEndOfFrame();
+            float duration = useClipDuration 
+                ? _animator.Animator.GetNextAnimatorStateInfo(0).length 
                 : turnTime;
             
             yield return CoroutineUtilities.SmoothCoroutine(duration,

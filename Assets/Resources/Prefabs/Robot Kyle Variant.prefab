@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: faea8fdac511ab941b58a63f0354cb63, type: 2}
     - target: {fileID: 9500000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -283,11 +283,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionDuration: 0.25
-  idleClip: {fileID: -203655887218126122, guid: 97f85fe9fb9476647a6fda6e5a04e812, type: 3}
-  walkClip: {fileID: -203655887218126122, guid: ede61ed597011c6468813178a987efad, type: 3}
-  turnLeftClip: {fileID: -203655887218126122, guid: 04aefedba3eb6474486a7d8788d425d0, type: 3}
-  turnRightClip: {fileID: -203655887218126122, guid: 260c5f03c4d07ad4f96f63cb13ed1741, type: 3}
-  brokenClip: {fileID: -203655887218126122, guid: 88c123332f889b449a35e1d02d05215a, type: 3}
+  startBroken: 0
+  idle:
+    value: Idle
+  walk:
+    value: Walk
+  turnLeft:
+    value: TurnLeft
+  turnRight:
+    value: Broken
+  broken:
+    value: Idle
 --- !u!114 &1804518065
 MonoBehaviour:
   m_ObjectHideFlags: 0

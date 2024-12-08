@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CanWalkThrough>k__BackingField: 0
+  <SteppedOnEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6933906182533548006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48b6ac6df3c47dab4ba3959c1adb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <InteractionAnimation>k__BackingField: {fileID: -203655887218126122, guid: 873cbd1b97493144798f597ed92b9235, type: 3}
+  <InteractionAnimation>k__BackingField:
+    value: Searching
   <Value>k__BackingField: Interactable Value
 --- !u!1 &380772971122689151
 GameObject:

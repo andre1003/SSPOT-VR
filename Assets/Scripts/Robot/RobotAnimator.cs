@@ -1,9 +1,8 @@
 ﻿using System.Collections;
+using NaughtyAttributes;
 using Photon.Pun;
-using SSPot.Utilities;
+using SSpot.AnimatorUtilities;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Playables;
 
 namespace SSpot.Robot
 {
@@ -12,131 +11,71 @@ namespace SSpot.Robot
     {
         [SerializeField] private float transitionDuration = 0.25f;
         [SerializeField] private bool startBroken;
+        
+        [BoxGroup("Clips"), SerializeField, RobotAnimatorStateName]
+        private HashedString idle, walk, turnLeft, turnRight, broken;
 
-        [Header("Clips")]
-        [SerializeField] private AnimationClip idleClip;
-        public AnimationClip IdleClip => idleClip;
-        
-        [SerializeField] private AnimationClip walkClip;
-        public AnimationClip WalkClip => walkClip;
-        
-        [SerializeField] private AnimationClip turnLeftClip;
-        public AnimationClip TurnLeftClip => turnLeftClip;
-        
-        [SerializeField] private AnimationClip turnRightClip;
-        public AnimationClip TurnRightClip => turnRightClip;
-        
-        [SerializeField] private AnimationClip brokenClip;
-        public AnimationClip BrokenClip => brokenClip;
-        
 
-        private PlayableGraph _graph;
-        private AnimationMixerPlayable _outputMixer;
-        private AnimationClipPlayable _oneShotPlayable;
+        public Animator Animator { get; private set; }
 
-        private const int IdleIndex = 0;
-        private const int WalkIndex = 1;
-        private const int TurnLeftIndex = 2;
-        private const int TurnRightIndex = 3;
-        private const int BrokenIndex = 4;
-        private const int OneShotIndex = 5;
+        private HashedString StartAnimation => startBroken ? broken : idle;
         
-        private const int OutputInputCount = 6;
-
-        private int StartAnimationIndex => startBroken ? BrokenIndex : IdleIndex;
+        public bool IsBroken => Animator.GetCurrentAnimatorStateInfo(0).shortNameHash == broken && !Animator.IsInTransition(0);
         
-        public bool IsBroken => Mathf.Approximately(_outputMixer.GetInputWeight(BrokenIndex), 1f);
-        
-        public bool IsIdle => Mathf.Approximately(_outputMixer.GetInputWeight(IdleIndex), 1f);
+        public bool IsIdle => Animator.GetCurrentAnimatorStateInfo(0).shortNameHash == idle && !Animator.IsInTransition(0);
 
         public IEnumerator WaitForIdle() => new WaitUntil(() => IsIdle);
         
         private void Awake()
         {
-            _graph = PlayableGraph.Create(nameof(RobotAnimator));
-            var output = AnimationPlayableOutput.Create(_graph, "Output", GetComponent<Animator>());
-            _outputMixer = AnimationMixerPlayable.Create(_graph, OutputInputCount);
-            output.SetSourcePlayable(_outputMixer);
-
-            _outputMixer.ConnectInput(IdleIndex, AnimationClipPlayable.Create(_graph, idleClip), 0);
-            _outputMixer.ConnectInput(WalkIndex, AnimationClipPlayable.Create(_graph, walkClip), 0);
-            _outputMixer.ConnectInput(TurnLeftIndex, AnimationClipPlayable.Create(_graph, turnLeftClip), 0);
-            _outputMixer.ConnectInput(TurnRightIndex, AnimationClipPlayable.Create(_graph, turnRightClip), 0);
-            _outputMixer.ConnectInput(BrokenIndex, AnimationClipPlayable.Create(_graph, brokenClip), 0);
-
-            SetActiveAnimation(StartAnimationIndex);
-
-            _graph.Play();
+            Animator = GetComponent<Animator>();
+            Animator.Play(StartAnimation);
         }
 
-        private void SetActiveAnimation(int index)
-        {
-            for (int i = 0; i < _outputMixer.GetInputCount(); i++)
-            {
-                float weight = i == index ? 1 : 0;
-                _outputMixer.SetInputWeight(i, weight);
-            }
-        }
-
-        public void SetBroken(bool broken) => StartCoroutine(SetBrokenCoroutine(broken));
-        public IEnumerator SetBrokenCoroutine(bool broken) =>
-            SmoothTransitionCoroutine(
-                from: broken ? IdleIndex : BrokenIndex,
-                to: broken ? BrokenIndex : IdleIndex
-            );
+        public void SetBroken(bool isBroken) => StartCoroutine(SetBrokenCoroutine(isBroken));
+        public IEnumerator SetBrokenCoroutine(bool isBroken) => SmoothTransitionCoroutine(isBroken ? broken : idle);
 
         public void StartWalking() => StartCoroutine(StartWalkingCoroutine());
-        public IEnumerator StartWalkingCoroutine() => SmoothTransitionCoroutine(IdleIndex, WalkIndex);
+        public IEnumerator StartWalkingCoroutine() => SmoothTransitionCoroutine(walk);
         
         public void StopWalking() => StartCoroutine(StopWalkingCoroutine());
-        public IEnumerator StopWalkingCoroutine() => SmoothTransitionCoroutine(WalkIndex, IdleIndex);
+        public IEnumerator StopWalkingCoroutine() => SmoothTransitionCoroutine(idle);
         
         
         public void TurnLeft() => StartCoroutine(TurnLeftCoroutine());
-        public IEnumerator TurnLeftCoroutine() => PlayOneShotCoroutine(turnLeftClip);
+        public IEnumerator TurnLeftCoroutine() => PlayOneShotCoroutine(turnLeft);
         
         public void TurnRight() => StartCoroutine(TurnRightCoroutine());
-        public IEnumerator TurnRightCoroutine() => PlayOneShotCoroutine(turnRightClip);
+        public IEnumerator TurnRightCoroutine() => PlayOneShotCoroutine(turnRight);
         
-        public void PlayOneShot(AnimationClip clip) => StartCoroutine(PlayOneShotCoroutine(clip));
-        public IEnumerator PlayOneShotCoroutine(AnimationClip clip)
+        public void PlayOneShot(string targetName) => StartCoroutine(PlayOneShotCoroutine(Animator.StringToHash(targetName)));
+        public void PlayOneShot(int targetHash) => StartCoroutine(PlayOneShotCoroutine(targetHash));
+        public IEnumerator PlayOneShotCoroutine(int targetHash)
         {
-            _oneShotPlayable = AnimationClipPlayable.Create(_graph, clip);
-            _outputMixer.ConnectInput(OneShotIndex, _oneShotPlayable, 0);
-
-            yield return SmoothTransitionCoroutine(IdleIndex, OneShotIndex);
-            yield return new WaitForSeconds(clip.length - 2 * transitionDuration);
-            yield return SmoothTransitionCoroutine(OneShotIndex, IdleIndex);
-            
-            _outputMixer.DisconnectInput(OneShotIndex);
-            _oneShotPlayable.Destroy();
+            yield return SmoothTransitionCoroutine(targetHash);
+            yield return new WaitForEndOfFrame();
+            yield return WaitForAnimationEndCoroutine();
+            yield return SmoothTransitionCoroutine(idle);
         }
 
-        private IEnumerator SmoothTransitionCoroutine(int from, int to)
+        private IEnumerator SmoothTransitionCoroutine(int to)
         {
-            return CoroutineUtilities.SmoothCoroutine(transitionDuration, t =>
-            {
-                _outputMixer.SetInputWeight(from, 1f - t);
-                _outputMixer.SetInputWeight(to, t);
-            });
+            Animator.CrossFade(to, transitionDuration);
+            yield return WaitForTransitionEndCoroutine(to);
         }
+
+        private IEnumerator WaitForTransitionEndCoroutine(int to) =>
+            new WaitUntil(() =>
+                !Animator.IsInTransition(0) &&
+                Animator.GetCurrentAnimatorStateInfo(0).shortNameHash == to);
+
+        private IEnumerator WaitForAnimationEndCoroutine() =>
+            new WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
         public void Reset()
         {
             StopAllCoroutines();
-            if (_oneShotPlayable.IsValid())
-            {
-                _outputMixer.DisconnectInput(OneShotIndex);
-                _oneShotPlayable.Destroy();
-            }
-
-            SetActiveAnimation(StartAnimationIndex);
-        }
-
-        private void OnDestroy()
-        {
-            StopAllCoroutines();
-            _graph.Destroy();
+            Animator.Play(StartAnimation);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using Photon.Pun;
+using SSpot.AnimatorUtilities;
 using SSpot.Grids;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace SSpot.Robot
     {
         [SerializeField] private RobotGridMover mover;
         [SerializeField] private RobotAnimator animator;
-        [SerializeField] private AnimationClip testClip;
+        [SerializeField, RobotAnimatorStateName] private HashedString testClip;
         
         private bool _isActing;
 
@@ -21,29 +22,31 @@ namespace SSpot.Robot
             _isActing = false;
         }
         
+        private void Act(IEnumerator action) => StartCoroutine(ActCoroutine(action));
+        
         private void Update()
         {
             if (_isActing) return;
             
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                StartCoroutine(ActCoroutine(mover.MoveForwardCoroutine()));
+                Act(mover.MoveForwardCoroutine());
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                StartCoroutine(ActCoroutine(mover.TurnLeftCoroutine()));
+                Act(mover.TurnLeftCoroutine());
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                StartCoroutine(ActCoroutine(mover.TurnRightCoroutine()));
+                Act(mover.TurnRightCoroutine());
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartCoroutine(ActCoroutine(animator.PlayOneShotCoroutine(testClip)));
+                Act(animator.PlayOneShotCoroutine(testClip));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                StartCoroutine(ActCoroutine(InteractCoroutine()));
+                Act(InteractCoroutine());
             }
         }
 
@@ -59,7 +62,7 @@ namespace SSpot.Robot
             if (!interactable) 
                 yield break;
 
-            if (interactable.InteractionAnimation)
+            if (interactable.InteractionAnimation.IsValid)
                 yield return animator.PlayOneShotCoroutine(interactable.InteractionAnimation);
             Debug.Log("Interacted with " + interactable.Value);
         }
