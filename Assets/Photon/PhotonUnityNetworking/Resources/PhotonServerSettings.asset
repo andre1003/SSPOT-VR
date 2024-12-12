@@ -76,6 +76,15 @@ MonoBehaviour:
   - SyncLoopAuxCells
   - DecreaseRPC
   - IncreaseRPC
+  - ResetRpc
+  - TryRun
+  - RunRpc
+  - SetLoopRpc
+  - ReplaceCubeRPC
+  - LoadSceneRpc
+  - SetCubeRPC
+  - SetIterationsRPC
+  - SetRangeRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

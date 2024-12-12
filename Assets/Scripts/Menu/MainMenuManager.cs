@@ -1,93 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Photon.Pun;
+using SSPot.Scenes;
+using UnityEngine;
 
-public class MainMenuManager : MonoBehaviourPunCallbacks
+namespace SSPot.Menu
 {
-    // Settings button reference
-    public GameObject settingsButton;
-    [SerializeField] private string firstLevel = "Tutorial";
-
-
-    // Platform controller
-    private bool isOnPc = false;
-
-
-    void Awake()
+    public class MainMenuManager : MonoBehaviourPunCallbacks
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        [SerializeField] private GameObject settingsButton;
+
+        private void Awake()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         
-        if(PhotonNetwork.InLobby)
-            PhotonNetwork.LeaveLobby();
-        if(PhotonNetwork.InRoom)
-            PhotonNetwork.LeaveRoom();
-    }
+            if(PhotonNetwork.InLobby)
+                PhotonNetwork.LeaveLobby();
+            if(PhotonNetwork.InRoom)
+                PhotonNetwork.LeaveRoom();
 
-
-    public void SetGamePlatform(bool isOnPc)
-    {
-        // Set isOnPc
-        this.isOnPc = isOnPc;
-
-        // If platform is not PC, disable settings button
-        if(!isOnPc)
-        {
-            settingsButton.SetActive(false);
-        }
-    }
-
-    #region Offline
-    public void PlayOffline()
-    {
-        PhotonNetwork.OfflineMode = true;
-    }
-
-    /// <summary>
-    /// On player joined room handler.
-    /// </summary>
-    public override void OnJoinedRoom()
-    {
-        PhotonNetwork.LoadLevel(firstLevel);
-    }
-    #endregion
-
-    #region Online
-    public void PlayOnline()
-    {
-        PhotonNetwork.OfflineMode = false;
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
-    public override void OnJoinedLobby()
-    {
-        SceneManager.LoadScene("Lobby");
-    }
-    #endregion
-
-    #region Master Connection
-    public override void OnConnectedToMaster()
-    {
-        if(PhotonNetwork.OfflineMode)
-        {
-            Debug.Log("Starting game offline");
-            PhotonNetwork.CreateRoom("singleplayer");
-        }
-        else
-        {
-            Debug.Log("Starting game online");
-            PhotonNetwork.JoinLobby();
+            // If platform is mobile, disable settings button
+            bool isMobile = Application.isMobilePlatform;
+            if (isMobile) settingsButton.SetActive(false);
         }
 
-    }
-    #endregion
+        #region Offline
+        public void PlayOffline()
+        {
+            PhotonNetwork.OfflineMode = true;
+        }
+    
+        public override void OnJoinedRoom()
+        {
+            SceneLoader.Instance.LoadTutorial();
+        }
+        #endregion
 
-    #region Quit
-    public void Quit()
-    {
-        Application.Quit();
+        #region Online
+        public void PlayOnline()
+        {
+            PhotonNetwork.OfflineMode = false;
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    
+        public override void OnJoinedLobby()
+        {
+            SceneLoader.Instance.LoadLobby();
+        }
+        #endregion
+
+        #region Master Connection
+        public override void OnConnectedToMaster()
+        {
+            if(PhotonNetwork.OfflineMode)
+            {
+                Debug.Log("Starting game offline");
+                PhotonNetwork.CreateRoom("singleplayer");
+            }
+            else
+            {
+                Debug.Log("Starting game online");
+                PhotonNetwork.JoinLobby();
+            }
+
+        }
+        #endregion
+
+        #region Quit
+        public void Quit()
+        {
+            Application.Quit();
+        }
+        #endregion
     }
-    #endregion
 }

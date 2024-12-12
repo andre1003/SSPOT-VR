@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using SSpot.Ambient.ComputerCode;
 using UnityEngine;
 
 public class AddRemoveIterations : MonoBehaviour
@@ -8,7 +7,7 @@ public class AddRemoveIterations : MonoBehaviour
     public LoopController loopController;
 
     /// <summary>
-    /// When player clicks on this object, it teleports the player to current GameObject position.
+    /// When player clicks on this object, it adds one iteraction at LoopController.
     /// </summary>
     public void OnPointerClick()
     {

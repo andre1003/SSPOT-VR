@@ -391,8 +391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744dbe48a6b2cba408e480a14896dbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHands: []
-  audioSource: {fileID: 5484245825408492553}
+  Cube:
+    type: 3
 --- !u!114 &5484245825408492547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +411,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1360482258010250987}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

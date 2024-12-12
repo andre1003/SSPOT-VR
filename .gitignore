@@ -70,3 +70,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /PCBuild/*
+
+# Unity adressable link file
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/link.xml
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/link.xml.meta

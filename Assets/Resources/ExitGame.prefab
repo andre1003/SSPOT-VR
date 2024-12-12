@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 888683715507870335}
   - component: {fileID: 888683715507870334}
   - component: {fileID: 888683715507870333}
-  - component: {fileID: 5239429569927061026}
+  - component: {fileID: 609476329702511357}
   m_Layer: 0
   m_Name: BackToMenuButton
   m_TagString: Clickable
@@ -375,7 +375,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.04
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5239429569927061026
+--- !u!114 &609476329702511357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,9 +384,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 888683715507870321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afa74919999bf634ead8549a3e45e929, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e1a9a1e0f6a4044889c3d98d2c50ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneCanvas: {fileID: 0}
-  progressBar: {fileID: 0}
-  mainMenuLevelName: MainMenu
+  target: 1

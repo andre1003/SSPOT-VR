@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 3021839316782635762}
   - component: {fileID: 3021839316782635747}
   - component: {fileID: 3021839316782635746}
+  - component: {fileID: 5803849207983314975}
   m_Layer: 0
   m_Name: ChangeSceneButton
   m_TagString: Clickable
@@ -354,12 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a9a1e0f6a4044889c3d98d2c50ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneCanvas: {fileID: 0}
-  progressBar: {fileID: 0}
-  goForward: 1
-  nextSceneOffline: 
-  nextSceneOnline: 
-  buttonTextCanvas: {fileID: 3021839316377315508}
+  target: 0
 --- !u!33 &3021839316782635746
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -368,6 +364,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3021839316782635761}
   m_Mesh: {fileID: -5495902117074765545, guid: c3e3e35311d0a7a47b3f0b32f720c5f4, type: 3}
+--- !u!114 &5803849207983314975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021839316782635761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1db67e4155c4ca28a8cdf96353d556a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3021839316855342614
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3021839316855342615}
+  - component: {fileID: 2071001298931824157}
   m_Layer: 0
   m_Name: ChangeScene
   m_TagString: Clickable
@@ -401,3 +410,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2071001298931824157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021839316855342614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1db67e4155c4ca28a8cdf96353d556a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

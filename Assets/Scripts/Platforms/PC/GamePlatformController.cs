@@ -1,35 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class GamePlatformController : MonoBehaviour
 {
-    // Is platform a PC?
-    private bool IsOnPC;
-
-
-    /// <summary>
-    /// Set player according to the platform.
-    /// </summary>
-    /// <param name="isOnPc">Is platform a PC?</param>
-    public void SetGamePlatform(bool isOnPc)
+    private GyroController _gyroController;
+    private MouseController _mouseController;
+    
+    private void Awake()
     {
-        // Set IsOnPC variable
-        IsOnPC = isOnPc;
+        _gyroController = GetComponentInChildren<GyroController>();
+        _mouseController = GetComponentInChildren<MouseController>();
 
-        // If platform is PC, disable gyro controller and enable mouse controller
-        if(IsOnPC)
-        {
-            GetComponentInChildren<GyroController>().enabled = false;
-            GetComponentInChildren<MouseController>().enabled = true;
-        }
+        bool isMobile = Application.isMobilePlatform;
+        SetPlatform(isMobile);
+    }
 
-        // If platform is not PC, enable gyro controller and disable mouse controller
-        else
-        {
-            GetComponentInChildren<GyroController>().enabled = true;
-            GetComponentInChildren<MouseController>().enabled = false;
-        }
+    private void SetPlatform(bool isMobile)
+    {
+        _gyroController.enabled = isMobile;
+        _mouseController.enabled = !isMobile;
     }
 }

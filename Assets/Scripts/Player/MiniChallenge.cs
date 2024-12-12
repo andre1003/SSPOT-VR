@@ -1,8 +1,9 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using SSpot.Level;
+using SSPot.Utilities;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
@@ -10,18 +11,6 @@ using UnityEngine.UI;
 
 public class MiniChallenge : MonoBehaviourPun
 {
-    #region Singleton
-    public static MiniChallenge instance;
-
-    void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-    }
-    #endregion
-
     #region Attributes
     #region Public
     [Space]
@@ -92,32 +81,47 @@ public class MiniChallenge : MonoBehaviourPun
 
     #region Methods
     #region Unity Methods
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
-        // Get audio source component and set it's clip to newStarAudioClip
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = newStarAudioClip;
 
         // If this player is master client, start timer synced
         if(PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("StartTimerRpc", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(StartTimerRpc), RpcTarget.AllBuffered);
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         // If this player is master client and timer is active, increase the timer for all players
         if(PhotonNetwork.IsMasterClient && isTimerActive)
         {
-            photonView.RPC("IncreaseTimerRpc", RpcTarget.AllBuffered, Time.deltaTime);
+            photonView.RPC(nameof(IncreaseTimerRpc), RpcTarget.AllBuffered, Time.deltaTime);
         }
 
-        // Update UI
         UpdateUI();
     }
+    
+    private void OnEnable()
+    {
+        LevelManager.Instance.OnFinishRunning.AddListener(CheckMiniChallenge);
+        LevelManager.Instance.OnError.AddListener(IncreaseError);
+        LevelManager.Instance.OnSuccess.AddListener(StopTimer);
+    }
+    
+    private void OnDisable()
+    {
+        if (LevelManager.Instance)
+        {
+            LevelManager.Instance.OnFinishRunning.RemoveListener(CheckMiniChallenge);
+            LevelManager.Instance.OnError.RemoveListener(IncreaseError);
+            LevelManager.Instance.OnSuccess.RemoveListener(StopTimer);
+        }
+    }
+    
     #endregion
 
     #region Time Challenge
@@ -157,7 +161,7 @@ public class MiniChallenge : MonoBehaviourPun
         // If this player is master client, stop timer via RPC
         if(PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("StopTimerRpc", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(StopTimerRpc), RpcTarget.AllBuffered);
         }
     }
 
@@ -179,7 +183,7 @@ public class MiniChallenge : MonoBehaviourPun
     {
         if(PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("IncreaseErrorRpc", RpcTarget.AllBuffered);
+            photonView.RPC(nameof(IncreaseErrorRpc), RpcTarget.AllBuffered);
         }
     }
 
@@ -215,10 +219,10 @@ public class MiniChallenge : MonoBehaviourPun
         string currentTimer = roundedTimer.ToString("D2") + " / " + (limitTime < 10 ? "0" + limitTime.ToString() : limitTime.ToString());
         if(timerEvent != null)
         {
-            // Obtém a variável local 'timer' do Localize String Event
+            // ObtÃ©m a variÃ¡vel local 'timer' do Localize String Event
             if(timerEvent.StringReference["timer"] is StringVariable stringVariable)
             {
-                // Atualiza o valor da variável local
+                // Atualiza o valor da variÃ¡vel local
                 stringVariable.Value = currentTimer;
 
                 // Recarrega o texto localizado
@@ -231,10 +235,10 @@ public class MiniChallenge : MonoBehaviourPun
         string currentErrors = errors.ToString("D2") + " / " + maxErrors.ToString("D2");
         if(errorEvent != null)
         {
-            // Obtém a variável local 'timer' do Localize String Event
+            // ObtÃ©m a variÃ¡vel local 'timer' do Localize String Event
             if(errorEvent.StringReference["errors"] is StringVariable stringVariable)
             {
-                // Atualiza o valor da variável local
+                // Atualiza o valor da variÃ¡vel local
                 stringVariable.Value = currentErrors;
 
                 // Recarrega o texto localizado
@@ -284,8 +288,8 @@ public class MiniChallenge : MonoBehaviourPun
             StartCoroutine(AddStarWithDelay(starsCount, 1));
         }
 
-        // Start countdown for diabling challenge results canvas
-        StartCoroutine(DisableChallengeResultsAfterSeconds(5f));
+        // Start countdown for disabling challenge results canvas
+        StartCoroutine(CoroutineUtilities.WaitThenDeactivate(5f, challengeResultCanvas));
     }
 
     /// <summary>
@@ -321,19 +325,6 @@ public class MiniChallenge : MonoBehaviourPun
             audioSource.clip = challengeFinishedAudioClip; 
             audioSource.Play();
         }
-    }
-
-    /// <summary>
-    /// Disable challenge results after a given amount of seconds.
-    /// </summary>
-    /// <param name="seconds">Seconds to wait.</param>
-    private IEnumerator DisableChallengeResultsAfterSeconds(float seconds)
-    {
-        // Wait some seconds
-        yield return new WaitForSeconds(seconds);
-
-        // Disable challenge result canvas
-        challengeResultCanvas.SetActive(false);
     }
     #endregion
     #endregion

@@ -78,14 +78,14 @@ public class CameraPointer : MonoBehaviour {
             // If is a non clickable area and there is any cube in player hands, remove it
             if(_gazedAtObject == null)
             {
-                PlayerSetup.instance.DestroyCubeOnHand();
+                PlayerSetup.Local.DestroyCubeOnHand();
                 return;
             }
 
             // If gazed object does not have Clickable nor NoPointerAction tag, call DestroyCubeOnHand
             if(!_gazedAtObject.CompareTag("Clickable") && !_gazedAtObject.CompareTag("NoPointerAction"))
             {
-                PlayerSetup.instance.DestroyCubeOnHand();
+                PlayerSetup.Local.DestroyCubeOnHand();
             }
 
             // Else, call OnPointerClick method
