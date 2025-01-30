@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SSPot
 {
-    [CreateAssetMenu(fileName = "AudioObject", menuName = "SSPot/New AudioObject", order = 1)]
+    [CreateAssetMenu(fileName = "NarratorObject", menuName = "SSPot/New NarratorObject", order = 1)]
 	public class AudioObject : ScriptableObject
     {
         public AudioClip clip;
