@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line3_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: b91079447183af44eb70df8a19f3b315, type: 3}
+  clip: {fileID: 8300000, guid: aac83b24a47cf2c4abac0cf0b707d917, type: 3}
   subtitle: "Use o bot\xE3o vermelho \xE0 sua esquerda para subir e descer."

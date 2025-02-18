@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: SecondLinePTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: f8d8d1e39f582324c890a31d772d8db7, type: 3}
+  clip: {fileID: 8300000, guid: 45ee82d32117c3f429551a700c952fe8, type: 3}
   subtitle: Olhe para cada um dos objetos, para aprender o que eles fazem!

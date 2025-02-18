@@ -114,6 +114,14 @@ namespace SSPot.Scenes
             loadSceneCanvas.SetActive(false);
             
             _loadCoroutine = null;
-        }
+
+            OnSceneLoaded();
+		}
+
+        private void OnSceneLoaded()
+        {
+            SpeakAtStart.instance.StartSpeaking();
+            Debug.LogWarning($"Scene {CurrentScene.name} loaded.");
+		}
     }
 }

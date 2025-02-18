@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: af8766c6af4cb054eb99ce21b1c1f584, type: 3}
+  clip: {fileID: 8300000, guid: f9a811c5090431a4bb844b2035915485, type: 3}
   subtitle: Vamos ter que subir de novo a plataforma.

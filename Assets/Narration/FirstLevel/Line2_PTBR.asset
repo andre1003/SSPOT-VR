@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: d1e820bc31243814e8622877b1e29eaa, type: 3}
+  clip: {fileID: 8300000, guid: 537bc9309b9f0694ba15ce38ccc86e46, type: 3}
   subtitle: "O computador dele \xE9 muito grande, voc\xEA precisa subir."

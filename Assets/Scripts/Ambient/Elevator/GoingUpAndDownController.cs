@@ -29,13 +29,6 @@ public class GoingUpAndDownController : MonoBehaviourPun
 	/// </summary>
 	public void OnPointerClick()
     {
-		if (firstTime)
-		{
-			Voice.instance.Speak(clips);
-		}
-
-		firstTime = false;
-
 		// If player is on the floor and player is on the platform, go up
 		if (isDown)
         {
@@ -56,14 +49,21 @@ public class GoingUpAndDownController : MonoBehaviourPun
     /// </summary>
     private void GoUp()
     {
-        photonView.RPC(nameof(GoUpRpc), RpcTarget.AllBuffered);
-    }
+		photonView.RPC(nameof(GoUpRpc), RpcTarget.AllBuffered);
+	}
 
     [PunRPC]
     private void GoUpRpc()
     {
-        // Enable GoingUp
-        PlayerSetup.Local.GetComponent<GoingUp>().enabled = true;
+		if (firstTime)
+		{
+			Voice.instance.Speak(clips);
+		}
+
+		firstTime = false;
+
+		// Enable GoingUp
+		PlayerSetup.Local.GetComponent<GoingUp>().enabled = true;
         playerCodingPlatform.GetComponent<GoingUp>().enabled = true;
         GetComponent<GoingUp>().enabled = true;
 

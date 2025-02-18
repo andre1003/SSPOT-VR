@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: dca41936d3b352a47845bc7fd7d0c4d7, type: 3}
+  clip: {fileID: 8300000, guid: b41cb31af29350046bf9a9d63e91622d, type: 3}
   subtitle: "O Mark est\xE1 se sentindo melhor, mas ainda n\xE3o est\xE1 100%..."

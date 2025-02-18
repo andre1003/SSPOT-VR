@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start3_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: dcf18cced38281248a65c69dcd109d9c, type: 3}
+  clip: {fileID: 8300000, guid: 4d371d951275d8d4289741ed1a8c91a9, type: 3}
   subtitle: Vamos ajudar ele!

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 26a4ab12cb21ecd40a95911024480302, type: 3}
+  clip: {fileID: 8300000, guid: 1a0924ef4a18e1f47a97809a9ff307b1, type: 3}
   subtitle: Acho que ele precisa dar umas voltas...

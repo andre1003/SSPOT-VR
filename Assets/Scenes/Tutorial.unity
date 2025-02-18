@@ -9473,6 +9473,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Narrator
       objectReference: {fileID: 0}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: isForPlayer1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: clipsP1.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: clipsP2.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: clipsP1.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 11c81bf7f8e6b6e4fb629485600a8619, type: 2}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: clipsP1.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d4943d81d81954894f4441e388a68d, type: 2}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: clipsP2.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 11c81bf7f8e6b6e4fb629485600a8619, type: 2}
+    - target: {fileID: 3809883406433488702, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
+      propertyPath: clipsP2.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d4943d81d81954894f4441e388a68d, type: 2}
     - target: {fileID: 3809883406433488703, guid: 27f96cc2800af3b40b9e6b1589756adb, type: 3}
       propertyPath: m_RootOrder
       value: 1

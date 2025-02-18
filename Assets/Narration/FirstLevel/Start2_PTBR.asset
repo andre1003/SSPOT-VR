@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 74e334e095ee72c4a85c7a9b4b567dd0, type: 3}
+  clip: {fileID: 8300000, guid: 679dac201802c384998742065518ef8a, type: 3}
   subtitle: "Ele n\xE3o lembra nem como andar!"

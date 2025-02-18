@@ -1,42 +1,82 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using SSPot;
 
-namespace SSPot
+public class Voice : MonoBehaviour
 {
-    public class Voice : MonoBehaviour
-    {
-        [SerializeField] AudioSource source;
-        public static Voice instance;
+	[SerializeField] private AudioSource source;
+	public static Voice instance { get; private set; }
 
-		private void Awake()
+	private Queue<AudioObject[]> narrationQueue = new Queue<AudioObject[]>();
+	private bool isPlaying = false;
+
+	public delegate void NarrationRequestHandler(AudioObject[] clips, bool interrupt);
+	public static event NarrationRequestHandler OnNarrationRequested;
+
+	private void Awake()
+	{
+		if (instance != null && instance != this)
 		{
-			instance = this;
+			Destroy(gameObject);
+			return;
 		}
+		instance = this;
+	}
 
-		public void Speak(AudioObject[] clips)
+	private void OnEnable()
+	{
+		OnNarrationRequested += HandleNarrationRequest;
+	}
+
+	private void OnDisable()
+	{
+		OnNarrationRequested -= HandleNarrationRequest;
+	}
+
+	private void HandleNarrationRequest(AudioObject[] clips, bool interrupt)
+	{
+		if (interrupt)
 		{
-			if (source.isPlaying)
+			narrationQueue.Clear();
+			if (isPlaying)
 			{
 				source.Stop();
 				StopAllCoroutines();
+				Subtitles.instance.ClearSubtitle();
+				isPlaying = false;
 			}
-
-			StartCoroutine(Lines(clips));
 		}
 
-		private IEnumerator Lines(AudioObject[] clips)
+		narrationQueue.Enqueue(clips);
+
+		if (!isPlaying)
 		{
-			foreach (AudioObject clip in clips)
+			StartCoroutine(ProcessNarrationQueue());
+		}
+	}
+
+	private IEnumerator ProcessNarrationQueue()
+	{
+		isPlaying = true;
+		while (narrationQueue.Count > 0)
+		{
+			AudioObject[] currentClips = narrationQueue.Dequeue();
+			foreach (AudioObject clip in currentClips)
 			{
 				source.clip = clip.clip;
 				source.PlayOneShot(clip.clip);
 				Subtitles.instance.DisplaySubtitle(clip.subtitle);
-
 				yield return new WaitForSeconds(clip.clip.length);
-
 				Subtitles.instance.ClearSubtitle();
 			}
 		}
+		isPlaying = false;
+	}
+
+	// Optional: Maintain original Speak method as an interruptible request
+	public void Speak(AudioObject[] clips)
+	{
+		OnNarrationRequested?.Invoke(clips, true);
 	}
 }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,31 @@ namespace SSPot
 {
     public class SpeakAtStart : MonoBehaviour
     {
-        [SerializeField] AudioObject[] clips;
+		[SerializeField] AudioObject[] clipsP1;
+		[SerializeField] AudioObject[] clipsP2;
+		public static SpeakAtStart instance;
 
-		void Start()
+		public void Awake()
+		{
+			if(instance != null)
+			{
+				Destroy(this);
+			}
+
+			instance = this;
+		}
+
+		public void Start()
+		{
+			StartSpeaking();
+		}
+
+		public void StartSpeaking()
         {
-			Voice.instance.Speak(clips);
+			if (PhotonNetwork.IsMasterClient)
+				Voice.instance.Speak(clipsP1);
+			else
+				Voice.instance.Speak(clipsP2);
 		}
 	}
 }

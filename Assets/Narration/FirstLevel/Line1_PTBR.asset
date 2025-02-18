@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: ea74bfcd50f5d5542b219e96d39bc004, type: 3}
-  subtitle: "Para o Mark se mexer de novo, voc\xEA vai programar ele com um algoritimo
-    secreto."
+  clip: {fileID: 8300000, guid: 6b327aa6929bc4c4e8b3f5b6d5a35501, type: 3}
+  subtitle: "Para o Mark se mexer de novo, voc\xEA vai programar ele com um algoritmo
+    secreto! "
