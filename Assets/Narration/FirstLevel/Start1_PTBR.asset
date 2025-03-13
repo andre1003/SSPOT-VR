@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Start1_PTBR
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 1075525832f8ab94583e2e24e4aa6b1d, type: 3}
-  subtitle: O Mark travou de novo! Teve que ser resetado!
+  subtitle: "O Mark travou de novo! N\xE3o estou conseguindo nem andar!"

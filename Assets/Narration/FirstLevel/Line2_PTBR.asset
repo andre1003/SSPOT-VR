@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Line2_PTBR
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 537bc9309b9f0694ba15ce38ccc86e46, type: 3}
-  subtitle: "O computador dele \xE9 muito grande, voc\xEA precisa subir."
+  subtitle: "Como meu computador \xE9 muito grande voc\xEA vai precisar subir."

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Code3_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: a4315d65447e9264d82d89011d1a0fe3, type: 3}
+  clip: {fileID: 8300000, guid: a57206efd67d8a04c99092dcd49799a2, type: 3}
   subtitle: "A\xED repita direita 5 vezes e depois frente."

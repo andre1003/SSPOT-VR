@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start2_pt-BR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: d8bcfc960fa2b41408fb03af6a401d39, type: 3}
-  subtitle: Ajudem o Mark a atravessar o labirinto!
+  clip: {fileID: 8300000, guid: 7302c8d80e0f5d04284a92c2d1ecc71b, type: 3}
+  subtitle: Me ajude a resolver esse labirinto com ele.

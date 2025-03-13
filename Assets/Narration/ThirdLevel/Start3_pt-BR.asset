@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start3_pt-BR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 9332378e4e7700846a0f5418297ac871, type: 3}
+  clip: {fileID: 8300000, guid: 8cbf4522cc8c8af4988cd87f3e6fc303, type: 3}
   subtitle: "Seu parceiro deve te falar o c\xF3digo para atravessar o labirinto!"

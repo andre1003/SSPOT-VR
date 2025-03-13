@@ -5056,7 +5056,6 @@ MonoBehaviour:
   clips:
   - {fileID: 11400000, guid: c35d66bd951bb554ba39008123136816, type: 2}
   - {fileID: 11400000, guid: 1dbc54370fb2f0a47b72a4f043e656d2, type: 2}
-  - {fileID: 11400000, guid: ed93ab595e08cef428bc72a97dccb260, type: 2}
 --- !u!114 &1717716196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,6 +5437,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1997964541}
     m_Modifications:
+    - target: {fileID: 1638862273290239316, guid: 056443abbe306c648af9814b59f3d462, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638862273290239316, guid: 056443abbe306c648af9814b59f3d462, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7853727156396354966, guid: 056443abbe306c648af9814b59f3d462, type: 3}
       propertyPath: m_Name
       value: SubtitlesBox
@@ -6322,7 +6329,6 @@ MonoBehaviour:
   clips:
   - {fileID: 11400000, guid: c35d66bd951bb554ba39008123136816, type: 2}
   - {fileID: 11400000, guid: 1dbc54370fb2f0a47b72a4f043e656d2, type: 2}
-  - {fileID: 11400000, guid: ed93ab595e08cef428bc72a97dccb260, type: 2}
 --- !u!82 &1948088698
 AudioSource:
   m_ObjectHideFlags: 0

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 11808e2f07bebbb4c824e6019fdf9998, type: 3}
-  subtitle: Vamos fazer o Mark praticar alguns giros, para ver se ele ainda tem jeito.
+  clip: {fileID: 8300000, guid: 4a8a81e36156f9b4882435dffda4c76c, type: 3}
+  subtitle: "Vamos fazer o Mark praticar alguns giros, para ver se os seus sensores
+    ainda est\xE3o funcionando."

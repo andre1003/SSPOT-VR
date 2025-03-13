@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Code4_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 6a301ebcc7116224baa011b1f2f7cac2, type: 3}
+  clip: {fileID: 8300000, guid: 52b8a815a709a0b4ca43c6b787882681, type: 3}
   subtitle: "N\xE3o esque\xE7a de marcar o in\xEDcio e o fim do c\xF3digo!"
