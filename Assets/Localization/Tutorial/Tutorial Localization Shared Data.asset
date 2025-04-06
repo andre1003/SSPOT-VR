@@ -55,6 +55,10 @@ MonoBehaviour:
     m_Key: BackToMainMenu
     m_Metadata:
       m_Items: []
+  - m_Id: 335226677362880512
+    m_Key: DisableNarrator
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

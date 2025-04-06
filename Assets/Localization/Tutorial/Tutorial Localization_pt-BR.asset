@@ -79,6 +79,10 @@ MonoBehaviour:
       CLIQUE AQUI'
     m_Metadata:
       m_Items: []
+  - m_Id: 335226677362880512
+    m_Localized: "PARA DESABILITAR\n O NARRADOR\n\n\nCLIQUE AQUI"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

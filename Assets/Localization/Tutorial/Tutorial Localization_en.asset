@@ -116,6 +116,16 @@ MonoBehaviour:
       CLICK HERE'
     m_Metadata:
       m_Items: []
+  - m_Id: 335226677362880512
+    m_Localized: 'TO DISABLE
+
+      THE NARRATOR
+
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
