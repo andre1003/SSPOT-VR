@@ -114,7 +114,6 @@ namespace SSpot.Level
         private void OnSuccess()
         {
             renderers.ForEach(r => r.SetMaterial(true));
-            audioSource.PlayOneShot(successSound);
         }
 
         private void OnError()
