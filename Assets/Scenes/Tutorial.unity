@@ -8519,8 +8519,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130.48, y: 54.9}
+  m_AnchoredPosition: {x: 0, y: 0.022}
+  m_SizeDelta: {x: 130.48, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928726420
 MonoBehaviour:
@@ -8544,7 +8544,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 62b952776bb618042a830a2632799fe8, type: 3}
-    m_FontSize: 7
+    m_FontSize: 5
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -8555,9 +8555,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.9
-  m_Text: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o
-    !\n\nOlhe para cada um dos objetos para aprender o que eles fazem !\n\nAqui do
-    lado \xE9 o Mark! O seu guia!"
+  m_Text: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o\r\nOlhe
+    para cada um dos objetos para aprender o que eles fazem\r\n\r\nEu sou o Mark
+    2000, a Intelig\xEAncia Artificial do Mark, o rob\xF4 a\xED do lado.\r\n\nEstou
+    tendo dificuldades em controlar o meu corpo, voc\xEA poderia me ajudar? Quando
+    estiver pronto clique no bot\xE3o no centro da sala\r\n"
 --- !u!222 &1928726421
 CanvasRenderer:
   m_ObjectHideFlags: 0

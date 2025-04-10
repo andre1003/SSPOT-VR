@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using SSPot;
+using UnityEngine.Localization.Settings;
 
 public class Voice : MonoBehaviour
 {
@@ -156,11 +157,22 @@ public class Voice : MonoBehaviour
 			subtitleBox.SetActive(true);
 			AudioObject[] currentClips = narrationQueue.Dequeue();
 			foreach (AudioObject clip in currentClips)
-			{
-				source.clip = clip.clip;
-				source.PlayOneShot(clip.clip);
-				subtitles.DisplaySubtitle(clip.subtitle);
-				yield return new WaitForSeconds(clip.clip.length);
+			{			
+				if (LocalizationSettings.SelectedLocale.Identifier.Code == "pt-BR")
+				{
+					source.clip = clip.clipPTBR;
+					source.PlayOneShot(clip.clipPTBR);
+					subtitles.DisplaySubtitle(clip.subtitlePTBR);
+					yield return new WaitForSeconds(clip.clipPTBR.length);
+				}
+				else
+				{
+					source.clip = clip.clipENUS;
+					source.PlayOneShot(clip.clipENUS);
+					subtitles.DisplaySubtitle(clip.subtitleENUS);
+					yield return new WaitForSeconds(clip.clipENUS.length);
+				}
+
 				subtitles.ClearSubtitle();
 			}
 			subtitleBox.SetActive(false);

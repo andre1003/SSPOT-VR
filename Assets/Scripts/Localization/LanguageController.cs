@@ -22,7 +22,11 @@ public class LanguageController : MonoBehaviour {
     /// When player clicks on this object, the next level is loaded
     /// </summary>
     public void OnPointerClick() {
-        Location();
+
+        Voice.instance.DisableNarrator();
+        //Voice.instance.EnableNarrator();
+
+		Location();
     }
 
     public void Location() {
@@ -44,5 +48,7 @@ public class LanguageController : MonoBehaviour {
             if(anIdentifier == localCode)
                 LocalizationSettings.SelectedLocale = aLocale;
         }
-    }
+
+		Voice.instance.EnableNarrator();
+	}
 }

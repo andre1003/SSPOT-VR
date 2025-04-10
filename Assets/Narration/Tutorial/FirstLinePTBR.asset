@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: FirstLinePTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 2b81293fad37273429c47f353400a93f, type: 3}
-  subtitle: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o"
+  clipPTBR: {fileID: 8300000, guid: 2b81293fad37273429c47f353400a93f, type: 3}
+  subtitlePTBR: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o"
+  clipENUS: {fileID: 8300000, guid: 3ed8357b670a81e4da14c7fda09b154f, type: 3}
+  subtitleENUS: Welcome to the Space Station for Programming Training

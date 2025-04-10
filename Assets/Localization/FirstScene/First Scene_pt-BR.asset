@@ -20,21 +20,22 @@ MonoBehaviour:
     - rid: 6199766798708244503
   m_TableData:
   - m_Id: 28317253632
-    m_Localized: "Oh, n\xE3o! O Mark travou de novo!\nTeve que ser resetado!\n\nEle
-      n\xE3o lembra nem como andar!\n\nE agora? V\xE1 at\xE9 a plataforma ao lado
-      para ajudar ele!"
+    m_Localized: "O Mark travou de novo! N\xE3o estou conseguindo nem andar!\r\n\r\nVamos
+      ter que resetar ele.\r\n\r\nV\xE1 at\xE9 a plataforma \xE0 sua direita para
+      me ajudar a ganhar o controle de novo!"
     m_Metadata:
       m_Items: []
   - m_Id: 748848349184
-    m_Localized: "Para o Mark se mexer de novo, voc\xEA vai programar ele com um
-      algoritmo secreto!\n\nO computador dele \xE9 muito grande,\nvoc\xEA precisa
-      subir!\n\nUse o bot\xE3o vermelho \xE0 sua esquerda\npara subir e descer.\n"
+    m_Localized: "Para o meu corpo se mexer de novo, voc\xEA vai programar ele com
+      um algoritmo secreto!\r\n\nComo meu computador \xE9 muito grande voc\xEA vai
+      precisar subir.\r\n\nUse o bot\xE3o vermelho \xE0 sua esquerda para subir e
+      descer.\r"
     m_Metadata:
       m_Items: []
   - m_Id: 1403386265600
-    m_Localized: "O c\xF3digo secreto \xE9:\nfrente, frente, esquerda, frente e direita.\r\n\r\nN\xE3o
-      esque\xE7a do\nIn\xEDcio e do Fim do algoritmo.\r\n\r\nPegue os Cubos e coloque
-      no Computador! Depois \xE9 s\xF3 dar Play!"
+    m_Localized: "O c\xF3digo secreto de reset \xE9: frente, frente, esquerda, frente
+      e direita.\r\n\nN\xE3o esque\xE7a do In\xEDcio e do Fim do algoritmo\r\n\nPegue
+      os Cubos e coloque no Computador! Depois \xE9 s\xF3 dar Play!\r"
     m_Metadata:
       m_Items: []
   - m_Id: 2433045954560

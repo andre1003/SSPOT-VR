@@ -27,15 +27,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 939412357120
-    m_Localized: 'Welcome to the Space Station for Programming Training!
+    m_Localized: 'Welcome to the Space Station for Programming Training
 
+      Look
+      at each of the objects to learn what they do
 
-      Gaze
-      the objects to see tips of how to use them!
+      
 
+      I am Mark 2000,
+      the Artificial Intelligence of Mark, the robot next to you.
 
-      Here in your right is Mark!
-      Your tutor!'
+      
+
+      I''m
+      having trouble controlling my body. Could you help me? When you''re ready,
+      click the button in the center of the room
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 2157576650752

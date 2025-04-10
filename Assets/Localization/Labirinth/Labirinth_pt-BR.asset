@@ -20,13 +20,12 @@ MonoBehaviour:
   m_TableData:
   - m_Id: 56146190336
     m_Localized: "Vamos ver se o Mark est\xE1 funcionando!\n\nAjudem o Mark a atravessar
-      \no labirinto!\n\nSeu pareceiro deve te falar o c\xF3digo para atravessar o
-      labirinto!"
+      o labirinto!\n\nSeu pareceiro deve te falar o c\xF3digo para atravessar o labirinto!"
     m_Metadata:
       m_Items: []
   - m_Id: 898211438592
     m_Localized: "Vamos ver se o Mark est\xE1 funcionando!\n\nAjudem o Mark a atravessar
-      \no labirinto!\n\nUse a TV atr\xE1s de voc\xEA para ajudar seu parceiro a programar
+      o labirinto!\n\nUse a TV atr\xE1s de voc\xEA para ajudar seu parceiro a programar
       o c\xF3digo!"
     m_Metadata:
       m_Items: []

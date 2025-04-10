@@ -23,9 +23,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 939412357120
-    m_Localized: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o
-      !\n\nOlhe para cada um dos objetos para aprender o que eles fazem !\n\nAqui
-      do lado \xE9 o Mark! O seu guia!"
+    m_Localized: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o\r\nOlhe
+      para cada um dos objetos para aprender o que eles fazem\r\n\r\r\nEu sou o Mark
+      2000, a Intelig\xEAncia Artificial do Mark, o rob\xF4 a\xED do lado.\r\n\r\nEstou
+      tendo dificuldades em controlar o meu corpo, voc\xEA poderia me ajudar? Quando
+      estiver pronto clique no bot\xE3o no centro da sala\r\n"
     m_Metadata:
       m_Items: []
   - m_Id: 2157576650752
