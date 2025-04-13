@@ -7730,6 +7730,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 778967350774300805, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5728405041537573032, guid: e3be146540ddec84191d600de5334aa5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.85
@@ -7806,12 +7810,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7372851956049493901, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7372851954952653705}
+    - target: {fileID: 7372851956049493901, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+      propertyPath: singleStepSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 226c3d78c7b337040adb718233238275, type: 3}
     - target: {fileID: 7372851956049493907, guid: e3be146540ddec84191d600de5334aa5, type: 3}
       propertyPath: startBroken
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+--- !u!82 &7372851954952653705 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7372851956049493906, guid: e3be146540ddec84191d600de5334aa5, type: 3}
+  m_PrefabInstance: {fileID: 7372851954952653704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7611308877597067551
 PrefabInstance:
   m_ObjectHideFlags: 0
