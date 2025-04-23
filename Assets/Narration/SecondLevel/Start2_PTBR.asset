@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 3ff290858fdea0b4fa6060fef4ebcb0b, type: 3}
-  subtitle: "Vamos precisar dar umas voltas por a\xED."
+  clipPTBR: {fileID: 8300000, guid: 3ff290858fdea0b4fa6060fef4ebcb0b, type: 3}
+  subtitlePTBR: "Vamos precisar dar umas voltas por a\xED."
+  clipENUS: {fileID: 8300000, guid: 878fd51473c32e44bb87e771996e733b, type: 3}
+  subtitleENUS: "We\u2019ll need to take a few laps around here."

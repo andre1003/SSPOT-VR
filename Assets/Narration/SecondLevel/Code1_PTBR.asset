@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Code1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 157864da3e8984849ae64ed9ea06fd21, type: 3}
-  subtitle: Tenho uma formulinha nova pra te ajudar!
+  clipPTBR: {fileID: 8300000, guid: 157864da3e8984849ae64ed9ea06fd21, type: 3}
+  subtitlePTBR: 'Tenho uma formulinha nova para te ajudar! '
+  clipENUS: {fileID: 8300000, guid: 66e9e45ee79b8de448653ca7eb52eede, type: 3}
+  subtitleENUS: "I\u2019ve got a new little formula to help you!"

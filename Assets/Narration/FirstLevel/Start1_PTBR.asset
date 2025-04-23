@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 1075525832f8ab94583e2e24e4aa6b1d, type: 3}
-  subtitle: "O Mark travou de novo! N\xE3o estou conseguindo nem andar!"
+  clipPTBR: {fileID: 8300000, guid: 1075525832f8ab94583e2e24e4aa6b1d, type: 3}
+  subtitlePTBR: "O Mark travou de novo! N\xE3o estou conseguindo nem andar!"
+  clipENUS: {fileID: 8300000, guid: 6bc3f56b2d672eb4ba2cd373593f3a38, type: 3}
+  subtitleENUS: Mark froze again! I can't even walk!

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Code2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: e09070cffa54fa74784ffe7482b88b8e, type: 3}
-  subtitle: Repita esquerda 4 vezes e depois frente.
+  clipPTBR: {fileID: 8300000, guid: e09070cffa54fa74784ffe7482b88b8e, type: 3}
+  subtitlePTBR: Repita esquerda 4 vezes e depois frente.
+  clipENUS: {fileID: 8300000, guid: c28f456435da26e4fa44515828f1cf91, type: 3}
+  subtitleENUS: Repeat left 4 times and then go forward.

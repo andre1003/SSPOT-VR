@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: f74b49c6b93455f4daa39b764d954022, type: 3}
-  subtitle: Estou ganhando controle novamente, mas vou precisar de ajuda para programar
-    o Mark.
+  clipPTBR: {fileID: 8300000, guid: f74b49c6b93455f4daa39b764d954022, type: 3}
+  subtitlePTBR: Estou ganhando controle novamente, mas vou precisar de ajuda para
+    programar o Mark.
+  clipENUS: {fileID: 8300000, guid: c0124005982f99d4794f8fa5b465da97, type: 3}
+  subtitleENUS: "I'm regaining control, but I\u2019ll still need help programming
+    Mark."

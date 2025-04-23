@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line1_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 4a8a81e36156f9b4882435dffda4c76c, type: 3}
-  subtitle: "Vamos fazer o Mark praticar alguns giros, para ver se os seus sensores
-    ainda est\xE3o funcionando."
+  clipPTBR: {fileID: 8300000, guid: 4a8a81e36156f9b4882435dffda4c76c, type: 3}
+  subtitlePTBR: "Vamos fazer o Mark praticar alguns giros, para ver se os seus sensores
+    ainda est\xE3o funcionando. "
+  clipENUS: {fileID: 8300000, guid: c7dfe8ca5e10f5049bdc35211db85f66, type: 3}
+  subtitleENUS: "Let\u2019s make Mark practice a few turns, to see if his sensors
+    are still working."

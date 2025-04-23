@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Line2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 537bc9309b9f0694ba15ce38ccc86e46, type: 3}
-  subtitle: "Como meu computador \xE9 muito grande voc\xEA vai precisar subir."
+  clipPTBR: {fileID: 8300000, guid: 537bc9309b9f0694ba15ce38ccc86e46, type: 3}
+  subtitlePTBR: "Como meu computador \xE9 muito grande voc\xEA vai precisar subir."
+  clipENUS: {fileID: 8300000, guid: fa837c2e50db94a40ad0f6ef902a8999, type: 3}
+  subtitleENUS: "Since my computer is very big, you\u2019ll need to go up."

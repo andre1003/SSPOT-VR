@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Code2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 4d458146616b54247a6d95bd61ee4eb6, type: 3}
-  subtitle: "N\xE3o esque\xE7a do in\xEDcio e do fim do algoritmo."
+  clipPTBR: {fileID: 8300000, guid: 4d458146616b54247a6d95bd61ee4eb6, type: 3}
+  subtitlePTBR: "N\xE3o esque\xE7a do In\xEDcio e do Fim do algoritmo"
+  clipENUS: {fileID: 8300000, guid: e25fcc70d5deba344af0e6332f87b0db, type: 3}
+  subtitleENUS: "Don\u2019t forget the Start and End of the algorithm"

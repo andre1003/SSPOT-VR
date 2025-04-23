@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start3_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 296280f633597b64aa9688f19ad9252a, type: 3}
-  subtitle: "Voc\xEA pode me ajudar?"
+  clipPTBR: {fileID: 8300000, guid: 296280f633597b64aa9688f19ad9252a, type: 3}
+  subtitlePTBR: "Voc\xEA pode me ajudar?"
+  clipENUS: {fileID: 8300000, guid: 9f3439d8e01158244814009ce13ef9f9, type: 3}
+  subtitleENUS: Can you help me?

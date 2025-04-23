@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
   m_Name: Start2_PTBR
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 4369a2e9c73cff049866f9f59977919b, type: 3}
-  subtitle: Vamos ter que resetar ele.
+  clipPTBR: {fileID: 8300000, guid: 4369a2e9c73cff049866f9f59977919b, type: 3}
+  subtitlePTBR: Vamos ter que resetar ele.
+  clipENUS: {fileID: 8300000, guid: b651bba9414d16f44bab286055a7f361, type: 3}
+  subtitleENUS: We're going to have to reset him.
