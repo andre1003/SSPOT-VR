@@ -9,8 +9,8 @@ public class LanguageController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        //Location();
-    }
+        language = LocalizationSettings.SelectedLocale.Identifier.Code;
+	}
 
     // Update is called once per frame
     void Update() {

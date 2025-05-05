@@ -46,9 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3157aee566c7b419e1131b2c646901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 11400000, guid: 11c81bf7f8e6b6e4fb629485600a8619, type: 2}
-  - {fileID: 11400000, guid: 51d4943d81d81954894f4441e388a68d, type: 2}
+  clipsP1: []
+  clipsP2: []
 --- !u!114 &3809883406433488689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 3809883406433488688}
+  subtitleBox: {fileID: 0}
+  audioIndicator: {fileID: 0}
+  subtitles: {fileID: 0}
 --- !u!82 &3809883406433488688
 AudioSource:
   m_ObjectHideFlags: 0
@@ -74,7 +76,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0

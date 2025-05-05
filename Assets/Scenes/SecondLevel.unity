@@ -1013,6 +1013,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChangeScene
       objectReference: {fileID: 0}
+    - target: {fileID: 3021839316855342614, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3021839316855342615, guid: 22c04571aa1e3504fb9e4ac875ee8c3e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2576,9 +2580,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Vamos fazer o Mark praticar alguns\ngiros, para ver se ele ainda tem\nas
-    manhas.\n\nVoc\xEA j\xE1 sabe, n\xE9?!  Vamos ter que subir\nde novo a plataforma.\n\nDica:
-    Use o bot\xE3o vermelho para subir ."
+  m_Text: "Vamos fazer o Mark praticar alguns giros, para ver se os seus sensores
+    ainda est\xE3o funcionando.\r\n\nUse o bot\xE3o vermelho para subir a plataforma
+    de novo"
 --- !u!222 &1049405943
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2603,7 +2607,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:4cd60ccf85cd22d4bb21fdd871671b7c
     m_TableEntryReference:
-      m_KeyId: 12496338944
+      m_KeyId: 1025328480256
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -2788,6 +2792,10 @@ PrefabInstance:
     - target: {fileID: 3636080736368181501, guid: 4e5e67175ef2852499ea08f565c987c5, type: 3}
       propertyPath: m_Name
       value: MiniChallenge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636080736743036450, guid: 4e5e67175ef2852499ea08f565c987c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e5e67175ef2852499ea08f565c987c5, type: 3}
