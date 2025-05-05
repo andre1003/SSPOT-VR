@@ -3066,10 +3066,6 @@ PrefabInstance:
       value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 2170496132997414244, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
-      propertyPath: loopSettings.maxRange
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2170496132997414244, guid: 10dbfbfc0fb816444a4308d095511021, type: 3}
       propertyPath: loopSettings.maxIterations
       value: 10
       objectReference: {fileID: 0}

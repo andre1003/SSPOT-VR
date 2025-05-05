@@ -45,6 +45,8 @@ namespace SSpot.Ambient.ComputerCode
         private float planeGrowthOffset = 0.05f;
         [BoxGroup("Visuals"), SerializeField]
         private GameObject IncreaseAmountButton;
+        [BoxGroup("Visuals"), SerializeField]
+        private GameObject DecreaseAmountButton;
 
         private LoopSettings Settings => overrideGlobalSettings 
             ? settings 
