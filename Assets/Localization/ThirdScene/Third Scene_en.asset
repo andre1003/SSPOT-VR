@@ -27,38 +27,24 @@ MonoBehaviour:
     m_Localized: 'It worked! Congrats!
 
 
-
       Now Mark can move around here.
 
 
-
-      But
-      it is not over yet!
-
-
-
-      Let''s continue!'
+      Thank
+      you for your help!!'
     m_Metadata:
       m_Items: []
   - m_Id: 662774784000
-    m_Localized: 'Let''s see if you can help mark avoid an obstacle. We''ll try to
-      bypass this pillar and return to Mark''s original position.
-
-
-      Place a
-      Loop block and set the block sequence that you want to repeat together.'
+    m_Localized: "To make the first turn, Mark needs to move forward twice and then
+      once to the left.\r\n\nUse a loop block and set the block sequence that you
+      want to repeat together.\r\n\nDon\u2019t forget to add a block to start and
+      another to end the code"
     m_Metadata:
       m_Items: []
   - m_Id: 2313816416256
-    m_Localized: 'You know, right?! We need to go up again.
-
-
-      Do not forget
-      to mark the begining and ending of the code!!
-
-
-      Tip: To peform the first
-      turn, Mark will have to go two steps forward an one step to the left.'
+    m_Localized: "Program Mark to go around an obstacle. \n\nHe needs to go around
+      this pillar and return to where he started.\r\n\nLet\u2019s lift the platform
+      again!"
     m_Metadata:
       m_Items: []
   references:

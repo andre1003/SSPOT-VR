@@ -32,16 +32,16 @@ MonoBehaviour:
       Look
       at each of the objects to learn what they do
 
-      
 
-      I am Mark 2000,
-      the Artificial Intelligence of Mark, the robot next to you.
 
-      
+      I am Mark 2000, the Artificial
+      Intelligence of Mark, the robot next to you.
 
-      I''m
-      having trouble controlling my body. Could you help me? When you''re ready,
-      click the button in the center of the room
+
+
+      I''m having trouble controlling
+      my body. Could you help me? When you''re ready, click the button in the center
+      of the room
 
 '
     m_Metadata:
@@ -126,6 +126,16 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 335226677362880512
     m_Localized: 'TO DISABLE
+
+      THE NARRATOR
+
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345558750640402432
+    m_Localized: 'TO ENABLE
 
       THE NARRATOR
 

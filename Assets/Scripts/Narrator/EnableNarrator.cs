@@ -10,19 +10,22 @@ namespace SSPot
     {
 		bool isNarratorEnabled = true;
 
-		[SerializeField] GameObject gameObject;
+		[SerializeField] GameObject disableText;
+		[SerializeField] GameObject enableText;
 
 		public void OnPointerClick()
 		{
 			if (isNarratorEnabled)
 			{
-				gameObject.SetActive(false);
+				disableText.SetActive(false);
+				enableText.SetActive(true);
 				Voice.instance.DisableNarrator();
 				isNarratorEnabled = false;
 			}
 			else
 			{
-				gameObject.SetActive(true);
+				disableText.SetActive(true);
+				enableText.SetActive(false);
 				Voice.instance.EnableNarrator();
 				isNarratorEnabled = true;
 			}
