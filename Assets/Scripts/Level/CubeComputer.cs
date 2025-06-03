@@ -11,20 +11,10 @@ namespace SSpot.Level
 {
     public class CubeComputer : MonoBehaviourPun
     {
-        public bool CanHaveLoops
-        {
-            get
-            {
-                if (!cellsParent) return false;
-                var cell = cellsParent.GetComponentInChildren<CodingCell>();
-                return cell && cell.LoopController;
-            }
-        }
-        
         [BoxGroup("Cells")]
         [SerializeField] private Transform cellsParent;
 
-        [BoxGroup("Cells"), ShowIf(nameof(CanHaveLoops))] 
+        [BoxGroup("Cells")] 
         [SerializeField] private LoopController.LoopSettings loopSettings;
         public LoopController.LoopSettings GlobalLoopSettings => loopSettings;
 
@@ -85,6 +75,12 @@ namespace SSpot.Level
                 LevelManager.Instance.OnError.RemoveListener(OnError);
                 LevelManager.Instance.OnReset.RemoveListener(OnReset);
             }
+        }
+
+        private void OnValidate()
+        {
+            if (!cellsParent)
+                cellsParent = transform; // Default to self if no parent set
         }
 
         public void ClearCells()

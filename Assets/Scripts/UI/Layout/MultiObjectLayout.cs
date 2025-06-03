@@ -38,6 +38,7 @@ namespace SSpot.UI.Layout
         {
             for (int i = 1; i < layouts.Length; i++)
             {
+                if (!layouts[i]) continue;
                 layouts[i].direction = Direction;
                 layouts[i].SetDirty();
             }
@@ -63,6 +64,7 @@ namespace SSpot.UI.Layout
             float maxProjection = float.MinValue;
             foreach (var layout in layouts)
             {
+                if (!layout) continue;
                 float projFrom = Vector3.Dot(layout.WorldOrigin, direction);
                 float projTo = Vector3.Dot(layout.WorldEnd, direction);
                 minProjection = Mathf.Min(minProjection, projFrom, projTo);
@@ -77,6 +79,7 @@ namespace SSpot.UI.Layout
             Vector3 worldMax = Vector3.negativeInfinity;
             foreach (var layout in layouts)
             {
+                if (!layout) continue;
                 worldMin = Vector3.Min(worldMin, layout.WorldOrigin);
                 worldMax = Vector3.Max(worldMax, layout.WorldEnd);
             }
@@ -90,6 +93,7 @@ namespace SSpot.UI.Layout
             int count = 0;
             foreach (var layout in layouts)
             {
+                if (!layout) continue;
                 sum += layout.WorldOrigin;
                 count++;
             }

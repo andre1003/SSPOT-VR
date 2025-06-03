@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 3291380054256372834}
   - component: {fileID: 5674305677520369950}
   m_Layer: 0
-  m_Name: CodingCells Left
+  m_Name: CodingCells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,12 +387,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3291380054256372835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6599341463761971650}
-  m_RootOrder: 0
+  m_Father: {fileID: 3291380055212626916}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5674305677520369950
 MonoBehaviour:
@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 345003413062873567}
   - component: {fileID: -9090163916798418432}
   m_Layer: 0
-  m_Name: Double Computer
+  m_Name: Flat Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1222,7 +1222,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 671550475010319391}
-  - {fileID: 6599341463761971650}
+  - {fileID: 3291380054256372834}
   - {fileID: 451797572}
   - {fileID: 699013481759116847}
   - {fileID: 3291380054440761919}
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5e5db632f04fa6a65f328d7e77d476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellsParent: {fileID: 6599341463761971650}
+  cellsParent: {fileID: 3291380054256372834}
   loopSettings:
     maxIterations: 10
     maxRange: 1
@@ -1758,55 +1758,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube:
     type: 0
---- !u!1 &3449908820645461426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6599341463761971650}
-  - component: {fileID: 7574700644214753729}
-  m_Layer: 0
-  m_Name: Cells
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6599341463761971650
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3449908820645461426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.24}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3291380054256372834}
-  - {fileID: 3766959433470978482}
-  m_Father: {fileID: 3291380055212626916}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7574700644214753729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3449908820645461426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876e988609a548a3920c73bb0bd20957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layouts:
-  - {fileID: 5674305677520369950}
-  - {fileID: 7145088691866130056}
 --- !u!1 &3496046565579948191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,53 +1859,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &3799495794099690887
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3766959433470978482}
-  - component: {fileID: 7145088691866130056}
-  m_Layer: 0
-  m_Name: CodingCells Right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3766959433470978482
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3799495794099690887}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6599341463761971650}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7145088691866130056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3799495794099690887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772bda3512304e95b7db399d65cba59e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceBetweenObjects: 0.9
-  reverseOrder: 1
-  direction: 1
 --- !u!1 &4687683896574139849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,7 +2197,6 @@ GameObject:
   m_Component:
   - component: {fileID: 671550475010319391}
   - component: {fileID: 3957901721502511978}
-  - component: {fileID: 2241571325126728961}
   - component: {fileID: 6421678356105511518}
   m_Layer: 0
   m_Name: '[EditorOnly] CellLayout'
@@ -2332,23 +2235,7 @@ MonoBehaviour:
   cellPrefab: {fileID: 7380917665972540969, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
   cellHolder: {fileID: 3291380054256372834}
   cellCount: 9
-  cellMaterial: {fileID: 2100000, guid: 6828a05d807905e4c86c7bd37da3caf5, type: 2}
---- !u!114 &2241571325126728961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5468971276305452954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f872d2223f4a4dfb8ebae95220f431fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 7380917665972540969, guid: 06b9b0ddfb30bff4291de03dcfe3f8df, type: 3}
-  cellHolder: {fileID: 3766959433470978482}
-  cellCount: 9
-  cellMaterial: {fileID: 2100000, guid: 51d587eafcd13384bafd060c5bc7cb82, type: 2}
+  cellMaterial: {fileID: 0}
 --- !u!114 &6421678356105511518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,7 +2249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minLength: 8
-  objectLayout: {fileID: 7574700644214753729}
+  objectLayout: {fileID: 5674305677520369950}
   meshToScale: {fileID: 4903744488706263257}
   transformToScale: {fileID: 451797572}
   paddingStart: 1
