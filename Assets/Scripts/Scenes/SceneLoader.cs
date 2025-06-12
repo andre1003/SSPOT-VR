@@ -66,7 +66,7 @@ namespace SSPot.Scenes
         }
 
         private Coroutine _loadCoroutine;
-        private void LoadScene(int buildIndex)
+        public void LoadScene(int buildIndex)
         {
             if (PhotonNetwork.InRoom)
             {

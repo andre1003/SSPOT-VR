@@ -1,3 +1,4 @@
+using SSPot.Scenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,7 @@ namespace SSPot.Scripts.DeveloperConsole.Commands
 			}
 
 			SceneManager.LoadScene(sceneName);
+			//SceneLoader.Instance.LoadScene(sceneName);
 			Debug.Log($"Changing scene to: {sceneName}");
 			return true;
 		}

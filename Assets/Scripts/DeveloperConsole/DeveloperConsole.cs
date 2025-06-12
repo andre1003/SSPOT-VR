@@ -1,5 +1,6 @@
 using SSPot.Scripts.DeveloperConsole.Commands;
 using System;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,6 +21,7 @@ namespace SSPot.Scripts.DeveloperConsole
         {
             if (!inputValue.StartsWith(prefix))
             {
+                Debug.Log(inputValue);
                 return;
             }
 
@@ -43,9 +45,12 @@ namespace SSPot.Scripts.DeveloperConsole
 
                 if (command.Process(args))
                 {
-                    return;
+					Debug.Log($"[Command] {commandInput}");
+					return;
                 }
 			}
-        }
+
+			Debug.LogError($"[Command] Unknown command: {commandInput}");
+		}
     }
 }

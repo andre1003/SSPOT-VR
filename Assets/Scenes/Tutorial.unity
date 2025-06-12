@@ -243,6 +243,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2097368008}
     m_Modifications:
+    - target: {fileID: 609476329702511357, guid: f1ba698e0475e33439c4b9df33c7c61e, type: 3}
+      propertyPath: targetMultiplayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 609476329702511357, guid: f1ba698e0475e33439c4b9df33c7c61e, type: 3}
+      propertyPath: targetSinglePlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 888683714586813350, guid: f1ba698e0475e33439c4b9df33c7c61e, type: 3}
       propertyPath: m_Name
       value: ExitGame
@@ -4823,7 +4831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a9a1e0f6a4044889c3d98d2c50ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: 3
+  targetSinglePlayer: 0
+  targetMultiplayer: 0
 --- !u!114 &1143003497
 MonoBehaviour:
   m_ObjectHideFlags: 0

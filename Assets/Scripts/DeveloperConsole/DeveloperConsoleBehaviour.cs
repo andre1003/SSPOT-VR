@@ -51,6 +51,7 @@ namespace SSPot.Scripts.DeveloperConsole
 			if (uiCanvas.activeSelf && Input.GetKeyDown(KeyCode.Return))
 			{
 				inputField.ActivateInputField();
+				//Debug.Log(inputField.text);
 				ProcessCommand(inputField.text);
 			}
 
