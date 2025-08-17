@@ -61,6 +61,12 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 383225048699772928
     m_Key: RunButton
+  - m_Id: 335226677362880512
+    m_Key: DisableNarrator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345558750640402432
+    m_Key: EnableNarrator
     m_Metadata:
       m_Items: []
   m_Metadata:

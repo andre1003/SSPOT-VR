@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a76eecfc729f42be44f27851f7037, type: 3}
+  m_Name: Code3
+  m_EditorClassIdentifier: 
+  clipPTBR: {fileID: 8300000, guid: 8e621b38f21885640b54d7dbc480bbf4, type: 3}
+  subtitlePTBR: "N\xE3o se esque\xE7a de colocar um bloco para come\xE7ar e outro
+    para terminar o c\xF3digo!"
+  clipENUS: {fileID: 8300000, guid: c7f642c6208cda542bc4f488cc8e735e, type: 3}
+  subtitleENUS: "Don\u2019t forget to add a block to start and another to end the
+    code!"

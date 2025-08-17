@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using SSPot;
 
 public class GoingUpAndDownController : MonoBehaviourPun
 {
@@ -19,13 +20,17 @@ public class GoingUpAndDownController : MonoBehaviourPun
     private bool isDown = true;                     // Is down boolean
 
 
-    /// <summary>
-    /// Elevator controller. If the platform is on the floor, the goes up. If not, goes down.
-    /// </summary>
-    public void OnPointerClick()
+	private bool firstTime = true;
+
+	[SerializeField] AudioObject[] clips;
+
+	/// <summary>
+	/// Elevator controller. If the platform is on the floor, the goes up. If not, goes down.
+	/// </summary>
+	public void OnPointerClick()
     {
-        // If player is on the floor and player is on the platform, go up
-        if(isDown)
+		// If player is on the floor and player is on the platform, go up
+		if (isDown)
         {
             GoUp();
         }
@@ -44,14 +49,21 @@ public class GoingUpAndDownController : MonoBehaviourPun
     /// </summary>
     private void GoUp()
     {
-        photonView.RPC(nameof(GoUpRpc), RpcTarget.AllBuffered);
-    }
+		photonView.RPC(nameof(GoUpRpc), RpcTarget.AllBuffered);
+	}
 
     [PunRPC]
     private void GoUpRpc()
     {
-        // Enable GoingUp
-        PlayerSetup.Local.GetComponent<GoingUp>().enabled = true;
+		if (firstTime)
+		{
+			Voice.instance.Speak(clips);
+		}
+
+		firstTime = false;
+
+		// Enable GoingUp
+		PlayerSetup.Local.GetComponent<GoingUp>().enabled = true;
         playerCodingPlatform.GetComponent<GoingUp>().enabled = true;
         GetComponent<GoingUp>().enabled = true;
 
