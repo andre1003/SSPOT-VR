@@ -49,15 +49,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2784725762048
-    m_Localized: 'Algorithm PLAY and RESET
-
-      BUTTON
-
-
-      PLAY EXECUTES.
-
-      RESET
-      CLEANS the algorithm.'
+    m_Localized: Reset Button RELOAD the Level.
     m_Metadata:
       m_Items: []
   - m_Id: 3514593378304
@@ -114,6 +106,14 @@ MonoBehaviour:
 
 
       CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383225046053167104
+    m_Localized: CLEAR Button clean the blocks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383225048699772928
+    m_Localized: PLAY Button EXECUTES the algorithm.
     m_Metadata:
       m_Items: []
   references:
