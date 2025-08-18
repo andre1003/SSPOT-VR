@@ -55,10 +55,11 @@ namespace SSpot.Robot
         private Vector2Int _originalFacing;
         private Vector2Int _originalGridPosition;
         
+        /// <summary>
+        /// Sets the original position/rotation that the robot will reset to.
+        /// </summary>
         public void SetOriginalPosition(Vector2Int position, Vector2Int facing) =>
             (_originalGridPosition, _originalFacing) = (position, facing);
-        
-        public void ChangeNode(Vector2Int target) => Grid.ChangeNode(this, target);
         
         private void Awake()
         {
@@ -107,7 +108,7 @@ namespace SSpot.Robot
             _animator.StopWalking();
             yield return _animator.WaitForIdle();
             
-            ChangeNode(toCell);
+            Grid.ChangeNode(this, toCell);
         }
         
         #endregion

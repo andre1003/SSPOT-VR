@@ -2,73 +2,79 @@ using UnityEngine;
 
 namespace SSpot.UI.Layout
 {
+    /// <summary>
+    /// Scales a mesh object to fit one or more <see cref="BaseObjectLayout"/>s.
+    /// </summary>
     [ExecuteAlways]
     public class ObjectLayoutContentScaler : MonoBehaviour
     {
+        [Tooltip("The scaled mesh will never be smaller than this.")]
         public float minLength;
-        public ObjectLayout objectLayout;
+        [Tooltip("The target layout that we want to fit inside the mesh.")]
+        public BaseObjectLayout objectLayout;
+        [Tooltip("The mesh to scale, ideally a child of 'transformToScale'. Will provide raw mesh size.")]
         public MeshRenderer meshToScale;
+        [Tooltip("The transform to scale, ideally a parent of 'meshToScale'. Will be actually manipulated.")]
         public Transform transformToScale;
+        [Tooltip("Padding applied to the start of the layout.")]
         public float paddingStart;
+        [Tooltip("Padding applied to the end of the layout.")]
         public float paddingEnd;
-
-        private void OnEnable() => RegisterEvents(objectLayout);
-
-        private void OnDisable() => DeregisterEvents(_oldLayout);
         
         private void Update()
         {
             if (!objectLayout) return;
             if (!meshToScale) return;
             if (!transformToScale) return;
-            
-            float finalLen = paddingStart + paddingEnd + objectLayout.LengthAlongAxis;
 
-            bool overrideLen = finalLen < minLength; 
-            if (overrideLen)
-                finalLen = minLength;
+            int axis = objectLayout.Direction.IsHorizontal() ? 0 : 1;
             
-            // Move the center of the mesh to the center of the layout
-            int axis = objectLayout.direction.IsHorizontal() ? 0 : 1;
-            Vector3 center = objectLayout.Center;
-            center[axis] += paddingStart / 2;
-            center[axis] -= paddingEnd / 2;
+            var (center, finalLength) = CalculateCenterAndLength(objectLayout, axis);
+            if (finalLength < minLength)
+                (center, finalLength) = CalculateOverrideCenterAndLength(objectLayout);
             
-            if (overrideLen)
-                center = objectLayout.Origin + objectLayout.direction.GetDirection() * (finalLen / 2);
-            
+            AdjustMesh(center, finalLength, axis);
+        }
+
+        private void AdjustMesh(Vector3 center, float length, int axis)
+        {
             transformToScale.position = center;
-            
             
             // Get the current size of the mesh (with scale applied). If it is not the right size, recalculate
             float scaledMeshLen = meshToScale.bounds.size[axis];
-            if (Mathf.Approximately(scaledMeshLen, finalLen)) return;
+            if (Mathf.Approximately(scaledMeshLen, length)) return;
             
-            // Calculate the size of the mesh before scaling
+            // Calculate the size of the mesh (without scale applied)
             float baseMeshLen = scaledMeshLen / transformToScale.localScale[axis];
 
             // Calculate the scale needed to change the mesh size to the desired size
             Vector3 finalScale = transformToScale.localScale;
-            finalScale[axis] = finalLen / baseMeshLen;
+            finalScale[axis] = length / baseMeshLen;
             transformToScale.localScale = finalScale;
         }
-        
-        private void RegisterEvents(ObjectLayout layout)
+        private (Vector3 center, float length) CalculateCenterAndLength(IObjectLayout layout, int axis)
         {
-            if (!layout) return;
+            float finalLen = paddingStart + paddingEnd + layout.LengthAlongAxis;
             
-            layout.OnLayoutChanged -= Update;
-            layout.OnLayoutChanged += Update;
-        }
-        
-        private void DeregisterEvents(ObjectLayout layout)
-        {
-            if (!layout) return;
+            // Move the center of the mesh to the center of the layout
+            Vector3 center = layout.WorldCenter;
+            center[axis] += paddingStart / 2;
+            center[axis] -= paddingEnd / 2;
             
-            layout.OnLayoutChanged -= Update;
+            return (center, finalLen);
         }
 
-        private ObjectLayout _oldLayout;
+        private (Vector3 center, float length) CalculateOverrideCenterAndLength(IObjectLayout layout)
+        {
+            float length = minLength;
+            Vector3 center = layout.WorldOrigin + layout.Direction.GetDirection() * (length / 2);
+            
+            return (center, length);
+        }
+        
+        #region EVENTS
+        
+        private BaseObjectLayout _oldLayout;
         private void OnValidate()
         {
             if (_oldLayout == objectLayout) return;
@@ -77,6 +83,25 @@ namespace SSpot.UI.Layout
             RegisterEvents(objectLayout);
                         
             _oldLayout = objectLayout;
-        } 
+        }
+        private void OnEnable() => RegisterEvents(objectLayout);
+        private void OnDisable() => DeregisterEvents(objectLayout);
+        
+        private void RegisterEvents(BaseObjectLayout layout)
+        {
+            if (!layout) return;
+            
+            layout.OnLayoutChanged -= Update;
+            layout.OnLayoutChanged += Update;
+        }
+        
+        private void DeregisterEvents(BaseObjectLayout layout)
+        {
+            if (!layout) return;
+            
+            layout.OnLayoutChanged -= Update;
+        }
+        
+        #endregion
     }
 }
