@@ -54,20 +54,12 @@ namespace SSpot.Robot
 
         private Vector2Int _originalFacing;
         private Vector2Int _originalGridPosition;
-
-        [BoxGroup("Sound")]
-        [SerializeField] private AudioSource audioSource;
-
-        [BoxGroup("Sound")]
-        [SerializeField] private AudioClip singleStepSound;
-
-        [BoxGroup("Sound")]
-        [SerializeField] private AudioClip turnSound;
-
+        
+        /// <summary>
+        /// Sets the original position/rotation that the robot will reset to.
+        /// </summary>
         public void SetOriginalPosition(Vector2Int position, Vector2Int facing) =>
             (_originalGridPosition, _originalFacing) = (position, facing);
-        
-        public void ChangeNode(Vector2Int target) => Grid.ChangeNode(this, target);
         
         private void Awake()
         {
@@ -102,12 +94,10 @@ namespace SSpot.Robot
                 yield break;
             }
 
-
             Vector3 from = Grid.GetCellCenterWorld(fromCell);
             Vector3 to = Grid.GetCellCenterWorld(toCell);
             
             _animator.StartWalking();
-            StepSound();
             yield return new WaitForEndOfFrame();
             
             float duration = useClipDuration 
@@ -118,14 +108,9 @@ namespace SSpot.Robot
             _animator.StopWalking();
             yield return _animator.WaitForIdle();
             
-            ChangeNode(toCell);
+            Grid.ChangeNode(this, toCell);
         }
         
-        public void StepSound()
-        {
-            audioSource.PlayOneShot(singleStepSound);
-        }
-
         #endregion
         
         #region TURN
@@ -138,8 +123,6 @@ namespace SSpot.Robot
             if (left) _animator.TurnLeft();
             else _animator.TurnRight();
             
-            audioSource.PlayOneShot(turnSound);
-
             Vector3 originalForward = transform.forward;
             Vector2Int target = left ? Facing.RotateCounterClockwise() : Facing.RotateClockwise();
             Vector3 targetForward = new(target.x, 0, target.y);

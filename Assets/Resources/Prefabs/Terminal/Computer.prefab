@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.75
-  direction: 0
   reverseOrder: 0
+  direction: 0
 --- !u!1 &123512168224529544
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 543311621945040739}
   - component: {fileID: 3155496609787473856}
   m_Layer: 0
-  m_Name: EditorOnly - CellsLayout
+  m_Name: '[EditorOnly] CellsLayout'
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,8 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 1.35
-  direction: 6
   reverseOrder: 0
+  direction: 6
 --- !u!1 &4725060520288128858
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,8 +732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.9
-  direction: 4
   reverseOrder: 0
+  direction: 4
 --- !u!1 &5146865312679728961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,8 +1757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 0.9
-  direction: 1
   reverseOrder: 1
+  direction: 1
 --- !u!1 &7611308878625908568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,8 +2375,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenObjects: 1.35
-  direction: 6
   reverseOrder: 0
+  direction: 6
 --- !u!1 &8397500771242085627
 GameObject:
   m_ObjectHideFlags: 0

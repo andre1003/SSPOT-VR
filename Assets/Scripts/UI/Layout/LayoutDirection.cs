@@ -17,19 +17,55 @@ namespace SSpot.UI.Layout
     
     public static class LayoutDirectionExtensions
     {
-        public static bool IsVertical(this LayoutDirection direction) => direction is LayoutDirection.Down
-            or LayoutDirection.Up 
-            or LayoutDirection.CenteredTopToBottom 
-            or LayoutDirection.CenteredBottomToTop;
+        /// <summary>
+        /// Returns true if the direction is one of the following:
+        /// <list type="bullet">
+        /// <item><see cref="LayoutDirection.Down"/></item>
+        /// <item><see cref="LayoutDirection.Up"/></item>
+        /// <item><see cref="LayoutDirection.CenteredTopToBottom"/></item>
+        /// <item><see cref="LayoutDirection.CenteredBottomToTop"/></item>
+        /// </list>
+        /// </summary>
+        public static bool IsVertical(this LayoutDirection direction) =>
+            direction is LayoutDirection.Down
+                or LayoutDirection.Up
+                or LayoutDirection.CenteredTopToBottom
+                or LayoutDirection.CenteredBottomToTop;
+
+        /// <summary>
+        /// Returns true if the direction is one of the following:
+        /// <list type="bullet">
+        /// <item><see cref="LayoutDirection.Left"/></item>
+        /// <item><see cref="LayoutDirection.Right"/></item>
+        /// <item><see cref="LayoutDirection.CenteredLeftToRight"/></item>
+        /// <item><see cref="LayoutDirection.CenteredRightToLeft"/></item>
+        /// </list>
+        public static bool IsHorizontal(this LayoutDirection direction) =>
+            direction is LayoutDirection.Left
+                or LayoutDirection.Right
+                or LayoutDirection.CenteredLeftToRight
+                or LayoutDirection.CenteredRightToLeft;
+
+        /// <summary>
+        /// Returns true if the direction is one of the following:
+        /// <list type="bullet">
+        /// <item><see cref="LayoutDirection.CenteredTopToBottom"/></item>
+        /// <item><see cref="LayoutDirection.CenteredBottomToTop"/></item>
+        /// <item><see cref="LayoutDirection.CenteredLeftToRight"/></item>
+        /// <item><see cref="LayoutDirection.CenteredRightToLeft"/></item>
+        /// </list>
+        /// </summary>
+        public static bool IsCentered(this LayoutDirection direction) =>
+            direction is LayoutDirection.CenteredTopToBottom
+                or LayoutDirection.CenteredBottomToTop
+                or LayoutDirection.CenteredLeftToRight
+                or LayoutDirection.CenteredRightToLeft;
         
-        public static bool IsHorizontal(this LayoutDirection direction) => direction is LayoutDirection.Left
-            or LayoutDirection.Right
-            or LayoutDirection.CenteredLeftToRight
-            or LayoutDirection.CenteredRightToLeft;
-        
-        public static Vector3 GetDirection(this LayoutDirection direction)
-        {
-            return direction switch
+        /// <summary>
+        /// Returns the Vector3 representation of the direction enum.
+        /// </summary>
+        public static Vector3 GetDirection(this LayoutDirection direction) =>
+            direction switch
             {
                 LayoutDirection.Down or LayoutDirection.CenteredTopToBottom => Vector3.down,
                 LayoutDirection.Up or LayoutDirection.CenteredBottomToTop => Vector3.up,
@@ -37,14 +73,5 @@ namespace SSpot.UI.Layout
                 LayoutDirection.Right or LayoutDirection.CenteredLeftToRight => Vector3.right,
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
             };
-        }
-        
-        public static Vector3 GetOffsetDirection(this LayoutDirection direction)
-        {
-            if (direction <= LayoutDirection.Right)
-                return Vector3.zero;
-
-            return -direction.GetDirection();
-        }
     }
 }
