@@ -6,6 +6,7 @@ using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
 using SSPot.Utilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SSpot.Level
 {

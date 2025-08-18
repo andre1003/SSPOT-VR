@@ -9,6 +9,7 @@ using SSpot.Robot;
 using SSPot.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace SSpot.Level
 {
@@ -188,7 +189,7 @@ namespace SSpot.Level
         /// <inheritdoc cref="ResetRpc"/>
         public void ResetLevel()
         {
-            photonView.RPC(nameof(ResetRpc), RpcTarget.AllBuffered);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         /// <summary>
