@@ -3229,6 +3229,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6540738827734901249, guid: 4f216ba969925bd4e95c6dd56d46947b, type: 3}
+      propertyPath: commands.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540738827734901249, guid: 4f216ba969925bd4e95c6dd56d46947b, type: 3}
+      propertyPath: commands.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5021ec89a68db2249a0b03a4d186f4ed, type: 2}
     - target: {fileID: 6540738827734901250, guid: 4f216ba969925bd4e95c6dd56d46947b, type: 3}
       propertyPath: m_Name
       value: DeveloperConsole

@@ -43,9 +43,10 @@ namespace SSPot.Scripts.DeveloperConsole
                     continue;
                 }
 
-                if (command.Process(args))
+				Debug.Log($"[Command] {commandInput}");
+
+				if (command.Process(args))
                 {
-					Debug.Log($"[Command] {commandInput}");
 					return;
                 }
 			}
