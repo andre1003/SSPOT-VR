@@ -105,11 +105,9 @@ namespace SSpot.Ambient.ComputerCode
         public void DecreaseIterations() =>
             photonView.RPC(nameof(SetIterationsRPC), RpcTarget.AllBuffered, Iterations - 1);
 
-        [Button]
         public void IncreaseRange() => 
             photonView.RPC(nameof(SetRangeRPC), RpcTarget.AllBuffered, Range + 1);
-
-        [Button]
+        
         public void DecreaseRange() => 
             photonView.RPC(nameof(SetRangeRPC), RpcTarget.AllBuffered, Range - 1);
         
