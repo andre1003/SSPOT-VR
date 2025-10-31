@@ -26,14 +26,7 @@ namespace SSPot.Scenes
 
 		public void Start()
 		{
-			if(PhotonNetwork.CountOfPlayersInRooms > 1)
-            {
-				isMultiplayer = true;
-            }
-            else
-            {
-                isMultiplayer = false;
-            }
+			isMultiplayer = PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.PlayerCount > 1;
 		}
 
 
