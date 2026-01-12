@@ -11,12 +11,12 @@ public class MouseController : MonoBehaviour
     // Player body transform
     public Transform playerBody;
 
-
     // Photon View reference
     private PhotonView photonView;
 
     // Mouse position
 	private float pitch = 0f;
+    private float yaw = 0f;
 
 
 	// Start is called before the first frame update
@@ -40,15 +40,14 @@ public class MouseController : MonoBehaviour
         }
 
 		// Get new mouse position
-		float mouseX_frame = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime; // <-- MUDANÇA
-		float mouseY_frame = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime; // <-- MUDANÇA
+		float mouseX_frame = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime; 
+		float mouseY_frame = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime; 
 
 		pitch -= mouseY_frame;
 		pitch = Mathf.Clamp(pitch, -90f, 90f);
 
-		transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        yaw += mouseX_frame;
 
-		// Rotate player body
-		playerBody.Rotate(Vector3.up * mouseX_frame);
+		playerBody.localRotation = Quaternion.Euler(pitch, yaw, 0f);
 	}
 }
