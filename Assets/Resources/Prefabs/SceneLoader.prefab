@@ -290,8 +290,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadSceneCanvas: {fileID: 4177659633489193950}
   progressBar: {fileID: 4177659631725396813}
-  nextLevelMessage: {fileID: 4177659633125642155}
-  connectionMessage: {fileID: 6505250901570439400}
   mainMenu:
     guid: 726aa57206806074bb7eeb240d076598
     buildIndex: 0
@@ -308,6 +306,10 @@ MonoBehaviour:
     guid: f4c5d18b38a307541ab699b1500ab5b6
     buildIndex: 3
     name: 
+  labirynth:
+    guid: 1daa3373bf22f4141aaae785e0122016
+    buildIndex: 6
+    name: LabirinthLevel
 --- !u!114 &6271014346601263704
 MonoBehaviour:
   m_ObjectHideFlags: 0
