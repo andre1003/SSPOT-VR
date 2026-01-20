@@ -16,7 +16,7 @@ namespace SSPot.Scenes
         private Slider progressBar;
         
         [SerializeField, BoxGroup("Scenes")]
-        private SerializableScene mainMenu, lobby, tutorial, firstLevel;
+        private SerializableScene mainMenu, lobby, tutorial, firstLevel, labirynth;
 
         public Scene CurrentScene => SceneManager.GetActiveScene();
         
@@ -33,13 +33,21 @@ namespace SSPot.Scenes
             loadSceneCanvas.SetActive(false);
         }
 
+        [Button("LoadMainMenu")]
         public void LoadMainMenu() => LoadScene(mainMenu.BuildIndex);
 
+        [Button("LoadLobby")]
         public void LoadLobby() => LoadScene(lobby.BuildIndex);
         
+        [Button("LoadTutorial")]
         public void LoadTutorial() => LoadScene(tutorial.BuildIndex);
 
+        [Button("LoadFirstLevel")]
         public void LoadFirstLevel() => LoadScene(firstLevel.BuildIndex);
+
+
+        [Button("LoadLabirynth")]
+        public void LoadLabirynth() => LoadScene(labirynth.BuildIndex);
 
         public void LoadPreviousScene()
         {
