@@ -9,8 +9,8 @@ public class LanguageController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        //Location();
-    }
+        language = LocalizationSettings.SelectedLocale.Identifier.Code;
+	}
 
     // Update is called once per frame
     void Update() {
@@ -22,7 +22,11 @@ public class LanguageController : MonoBehaviour {
     /// When player clicks on this object, the next level is loaded
     /// </summary>
     public void OnPointerClick() {
-        Location();
+
+        Voice.instance.DisableNarrator();
+        //Voice.instance.EnableNarrator();
+
+		Location();
     }
 
     public void Location() {
@@ -44,5 +48,7 @@ public class LanguageController : MonoBehaviour {
             if(anIdentifier == localCode)
                 LocalizationSettings.SelectedLocale = aLocale;
         }
-    }
+
+		Voice.instance.EnableNarrator();
+	}
 }

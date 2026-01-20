@@ -19,27 +19,27 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 2031392956416
-    m_Localized: "Mark est\xE1 indo muito bem, vamos continuar a ajud\xE1-lo a aprimorar
-      suas capacidades!"
+    m_Localized: "Boa not\xEDcia: os motores do Mark est\xE3o funcionando de novo!
+      Vamos ver se ele consegue dar uma volta pela sala.\r\n\nVoc\xEA pode me ajudar
+      a guiar o Mark?\r"
     m_Metadata:
       m_Items: []
   - m_Id: 796489195520
     m_Localized: "Deu certo! Parab\xE9ns!\n\nAgora o Mark consegue dar umas voltas
-      por a\xED.\n\nMas ainda n\xE3o acabou!\n\nVamos continuar!"
+      por a\xED.\n\nMuito obrigado pela ajuda!!"
     m_Metadata:
       m_Items: []
   - m_Id: 662774784000
-    m_Localized: "Vamos ver se voc\xEA consegue ajudar o Mark a evitar um obst\xE1culo.
-      Vamos tentar contornar esse pilar e voltar para a posi\xE7\xE3o onde Mark est\xE1.\n\r\nColoque
-      um bloco de loop e controle qual a sequ\xEAncia de blocos que voc\xEA quer
-      repetir juntos."
+    m_Localized: "Para fazer a primeira curva, o Mark precisa andar duas vezes para
+      frente e uma vez para a esquerda.\r\n\nColoque um bloco de loop e controle
+      qual a sequ\xEAncia de blocos que voc\xEA quer repetir juntos.\r\n\nN\xE3o
+      se esque\xE7a de colocar um bloco para come\xE7ar e outro para terminar o c\xF3digo!"
     m_Metadata:
       m_Items: []
   - m_Id: 2313816416256
-    m_Localized: "Voc\xEA j\xE1 sabe, n\xE9?!  Vamos ter que subir\nde novo a plataforma.\n\nN\xE3o
-      esque\xE7a de marcar o in\xEDcio e fim do c\xF3digo!!\n\nDica: Para realizar
-      a primeira volta, Mark ter\xE1 que andar duas vezes para frente e uma para
-      esquerda."
+    m_Localized: "Programe o Mark para desviar de um obst\xE1culo. \n\nEle precisa
+      dar a volta nesse pilar e voltar para o lugar onde come\xE7ou.\r\n\r\nVamos
+      subir a plataforma de novo!\r"
     m_Metadata:
       m_Items: []
   references:

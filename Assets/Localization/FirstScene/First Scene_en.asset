@@ -20,45 +20,27 @@ MonoBehaviour:
     - rid: 6199766798708244502
   m_TableData:
   - m_Id: 28317253632
-    m_Localized: 'Oh no! Mark bugged again!
-
-      It must have been reset!
+    m_Localized: 'Mark froze again! I can''t even walk!
 
 
-      It
-      doesn''t remember how to walk!
+      We''re going to
+      have to reset him.
 
 
-      What now? Go to the platform on the
-      side to help him!'
+      Go to the platform on your right to help me regain
+      control!'
     m_Metadata:
       m_Items: []
   - m_Id: 748848349184
-    m_Localized: 'To Mark move again, you''ll need to program it again with a secret
-      algorithm!
-
-
-      The computer is too big, you must go up!
-
-
-      Use the
-      red button at your left to go up or down.'
+    m_Localized: "To move my body again, you're going to program it with a secret
+      algorithm!\r\n\nSince my computer is very big, you\u2019ll need to go up.\r\n\nUse
+      the red button on your left to go up and down."
     m_Metadata:
       m_Items: []
   - m_Id: 1403386265600
-    m_Localized: 'The secret code is:
-
-      forward, forward, left, forward, right.
-
-
-      Do
-      not forget the
-
-      algorithm Begin and End.
-
-
-      Get the Cubes and put
-      it on Computer! After that is just hit Play!'
+    m_Localized: "The secret reset code is: forward, forward, left, forward, and
+      right.\r\n\nDon\u2019t forget the Start and End of the algorithm\r\n\nGrab
+      the Cubes and place them on the Computer! Then just hit Play!"
     m_Metadata:
       m_Items: []
   - m_Id: 2433045954560
