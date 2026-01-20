@@ -19,59 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 12496338944
-    m_Localized: "Mark is feeling better now,\r but\nstill not 100%...\r\n\r\nHe
-      might need to move\r\naround...\r\n\r\nLet's help him!!"
+    m_Localized: "I'm regaining control, but I\u2019ll still need help programming
+      Mark.\r\n\nWe\u2019ll need to take a few laps around here.\r\n\nCan you help
+      me?"
     m_Metadata:
       m_Items: []
   - m_Id: 1025328480256
-    m_Localized: 'Let''s make Mark pratice some circle
-
-      movements, to see
-      if he can handle it.
-
-      
-
-
-      You know, right?! We need to go up again.
-
-      
-
-
-      Tip:
-      Use the red button to go up.'
+    m_Localized: "Let\u2019s make Mark practice a few turns, to see if his sensors
+      are still working.\r\n\nUse the red button to raise the platform again"
     m_Metadata:
       m_Items: []
   - m_Id: 2036591951872
-    m_Localized: 'I have a new code to help you!
-
-      Give it a try:
-
-      
-
-      Repeat
-      left 4 times and then forward.
-
-      Repear right 5 times and then forward.
-
-      
-
-      Do
-      not forget to mark the begining and ending of the code!!'
+    m_Localized: "I\u2019ve got a new little formula to help you!\r\n\nRepeat left
+      4 times and then go forward.\r\n\nThen repeat right 5 times and go forward.\r\n\nDon\u2019t
+      forget to mark the beginning and end of the code"
     m_Metadata:
       m_Items: []
   - m_Id: 3843611361280
     m_Localized: 'It worked! Congrats!
 
-      
 
-      Now Mark can move around
-      here.
 
-      
+      Now Mark can move around here.
 
-      But it is not over yet!
 
-      
+
+      But
+      it is not over yet!
+
+
 
       Let''s continue!'
     m_Metadata:

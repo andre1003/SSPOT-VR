@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Third Scene Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Third Scene
+  m_TableCollectionNameGuidString: e448d89e4c9d31d4ba89db98e3410a95
+  m_Entries:
+  - m_Id: 662774784000
+    m_Key: InstructionsProgramming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796489195520
+    m_Key: Instructions3NextScene
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2031392956416
+    m_Key: Instructions1Initial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2313816416256
+    m_Key: Instructions2CodingPlatform
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2375984469451735047
+  references:
+    version: 2
+    RefIds:
+    - rid: 2375984469451735047
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1744583338302

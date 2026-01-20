@@ -66,7 +66,7 @@ namespace SSPot.Scenes
         }
 
         private Coroutine _loadCoroutine;
-        private void LoadScene(int buildIndex)
+        public void LoadScene(int buildIndex)
         {
             if (PhotonNetwork.InRoom)
             {
@@ -114,6 +114,14 @@ namespace SSPot.Scenes
             loadSceneCanvas.SetActive(false);
             
             _loadCoroutine = null;
-        }
+
+            OnSceneLoaded();
+		}
+
+        private void OnSceneLoaded()
+        {
+            SpeakAtStart.instance.StartSpeaking();
+            Debug.LogWarning($"Scene {CurrentScene.name} loaded.");
+		}
     }
 }

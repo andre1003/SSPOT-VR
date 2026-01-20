@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SecondLevel.unity
     guid: 917b191f87fdb3c4caec38f55e425d67
   - enabled: 1
+    path: Assets/Scenes/ThirdLevel.unity
+    guid: 2952fb8331918c94ba0182ab74ad5778
+  - enabled: 1
     path: Assets/Scenes/LabirinthLevel.unity
     guid: 1daa3373bf22f4141aaae785e0122016
   m_configObjects:

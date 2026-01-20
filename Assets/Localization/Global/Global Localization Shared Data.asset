@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: MiniChallengeError
     m_Metadata:
       m_Items: []
+  - m_Id: 345555123456634880
+    m_Key: BackToMenu
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

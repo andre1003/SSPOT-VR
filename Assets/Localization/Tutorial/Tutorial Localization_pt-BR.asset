@@ -23,9 +23,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 939412357120
-    m_Localized: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o
-      !\n\nOlhe para cada um dos objetos para aprender o que eles fazem !\n\nAqui
-      do lado \xE9 o Mark! O seu guia!"
+    m_Localized: "Bem vindo \xE0 Esta\xE7\xE3o Espacial de Treinamento em Programa\xE7\xE3o\r\nOlhe
+      para cada um dos objetos para aprender o que eles fazem\r\n\r\r\nEu sou o Mark
+      2000, a Intelig\xEAncia Artificial do Mark, o rob\xF4 a\xED do lado.\r\n\r\nEstou
+      tendo dificuldades em controlar o meu corpo, voc\xEA poderia me ajudar? Quando
+      estiver pronto clique no bot\xE3o no centro da sala\r\n"
     m_Metadata:
       m_Items: []
   - m_Id: 2157576650752
@@ -34,8 +36,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2784725762048
-    m_Localized: "BOT\xD5ES de\nPLAY e RESET do Algoritmo\n\nO PLAY EXECUTA.\nRESET
-      LIMPA o algoritmo."
+    m_Localized: "O Bot\xE3o RESET reinicia a fase."
     m_Metadata:
       m_Items: []
   - m_Id: 3514593378304
@@ -77,6 +78,20 @@ MonoBehaviour:
 
 
       CLIQUE AQUI'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383225046053167104
+    m_Localized: "O Bot\xE3o LIMPAR limpa os blocos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383225048699772928
+    m_Localized: "O Bot\xE3o PLAY EXECUTA o algoritmo."
+  - m_Id: 335226677362880512
+    m_Localized: "PARA DESABILITAR\n O NARRADOR\n\n\nCLIQUE AQUI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345558750640402432
+    m_Localized: "PARA HABILITAR\n O NARRADOR\n\n\nCLIQUE AQUI"
     m_Metadata:
       m_Items: []
   references:

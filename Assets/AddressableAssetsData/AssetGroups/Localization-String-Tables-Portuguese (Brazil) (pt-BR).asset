@@ -40,7 +40,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt-BR
-    - Preload
   - m_GUID: aa40372f59d5c0040a8f57866abe5e4a
     m_Address: MainMenu_pt-BR
     m_ReadOnly: 1
@@ -55,6 +54,12 @@ MonoBehaviour:
     - Preload
   - m_GUID: 117ca80587c74a645b5ce24bfdc43e9f
     m_Address: Labirinth_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: a5567f45b24fdbc4ca3603bb66dbb1e1
+    m_Address: Third Scene_pt-BR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt-BR

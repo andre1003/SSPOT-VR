@@ -6,6 +6,7 @@ using SSpot.Ambient.ComputerCode;
 using SSpot.UI;
 using SSPot.Utilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SSpot.Level
 {
@@ -110,7 +111,6 @@ namespace SSpot.Level
         private void OnSuccess()
         {
             renderers.ForEach(r => r.SetMaterial(true));
-            audioSource.PlayOneShot(successSound);
         }
 
         private void OnError()

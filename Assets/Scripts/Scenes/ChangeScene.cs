@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Photon.Pun;
 using UnityEngine;
 
 namespace SSPot.Scenes
@@ -15,15 +16,38 @@ namespace SSPot.Scenes
         }
         
         [SerializeField]
-        private LoadTarget target = LoadTarget.NextLevel;
+        private LoadTarget targetSinglePlayer = LoadTarget.NextLevel;
 
-        /// <summary>
-        /// When player clicks on this object, the next level is loaded
-        /// </summary>
-        [UsedImplicitly]
+		[SerializeField]
+		private LoadTarget targetMultiplayer = LoadTarget.NextLevel;
+
+		private bool isMultiplayer = false;
+
+
+		public void Start()
+		{
+			isMultiplayer = PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.PlayerCount > 1;
+		}
+
+
+		/// <summary>
+		/// When player clicks on this object, the next level is loaded
+		/// </summary>
+		[UsedImplicitly]
         public void OnPointerClick()
         {
-            switch (target)
+            LoadTarget target;
+
+			if (isMultiplayer)
+			{
+				target = targetMultiplayer;
+			}
+			else
+			{
+				target = targetSinglePlayer;
+			}
+
+			switch (target)
             {
                 case LoadTarget.MainMenu: 
                     SceneLoader.Instance.LoadMainMenu();

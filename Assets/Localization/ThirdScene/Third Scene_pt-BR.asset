@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Third Scene_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: e448d89e4c9d31d4ba89db98e3410a95, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2031392956416
+    m_Localized: "Boa not\xEDcia: os motores do Mark est\xE3o funcionando de novo!
+      Vamos ver se ele consegue dar uma volta pela sala.\r\n\nVoc\xEA pode me ajudar
+      a guiar o Mark?\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796489195520
+    m_Localized: "Deu certo! Parab\xE9ns!\n\nAgora o Mark consegue dar umas voltas
+      por a\xED.\n\nMuito obrigado pela ajuda!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 662774784000
+    m_Localized: "Para fazer a primeira curva, o Mark precisa andar duas vezes para
+      frente e uma vez para a esquerda.\r\n\nColoque um bloco de loop e controle
+      qual a sequ\xEAncia de blocos que voc\xEA quer repetir juntos.\r\n\nN\xE3o
+      se esque\xE7a de colocar um bloco para come\xE7ar e outro para terminar o c\xF3digo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2313816416256
+    m_Localized: "Programe o Mark para desviar de um obst\xE1culo. \n\nEle precisa
+      dar a volta nesse pilar e voltar para o lugar onde come\xE7ou.\r\n\r\nVamos
+      subir a plataforma de novo!\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

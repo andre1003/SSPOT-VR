@@ -114,8 +114,8 @@ namespace SSpot.Ambient.ComputerCode
                 var loop = cells[i].LoopController;
                 yield return (i, i + loop.Range, loop.Iterations);
 
-                i += loop.Range;
-                sliceStartIndex = i;
+                i += loop.Range - 1;
+                sliceStartIndex = i + 1;
             }
 
             // If there is non-looped code after the last loop, return it as a single-iteration slice.

@@ -37,7 +37,7 @@ namespace SSpot.Ambient.ComputerCode
 
         public void Clear()
         {
-            if (CurrentCube == null)
+            if (CurrentCube != null)
                 AttachingCube.ClearCell();
             
             if (LoopController) 

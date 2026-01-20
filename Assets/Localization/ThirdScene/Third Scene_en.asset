@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Third Scene_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e448d89e4c9d31d4ba89db98e3410a95, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2031392956416
+    m_Localized: "Mark is doing really well, let's continue to help him to improve
+      his capabilities!\n\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796489195520
+    m_Localized: 'It worked! Congrats!
+
+
+      Now Mark can move around here.
+
+
+      Thank
+      you for your help!!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 662774784000
+    m_Localized: "To make the first turn, Mark needs to move forward twice and then
+      once to the left.\r\n\nUse a loop block and set the block sequence that you
+      want to repeat together.\r\n\nDon\u2019t forget to add a block to start and
+      another to end the code"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2313816416256
+    m_Localized: "Program Mark to go around an obstacle. \n\nHe needs to go around
+      this pillar and return to where he started.\r\n\nLet\u2019s lift the platform
+      again!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

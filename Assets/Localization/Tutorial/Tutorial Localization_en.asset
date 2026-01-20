@@ -27,15 +27,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 939412357120
-    m_Localized: 'Welcome to the Space Station for Programming Training!
+    m_Localized: 'Welcome to the Space Station for Programming Training
+
+      Look
+      at each of the objects to learn what they do
 
 
-      Gaze
-      the objects to see tips of how to use them!
+
+      I am Mark 2000, the Artificial
+      Intelligence of Mark, the robot next to you.
 
 
-      Here in your right is Mark!
-      Your tutor!'
+
+      I''m having trouble controlling
+      my body. Could you help me? When you''re ready, click the button in the center
+      of the room
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 2157576650752
@@ -49,15 +57,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2784725762048
-    m_Localized: 'Algorithm PLAY and RESET
-
-      BUTTON
-
-
-      PLAY EXECUTES.
-
-      RESET
-      CLEANS the algorithm.'
+    m_Localized: Reset Button RELOAD the Level.
     m_Metadata:
       m_Items: []
   - m_Id: 3514593378304
@@ -110,6 +110,32 @@ MonoBehaviour:
     m_Localized: 'TO EXIT THE
 
       GAME
+
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383225046053167104
+    m_Localized: CLEAR Button clean the blocks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 383225048699772928
+    m_Localized: PLAY Button EXECUTES the algorithm.
+  - m_Id: 335226677362880512
+    m_Localized: 'TO DISABLE
+
+      THE NARRATOR
+
+
+
+      CLICK HERE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 345558750640402432
+    m_Localized: 'TO ENABLE
+
+      THE NARRATOR
 
 
 

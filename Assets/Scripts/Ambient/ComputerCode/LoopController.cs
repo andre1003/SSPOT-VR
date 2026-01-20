@@ -45,6 +45,8 @@ namespace SSpot.Ambient.ComputerCode
         private float planeGrowthOffset = 0.05f;
         [BoxGroup("Visuals"), SerializeField]
         private GameObject IncreaseAmountButton;
+        [BoxGroup("Visuals"), SerializeField]
+        private GameObject DecreaseAmountButton;
 
         private LoopSettings Settings => overrideGlobalSettings 
             ? settings 
@@ -103,9 +105,11 @@ namespace SSpot.Ambient.ComputerCode
         public void DecreaseIterations() =>
             photonView.RPC(nameof(SetIterationsRPC), RpcTarget.AllBuffered, Iterations - 1);
 
+        [Button]
         public void IncreaseRange() => 
             photonView.RPC(nameof(SetRangeRPC), RpcTarget.AllBuffered, Range + 1);
-        
+
+        [Button]
         public void DecreaseRange() => 
             photonView.RPC(nameof(SetRangeRPC), RpcTarget.AllBuffered, Range - 1);
         
